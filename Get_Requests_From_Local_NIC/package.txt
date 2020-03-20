@@ -1,0 +1,1118 @@
+'GET /s.gif?r=http%3A%2F%2Fwww.hyluz.cn%2Fzb_system%2Fadmin%2Findex.php%3Fact%3DArticleMng&l=http://www.hyluz.cn/?id=68 HTTP/1.1
+Host: api.share.baidu.com
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://www.hyluz.cn/?id=68
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+
+'
+
+
+'GET /s.gif?r=http%3A%2F%2Fwww.hyluz.cn%2Fzb_system%2Fadmin%2Findex.php%3Fact%3DArticleMng&l=http://www.hyluz.cn/?id=68 HTTP/1.1
+Host: api.share.baidu.com
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://www.hyluz.cn/?id=68
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+
+'
+
+
+'GET / HTTP/1.1
+Host: www.hyluz.cn
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+DNT: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://www.hyluz.cn/?id=68
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: UM_distinctid=1707cd48b7c24f-01d381582e948e-313f68-1fa400-1707cd48b7d1f2; username=Luz; token=cd2b0248c3bd69ae88cc7785dabd608d9282dc55fc807a29bb5942a5632990f61585640743; addinfo=%7B%22chkadmin%22%3A1%2C%22chkarticle%22%3A1%2C%22levelname%22%3A%22%5Cu7ba1%5Cu7406%5Cu5458%22%2C%22userid%22%3A%221%22%2C%22useralias%22%3A%22Luz%22%7D; timezone=8; order=id%20desc; memSize=2000; sites_path=/www/wwwroot; serverType=nginx; BT_PANEL_6=197df3e6-cfb3-4a0a-89ff-d285874b0060.6mtPp6V7CV7f61BPC-okFYmDoLo; request_token=Qwfpqd44w9ruKgON2lBdIM6HG362mbCwlltNkJMUwvNvhyHy; CNZZDATA1277949079=1389163364-1582642269-%7C1584692187
+
+'
+
+
+'GET / HTTP/1.1
+Host: www.hyluz.cn
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+DNT: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://www.hyluz.cn/?id=68
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: UM_distinctid=1707cd48b7c24f-01d381582e948e-313f68-1fa400-1707cd48b7d1f2; username=Luz; token=cd2b0248c3bd69ae88cc7785dabd608d9282dc55fc807a29bb5942a5632990f61585640743; addinfo=%7B%22chkadmin%22%3A1%2C%22chkarticle%22%3A1%2C%22levelname%22%3A%22%5Cu7ba1%5Cu7406%5Cu5458%22%2C%22userid%22%3A%221%22%2C%22useralias%22%3A%22Luz%22%7D; timezone=8; order=id%20desc; memSize=2000; sites_path=/www/wwwroot; serverType=nginx; BT_PANEL_6=197df3e6-cfb3-4a0a-89ff-d285874b0060.6mtPp6V7CV7f61BPC-okFYmDoLo; request_token=Qwfpqd44w9ruKgON2lBdIM6HG362mbCwlltNkJMUwvNvhyHy; CNZZDATA1277949079=1389163364-1582642269-%7C1584692187
+
+'
+
+
+'GET /zb_system/script/c_html_js_add.php HTTP/1.1
+Host: www.hyluz.cn
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: */*
+Referer: http://www.hyluz.cn/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: UM_distinctid=1707cd48b7c24f-01d381582e948e-313f68-1fa400-1707cd48b7d1f2; username=Luz; token=cd2b0248c3bd69ae88cc7785dabd608d9282dc55fc807a29bb5942a5632990f61585640743; addinfo=%7B%22chkadmin%22%3A1%2C%22chkarticle%22%3A1%2C%22levelname%22%3A%22%5Cu7ba1%5Cu7406%5Cu5458%22%2C%22userid%22%3A%221%22%2C%22useralias%22%3A%22Luz%22%7D; timezone=8; order=id%20desc; memSize=2000; sites_path=/www/wwwroot; serverType=nginx; BT_PANEL_6=197df3e6-cfb3-4a0a-89ff-d285874b0060.6mtPp6V7CV7f61BPC-okFYmDoLo; request_token=Qwfpqd44w9ruKgON2lBdIM6HG362mbCwlltNkJMUwvNvhyHy; CNZZDATA1277949079=1389163364-1582642269-%7C1584692187
+
+'
+
+
+'GET /zb_system/script/c_html_js_add.php HTTP/1.1
+Host: www.hyluz.cn
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: */*
+Referer: http://www.hyluz.cn/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: UM_distinctid=1707cd48b7c24f-01d381582e948e-313f68-1fa400-1707cd48b7d1f2; username=Luz; token=cd2b0248c3bd69ae88cc7785dabd608d9282dc55fc807a29bb5942a5632990f61585640743; addinfo=%7B%22chkadmin%22%3A1%2C%22chkarticle%22%3A1%2C%22levelname%22%3A%22%5Cu7ba1%5Cu7406%5Cu5458%22%2C%22userid%22%3A%221%22%2C%22useralias%22%3A%22Luz%22%7D; timezone=8; order=id%20desc; memSize=2000; sites_path=/www/wwwroot; serverType=nginx; BT_PANEL_6=197df3e6-cfb3-4a0a-89ff-d285874b0060.6mtPp6V7CV7f61BPC-okFYmDoLo; request_token=Qwfpqd44w9ruKgON2lBdIM6HG362mbCwlltNkJMUwvNvhyHy; CNZZDATA1277949079=1389163364-1582642269-%7C1584692187
+
+'
+
+
+'GET /s.gif?r=http%3A%2F%2Fwww.hyluz.cn%2F%3Fid%3D68&l=http://www.hyluz.cn/ HTTP/1.1
+Host: api.share.baidu.com
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://www.hyluz.cn/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+
+'
+
+
+'GET /s.gif?r=http%3A%2F%2Fwww.hyluz.cn%2F%3Fid%3D68&l=http://www.hyluz.cn/ HTTP/1.1
+Host: api.share.baidu.com
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://www.hyluz.cn/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+
+'
+
+
+'GET /v5/ypt/cdns?p1=1_11_114&u=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&v=15.0.1.713&rn=192885343&stcf=0&skcf=0&lrcf=0&cpcf=0&bfcf=0&pupf=10792&openup=1&htaskr=0&cpucnt=8&memts=19353&diskts=102399&sbfcf=0&celncf=0&crcec=0&dkioswh=1&dkioran=3&kpdldswh=0&kpdldras=0&stmode=2&upmemhit=30&iotmmed=0&iotmiqr=0&dbflsmed=0&dbflsiqr=0&appclup=0&onlyuc=0&v4v6tp=0 HTTP/1.1
+Host: msg.qy.net
+Accept: */*
+Content-Type: application/octet-stream
+User-Agent: HCDNClient_WINPC;15.0.1.713;NetType/unknown;QTP/1.0.32.1
+Connection: keep-alive
+
+'
+
+
+'GET /v5/ypt/cdns?p1=1_11_114&u=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&v=15.0.1.713&rn=192885343&stcf=0&skcf=0&lrcf=0&cpcf=0&bfcf=0&pupf=10792&openup=1&htaskr=0&cpucnt=8&memts=19353&diskts=102399&sbfcf=0&celncf=0&crcec=0&dkioswh=1&dkioran=3&kpdldswh=0&kpdldras=0&stmode=2&upmemhit=30&iotmmed=0&iotmiqr=0&dbflsmed=0&dbflsiqr=0&appclup=0&onlyuc=0&v4v6tp=0 HTTP/1.1
+Host: msg.qy.net
+Accept: */*
+Content-Type: application/octet-stream
+User-Agent: HCDNClient_WINPC;15.0.1.713;NetType/unknown;QTP/1.0.32.1
+Connection: keep-alive
+
+'
+
+
+'HTTP/1.1 200 OK
+Server: nginx
+Date: Fri, 20 Mar 2020 09:22:33 GMT
+Content-Type: text/html
+Content-Length: 0
+Connection: keep-alive
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Headers: Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With
+
+'
+
+
+'GET /core?t=2&tm=120&nsd1=0_0_0_0_0_0_0_0_0_0_0_0&nbfl=15282_15282_15282_15282_15282_15282_15282_15282_15282_15282_15282_15282&rasi=2_-1_600_120&ispre=0&vbr=178424&vfrmtp=1&z=hangzhou7_cmnet&hsdp=100&ptid=01012001010000000000&pf=2&c1=2&c2=&lvbck=&r=11685976300&aid=212447801&u=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&pu=1687348376&os=windows_01000018362&v=7.2.104.1431&krv=4.5.10&hcdnv=15.0.1.713&lnv=6.6.4.17&mdlm=2&ra1=2&ra2=-1&ra3=600&va=0&as=ccdd9f607fdf8672aa16ece818337e0b&ve=b3f4fed007561183b3fd4b168ec382df&islocal=0&ht=1&tpcd=0&drm_t=0&abr_t=0&chipid=AMD%20Ryzen%205%202500U%20with%20Radeon%20Vega%20Mobile%20Gfx%20%20&mod=&nettype=18&ua_model=&rn=1584696162471&stime=1584696162471&vdurt=2895000&abr_at=&krus=pc_win32_player&vpt=1&p1=114&p2=3000&op_mp=&pdc_src=-1&a_ra=&a_va= HTTP/1.1
+Host: msg.qy.net
+Accept: */*
+Accept-Encoding: gzip, deflate
+qyid: wd6dmxom33kasgbqfjd5h4rf3x2tu63j
+User-Agent: QYPlayer/Windows/4.5.10;BT/mcto;NetType/unknown;Hv/15.0.1.713;QTP/1.0.18.3
+
+'
+
+
+'GET /core?t=2&tm=120&nsd1=0_0_0_0_0_0_0_0_0_0_0_0&nbfl=15282_15282_15282_15282_15282_15282_15282_15282_15282_15282_15282_15282&rasi=2_-1_600_120&ispre=0&vbr=178424&vfrmtp=1&z=hangzhou7_cmnet&hsdp=100&ptid=01012001010000000000&pf=2&c1=2&c2=&lvbck=&r=11685976300&aid=212447801&u=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&pu=1687348376&os=windows_01000018362&v=7.2.104.1431&krv=4.5.10&hcdnv=15.0.1.713&lnv=6.6.4.17&mdlm=2&ra1=2&ra2=-1&ra3=600&va=0&as=ccdd9f607fdf8672aa16ece818337e0b&ve=b3f4fed007561183b3fd4b168ec382df&islocal=0&ht=1&tpcd=0&drm_t=0&abr_t=0&chipid=AMD%20Ryzen%205%202500U%20with%20Radeon%20Vega%20Mobile%20Gfx%20%20&mod=&nettype=18&ua_model=&rn=1584696162471&stime=1584696162471&vdurt=2895000&abr_at=&krus=pc_win32_player&vpt=1&p1=114&p2=3000&op_mp=&pdc_src=-1&a_ra=&a_va= HTTP/1.1
+Host: msg.qy.net
+Accept: */*
+Accept-Encoding: gzip, deflate
+qyid: wd6dmxom33kasgbqfjd5h4rf3x2tu63j
+User-Agent: QYPlayer/Windows/4.5.10;BT/mcto;NetType/unknown;Hv/15.0.1.713;QTP/1.0.18.3
+
+'
+
+
+'POST /cgi-bin/httpconn HTTP/1.1
+Host: 183.194.234.190
+Accept: */*
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)
+Connection: Keep-Alive
+Cache-Control: no-cache
+Accept-Encoding: gzip, deflate
+Content-Type: application/octet-stream
+Content-Length: 284
+
+'
+
+
+'POST /cgi-bin/httpconn HTTP/1.1
+Host: 183.194.234.190
+Accept: */*
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)
+Connection: Keep-Alive
+Cache-Control: no-cache
+Accept-Encoding: gzip, deflate
+Content-Type: application/octet-stream
+Content-Length: 284
+
+'
+
+
+'POST /cgi-bin/qqshow_user_props_info HTTP/1.1
+Accept: */*
+Accept-Language: zh-CN
+x-flash-version: 32,0,0,255
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 116
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; Zoom 3.6.0)
+Host: client.show.qq.com
+Connection: Keep-Alive
+Cache-Control: no-cache
+Cookie: euin_cookie=DDE961AA18AC0A1983F06BFAD47483067EE2827E76DDCAD2; ptcz=516db46605cb681ba28a9ad30c89fc420dc840d54202fddb6b7b33ae63ba3b0b; uin_cookie=805976884; RK=ABJspOrjct
+
+senduin=1290017556&uin=805976884&sVersion=2014&ckey=A4C7A4C903A9C19349D1BACE08482B2211B7CF9AD391FF73C01317CEAD00670A'
+
+
+'POST /cgi-bin/qqshow_user_props_info HTTP/1.1
+Accept: */*
+Accept-Language: zh-CN
+x-flash-version: 32,0,0,255
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 116
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; Zoom 3.6.0)
+Host: client.show.qq.com
+Connection: Keep-Alive
+Cache-Control: no-cache
+Cookie: euin_cookie=DDE961AA18AC0A1983F06BFAD47483067EE2827E76DDCAD2; ptcz=516db46605cb681ba28a9ad30c89fc420dc840d54202fddb6b7b33ae63ba3b0b; uin_cookie=805976884; RK=ABJspOrjct
+
+senduin=1290017556&uin=805976884&sVersion=2014&ckey=A4C7A4C903A9C19349D1BACE08482B2211B7CF9AD391FF73C01317CEAD00670A'
+
+
+'GET / HTTP/1.1
+Host: www.hyluz.cn
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+DNT: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://www.hyluz.cn/?id=68
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: UM_distinctid=1707cd48b7c24f-01d381582e948e-313f68-1fa400-1707cd48b7d1f2; username=Luz; token=cd2b0248c3bd69ae88cc7785dabd608d9282dc55fc807a29bb5942a5632990f61585640743; addinfo=%7B%22chkadmin%22%3A1%2C%22chkarticle%22%3A1%2C%22levelname%22%3A%22%5Cu7ba1%5Cu7406%5Cu5458%22%2C%22userid%22%3A%221%22%2C%22useralias%22%3A%22Luz%22%7D; timezone=8; order=id%20desc; memSize=2000; sites_path=/www/wwwroot; serverType=nginx; BT_PANEL_6=197df3e6-cfb3-4a0a-89ff-d285874b0060.6mtPp6V7CV7f61BPC-okFYmDoLo; request_token=Qwfpqd44w9ruKgON2lBdIM6HG362mbCwlltNkJMUwvNvhyHy; CNZZDATA1277949079=1389163364-1582642269-%7C1584692187
+
+'
+
+
+'GET / HTTP/1.1
+Host: www.hyluz.cn
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+DNT: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://www.hyluz.cn/?id=68
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: UM_distinctid=1707cd48b7c24f-01d381582e948e-313f68-1fa400-1707cd48b7d1f2; username=Luz; token=cd2b0248c3bd69ae88cc7785dabd608d9282dc55fc807a29bb5942a5632990f61585640743; addinfo=%7B%22chkadmin%22%3A1%2C%22chkarticle%22%3A1%2C%22levelname%22%3A%22%5Cu7ba1%5Cu7406%5Cu5458%22%2C%22userid%22%3A%221%22%2C%22useralias%22%3A%22Luz%22%7D; timezone=8; order=id%20desc; memSize=2000; sites_path=/www/wwwroot; serverType=nginx; BT_PANEL_6=197df3e6-cfb3-4a0a-89ff-d285874b0060.6mtPp6V7CV7f61BPC-okFYmDoLo; request_token=Qwfpqd44w9ruKgON2lBdIM6HG362mbCwlltNkJMUwvNvhyHy; CNZZDATA1277949079=1389163364-1582642269-%7C1584692187
+
+'
+
+
+'GET /zb_system/script/c_html_js_add.php HTTP/1.1
+Host: www.hyluz.cn
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: */*
+Referer: http://www.hyluz.cn/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: UM_distinctid=1707cd48b7c24f-01d381582e948e-313f68-1fa400-1707cd48b7d1f2; username=Luz; token=cd2b0248c3bd69ae88cc7785dabd608d9282dc55fc807a29bb5942a5632990f61585640743; addinfo=%7B%22chkadmin%22%3A1%2C%22chkarticle%22%3A1%2C%22levelname%22%3A%22%5Cu7ba1%5Cu7406%5Cu5458%22%2C%22userid%22%3A%221%22%2C%22useralias%22%3A%22Luz%22%7D; timezone=8; order=id%20desc; memSize=2000; sites_path=/www/wwwroot; serverType=nginx; BT_PANEL_6=197df3e6-cfb3-4a0a-89ff-d285874b0060.6mtPp6V7CV7f61BPC-okFYmDoLo; request_token=Qwfpqd44w9ruKgON2lBdIM6HG362mbCwlltNkJMUwvNvhyHy; CNZZDATA1277949079=1389163364-1582642269-%7C1584692187
+
+'
+
+
+'GET /zb_system/script/c_html_js_add.php HTTP/1.1
+Host: www.hyluz.cn
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: */*
+Referer: http://www.hyluz.cn/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: UM_distinctid=1707cd48b7c24f-01d381582e948e-313f68-1fa400-1707cd48b7d1f2; username=Luz; token=cd2b0248c3bd69ae88cc7785dabd608d9282dc55fc807a29bb5942a5632990f61585640743; addinfo=%7B%22chkadmin%22%3A1%2C%22chkarticle%22%3A1%2C%22levelname%22%3A%22%5Cu7ba1%5Cu7406%5Cu5458%22%2C%22userid%22%3A%221%22%2C%22useralias%22%3A%22Luz%22%7D; timezone=8; order=id%20desc; memSize=2000; sites_path=/www/wwwroot; serverType=nginx; BT_PANEL_6=197df3e6-cfb3-4a0a-89ff-d285874b0060.6mtPp6V7CV7f61BPC-okFYmDoLo; request_token=Qwfpqd44w9ruKgON2lBdIM6HG362mbCwlltNkJMUwvNvhyHy; CNZZDATA1277949079=1389163364-1582642269-%7C1584692187
+
+'
+
+
+'GET /s.gif?r=http%3A%2F%2Fwww.hyluz.cn%2F%3Fid%3D68&l=http://www.hyluz.cn/ HTTP/1.1
+Host: api.share.baidu.com
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://www.hyluz.cn/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+
+'
+
+
+'GET /s.gif?r=http%3A%2F%2Fwww.hyluz.cn%2F%3Fid%3D68&l=http://www.hyluz.cn/ HTTP/1.1
+Host: api.share.baidu.com
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://www.hyluz.cn/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+
+'
+
+
+'GET /?id=66 HTTP/1.1
+Host: www.hyluz.cn
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+DNT: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://www.hyluz.cn/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: UM_distinctid=1707cd48b7c24f-01d381582e948e-313f68-1fa400-1707cd48b7d1f2; username=Luz; token=cd2b0248c3bd69ae88cc7785dabd608d9282dc55fc807a29bb5942a5632990f61585640743; addinfo=%7B%22chkadmin%22%3A1%2C%22chkarticle%22%3A1%2C%22levelname%22%3A%22%5Cu7ba1%5Cu7406%5Cu5458%22%2C%22userid%22%3A%221%22%2C%22useralias%22%3A%22Luz%22%7D; timezone=8; order=id%20desc; memSize=2000; sites_path=/www/wwwroot; serverType=nginx; BT_PANEL_6=197df3e6-cfb3-4a0a-89ff-d285874b0060.6mtPp6V7CV7f61BPC-okFYmDoLo; request_token=Qwfpqd44w9ruKgON2lBdIM6HG362mbCwlltNkJMUwvNvhyHy; CNZZDATA1277949079=1389163364-1582642269-%7C1584692187
+
+'
+
+
+'GET /?id=66 HTTP/1.1
+Host: www.hyluz.cn
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+DNT: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Referer: http://www.hyluz.cn/
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: UM_distinctid=1707cd48b7c24f-01d381582e948e-313f68-1fa400-1707cd48b7d1f2; username=Luz; token=cd2b0248c3bd69ae88cc7785dabd608d9282dc55fc807a29bb5942a5632990f61585640743; addinfo=%7B%22chkadmin%22%3A1%2C%22chkarticle%22%3A1%2C%22levelname%22%3A%22%5Cu7ba1%5Cu7406%5Cu5458%22%2C%22userid%22%3A%221%22%2C%22useralias%22%3A%22Luz%22%7D; timezone=8; order=id%20desc; memSize=2000; sites_path=/www/wwwroot; serverType=nginx; BT_PANEL_6=197df3e6-cfb3-4a0a-89ff-d285874b0060.6mtPp6V7CV7f61BPC-okFYmDoLo; request_token=Qwfpqd44w9ruKgON2lBdIM6HG362mbCwlltNkJMUwvNvhyHy; CNZZDATA1277949079=1389163364-1582642269-%7C1584692187
+
+'
+
+
+'GET /zb_system/script/c_html_js_add.php HTTP/1.1
+Host: www.hyluz.cn
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: */*
+Referer: http://www.hyluz.cn/?id=66
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: UM_distinctid=1707cd48b7c24f-01d381582e948e-313f68-1fa400-1707cd48b7d1f2; username=Luz; token=cd2b0248c3bd69ae88cc7785dabd608d9282dc55fc807a29bb5942a5632990f61585640743; addinfo=%7B%22chkadmin%22%3A1%2C%22chkarticle%22%3A1%2C%22levelname%22%3A%22%5Cu7ba1%5Cu7406%5Cu5458%22%2C%22userid%22%3A%221%22%2C%22useralias%22%3A%22Luz%22%7D; timezone=8; order=id%20desc; memSize=2000; sites_path=/www/wwwroot; serverType=nginx; BT_PANEL_6=197df3e6-cfb3-4a0a-89ff-d285874b0060.6mtPp6V7CV7f61BPC-okFYmDoLo; request_token=Qwfpqd44w9ruKgON2lBdIM6HG362mbCwlltNkJMUwvNvhyHy; CNZZDATA1277949079=1389163364-1582642269-%7C1584692187
+
+'
+
+
+'GET /zb_system/script/c_html_js_add.php HTTP/1.1
+Host: www.hyluz.cn
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: */*
+Referer: http://www.hyluz.cn/?id=66
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: UM_distinctid=1707cd48b7c24f-01d381582e948e-313f68-1fa400-1707cd48b7d1f2; username=Luz; token=cd2b0248c3bd69ae88cc7785dabd608d9282dc55fc807a29bb5942a5632990f61585640743; addinfo=%7B%22chkadmin%22%3A1%2C%22chkarticle%22%3A1%2C%22levelname%22%3A%22%5Cu7ba1%5Cu7406%5Cu5458%22%2C%22userid%22%3A%221%22%2C%22useralias%22%3A%22Luz%22%7D; timezone=8; order=id%20desc; memSize=2000; sites_path=/www/wwwroot; serverType=nginx; BT_PANEL_6=197df3e6-cfb3-4a0a-89ff-d285874b0060.6mtPp6V7CV7f61BPC-okFYmDoLo; request_token=Qwfpqd44w9ruKgON2lBdIM6HG362mbCwlltNkJMUwvNvhyHy; CNZZDATA1277949079=1389163364-1582642269-%7C1584692187
+
+'
+
+
+'GET /zb_system/image/filetype/tgz.png HTTP/1.1
+Host: www.hyluz.cn
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://www.hyluz.cn/?id=66
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: UM_distinctid=1707cd48b7c24f-01d381582e948e-313f68-1fa400-1707cd48b7d1f2; username=Luz; token=cd2b0248c3bd69ae88cc7785dabd608d9282dc55fc807a29bb5942a5632990f61585640743; addinfo=%7B%22chkadmin%22%3A1%2C%22chkarticle%22%3A1%2C%22levelname%22%3A%22%5Cu7ba1%5Cu7406%5Cu5458%22%2C%22userid%22%3A%221%22%2C%22useralias%22%3A%22Luz%22%7D; timezone=8; order=id%20desc; memSize=2000; sites_path=/www/wwwroot; serverType=nginx; BT_PANEL_6=197df3e6-cfb3-4a0a-89ff-d285874b0060.6mtPp6V7CV7f61BPC-okFYmDoLo; request_token=Qwfpqd44w9ruKgON2lBdIM6HG362mbCwlltNkJMUwvNvhyHy; CNZZDATA1277949079=1389163364-1582642269-%7C1584692187
+
+'
+
+
+'GET /zb_system/image/filetype/tgz.png HTTP/1.1
+Host: www.hyluz.cn
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://www.hyluz.cn/?id=66
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: UM_distinctid=1707cd48b7c24f-01d381582e948e-313f68-1fa400-1707cd48b7d1f2; username=Luz; token=cd2b0248c3bd69ae88cc7785dabd608d9282dc55fc807a29bb5942a5632990f61585640743; addinfo=%7B%22chkadmin%22%3A1%2C%22chkarticle%22%3A1%2C%22levelname%22%3A%22%5Cu7ba1%5Cu7406%5Cu5458%22%2C%22userid%22%3A%221%22%2C%22useralias%22%3A%22Luz%22%7D; timezone=8; order=id%20desc; memSize=2000; sites_path=/www/wwwroot; serverType=nginx; BT_PANEL_6=197df3e6-cfb3-4a0a-89ff-d285874b0060.6mtPp6V7CV7f61BPC-okFYmDoLo; request_token=Qwfpqd44w9ruKgON2lBdIM6HG362mbCwlltNkJMUwvNvhyHy; CNZZDATA1277949079=1389163364-1582642269-%7C1584692187
+
+'
+
+
+'GET /s.gif?r=http%3A%2F%2Fwww.hyluz.cn%2F&l=http://www.hyluz.cn/?id=66 HTTP/1.1
+Host: api.share.baidu.com
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://www.hyluz.cn/?id=66
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+
+'
+
+
+'GET /s.gif?r=http%3A%2F%2Fwww.hyluz.cn%2F&l=http://www.hyluz.cn/?id=66 HTTP/1.1
+Host: api.share.baidu.com
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
+DNT: 1
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+Referer: http://www.hyluz.cn/?id=66
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+
+'
+
+
+'GET /gchatpic_new/054B5B7ECB856561F23C0D0DBAF62FF0E02F974613D3FB2D254BB4EA308DFA5F0D24B389BE82FACFC5D8FDC07A464FC91D860C1D9D32790867D2A02AB67478B9382D6A28DFCD2F8B20E42D1CF98D68B3CF93FAF5610A5BFF/0?vuin=805976884&term=1&srvver=26982&rf=naio HTTP/1.1
+Host: 120.221.241.231
+Accept: */*
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)
+Connection: Keep-Alive
+Cache-Control: no-cache
+Accept-Encoding: gzip, deflate
+referer: http://im.qq.com
+Cookie: ST=00015E7429FF0040F52F7D80EC7C093735E079FA0A81623AE6DA8B4805732BFF53973ADEBB43C900A3BC0EB05B8D764A1C7178E1477C78C9C069B9ED43CCDF39599E2AD684BD7428
+
+'
+
+
+'GET /gchatpic_new/054B5B7ECB856561F23C0D0DBAF62FF0E02F974613D3FB2D254BB4EA308DFA5F0D24B389BE82FACFC5D8FDC07A464FC91D860C1D9D32790867D2A02AB67478B9382D6A28DFCD2F8B20E42D1CF98D68B3CF93FAF5610A5BFF/0?vuin=805976884&term=1&srvver=26982&rf=naio HTTP/1.1
+Host: 120.221.241.231
+Accept: */*
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)
+Connection: Keep-Alive
+Cache-Control: no-cache
+Accept-Encoding: gzip, deflate
+referer: http://im.qq.com
+Cookie: ST=00015E7429FF0040F52F7D80EC7C093735E079FA0A81623AE6DA8B4805732BFF53973ADEBB43C900A3BC0EB05B8D764A1C7178E1477C78C9C069B9ED43CCDF39599E2AD684BD7428
+
+'
+
+
+'GET /core?t=2&tm=120&nsd1=0_0_0_0_0_0_0_0_0_0_0_0&nbfl=15282_15282_15282_15282_15282_15282_15282_15282_15282_15282_15282_15282&rasi=2_-1_600_120&ispre=0&vbr=178424&vfrmtp=1&z=hangzhou7_cmnet&hsdp=100&ptid=01012001010000000000&pf=2&c1=2&c2=&lvbck=&r=11685976300&aid=212447801&u=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&pu=1687348376&os=windows_01000018362&v=7.2.104.1431&krv=4.5.10&hcdnv=15.0.1.713&lnv=6.6.4.17&mdlm=2&ra1=2&ra2=-1&ra3=600&va=0&as=ccdd9f607fdf8672aa16ece818337e0b&ve=b3f4fed007561183b3fd4b168ec382df&islocal=0&ht=1&tpcd=0&drm_t=0&abr_t=0&chipid=AMD%20Ryzen%205%202500U%20with%20Radeon%20Vega%20Mobile%20Gfx%20%20&mod=&nettype=18&ua_model=&rn=1584696282172&stime=1584696282172&vdurt=2895000&abr_at=&krus=pc_win32_player&vpt=1&p1=114&p2=3000&op_mp=&pdc_src=-1&a_ra=&a_va= HTTP/1.1
+Host: msg.qy.net
+Accept: */*
+Accept-Encoding: gzip, deflate
+qyid: wd6dmxom33kasgbqfjd5h4rf3x2tu63j
+User-Agent: QYPlayer/Windows/4.5.10;BT/mcto;NetType/unknown;Hv/15.0.1.713;QTP/1.0.18.3
+
+'
+
+
+'GET /core?t=2&tm=120&nsd1=0_0_0_0_0_0_0_0_0_0_0_0&nbfl=15282_15282_15282_15282_15282_15282_15282_15282_15282_15282_15282_15282&rasi=2_-1_600_120&ispre=0&vbr=178424&vfrmtp=1&z=hangzhou7_cmnet&hsdp=100&ptid=01012001010000000000&pf=2&c1=2&c2=&lvbck=&r=11685976300&aid=212447801&u=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&pu=1687348376&os=windows_01000018362&v=7.2.104.1431&krv=4.5.10&hcdnv=15.0.1.713&lnv=6.6.4.17&mdlm=2&ra1=2&ra2=-1&ra3=600&va=0&as=ccdd9f607fdf8672aa16ece818337e0b&ve=b3f4fed007561183b3fd4b168ec382df&islocal=0&ht=1&tpcd=0&drm_t=0&abr_t=0&chipid=AMD%20Ryzen%205%202500U%20with%20Radeon%20Vega%20Mobile%20Gfx%20%20&mod=&nettype=18&ua_model=&rn=1584696282172&stime=1584696282172&vdurt=2895000&abr_at=&krus=pc_win32_player&vpt=1&p1=114&p2=3000&op_mp=&pdc_src=-1&a_ra=&a_va= HTTP/1.1
+Host: msg.qy.net
+Accept: */*
+Accept-Encoding: gzip, deflate
+qyid: wd6dmxom33kasgbqfjd5h4rf3x2tu63j
+User-Agent: QYPlayer/Windows/4.5.10;BT/mcto;NetType/unknown;Hv/15.0.1.713;QTP/1.0.18.3
+
+'
+
+
+'POST /mmtls/00007e33 HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Connection: close
+Content-Length: 652
+Content-Type: application/octet-stream
+Host: 117.184.242.100
+Upgrade: mmtls
+User-Agent: MicroMessenger Client
+X-Online-Host: 117.184.242.100
+
+\x19\xf1\x03\x00\xa1\x00\x00\x00\x9d\x01\x03\xf1\x01\x00\xa83\x9c\xe3\x91\xfa.\x1c\x86\x071q\x19\x06\xe3\xa0\x92c\xbc\xe2Z\xad\xde\x00&Dy\x05\xf37)\xfdW^t\x8c\x12\x00\x00\x00o\x01\x00\x00\x00j\x00\x0f\x01\x00\x00\x00c\x01\x00\t:\x80\x00\x00\x00\x00\x004\x00\x0c\xd7\xe1\xed!n\xe2\x86\x07\xd5\xf4\xbe\xdd\x00H\xa4_^\xb4d\xa9\xf4J\xfa\xfa\xaf\x81\xbem\xfa\x1fE\xe8\xc75\xd0\x981\x85.\xba\xf3\x1d\xfe#J\xbd\x03\xfd\x85\xed3\xf9\x05\xcd\x0e\xf2\xf4F@\x1bk\xac\xc9\x00]TW\'\xe7w\x13\xa4\xbd\x8f\x96\x89\x11\xa22t\x18\xfcG\xb90\xf4\x19\xf1\x03\x00$(`Y\xb1\xc7\xd4\x914\xbd\xa3\xd9\xed)\x94\xf9N\x9c\xd9\xc5y\x0b\xaf\x94$N\x7f]\xf4S+\xb1WGz\xf9D\x17\xf1\x03\x01\x9ce@>^=\x90\xe9\xe8w\n\'\xa3b8A\xc0j\x12\xf1\xc5\xef\x95G\xed\xc6\xdf\xee\x90(\x06x"\x1eEeS\xf07\xa9h\xc7\x0e\xb7,R\xb6<\xfe\xe3vO\xc6\x11\xad\x13\x10;\x0f\x1a\xf8+\x0b\xc3\xa8\xc5\x02N\xf1\t\x8e\xc8\xff[R\x8f\xbb\\o\xb5\x15\xe3\xaf\xca\xaa\x11\x12\xc9\x14\x10\xefI\xa0\x80v\x1d\xc1k\x84" \x81\xde, \xd3R\x81\xf9a\xfb\xae\xc6\xeb\x86\x84\xab\xef\x8b\x9f\x08oE\xce_\xe0\x85\x1c\xb9\x93U\xc2*\xa3\xe7\xb0\x9f\xf8\x12~\xdaJ\xe2\xfd6\x90^\xf3\xa9h&[\x0c%,\xd2\x96Hj\xd4\xc8v\xd1\x02\x9fC\x11xV\x11\xb5p{\xa1&\xf9\xf4\xdd\x12)^\x11\xe8x\xdaD6\xc2\x91J\xe8\x914P\x89\xc9\x01\xcd \x14\x84]\x82\xa48`\xaf\xa3\xa1\xf2\xb8\x1b\x00\xefO\xb8`\xe9\x95\xa9\xe3\xcdAd\x91_\xcaW\xfb|\xf5\x87\xd2;\xbc\xf7\xe0\xdd\xff\xc6 SP\x8a|w\x1e\x86:(P\x9bs+<\x81\xa0\xa0\xe6\xbe\xdef\xe2,H\xc69\xac\x9f\x0e\xf6g\x94\xfeTQ\x9b\x17b\xe2\x14\xb6\x08\x89\x0fw\x0b:\xb7\xb1\x8bo\xd9\xa4\xab~7@\x9b\xe2R\xbbV\xce\xd6\xa0\x8f!\xf6\xae\x06\xca\x9co>a#\xa1\xe3X\x88\xa3\xec\xf7\xe0\xf3\x07\x01\x93\xcd\x91\x02\xe2n\xfa\xc7\x85\x07\xe2\x17\xc47$\x1dt\\B\x14\xea\x07[`9\xeeo\xc6<\xe0\x9d\x01F\x88\xd8\xf5\xc6b6sC\x11_\x86\xae\xd9\x99v`\xcd\xad!\x16}}\xca\x9d@\xea\xc9\x17\x91\xf8\xdb\xf4\xd5\x0c}\xe5{\x1ei|]\xd5\x8b\xd6J\xb4`SD\xa7^\x07\x15\xf1\x03\x00\x17\xb9D\xd6C\xc2?\x8az\xd2N\xd7\xe6_\x1c\xe2\xae\x1eN\xe9\xa4%\xa4\xc2'
+
+
+'POST /mmtls/00007e33 HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Connection: close
+Content-Length: 652
+Content-Type: application/octet-stream
+Host: 117.184.242.100
+Upgrade: mmtls
+User-Agent: MicroMessenger Client
+X-Online-Host: 117.184.242.100
+
+\x19\xf1\x03\x00\xa1\x00\x00\x00\x9d\x01\x03\xf1\x01\x00\xa83\x9c\xe3\x91\xfa.\x1c\x86\x071q\x19\x06\xe3\xa0\x92c\xbc\xe2Z\xad\xde\x00&Dy\x05\xf37)\xfdW^t\x8c\x12\x00\x00\x00o\x01\x00\x00\x00j\x00\x0f\x01\x00\x00\x00c\x01\x00\t:\x80\x00\x00\x00\x00\x004\x00\x0c\xd7\xe1\xed!n\xe2\x86\x07\xd5\xf4\xbe\xdd\x00H\xa4_^\xb4d\xa9\xf4J\xfa\xfa\xaf\x81\xbem\xfa\x1fE\xe8\xc75\xd0\x981\x85.\xba\xf3\x1d\xfe#J\xbd\x03\xfd\x85\xed3\xf9\x05\xcd\x0e\xf2\xf4F@\x1bk\xac\xc9\x00]TW\'\xe7w\x13\xa4\xbd\x8f\x96\x89\x11\xa22t\x18\xfcG\xb90\xf4\x19\xf1\x03\x00$(`Y\xb1\xc7\xd4\x914\xbd\xa3\xd9\xed)\x94\xf9N\x9c\xd9\xc5y\x0b\xaf\x94$N\x7f]\xf4S+\xb1WGz\xf9D\x17\xf1\x03\x01\x9ce@>^=\x90\xe9\xe8w\n\'\xa3b8A\xc0j\x12\xf1\xc5\xef\x95G\xed\xc6\xdf\xee\x90(\x06x"\x1eEeS\xf07\xa9h\xc7\x0e\xb7,R\xb6<\xfe\xe3vO\xc6\x11\xad\x13\x10;\x0f\x1a\xf8+\x0b\xc3\xa8\xc5\x02N\xf1\t\x8e\xc8\xff[R\x8f\xbb\\o\xb5\x15\xe3\xaf\xca\xaa\x11\x12\xc9\x14\x10\xefI\xa0\x80v\x1d\xc1k\x84" \x81\xde, \xd3R\x81\xf9a\xfb\xae\xc6\xeb\x86\x84\xab\xef\x8b\x9f\x08oE\xce_\xe0\x85\x1c\xb9\x93U\xc2*\xa3\xe7\xb0\x9f\xf8\x12~\xdaJ\xe2\xfd6\x90^\xf3\xa9h&[\x0c%,\xd2\x96Hj\xd4\xc8v\xd1\x02\x9fC\x11xV\x11\xb5p{\xa1&\xf9\xf4\xdd\x12)^\x11\xe8x\xdaD6\xc2\x91J\xe8\x914P\x89\xc9\x01\xcd \x14\x84]\x82\xa48`\xaf\xa3\xa1\xf2\xb8\x1b\x00\xefO\xb8`\xe9\x95\xa9\xe3\xcdAd\x91_\xcaW\xfb|\xf5\x87\xd2;\xbc\xf7\xe0\xdd\xff\xc6 SP\x8a|w\x1e\x86:(P\x9bs+<\x81\xa0\xa0\xe6\xbe\xdef\xe2,H\xc69\xac\x9f\x0e\xf6g\x94\xfeTQ\x9b\x17b\xe2\x14\xb6\x08\x89\x0fw\x0b:\xb7\xb1\x8bo\xd9\xa4\xab~7@\x9b\xe2R\xbbV\xce\xd6\xa0\x8f!\xf6\xae\x06\xca\x9co>a#\xa1\xe3X\x88\xa3\xec\xf7\xe0\xf3\x07\x01\x93\xcd\x91\x02\xe2n\xfa\xc7\x85\x07\xe2\x17\xc47$\x1dt\\B\x14\xea\x07[`9\xeeo\xc6<\xe0\x9d\x01F\x88\xd8\xf5\xc6b6sC\x11_\x86\xae\xd9\x99v`\xcd\xad!\x16}}\xca\x9d@\xea\xc9\x17\x91\xf8\xdb\xf4\xd5\x0c}\xe5{\x1ei|]\xd5\x8b\xd6J\xb4`SD\xa7^\x07\x15\xf1\x03\x00\x17\xb9D\xd6C\xc2?\x8az\xd2N\xd7\xe6_\x1c\xe2\xae\x1eN\xe9\xa4%\xa4\xc2'
+
+
+'GET /pc/version/message?version=7.2.104.1431&p_name=RNDWebNativePlugin&p_md5=20cc1df876dc857ad3b89da9c0cbceed HTTP/1.1
+Host: api.lequ.iqiyi.com
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: close
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; Qisu);QTP/1.0.18.3
+User-Agent: AsyncHttp
+
+'
+
+
+'GET /pc/version/message?version=7.2.104.1431&p_name=RNDWebNativePlugin&p_md5=20cc1df876dc857ad3b89da9c0cbceed HTTP/1.1
+Host: api.lequ.iqiyi.com
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: close
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; Qisu);QTP/1.0.18.3
+User-Agent: AsyncHttp
+
+'
+
+
+'GET /pc/version/message?version=7.2.104.1431&p_name=mainPlugin&p_md5=00eaebedd5972ed19c03e30c00a19aa9 HTTP/1.1
+Host: api.lequ.iqiyi.com
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: close
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; Qisu);QTP/1.0.18.3
+User-Agent: AsyncHttp
+
+'
+
+
+'GET /pc/version/message?version=7.2.104.1431&p_name=mainPlugin&p_md5=00eaebedd5972ed19c03e30c00a19aa9 HTTP/1.1
+Host: api.lequ.iqiyi.com
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: close
+User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; Qisu);QTP/1.0.18.3
+User-Agent: AsyncHttp
+
+'
+
+
+'GET /core?t=2&tm=120&nsd1=0_0_0_0_0_0_0_0_0_0_0_0&nbfl=15282_15282_15282_15282_15282_15282_15282_15282_15282_15282_15282_15282&rasi=2_-1_600_120&ispre=0&vbr=178424&vfrmtp=1&z=hangzhou7_cmnet&hsdp=100&ptid=01012001010000000000&pf=2&c1=2&c2=&lvbck=&r=11685976300&aid=212447801&u=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&pu=1687348376&os=windows_01000018362&v=7.2.104.1431&krv=4.5.10&hcdnv=15.0.1.713&lnv=6.6.4.17&mdlm=2&ra1=2&ra2=-1&ra3=600&va=0&as=ccdd9f607fdf8672aa16ece818337e0b&ve=b3f4fed007561183b3fd4b168ec382df&islocal=0&ht=1&tpcd=0&drm_t=0&abr_t=0&chipid=AMD%20Ryzen%205%202500U%20with%20Radeon%20Vega%20Mobile%20Gfx%20%20&mod=&nettype=18&ua_model=&rn=1584696402801&stime=1584696402801&vdurt=2895000&abr_at=&krus=pc_win32_player&vpt=1&p1=114&p2=3000&op_mp=&pdc_src=-1&a_ra=&a_va= HTTP/1.1
+Host: msg.qy.net
+Accept: */*
+Accept-Encoding: gzip, deflate
+qyid: wd6dmxom33kasgbqfjd5h4rf3x2tu63j
+User-Agent: QYPlayer/Windows/4.5.10;BT/mcto;NetType/unknown;Hv/15.0.1.713;QTP/1.0.18.3
+
+'
+
+
+'GET /core?t=2&tm=120&nsd1=0_0_0_0_0_0_0_0_0_0_0_0&nbfl=15282_15282_15282_15282_15282_15282_15282_15282_15282_15282_15282_15282&rasi=2_-1_600_120&ispre=0&vbr=178424&vfrmtp=1&z=hangzhou7_cmnet&hsdp=100&ptid=01012001010000000000&pf=2&c1=2&c2=&lvbck=&r=11685976300&aid=212447801&u=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&pu=1687348376&os=windows_01000018362&v=7.2.104.1431&krv=4.5.10&hcdnv=15.0.1.713&lnv=6.6.4.17&mdlm=2&ra1=2&ra2=-1&ra3=600&va=0&as=ccdd9f607fdf8672aa16ece818337e0b&ve=b3f4fed007561183b3fd4b168ec382df&islocal=0&ht=1&tpcd=0&drm_t=0&abr_t=0&chipid=AMD%20Ryzen%205%202500U%20with%20Radeon%20Vega%20Mobile%20Gfx%20%20&mod=&nettype=18&ua_model=&rn=1584696402801&stime=1584696402801&vdurt=2895000&abr_at=&krus=pc_win32_player&vpt=1&p1=114&p2=3000&op_mp=&pdc_src=-1&a_ra=&a_va= HTTP/1.1
+Host: msg.qy.net
+Accept: */*
+Accept-Encoding: gzip, deflate
+qyid: wd6dmxom33kasgbqfjd5h4rf3x2tu63j
+User-Agent: QYPlayer/Windows/4.5.10;BT/mcto;NetType/unknown;Hv/15.0.1.713;QTP/1.0.18.3
+
+'
+
+
+'POST /mmtls/00007f2f HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Connection: close
+Content-Length: 602
+Content-Type: application/octet-stream
+Host: 117.184.242.100
+Upgrade: mmtls
+User-Agent: MicroMessenger Client
+X-Online-Host: 117.184.242.100
+
+\x19\xf1\x03\x00\xa1\x00\x00\x00\x9d\x01\x03\xf1\x01\x00\xa8I\xa5\xcc\xf8F\xc0\xce\xf2\xfc\x91\xdf,\t\xde\x8d\xda\xd6\xc9`wn\xe8_{\xa3\x92\xace~y\xdbd^t\x8c_\x00\x00\x00o\x01\x00\x00\x00j\x00\x0f\x01\x00\x00\x00c\x01\x00\t:\x80\x00\x00\x00\x00\x004\x00\x0c\xd7\xe1\xed!n\xe2\x86\x07\xd5\xf4\xbe\xdd\x00H\xa4_^\xb4d\xa9\xf4J\xfa\xfa\xaf\x81\xbem\xfa\x1fE\xe8\xc75\xd0\x981\x85.\xba\xf3\x1d\xfe#J\xbd\x03\xfd\x85\xed3\xf9\x05\xcd\x0e\xf2\xf4F@\x1bk\xac\xc9\x00]TW\'\xe7w\x13\xa4\xbd\x8f\x96\x89\x11\xa22t\x18\xfcG\xb90\xf4\x19\xf1\x03\x00$F}\x8ek\xb5F[\xf3\xb46\xd3\xeb\xcc>\xe2\x13/\xfaG\xbe\xe4\xadu\xd0\xbc\xa6\x80g/j95K\xad!D\x17\xf1\x03\x01j\x98\xb9\xaa\xdf\xc6\xe2\xc4R\xf9M\xd8V\x06\xff\x1a\x03\xfa\r\xd6\x9a-D\xa1\x0b@\x07\xbd\xd1\xdc\xbd\xeb2\xca\xe5y\x9d|a>\xe1@&\xe9\x00\x8f3\xb1^>\xbb:\xe1kDq\n\xb2\x98m(\xa3\x94\xd6\xb2\x88N^\xfbP&!\x0f\xaea_k\xadf:\xde3\xd2\'`SS\x06\x9a\xb1\xc3\xb5d\xcb_wt\x97.M\xc9\xaci\xc2\x19\x93\x97\xf5fTC\x13\xbf\x16S"\xda>\x15/\x02\xd2aT\xb7\xb5\rs\x08JMa\xc4u\x87s\n\xc6\x93\x13\xb5D\xda\xe6Vr\xbf\xac\xedFQn\t\xd4\xa1\x8a\x17\xf2\xd6\xc8\xfd\xeb\xd7X\xb1P\\g\xec\xa3\xdbh8\xe3Lp(H\xa6\x98u6\xab%\xea\x04h\x1d\xcc&\xf7}\xc32\x93.\x9c\x1a\xbf\x95\x8bL\xbfQ\xb5\xc1\rO\x14X\xa7\xdb\x9dj\x19\x01\x85nm\'Kx\x12\xc5\x81\xf7,d\xf4\xb9\x83\xf3\xdd\xd8\x0eq\xa1J\xfb\xcf\x88\xef\x14\xa5\xfc\x1e\xd1gn2\xfe\x19Qsx\x05\xf4,\x9d\x9b\x9f\xc4\x1e\xf2T,\x17G\x9ed\x86\x08\xa0\xcb\xb5\xbf\'\xf6Y\xbb\xc0\xc4\xee\xb7\xb6\x1e\x16J\xfa\xe6h>Q\xed9\x80\xe2\xd3\x10\x86\xd3(H\xb1\xc8\xfa\x8eJ\x19\x8f"\xeb\xfe\xe6S1\xee\xb3T\xe9\x94l\xe7L\x03\xcd\xcc^h\x18C"\x17\x80IA/\x12\x1c\xe9\xe3\x1c\xf4b?\x02\xca]\x13\xd5\x88*\x19\xf3\xf6\x90\xd6\x8e,\xd3F\xcf\xf2\x15\xf1\x03\x00\x17\xf4\xe5\x97&\xa7\x84\xc1\xb5$\xd4\xa2\xb0P\xde\x1c?\xa3\xc7*\xd8_\x1dG'
+
+
+'POST /mmtls/00007f2f HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Connection: close
+Content-Length: 602
+Content-Type: application/octet-stream
+Host: 117.184.242.100
+Upgrade: mmtls
+User-Agent: MicroMessenger Client
+X-Online-Host: 117.184.242.100
+
+\x19\xf1\x03\x00\xa1\x00\x00\x00\x9d\x01\x03\xf1\x01\x00\xa8I\xa5\xcc\xf8F\xc0\xce\xf2\xfc\x91\xdf,\t\xde\x8d\xda\xd6\xc9`wn\xe8_{\xa3\x92\xace~y\xdbd^t\x8c_\x00\x00\x00o\x01\x00\x00\x00j\x00\x0f\x01\x00\x00\x00c\x01\x00\t:\x80\x00\x00\x00\x00\x004\x00\x0c\xd7\xe1\xed!n\xe2\x86\x07\xd5\xf4\xbe\xdd\x00H\xa4_^\xb4d\xa9\xf4J\xfa\xfa\xaf\x81\xbem\xfa\x1fE\xe8\xc75\xd0\x981\x85.\xba\xf3\x1d\xfe#J\xbd\x03\xfd\x85\xed3\xf9\x05\xcd\x0e\xf2\xf4F@\x1bk\xac\xc9\x00]TW\'\xe7w\x13\xa4\xbd\x8f\x96\x89\x11\xa22t\x18\xfcG\xb90\xf4\x19\xf1\x03\x00$F}\x8ek\xb5F[\xf3\xb46\xd3\xeb\xcc>\xe2\x13/\xfaG\xbe\xe4\xadu\xd0\xbc\xa6\x80g/j95K\xad!D\x17\xf1\x03\x01j\x98\xb9\xaa\xdf\xc6\xe2\xc4R\xf9M\xd8V\x06\xff\x1a\x03\xfa\r\xd6\x9a-D\xa1\x0b@\x07\xbd\xd1\xdc\xbd\xeb2\xca\xe5y\x9d|a>\xe1@&\xe9\x00\x8f3\xb1^>\xbb:\xe1kDq\n\xb2\x98m(\xa3\x94\xd6\xb2\x88N^\xfbP&!\x0f\xaea_k\xadf:\xde3\xd2\'`SS\x06\x9a\xb1\xc3\xb5d\xcb_wt\x97.M\xc9\xaci\xc2\x19\x93\x97\xf5fTC\x13\xbf\x16S"\xda>\x15/\x02\xd2aT\xb7\xb5\rs\x08JMa\xc4u\x87s\n\xc6\x93\x13\xb5D\xda\xe6Vr\xbf\xac\xedFQn\t\xd4\xa1\x8a\x17\xf2\xd6\xc8\xfd\xeb\xd7X\xb1P\\g\xec\xa3\xdbh8\xe3Lp(H\xa6\x98u6\xab%\xea\x04h\x1d\xcc&\xf7}\xc32\x93.\x9c\x1a\xbf\x95\x8bL\xbfQ\xb5\xc1\rO\x14X\xa7\xdb\x9dj\x19\x01\x85nm\'Kx\x12\xc5\x81\xf7,d\xf4\xb9\x83\xf3\xdd\xd8\x0eq\xa1J\xfb\xcf\x88\xef\x14\xa5\xfc\x1e\xd1gn2\xfe\x19Qsx\x05\xf4,\x9d\x9b\x9f\xc4\x1e\xf2T,\x17G\x9ed\x86\x08\xa0\xcb\xb5\xbf\'\xf6Y\xbb\xc0\xc4\xee\xb7\xb6\x1e\x16J\xfa\xe6h>Q\xed9\x80\xe2\xd3\x10\x86\xd3(H\xb1\xc8\xfa\x8eJ\x19\x8f"\xeb\xfe\xe6S1\xee\xb3T\xe9\x94l\xe7L\x03\xcd\xcc^h\x18C"\x17\x80IA/\x12\x1c\xe9\xe3\x1c\xf4b?\x02\xca]\x13\xd5\x88*\x19\xf3\xf6\x90\xd6\x8e,\xd3F\xcf\xf2\x15\xf1\x03\x00\x17\xf4\xe5\x97&\xa7\x84\xc1\xb5$\xd4\xa2\xb0P\xde\x1c?\xa3\xc7*\xd8_\x1dG'
+
+
+'GET /cgi-bin/micromsg-bin/newgetdns?uin=1268742344&clientversion=1644626264&scene=0&net=1&md5=467430e3ed1289ab38ff162027865bab&devicetype=Windows+10&lan=zh_CN&sigver=2 HTTP/1.0
+Accept: */*
+Accept-Encoding: deflate
+Cache-Control: no-cache
+Connection: close
+Content-Type: application/octet-stream
+Host: dns.weixin.qq.com
+User-Agent: MicroMessenger Client
+
+'
+
+
+'GET /cgi-bin/micromsg-bin/newgetdns?uin=1268742344&clientversion=1644626264&scene=0&net=1&md5=467430e3ed1289ab38ff162027865bab&devicetype=Windows+10&lan=zh_CN&sigver=2 HTTP/1.0
+Accept: */*
+Accept-Encoding: deflate
+Cache-Control: no-cache
+Connection: close
+Content-Type: application/octet-stream
+Host: dns.weixin.qq.com
+User-Agent: MicroMessenger Client
+
+'
+
+
+"POST /mmtls/00007f49 HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Connection: close
+Content-Length: 462
+Content-Type: application/octet-stream
+Host: 117.184.242.100
+Upgrade: mmtls
+User-Agent: MicroMessenger Client
+X-Online-Host: 117.184.242.100
+
+\x19\xf1\x03\x00\xa1\x00\x00\x00\x9d\x01\x03\xf1\x01\x00\xa8\xbf\xdf878\xdbK\xba\xa8Vh\xc0\xe2O\x86K\xbc\x88\xe2)\x15\x87\xe4n\xb5\x1a\xb1x7{\x8d\x07^t\x8cg\x00\x00\x00o\x01\x00\x00\x00j\x00\x0f\x01\x00\x00\x00c\x01\x00\t:\x80\x00\x00\x00\x00\x004\x00\x0c\xd7\xe1\xed!n\xe2\x86\x07\xd5\xf4\xbe\xdd\x00H\xa4_^\xb4d\xa9\xf4J\xfa\xfa\xaf\x81\xbem\xfa\x1fE\xe8\xc75\xd0\x981\x85.\xba\xf3\x1d\xfe#J\xbd\x03\xfd\x85\xed3\xf9\x05\xcd\x0e\xf2\xf4F@\x1bk\xac\xc9\x00]TW'\xe7w\x13\xa4\xbd\x8f\x96\x89\x11\xa22t\x18\xfcG\xb90\xf4\x19\xf1\x03\x00$\xa9\x9d\x0e\xb0\x12\x1c\xaanZ\xca.~\x02.\x84\x0e\x16Mn\xf3V\xd7\x0b3\xf5\\\x1b\xe9c\x9f\xa9\xde\xd23D\r\x17\xf1\x03\x00\xde:\xb1k\xfc $\x10\xc4&\xee\xd3\xc8\xe8B1GE\xc8\x12\x0f\xefF^g\xb9_tm[\xc1\x93\x8f\x84\x1d\xe3t\xa7\xee\xff\xb4\xa8\\+D\x06+~\x0b\xccIQ\x00\x14@6e\xbc\xf3\x05e\xe1\xbf\xda\xaft&\x84\xebs\xc2\xb9i'\ns\xae\x8b\nQaZ\xe1S\xb2)K\xc3\xee\xc1\xf1\x05\xc2pr\xb1t\xce\xa4\x93>\x12 Y2*\xd4\x99S\xfe\xea\xc2\xa0}\xf7?\xd9\xb2\r7|\xfa\xc8\x8b\xd0\x90\x8c\x87NI\xe9\xae\x90\x9b\xcd\xe6g\x11^f\r(\xd0\xee\xb5m\x84\xa7\x81V1\xed\x0c\xcf\x90\xb8\xbf\xa7\x02\x83\xa9\xae\x01\xe2\xecO\xdb\xb0\x96\xef\x87\xdb\xd9\x95\x82\xd0\xae\xbf\xc5%\x83jS\xd5\x8d\x0e)\x17\x9d\xea\x0f\xac\x90mEPs\xc3\xe2\x08\x9c\xe7\x006o\x7f\x08\xed\xec\x17Xn#\x19c\xeec\xeb\xc9\xf6\x07\x177\x15\xf1\x03\x00\x17\xbavM\xcb/zPx\xca\x97Q\x9e\x1b\x86\xd5\x1f\xc6\x14JYTU\x0c"
+
+
+"POST /mmtls/00007f49 HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Connection: close
+Content-Length: 462
+Content-Type: application/octet-stream
+Host: 117.184.242.100
+Upgrade: mmtls
+User-Agent: MicroMessenger Client
+X-Online-Host: 117.184.242.100
+
+\x19\xf1\x03\x00\xa1\x00\x00\x00\x9d\x01\x03\xf1\x01\x00\xa8\xbf\xdf878\xdbK\xba\xa8Vh\xc0\xe2O\x86K\xbc\x88\xe2)\x15\x87\xe4n\xb5\x1a\xb1x7{\x8d\x07^t\x8cg\x00\x00\x00o\x01\x00\x00\x00j\x00\x0f\x01\x00\x00\x00c\x01\x00\t:\x80\x00\x00\x00\x00\x004\x00\x0c\xd7\xe1\xed!n\xe2\x86\x07\xd5\xf4\xbe\xdd\x00H\xa4_^\xb4d\xa9\xf4J\xfa\xfa\xaf\x81\xbem\xfa\x1fE\xe8\xc75\xd0\x981\x85.\xba\xf3\x1d\xfe#J\xbd\x03\xfd\x85\xed3\xf9\x05\xcd\x0e\xf2\xf4F@\x1bk\xac\xc9\x00]TW'\xe7w\x13\xa4\xbd\x8f\x96\x89\x11\xa22t\x18\xfcG\xb90\xf4\x19\xf1\x03\x00$\xa9\x9d\x0e\xb0\x12\x1c\xaanZ\xca.~\x02.\x84\x0e\x16Mn\xf3V\xd7\x0b3\xf5\\\x1b\xe9c\x9f\xa9\xde\xd23D\r\x17\xf1\x03\x00\xde:\xb1k\xfc $\x10\xc4&\xee\xd3\xc8\xe8B1GE\xc8\x12\x0f\xefF^g\xb9_tm[\xc1\x93\x8f\x84\x1d\xe3t\xa7\xee\xff\xb4\xa8\\+D\x06+~\x0b\xccIQ\x00\x14@6e\xbc\xf3\x05e\xe1\xbf\xda\xaft&\x84\xebs\xc2\xb9i'\ns\xae\x8b\nQaZ\xe1S\xb2)K\xc3\xee\xc1\xf1\x05\xc2pr\xb1t\xce\xa4\x93>\x12 Y2*\xd4\x99S\xfe\xea\xc2\xa0}\xf7?\xd9\xb2\r7|\xfa\xc8\x8b\xd0\x90\x8c\x87NI\xe9\xae\x90\x9b\xcd\xe6g\x11^f\r(\xd0\xee\xb5m\x84\xa7\x81V1\xed\x0c\xcf\x90\xb8\xbf\xa7\x02\x83\xa9\xae\x01\xe2\xecO\xdb\xb0\x96\xef\x87\xdb\xd9\x95\x82\xd0\xae\xbf\xc5%\x83jS\xd5\x8d\x0e)\x17\x9d\xea\x0f\xac\x90mEPs\xc3\xe2\x08\x9c\xe7\x006o\x7f\x08\xed\xec\x17Xn#\x19c\xeec\xeb\xc9\xf6\x07\x177\x15\xf1\x03\x00\x17\xbavM\xcb/zPx\xca\x97Q\x9e\x1b\x86\xd5\x1f\xc6\x14JYTU\x0c"
+
+
+'POST /router HTTP/1.1
+Content-Length: 112
+Host: nj.t.bcsp2p.baidu.com
+
+}\xba\x1f\x9a^t\x8cg\x00\x10\x01\x02\x01\x00\x08\x02\x02<:\x00g\x8ct^\xc6\x83\x01\x00\x00\x00\x00P\x81x]/\xd5(=*8\x92\xfc\xc52>\x9b\x0b\x1b\x01;\x9f,\xbaIA\x03\xaf\xdd%\xe6/d\x14NP\xdah\t\r\xc0\xa1\xf5\xcb\xa9\x9a\n\x8ek\x9a\xc0"o\xcb\xd3\xac\xc5\xfc\xc9\x92\x0e\xd4\xf0\xb6\x91\xc5t\xb0y\x1cW\x05\x14\x04\x9d\xe5c\xc6^\xc4\x06\x99'
+
+
+'POST /router HTTP/1.1
+Content-Length: 112
+Host: nj.t.bcsp2p.baidu.com
+
+}\xba\x1f\x9a^t\x8cg\x00\x10\x01\x02\x01\x00\x08\x02\x02<:\x00g\x8ct^\xc6\x83\x01\x00\x00\x00\x00P\x81x]/\xd5(=*8\x92\xfc\xc52>\x9b\x0b\x1b\x01;\x9f,\xbaIA\x03\xaf\xdd%\xe6/d\x14NP\xdah\t\r\xc0\xa1\xf5\xcb\xa9\x9a\n\x8ek\x9a\xc0"o\xcb\xd3\xac\xc5\xfc\xc9\x92\x0e\xd4\xf0\xb6\x91\xc5t\xb0y\x1cW\x05\x14\x04\x9d\xe5c\xc6^\xc4\x06\x99'
+
+
+'GET /policy.qtp.qtpconfig.blf HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Mon, 25 Nov 2019 03:05:53 GMT
+Cache-Control: max-age=0
+User-Agent: QTP;QTP/1.0.18.3
+
+'
+
+
+'GET /policy.qtp.qtpconfig.blf HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Mon, 25 Nov 2019 03:05:53 GMT
+Cache-Control: max-age=0
+User-Agent: QTP;QTP/1.0.18.3
+
+'
+
+
+'GET /policy.mssconfig.livenet.pc.json HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Wed, 19 Jun 2019 03:18:51 GMT
+User-Agent: HCDNLivenet6/6.6.4.17(win;nt/NULL;qb/8.0.0.34);QTP/1.0.18.3
+
+'
+
+
+'GET /policy.mssconfig.livenet.pc.json HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Wed, 19 Jun 2019 03:18:51 GMT
+User-Agent: HCDNLivenet6/6.6.4.17(win;nt/NULL;qb/8.0.0.34);QTP/1.0.18.3
+
+'
+
+
+'GET /policy.qtp.qtpconfig.blf HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Mon, 25 Nov 2019 03:05:53 GMT
+Cache-Control: max-age=0
+User-Agent: QTP;QTP/1.0.18.3
+
+'
+
+
+'GET /policy.qtp.qtpconfig.blf HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Mon, 25 Nov 2019 03:05:53 GMT
+Cache-Control: max-age=0
+User-Agent: QTP;QTP/1.0.18.3
+
+'
+
+
+'GET /policy.qtp.qtpconfig.blf HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Mon, 25 Nov 2019 03:05:53 GMT
+Cache-Control: max-age=0
+User-Agent: QTP;QTP/1.0.32.1
+
+'
+
+
+'GET /policy.qtp.qtpconfig.blf HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Mon, 25 Nov 2019 03:05:53 GMT
+Cache-Control: max-age=0
+User-Agent: QTP;QTP/1.0.32.1
+
+'
+
+
+'GET /policy.qtp.qtpconfig.blf HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Mon, 25 Nov 2019 03:05:53 GMT
+Cache-Control: max-age=0
+User-Agent: QTP;QTP/1.0.18.3
+
+'
+
+
+'GET /policy.qtp.qtpconfig.blf HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Mon, 25 Nov 2019 03:05:53 GMT
+Cache-Control: max-age=0
+User-Agent: QTP;QTP/1.0.18.3
+
+'
+
+
+'GET /ext/config/xplayer/v2.json HTTP/1.1
+Host: static.iqiyi.com
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Qiyi List Client PC 7.2.104.1431
+
+'
+
+
+'GET /ext/config/xplayer/v2.json HTTP/1.1
+Host: static.iqiyi.com
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Qiyi List Client PC 7.2.104.1431
+
+'
+
+
+'GET /play/img/loading?timestamp=1584696422&version=7.2.104.1431&sign=e6e87bef4392e7a2c732a273409b759f HTTP/1.1
+Host: ant.if.iqiyi.com
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Qiyi List Client PC 7.2.104.1431
+
+'
+
+
+'GET /play/img/loading?timestamp=1584696422&version=7.2.104.1431&sign=e6e87bef4392e7a2c732a273409b759f HTTP/1.1
+Host: ant.if.iqiyi.com
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Qiyi List Client PC 7.2.104.1431
+
+'
+
+
+'POST / HTTP/1.1
+Host: qbwup.imtt.qq.com
+Connection: keep-alive
+Content-Length: 389
+Q-UA2: BIT=32&CHID=0&CO=BK&COVC=045300&MO=PC&OS=10.0.18362&PB=GE&PL=WIN&PPVN=4.0.0.1278&PR=PCTBS&QV=3&RL=1920*1080&VE=GA
+QQ-S-ZIP: gzip
+Content-Type: application/x-www-form-urlencoded
+User-Agent:
+Accept-Encoding: gzip, deflate
+
+\x1f\x8b\x08\x00\x00\x00\x00\x00\x02\xff\x01n\x01\x91\xfe\x00\x00\x01n\x10\x02,<LV\x08qbpcstatf\x04stat}\x00\x01\x01K\x08\x00\x01\x06\x05crypt\x18\x00\x01\x06\nlist<char>\x1d\x00\x01\x01-\r\x00\x01\x01(\xa2\x93\xe3\xc4]\xbc\xf7l\x7f\xf5\x85\x87_\xb7\xc8E9Cw\xa0\x94\xdb\xc7\xc7\x94O\r\x9b\x06\xec\x89"\x8c\x16\xf3\x15\xbd\x8e\xae\x8a8\x84Wj\xb6y%\xbb\x981\x08)G\xe8\xc1^z\xc94\xd6\xaa\xb1\x88R9\\+\x01}\x8a5\x0fz2T\x91\x13\xf1\x90\xd7]\x04\xe5q<\x95\xab\x89\x96h|\x07]&\x1d\xc8|\xd5s\x01\xf7m\x92\xff\x87f\x86\xa6\x1a\x93\x98\x9a \xc7\x12\\\xfc\x9d\x8ek\x1f\xbc\xfb\x98\xc95\x82\xcf*\xf9\xc4I\x82\x98\x90\x03\xb0J\xef\xa9\xc9\x167\t\xd2\x85\xe3\x1b\xe5Sn\x9b\xb4\xcb2gE/@H4\x04_\xa5hZ\xe9\xba\xe5\xee\x8f/\xfc\x03\x9d\x00K\xd2pL|5\xde\x82;\xc3\xfbh[m\xc9:\x8c\x17\xef\x1aoG\x05\x9f\x02f\xb9\xf8 \xb3\x1c\xaaS&Qn\\\xb7:y\xf7\xcbq\xbd\x89\x9c6\x9d\xd6\xfa\xa5k\xb4\xa4l"S\x9e\xe0kliw\xedz\x01D\x98\xc5\x88\xb0\x10\xe594\xe6y:;\x04t\x06)\xec\xa1\xe9\xa2\xe3#\x80p\x95\xcd;\x1f\xfe\x9e\x1b\xf1C8y\x0c\xd2\xa7\x0f\xbd\xea\xee\xf9\x05\xd9\x13\xa3K\xe3\x85px\x06\x8c\x98\x0c\xa8\x0c\xe8\x91\xfd~n\x01\x00\x00'
+
+
+'POST / HTTP/1.1
+Host: qbwup.imtt.qq.com
+Connection: keep-alive
+Content-Length: 389
+Q-UA2: BIT=32&CHID=0&CO=BK&COVC=045300&MO=PC&OS=10.0.18362&PB=GE&PL=WIN&PPVN=4.0.0.1278&PR=PCTBS&QV=3&RL=1920*1080&VE=GA
+QQ-S-ZIP: gzip
+Content-Type: application/x-www-form-urlencoded
+User-Agent:
+Accept-Encoding: gzip, deflate
+
+\x1f\x8b\x08\x00\x00\x00\x00\x00\x02\xff\x01n\x01\x91\xfe\x00\x00\x01n\x10\x02,<LV\x08qbpcstatf\x04stat}\x00\x01\x01K\x08\x00\x01\x06\x05crypt\x18\x00\x01\x06\nlist<char>\x1d\x00\x01\x01-\r\x00\x01\x01(\xa2\x93\xe3\xc4]\xbc\xf7l\x7f\xf5\x85\x87_\xb7\xc8E9Cw\xa0\x94\xdb\xc7\xc7\x94O\r\x9b\x06\xec\x89"\x8c\x16\xf3\x15\xbd\x8e\xae\x8a8\x84Wj\xb6y%\xbb\x981\x08)G\xe8\xc1^z\xc94\xd6\xaa\xb1\x88R9\\+\x01}\x8a5\x0fz2T\x91\x13\xf1\x90\xd7]\x04\xe5q<\x95\xab\x89\x96h|\x07]&\x1d\xc8|\xd5s\x01\xf7m\x92\xff\x87f\x86\xa6\x1a\x93\x98\x9a \xc7\x12\\\xfc\x9d\x8ek\x1f\xbc\xfb\x98\xc95\x82\xcf*\xf9\xc4I\x82\x98\x90\x03\xb0J\xef\xa9\xc9\x167\t\xd2\x85\xe3\x1b\xe5Sn\x9b\xb4\xcb2gE/@H4\x04_\xa5hZ\xe9\xba\xe5\xee\x8f/\xfc\x03\x9d\x00K\xd2pL|5\xde\x82;\xc3\xfbh[m\xc9:\x8c\x17\xef\x1aoG\x05\x9f\x02f\xb9\xf8 \xb3\x1c\xaaS&Qn\\\xb7:y\xf7\xcbq\xbd\x89\x9c6\x9d\xd6\xfa\xa5k\xb4\xa4l"S\x9e\xe0kliw\xedz\x01D\x98\xc5\x88\xb0\x10\xe594\xe6y:;\x04t\x06)\xec\xa1\xe9\xa2\xe3#\x80p\x95\xcd;\x1f\xfe\x9e\x1b\xf1C8y\x0c\xd2\xa7\x0f\xbd\xea\xee\xf9\x05\xd9\x13\xa3K\xe3\x85px\x06\x8c\x98\x0c\xa8\x0c\xe8\x91\xfd~n\x01\x00\x00'
+
+
+'GET /b?t=11&ct=hcdn140224&methodtp=HCDNDLRATIO&platform=pc&deviceid=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&pf=1&p=11&p1=114&u=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&pu=&rn=193155359&version=15.0.1.713&p2p=0&http=0&ts=0&up=13592576&dcdn=0&icdnds=-1&p2pds=-1&p2pus=608&localup=0&directional=0&otherdsrv=0&otherdp2p=0&cl=z40 HTTP/1.1
+Host: msg.qy.net
+Accept: */*
+Content-Type: application/octet-stream
+User-Agent: HCDNClient_WINPC;15.0.1.713;NetType/unknown;QTP/1.0.32.1
+Connection: keep-alive
+
+'
+
+
+'GET /b?t=11&ct=hcdn140224&methodtp=HCDNDLRATIO&platform=pc&deviceid=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&pf=1&p=11&p1=114&u=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&pu=&rn=193155359&version=15.0.1.713&p2p=0&http=0&ts=0&up=13592576&dcdn=0&icdnds=-1&p2pds=-1&p2pus=608&localup=0&directional=0&otherdsrv=0&otherdp2p=0&cl=z40 HTTP/1.1
+Host: msg.qy.net
+Accept: */*
+Content-Type: application/octet-stream
+User-Agent: HCDNClient_WINPC;15.0.1.713;NetType/unknown;QTP/1.0.32.1
+Connection: keep-alive
+
+'
+
+
+'GET /policy.qtp.qtpconfig.blf HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Mon, 25 Nov 2019 03:05:53 GMT
+Cache-Control: max-age=0
+User-Agent: QTP;QTP/1.0.32.1
+
+'
+
+
+'GET /policy.qtp.qtpconfig.blf HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Mon, 25 Nov 2019 03:05:53 GMT
+Cache-Control: max-age=0
+User-Agent: QTP;QTP/1.0.32.1
+
+'
+
+
+'GET /policy.qtp.qtpconfig.blf HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Mon, 25 Nov 2019 03:05:53 GMT
+Cache-Control: max-age=0
+User-Agent: QTP;QTP/1.0.18.3
+
+'
+
+
+'GET /policy.qtp.qtpconfig.blf HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Mon, 25 Nov 2019 03:05:53 GMT
+Cache-Control: max-age=0
+User-Agent: QTP;QTP/1.0.18.3
+
+'
+
+
+'GET /policy.mssconfig.livenet.pc.json HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Wed, 19 Jun 2019 03:18:51 GMT
+User-Agent: LivenetPrePush/10.6.4.10(win;nt/WIFI;qb/8.0.0.34);QTP/1.0.18.3
+
+'
+
+
+'GET /policy.mssconfig.livenet.pc.json HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Wed, 19 Jun 2019 03:18:51 GMT
+User-Agent: LivenetPrePush/10.6.4.10(win;nt/WIFI;qb/8.0.0.34);QTP/1.0.18.3
+
+'
+
+
+'GET /policy.hcdnclient.pc.blf HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Mon, 16 Mar 2020 11:35:54 GMT
+Pragma: no-cache
+Connection: close
+User-Agent: QTP;QTP/1.0.32.1
+
+'
+
+
+'GET /policy.hcdnclient.pc.blf HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Mon, 16 Mar 2020 11:35:54 GMT
+Pragma: no-cache
+Connection: close
+User-Agent: QTP;QTP/1.0.32.1
+
+'
+
+
+'GET /v.f4v HTTP/1.1
+Host: data6.video.iqiyi.com
+Accept: *
+User-Agent: HCDNClient;QTP/1.0.32.1
+Connection: close
+
+'
+
+
+'GET /v.f4v HTTP/1.1
+Host: data6.video.iqiyi.com
+Accept: *
+User-Agent: HCDNClient;QTP/1.0.32.1
+Connection: close
+
+'
+
+
+'GET /qos?u=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&pu=&rn=167955656&p1=8_82_820&dfp=&de=&stime=167955656&pbv=&ct=p2p_loss&t=11&v=15.0.1.713&all=852928&valid=351465&data=738472&assist=114456&tcp=0&udp=0&tcpkcp=0&udp_up=686812&im=0&iim=0&ivm=0&viiim=0&xm=0 HTTP/1.1
+Host: msg.qy.net
+Accept: */*
+User-Agent: QTP;QTP/1.0.32.1
+
+'
+
+
+'GET /qos?u=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&pu=&rn=167955656&p1=8_82_820&dfp=&de=&stime=167955656&pbv=&ct=p2p_loss&t=11&v=15.0.1.713&all=852928&valid=351465&data=738472&assist=114456&tcp=0&udp=0&tcpkcp=0&udp_up=686812&im=0&iim=0&ivm=0&viiim=0&xm=0 HTTP/1.1
+Host: msg.qy.net
+Accept: */*
+User-Agent: QTP;QTP/1.0.32.1
+
+'
+
+
+'GET /update/HCDNkernel/HCDNClientUpdate.ini HTTP/1.1
+Host: p2pupdate.inter.iqiyi.com:8888
+Accept: *
+User-Agent: HCDNClient;QTP/1.0.32.1
+
+'
+
+
+'GET /update/HCDNkernel/HCDNClientUpdate.ini HTTP/1.1
+Host: p2pupdate.inter.iqiyi.com:8888
+Accept: *
+User-Agent: HCDNClient;QTP/1.0.32.1
+
+'
+
+
+'POST /mmtls/00007f70 HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Connection: close
+Content-Length: 1335
+Content-Type: application/octet-stream
+Host: 183.194.234.225
+Upgrade: mmtls
+User-Agent: MicroMessenger Client
+X-Online-Host: 183.194.234.225
+
+\x19\xf1\x03\x00\xa1\x00\x00\x00\x9d\x01\x03\xf1\x01\x00\xa85*r\xe5\x9b<"\x15o\xb2\xb1m\x14N\x96\xb0n\x91\xff\x10\xa6\xa0&e&\x9a\xfc\x02\xa4\xf2\'\xc2^t\x8cs\x00\x00\x00o\x01\x00\x00\x00j\x00\x0f\x01\x00\x00\x00c\x01\x00\t:\x80\x00\x00\x00\x00\x004\x00\x0c\xd7\xe1\xed!n\xe2\x86\x07\xd5\xf4\xbe\xdd\x00H\xa4_^\xb4d\xa9\xf4J\xfa\xfa\xaf\x81\xbem\xfa\x1fE\xe8\xc75\xd0\x981\x85.\xba\xf3\x1d\xfe#J\xbd\x03\xfd\x85\xed3\xf9\x05\xcd\x0e\xf2\xf4F@\x1bk\xac\xc9\x00]TW\'\xe7w\x13\xa4\xbd\x8f\x96\x89\x11\xa22t\x18\xfcG\xb90\xf4\x19\xf1\x03\x00$\xafZM\xf2\xfdB\x89\x1e@\xa5)\xf4\xd2\x89(\xed\x8b\xef\x04g2\xbe\x12d*\xdb\x10\xd4\xbe\xd43\xc7g\xc2\xa0\xe8\x17\xf1\x03\x04G\x0c\xcc\xbc5\x0b\xbe\xd0\x12\xdd\xba\xf8\xf8\xc3\xe0\xc6R\xe3\x8a\xd4\\^\x9b\xfd\xfe59\x02\xff\xfd+\xbc\x0fpw:\xcb<D\xbc\x12[^\x9a\xa8\x90\t\xc9\xa16=\xc9B`q\x9b\xf7\xf5b\xe5\x91<\xa9\xfa\xa8\xb7\xb9N\xd2\xc2n\xe4\xce,\x17P\x1eZ\xcb\xed\x1c\xa1P\x85m-\x15=\xc2\xe0\xd4}\x0ec\x91a\xdf\x85-\x93\x93j\x91Mx\x13<\xd4*M\xcf\x02\x04\xba> \x9f\xe6=\xdbQ|\x05\xcd\x1e[\xbb\xfcy\xa6\x82\x13\\?\x92\xee\xb9\xc8\xf5+\xb2\xd3\xe9"\xde\x90j`\xa9 \xa7C\x0e\xe5\x18\x8e8\x05\x0c,\xe2\x92\xc8P$\xbd\xd1V\x14\x04\xc1\xa6&z\x1d\x19\xac\xbe\xbfXPd\xb3\x0c\xa8\xbd}K\xf1.\xc1\x08y01|\xfe,\xb0\xe9\xf8\xe9\x8c?o\x84\xeea\xfc\x05\x18\xa6\x03eG",I\xc0\x19>\xafN\xb6\xc5\xb5\xde \x14\x18\xbb>f\xaf\xc17\xb4d\xff\xdc\xe6OS\x05\x1dZ\x07\xe7 \x0c\xdb9e\x8d\x90 \xd6\xfb\xbc\x0b9-\xbd\xa2B\x1e5\x1bT\xa67\x08\xaeo\x93\xd0\xafC8c\xc1\xb8\x08+\xd0\xcd\x16\x1d\xdaC\xf7\xb8\x06\xb2\xd3\xc56w\x85.\xfe\x8cF\xcf\xd3\x8aC\x1b\xcem,\x8a\xcc\xd5\xd7\xc5\x06\xdd\xe1@-\xec\xe8un\xaf.\xd1\xfc\xf0\x03\xab\x04^\xef\x18q.\xcc\xcd\xbe~\x89\xdd\xe6\xe5J\xdf\xfe\x96@}j\xee\xe4Z\xfd\x0fc*q\x95\xff\xf6\x8d6\xddB+8\x93<\xc1\x0eQ\xd7\x0f\xfd\x01Z\xfd\x85\xa5\xba\xe3Q"d\xac\xa5\xd8\xea\x94\xb4\xb5\xff\xba>\x83\xb4\x8d\xdbe\xa5\r\x99H3@\x14>\xae\xd0\xd2\xd7cVJ0/T\x90\xc0o,\x9fM\xb3\x7f|\xa9\xb7\x08+\xe0\x99\xfe#\xb8C\x84\x8beV\xea5\x08J\xed\x8f\xe1%\xc9;o\x0b\x9dp\xfd\x88c\x12T\x83\xb9\x9f\x15\xae\x88FDjQf\xe8W\xa3\x8dln\xa6\x0c\x07K\xbfd\xe1#\xc6\xa4\x1aM\x88M&\x96\xa4\xb9k\x97\xe0\xf8K\xf4\xdc\x94%\xc5tv\xf9\x12\tz\x8e\xfe\xfeq\x92E1\xd8\xc3\x89\x93:\xdb\x90\xe6pL.Y\xa1\xa9w\xccX\xa2G\xdc0P\xd4\xe9\x00E\x01f\x13\xcd\x10\x1c\xb0=3\x87V\xdej\xea\xc6\x98|b\x0f:\x99\xd0[\x93"\\\xab\xf7\xaf\x8f\x12c-\xc9y\xdf\xdd"\xa8\xc5\x81y!\xb4\xc2\xfb\xc3%\xa3\x02\xc5B\xc2\x0e\xc8\xa0\x19;\xc5T\xd6\x8c\\\xa1\x92\xcb!\xfe\x17\xa8\x80\xaaa\xf1\x07\xea\x04{\xe9\xdc\xe4{\xf8tD\xe9\xcf\xa4\x82o\xc2\xb6\xd9u\xfe\x8f!\xbd\xe0E_\xae\x98&qQ\xfa\xec\xa1w\xc8\xcb\xd77\xc9H\x16\xf4\xfb\x8f\x86\xda\xf6\xad\x8c\x13\x19\x98\xe7\xac\xec1\xa6`\xe3{*\xe67\xaf\x96\xf8\x02I\xed\x94\x8a\xcd,7\xafZ\xc0\xef/2\x0f\x0b\xd3\xbfEK\x1f\x9e\xbd\xaa\x86\xe7\x11\xc35\xe7\x11B\xcc\x18\x9d\x0c5\x13tb\x80\xa6\xd2[\xe7L\x9f=\x02\xab\xee#)jM[2c"Q\x13\x1e.F\xe6\xe1]\xfb9\x12\xb9Z\x1b\xeb\xd9u\xcap\x8f\x0c\xbc9\xb2}\xf1\xcb\xca,\xa1i\xe4\xacs9Gk\x98\x7f\x13`DX6\x01\x88\x9e\x86\xfa\x07\xf4BR\xf1\xe2\x89\xd746\xa0\x8fJ\xacn\xa9\xbdg!\x06\x02\xa9|\xf6\x1f}\xa1\xb3\xed1\x93jJ\x9e\x05 \x9dJb\x1f\'\xc7<\xc3\xc2\x17[X>K\xae[\x08\x88^hP\xec\xe5\xe9\xae\x14#\x00\xd5\x9d8\x85Z\xd1\x0e\x06\x8e5\x02o\xef\t\x05\xee\x9fO\xd8\xb3\x97\x1b\x1f\xb3O\xc2\x99$\x05\x82\x9cB\x97\xc2\xb2\x1c\x06N\x88\xb9\xa5\xcb<\xff\x86o%!\x9f\x9d\xcc\xdc\xfb=\x03\x8a\xce\xf0U4\xf7\xa7\xe8.\xb7)\xe9\xeb\xe0\x85'
+
+
+'POST /mmtls/00007f70 HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Connection: close
+Content-Length: 1335
+Content-Type: application/octet-stream
+Host: 183.194.234.225
+Upgrade: mmtls
+User-Agent: MicroMessenger Client
+X-Online-Host: 183.194.234.225
+
+\x19\xf1\x03\x00\xa1\x00\x00\x00\x9d\x01\x03\xf1\x01\x00\xa85*r\xe5\x9b<"\x15o\xb2\xb1m\x14N\x96\xb0n\x91\xff\x10\xa6\xa0&e&\x9a\xfc\x02\xa4\xf2\'\xc2^t\x8cs\x00\x00\x00o\x01\x00\x00\x00j\x00\x0f\x01\x00\x00\x00c\x01\x00\t:\x80\x00\x00\x00\x00\x004\x00\x0c\xd7\xe1\xed!n\xe2\x86\x07\xd5\xf4\xbe\xdd\x00H\xa4_^\xb4d\xa9\xf4J\xfa\xfa\xaf\x81\xbem\xfa\x1fE\xe8\xc75\xd0\x981\x85.\xba\xf3\x1d\xfe#J\xbd\x03\xfd\x85\xed3\xf9\x05\xcd\x0e\xf2\xf4F@\x1bk\xac\xc9\x00]TW\'\xe7w\x13\xa4\xbd\x8f\x96\x89\x11\xa22t\x18\xfcG\xb90\xf4\x19\xf1\x03\x00$\xafZM\xf2\xfdB\x89\x1e@\xa5)\xf4\xd2\x89(\xed\x8b\xef\x04g2\xbe\x12d*\xdb\x10\xd4\xbe\xd43\xc7g\xc2\xa0\xe8\x17\xf1\x03\x04G\x0c\xcc\xbc5\x0b\xbe\xd0\x12\xdd\xba\xf8\xf8\xc3\xe0\xc6R\xe3\x8a\xd4\\^\x9b\xfd\xfe59\x02\xff\xfd+\xbc\x0fpw:\xcb<D\xbc\x12[^\x9a\xa8\x90\t\xc9\xa16=\xc9B`q\x9b\xf7\xf5b\xe5\x91<\xa9\xfa\xa8\xb7\xb9N\xd2\xc2n\xe4\xce,\x17P\x1eZ\xcb\xed\x1c\xa1P\x85m-\x15=\xc2\xe0\xd4}\x0ec\x91a\xdf\x85-\x93\x93j\x91Mx\x13<\xd4*M\xcf\x02\x04\xba> \x9f\xe6=\xdbQ|\x05\xcd\x1e[\xbb\xfcy\xa6\x82\x13\\?\x92\xee\xb9\xc8\xf5+\xb2\xd3\xe9"\xde\x90j`\xa9 \xa7C\x0e\xe5\x18\x8e8\x05\x0c,\xe2\x92\xc8P$\xbd\xd1V\x14\x04\xc1\xa6&z\x1d\x19\xac\xbe\xbfXPd\xb3\x0c\xa8\xbd}K\xf1.\xc1\x08y01|\xfe,\xb0\xe9\xf8\xe9\x8c?o\x84\xeea\xfc\x05\x18\xa6\x03eG",I\xc0\x19>\xafN\xb6\xc5\xb5\xde \x14\x18\xbb>f\xaf\xc17\xb4d\xff\xdc\xe6OS\x05\x1dZ\x07\xe7 \x0c\xdb9e\x8d\x90 \xd6\xfb\xbc\x0b9-\xbd\xa2B\x1e5\x1bT\xa67\x08\xaeo\x93\xd0\xafC8c\xc1\xb8\x08+\xd0\xcd\x16\x1d\xdaC\xf7\xb8\x06\xb2\xd3\xc56w\x85.\xfe\x8cF\xcf\xd3\x8aC\x1b\xcem,\x8a\xcc\xd5\xd7\xc5\x06\xdd\xe1@-\xec\xe8un\xaf.\xd1\xfc\xf0\x03\xab\x04^\xef\x18q.\xcc\xcd\xbe~\x89\xdd\xe6\xe5J\xdf\xfe\x96@}j\xee\xe4Z\xfd\x0fc*q\x95\xff\xf6\x8d6\xddB+8\x93<\xc1\x0eQ\xd7\x0f\xfd\x01Z\xfd\x85\xa5\xba\xe3Q"d\xac\xa5\xd8\xea\x94\xb4\xb5\xff\xba>\x83\xb4\x8d\xdbe\xa5\r\x99H3@\x14>\xae\xd0\xd2\xd7cVJ0/T\x90\xc0o,\x9fM\xb3\x7f|\xa9\xb7\x08+\xe0\x99\xfe#\xb8C\x84\x8beV\xea5\x08J\xed\x8f\xe1%\xc9;o\x0b\x9dp\xfd\x88c\x12T\x83\xb9\x9f\x15\xae\x88FDjQf\xe8W\xa3\x8dln\xa6\x0c\x07K\xbfd\xe1#\xc6\xa4\x1aM\x88M&\x96\xa4\xb9k\x97\xe0\xf8K\xf4\xdc\x94%\xc5tv\xf9\x12\tz\x8e\xfe\xfeq\x92E1\xd8\xc3\x89\x93:\xdb\x90\xe6pL.Y\xa1\xa9w\xccX\xa2G\xdc0P\xd4\xe9\x00E\x01f\x13\xcd\x10\x1c\xb0=3\x87V\xdej\xea\xc6\x98|b\x0f:\x99\xd0[\x93"\\\xab\xf7\xaf\x8f\x12c-\xc9y\xdf\xdd"\xa8\xc5\x81y!\xb4\xc2\xfb\xc3%\xa3\x02\xc5B\xc2\x0e\xc8\xa0\x19;\xc5T\xd6\x8c\\\xa1\x92\xcb!\xfe\x17\xa8\x80\xaaa\xf1\x07\xea\x04{\xe9\xdc\xe4{\xf8tD\xe9\xcf\xa4\x82o\xc2\xb6\xd9u\xfe\x8f!\xbd\xe0E_\xae\x98&qQ\xfa\xec\xa1w\xc8\xcb\xd77\xc9H\x16\xf4\xfb\x8f\x86\xda\xf6\xad\x8c\x13\x19\x98\xe7\xac\xec1\xa6`\xe3{*\xe67\xaf\x96\xf8\x02I\xed\x94\x8a\xcd,7\xafZ\xc0\xef/2\x0f\x0b\xd3\xbfEK\x1f\x9e\xbd\xaa\x86\xe7\x11\xc35\xe7\x11B\xcc\x18\x9d\x0c5\x13tb\x80\xa6\xd2[\xe7L\x9f=\x02\xab\xee#)jM[2c"Q\x13\x1e.F\xe6\xe1]\xfb9\x12\xb9Z\x1b\xeb\xd9u\xcap\x8f\x0c\xbc9\xb2}\xf1\xcb\xca,\xa1i\xe4\xacs9Gk\x98\x7f\x13`DX6\x01\x88\x9e\x86\xfa\x07\xf4BR\xf1\xe2\x89\xd746\xa0\x8fJ\xacn\xa9\xbdg!\x06\x02\xa9|\xf6\x1f}\xa1\xb3\xed1\x93jJ\x9e\x05 \x9dJb\x1f\'\xc7<\xc3\xc2\x17[X>K\xae[\x08\x88^hP\xec\xe5\xe9\xae\x14#\x00\xd5\x9d8\x85Z\xd1\x0e\x06\x8e5\x02o\xef\t\x05\xee\x9fO\xd8\xb3\x97\x1b\x1f\xb3O\xc2\x99$\x05\x82\x9cB\x97\xc2\xb2\x1c\x06N\x88\xb9\xa5\xcb<\xff\x86o%!\x9f\x9d\xcc\xdc\xfb=\x03\x8a\xce\xf0U4\xf7\xa7\xe8.\xb7)\xe9\xeb\xe0\x85'
+
+
+'GET /cfg2/global.json HTTP/1.1
+Host: list3.ppstream.com.iqiyi.com
+Accept: */*
+Accept-Encoding: deflate, gzip
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Qiyi List Client PC 7.2.104.1431
+
+'
+
+
+'GET /cfg2/global.json HTTP/1.1
+Host: list3.ppstream.com.iqiyi.com
+Accept: */*
+Accept-Encoding: deflate, gzip
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Qiyi List Client PC 7.2.104.1431
+
+'
+
+
+'GET /v5/ypt/cdns?p1=1_11_114&u=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&v=15.0.1.713&rn=193185390&stcf=0&skcf=0&lrcf=0&cpcf=0&bfcf=0&pupf=13215&openup=1&htaskr=0&cpucnt=8&memts=19353&diskts=102399&sbfcf=0&celncf=0&crcec=0&dkioswh=1&dkioran=3&kpdldswh=0&kpdldras=0&stmode=2&upmemhit=37&iotmmed=0&iotmiqr=0&dbflsmed=0&dbflsiqr=0&appclup=0&onlyuc=0&v4v6tp=0 HTTP/1.1
+Host: msg.qy.net
+Accept: */*
+Content-Type: application/octet-stream
+User-Agent: HCDNClient_WINPC;15.0.1.713;NetType/unknown;QTP/1.0.32.1
+Connection: keep-alive
+
+'
+
+
+'GET /v5/ypt/cdns?p1=1_11_114&u=wd6dmxom33kasgbqfjd5h4rf3x2tu63j&v=15.0.1.713&rn=193185390&stcf=0&skcf=0&lrcf=0&cpcf=0&bfcf=0&pupf=13215&openup=1&htaskr=0&cpucnt=8&memts=19353&diskts=102399&sbfcf=0&celncf=0&crcec=0&dkioswh=1&dkioran=3&kpdldswh=0&kpdldras=0&stmode=2&upmemhit=37&iotmmed=0&iotmiqr=0&dbflsmed=0&dbflsiqr=0&appclup=0&onlyuc=0&v4v6tp=0 HTTP/1.1
+Host: msg.qy.net
+Accept: */*
+Content-Type: application/octet-stream
+User-Agent: HCDNClient_WINPC;15.0.1.713;NetType/unknown;QTP/1.0.32.1
+Connection: keep-alive
+
+'
+
+
+'HTTP/1.1 200 OK
+Server: nginx
+Date: Fri, 20 Mar 2020 09:27:33 GMT
+Content-Type: text/html
+Content-Length: 0
+Connection: keep-alive
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Headers: Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With
+
+'
+
+
+'GET /policy.mssconfig.pc.json HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Thu, 17 May 2018 02:38:19 GMT
+Pragma: no-cache
+Connection: close
+User-Agent: HCDN_MSS_POLICY;QTP/1.0.32.1
+
+'
+
+
+'GET /policy.mssconfig.pc.json HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Thu, 17 May 2018 02:38:19 GMT
+Pragma: no-cache
+Connection: close
+User-Agent: HCDN_MSS_POLICY;QTP/1.0.32.1
+
+'
+
+
+'GET /v.f4v HTTP/1.1
+Host: data6.video.iqiyi.com
+Accept: */*
+User-Agent: QTP;QTP/1.0.32.1
+
+'
+
+
+'GET /v.f4v HTTP/1.1
+Host: data6.video.iqiyi.com
+Accept: */*
+User-Agent: QTP;QTP/1.0.32.1
+
+'
+
+
+'GET /vodservercfg.blf?su=wd6dmxom33kasgbqfjd5h4rf3x2tu63j HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Thu, 19 Mar 2020 07:27:01 GMT
+Pragma: no-cache
+User-Agent: QTP;QTP/1.0.32.1
+
+'
+
+
+'GET /vodservercfg.blf?su=wd6dmxom33kasgbqfjd5h4rf3x2tu63j HTTP/1.1
+Host: policy.video.iqiyi.com
+Accept: */*
+If-Modified-Since: Thu, 19 Mar 2020 07:27:01 GMT
+Pragma: no-cache
+User-Agent: QTP;QTP/1.0.32.1
+
+'
+
+
+'GET /v.f4v HTTP/1.1
+Host: data6.video.iqiyi.com
+Accept: *
+User-Agent: HCDNClient_WINPC;QK/15.0.1.713;AreaInfo;;QTP/1.0.32.1
+Connection: close
+
+'
+
+
+'GET /v.f4v HTTP/1.1
+Host: data6.video.iqiyi.com
+Accept: *
+User-Agent: HCDNClient_WINPC;QK/15.0.1.713;AreaInfo;;QTP/1.0.32.1
+Connection: close
+
+'
+
+
