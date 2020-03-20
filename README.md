@@ -58,16 +58,20 @@ python3+
 
 
 -----------------------
+```bash
 e.g.
 url:https://www.baidu.com
 method:GET/POST
 data:Accept:*/*
-​	Cache-Control:no-cache
-​	Connection:keep-alive
-​	Content-Length:438
-​	Host:seeds-darwin.xycdn.com
-​	Pragma:no-cache
-​	{"url":"m701.music.126.net/20200316195545/035eed50001bed1d8ce2ecdbf5d161f9/jdyyaac/015a/510e/0f0b/600184ef5cfd9ca30f398a27dbbfefb2.m4a","surl":"https://m701.music.126.net/20200316195545/035eed50001bed1d8ce2ecdbf5d161f9/jdyyaac/015a/510e/0f0b/600184ef5cfd9ca30f398a27dbbfefb2.m4a?xyop=2","sid":"9eec9f81d374fceeb66826135a2af3b64e2e185e66cfaf2b6cee90b465e34395","fs":4245477,"ofs":424576,"nt":0,"type":"sdk","ver":"1.5.99","peer_status":[]}
+	Cache-Control:no-cache
+	Connection:keep-alive
+	Content-Length:438
+	Host:seeds-darwin.xycdn.com
+	Pragma:no-cache
+	{"url":"m701.music.126.net/20200316195545/035eed50001bed1d8ce2ecdbf5d161f9/jdyyaac/015a/510e/0f0b/600184ef5cfd9ca30f398a27dbbfefb2.m4a","surl":"https://m701.music.126.net/20200316195545/035eed50001bed1d8ce2ecdbf5d161f9/jdyyaac/015a/510e/0f0b/600184ef5cfd9ca30f398a27dbbfefb2.m4a?xyop=2","sid":"9eec9f81d374fceeb66826135a2af3b64e2e185e66cfaf2b6cee90b465e34395","fs":4245477,"ofs":424576,"nt":0,"type":"sdk","ver":"1.5.99","peer_status":[]}
 
 ===
+```
+
+
 
