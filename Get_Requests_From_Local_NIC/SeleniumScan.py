@@ -35,8 +35,6 @@ def selenium_login(WebServer):
 
     time.sleep(1)
 
-    print(browser.current_url)
-
     cookies_msg = {}
     Cookies = {}
 
@@ -55,23 +53,21 @@ def selenium_login(WebServer):
     except:
         print("get_cookies error")
     return Cookies, browser ,s
-
-
+OLDER_URL = []
 
 def get_url(s, browser, Cookies):
     r = s.get(browser.current_url, cookies=Cookies)
     # params = re.compile('id="(.*?)"',re.S)
     params = re.compile('href="(.*?)"',re.S)
     result = re.findall(params, r.text)
-    print(result)
+    # print(result)
     MainServer = browser.current_url
-    print(MainServer)
-    print(browser.current_url.split("/")[-1])
     time.sleep(1)
     Logout = ['logout', 'login', 'login.html', 'javascript:void(0);','javascript:history.back(-1);','javascript:void(0)','#',browser.current_url.split("/")[-1]]
-
+    OLDER_URL.append(browser.current_url.split("/")[-1])
+    print(OLDER_URL)
     for i in result:
-        if i.lower() not in Logout:
+        if i.lower() not in Logout and i not in OLDER_URL:
             try:
                 windows = browser.window_handles
                 browser.switch_to.window(windows[0])
