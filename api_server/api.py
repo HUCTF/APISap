@@ -1,4 +1,4 @@
-from api_class import mid_server,Encrypts,Decrypts
+from api_class import mid_server,op
 from flask import Flask, render_template, request, current_app
 from flask_cors import *
 server = Flask(__name__)
@@ -60,9 +60,11 @@ def test():
     return 'good'
 if __name__ == '__main__':
     #用于定时清理
-    test=1
-    test=token_api.server_get_token('2019','127.0.0.1:8886')
+    token_api.timedTask()
+    # test=1
+    # print(token_api.search_token_by_id('2019', '127.0.0.1:8886'))
+    # token_api.server_get_token('2019','127.0.0.1:8886')
     # print(test['token'])
-    # token_api.timedTask()
+
     # token_api.create_mid_server_key('127.0.0.1:8886')
-    # server.run(debug='true' , port=5000, host='0.0.0.0')  # 指定端口、host,0.0.0.0代表不管几个网卡，任何ip都可以访问
+    server.run(debug='true' , port=5000, host='0.0.0.0')  # 指定端口、host,0.0.0.0代表不管几个网卡，任何ip都可以访问
