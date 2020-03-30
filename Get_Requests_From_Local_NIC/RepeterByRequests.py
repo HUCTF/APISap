@@ -1,6 +1,7 @@
 #coding:utf-8
 import sys
 import requests
+import time
 from scapy.utils import PcapReader
 ##resend the package in package.txt, and get the return from server.
 host=''
@@ -16,21 +17,44 @@ def Read_package():
     line=fd.readline()
     while ('GET' not in line) and ('POST' not in line):
         line=fd.readline()
-        #print(line)
     if 'GET' in line:
         msd='GET'
         host=getmidstring(line,'GET ',' HTTP/')
+        requests_get(line, host)
     #else:
     #    msd='POST'
     #    host=getmidstring(line,'POST ',' HTTP/')
-    head=''
-    line=fd.readline()+'\n'
+
+
+def requests_get(line, host):
+    headers={}
+    headers.clear()
+    # time.sleep(1)
     while('Host:' not in line):
-        line=fd.readline()+'\n'
-        head=head+line
+        line = fd.readline()
+        head = line.split(": ")
+        if "\n" not in head[0] and head[0] != '':
+            headers[head[0]]=head[1][:-1]
+    # print(headers)
     host='http://'+str(getmidstring(line,'Host:','\n'))+str(host)
     print(host)
-    resp=requests.get(url=host,data=head).text
+    resp=requests.get(url=host,headers=headers).text
+    print(resp)
+
+
+def requests_post(line, host):
+    headers={}
+    headers.clear()
+    # time.sleep(1)
+    while('Host:' not in line):
+        line = fd.readline()
+        head = line.split(": ")
+        if "\n" not in head[0] and head[0] != '':
+            headers[head[0]]=head[1][:-1]
+
+    host='http://'+str(getmidstring(line,'Host:','\n'))+str(host)
+    print(host)
+    resp=requests.post(url=host,headers=headers).text
     print(resp)
 
 while(1):
