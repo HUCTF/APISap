@@ -23,7 +23,7 @@ session = Session()
 # db = SQLAlchemy(app)  # 实例化
 tablename=''
 
-
+#token表
 class token(Base):
     __tablename__ = 'token_1'
     __table_args__ = {
@@ -46,18 +46,18 @@ class token(Base):
         resData = []
         for x in results:
             resData.append({
-                'table_nm': x.table_nm,
+                'token_tb': x.token_tb,
             })
         # print(resData)
         if resData!=[]:
             # print(items[0][0])
-            self.__table__.name = resData[0]['table_nm']
+            self.__table__.name = resData[0]['token_tb']
             # __init__(app)
             tablename=self.__table__.name
             # print(tablename)
             print('找表成功')
-            return tablename
-            # return {'code':200,'msg':'找表成功'}
+            # return tablename
+            return {'code':200,'table_name':tablename,'msg':'找表成功'}
         else:
             print('没找到表')
             return {'code':10000,'msg':'没有找到表'}
@@ -75,9 +75,46 @@ class server(Base):
     }
     # id = Column(Integer, primary_key=True,unique=True,autoincrement=True)
     url = Column(String(255), unique=True,primary_key=True,nullable=False)
-    pub_key = Column(String(255), nullable=False)
-    private_key = Column(String(255), nullable=False)
-    table_nm= Column(String(255), nullable=False)
+    token_tb= Column(String(255), nullable=False)
+    msg_tb= Column(String(255), nullable=False)
+
+#msg_check表
+class msg(Base):
+    __tablename__ = 'msg_check'
+    __table_args__ = {
+        'mysql_engine': 'InnoDB',
+        'mysql_charset': 'utf8'
+    }
+    # id = Column(Integer, primary_key=True,unique=True,autoincrement=True)
+    sq = Column(String(255), unique=True,primary_key=True,nullable=False)
+    puk = Column(String(1000), nullable=False)
+    prk = Column(String(1000), nullable=False)
+    time_code= Column(String(255), nullable=False)
+
+    def init(self, url):
+        # id = Column(Integer, primary_key=True,unique=True,autoincrement=True
+        # try:
+        # items = session.execute("select table_nm from server WHERE url=%s "%(url))
+        results = session.query(server).filter_by(url=url).all()
+        # print(results)
+        resData = []
+        for x in results:
+            resData.append({
+                'msg_tb': x.msg_tb,
+            })
+        # print(resData)
+        if resData != []:
+            # print(items[0][0])
+            self.__table__.name = resData[0]['msg_tb']
+            # __init__(app)
+            tablename = self.__table__.name
+            # print(tablename)
+            print('找表成功')
+            # return tablename
+            return {'code': 200, 'table_name': tablename, 'msg': '找表成功'}
+        else:
+            print('没找到表')
+            return {'code': 10000, 'msg': '没有找到表'}
 
 
 #token表的操作
@@ -115,7 +152,7 @@ class db_operation:
     #删除已经过时的密钥
     def delete_task(self):
         now=self.get_time()/1000000-86400
-        items=session.execute("delete  from token  where (time_code+0)/1000000<'%d'"%(now))
+        items=session.execute("delete  from %s  where (time_code+0)/1000000<'%d'"%(token.__tablename__,now))
         items=list(items)
         print(items)
         # session.execute("delete from user where id=1 ")
@@ -217,9 +254,9 @@ class server_operation:
 
     def __init__(self):
         self.url = ''
-    def insert(self, url, pub_key, private_key,table_nm):
+    def insert(self, url,token_tb,msg_tb):
 
-        session.add(server(url=url,pub_key=pub_key, private_key=private_key,table_nm=table_nm))
+        session.add(server(url=url,token_tb=token_tb,msg_tb=msg_tb))
         session.commit()
         print('单个数据添加成功')
 
@@ -245,12 +282,11 @@ class server_operation:
         # session.execute("delete from user where id=1 ")
 
     # # 改
-    def update(self,  url, pub_key, private_key,table_nm):
+    def update(self,  url,token_tb,msg_tb):
         results = session.query(server).filter_by(url=url).all()
         # print(results[0].title)
-        results[0].pub_key = pub_key
-        results[0].private_key = private_key
-        results[0].table_nm=table_nm
+        results[0].token_tb=token_tb
+        results[0].msg_tb=msg_tb
         session.commit()
         print('修改成功')
 
@@ -263,9 +299,8 @@ class server_operation:
         for x in results:
             resData.append({
                 'url': x.url,
-                'pub_key': x.pub_key,
-                'private_key': x.private_key,
-                'table_nm':x.table_nm,
+                'token_tb':x.token_tb,
+                'msg_tb':x.msg_tb,
             })
         # print(resData)
         if resData != []:
@@ -273,16 +308,15 @@ class server_operation:
         else:
             return resData
 
-    def search_by_table_nm(self, table_nm):
-        results = session.query(server).filter_by(table_nm=table_nm).all()
+    def search_by_token_tb(self, token_tb):
+        results = session.query(server).filter_by(token_tb=token_tb).all()
         # print(results)
         resData = []
         for x in results:
             resData.append({
                 'url': x.url,
-                'pub_key': x.pub_key,
-                'private_key': x.private_key,
-                'table_nm': x.table_nm,
+                'token_tb': x.token_tb,
+                'msg_tb': x.msg_tb,
             })
         # print(resData)
         if resData != []:
@@ -296,7 +330,7 @@ class server_operation:
         # print('good')
         for each in dict:
             # print(each)
-            print(each.url + '|' + each.pub_key + '|' + each.private_key+'|'+each.table_nm)
+            print(each.url +'|'+each.token_tb+'|'+each.msg_tb)
         return dict
 
     def checkhave(self, url):
@@ -308,16 +342,168 @@ class server_operation:
             return 0
         else:
             return 1
+            # 删除已经过时的密钥
 
-    def create_new_token_table(self,table_nm):
-        str="CREATE TABLE `"+table_nm+"` "+\
+    def delete_task(self):
+        now = self.get_time() / 1000000 - 86400
+        dict = session.query(server).all()
+        for each in dict:
+            # each.token_tb  + each.msg_tb
+            session.execute("delete  from %s  where (time_code+0)/1000000<'%d'" % (each.token_tb, now))
+            session.execute("delete  from %s  where (time_code+0)/1000000<'%d'" % (each.msg_tb, now))
+
+    def create_new_table(self,token_tb,msg_check):
+        str1="CREATE TABLE `"+token_tb+"` "+\
             "(`user_id` varchar(255) CHARACTER SET utf8 NOT NULL,"+\
             "`time_code` varchar(255) CHARACTER SET utf8 NOT NULL,"+\
-            "`token` varchar(255) CHARACTER SET utf8 NOT NULL,"+\
+            "`token` varchar(500) CHARACTER SET utf8 NOT NULL,"+\
             "PRIMARY KEY (`user_id`) USING BTREE)"+\
-            " ENGINE=InnoDB DEFAULT CHARSET=latin1;"
-        session.execute(str)
+            " ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+        session.execute(str1)
+        str2=" CREATE TABLE `"+msg_check+"`"+\
+             " (`sq` varchar(255) DEFAULT NULL,"+\
+             "`puk` varchar(1000) DEFAULT NULL,"+\
+             "`prk` varchar(1000) DEFAULT NULL,"+\
+             "`time_code` varchar(255) DEFAULT NULL)"+\
+             " ENGINE=InnoDB DEFAULT CHARSET=utf8"
+        session.execute(str2)
         print('建表成功')
+
+# msg表的操作
+class msg_operation:
+    def init(self,url):
+        msg.init(msg,url)
+
+        # print(self.token.__tablename__)
+        # print("--------------")
+        # token=token1()
+        # print(url)
+
+    def insert(self,sq,puk,prk,time_code):
+        # print(user_id1)
+        # print(time_code1)
+        # print(token1)
+        session.add(msg(sq=sq,puk=puk,prk=prk,time_code=time_code))
+        session.commit()
+        print('单个数据添加成功')
+
+    def createMany(self,list):
+        # users=[Role(name="lisi"),Role(name="wangwu"),Role(name="zhaosi")]
+        session.add_all(list)
+        session.commit()
+        print('多个数据添加成功')
+
+    # 删
+    def deleteis_by_sq(self,sq):
+        results = session.query(msg).filter_by(sq=sq).all()
+        session.delete(results)
+        session.commit()
+        print('数据删除成功')
+
+    #删除已经过时的密钥
+    # def delete_task(self):
+    #     now=self.get_time()/1000000-86400
+    #     items=session.execute("delete  from msg  where (time_code+0)/1000000<'%d'"%(now))
+    #     items=list(items)
+    #     print(items)
+        # session.execute("delete from user where id=1 ")
+
+
+    # # 改
+    def update(self,sq,puk,prk,time_code):
+        results = session.query(msg).filter_by(sq=sq).all()
+        # print(results[0].title)
+        results[0].time_code = time_code
+        results[0].puk = puk
+        results[0].prk = prk
+        session.commit()
+        print('修改成功')
+
+
+    #
+    # # 查
+    def search_by_sq(self,sq):
+        results = session.query(msg).filter_by(sq=sq).all()
+        # print(results)
+        resData = []
+        for x in results:
+            resData.append({
+                'sq': x.sq,
+                'puk': x.puk,
+                'prk':x.prk,
+                'time_code':x.time_code,
+            })
+        # print(resData)
+        if resData!=[]:
+            return resData[0]
+        else:
+            return resData
+
+    def search_by_time_code(self,time_code):
+        results = session.query(msg).filter_by(time_code=time_code).all()
+        # print(results)
+        resData = []
+        for x in results:
+            resData.append({
+                'sq': x.sq,
+                'puk': x.puk,
+                'prk':x.prk,
+                'time_code':x.time_code,
+            })
+        # print(resData)
+        if resData!=[]:
+            return resData[0]
+        else:
+            return resData
+
+
+    def search_by_puk(self,puk):
+        results = session.query(msg).filter_by(puk=puk).all()
+        # print(results)
+        resData = []
+        for x in results:
+            resData.append({
+                'sq': x.sq,
+                'puk': x.puk,
+                'prk':x.prk,
+                'time_code':x.time_code,
+            })
+        # print(resData)
+        if resData!=[]:
+            return resData[0]
+        else:
+            return resData
+
+    #获取所有数据
+    def search_all(self):
+        dict = session.query(msg).all()
+        for each in dict:
+            # print(each)
+            print(each.sq + '|' + each.puk + '|' + each.prk + '|' + each.time_code)
+        return dict
+
+    def checkhave(self,sq):
+        print(msg.__tablename__)
+        results = session.query(msg).filter_by(sq=sq).all()
+        # print(results)
+        # print(results[0].token)
+        # print(12345)
+        if results ==[]:
+            # print(0)
+            return 0
+        else:
+            print(1)
+            return 1
+
+
+
+    def get_time(self):
+        t = time.time()
+        # print(t)  # 原始时间数据
+        # print(int(t))  # 秒级时间戳
+        # print(int(round(t * 1000)))  # 毫秒级时间戳
+        print(int(round(t * 1000000)))  # 微秒级时间戳
+        return int(round(t * 1000000))/1000000
 
 if __name__ == "__main__":
 

@@ -8,6 +8,7 @@ server = Flask(__name__)
 CORS(server,supports_credentials=True)
 # server.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://123456:123456@localhost:3306/token1'  # 这里登陆的是root用户，要填上自己的密码，MySQL的默认端口是3306，填上之前创建的数据库名text1
 
+#需要实现只对少数端口开放。
 @server.route('/',methods=['get','post'])
 def index():
     response = make_response(render_template('test.html'))
