@@ -60,6 +60,23 @@ def find_cookies(WebServer):
     return Cookies, login_url
 
 
+def complete_url(url): #自动补全urls
+    if(re.match('http',url)):
+        return url
+    else:
+        return base_url+url
+
+def url_repeat(url,array): #url查重 如果不重复返回1
+    flag = False
+    for y in array:
+        if (str(url)) == str(y):
+            flag = True
+        else:
+            flag = False
+    if (flag == False):
+        return 1
+
+
 
 def s_find(url, cookie):
     surl=url
@@ -67,16 +84,14 @@ def s_find(url, cookie):
     res = requests.get(url=surl,cookies=cookie)
     return res.text
 
-def find_url(html):
+def find_url(html):  #查找返回的a标签链接
     from bs4 import BeautifulSoup
     # 解析成文档对象
     soup = BeautifulSoup(html, 'html.parser')  # 文档对象
     # 非法URL 1
-    invalidLink1 = '#'
-    # 非法URL 2
-    invalidLink2 = 'javascript:void(0)'
+    invalidLink = ['#' ]
     # 集合
-    result = set()
+    result = []
     # 计数器
     mycount = 0
     # 查找文档中所有a标签
@@ -86,18 +101,15 @@ def find_url(html):
         # 过滤没找到的
         if (link is not None):
             # 过滤非法链接
-            if link == invalidLink1:
-                pass
-            elif link == invalidLink2:
+            if link in invalidLink:
                 pass
             elif re.match('javascript',link,re.IGNORECASE):
                 pass
             else:
                 mycount = mycount + 1
-                result.add(link)
-    print("打印超链接个数:", mycount)
-    for a in result:
-        print(a + "\n")
+                if(url_repeat(complete_url(link),result)):
+                    result.append(complete_url(link))
+    # print("打印超链接个数:", mycount)
     return result
 
 
@@ -117,13 +129,23 @@ def post_login(url):
 
 # s_find()
 if __name__ == "__main__":
+    OLD_URL = []
+    UN_URL = []
     url = 'http://jkxxcj.zjhu.edu.cn/serviceList.html'
     msg_cookies = find_cookies("http://jkxxcj.zjhu.edu.cn/")
     cookie = msg_cookies[0]
     login_url = msg_cookies[1]
     base_url = 'http://jkxxcj.zjhu.edu.cn/'
-    for i in find_url(s_find(url, cookie)):
-        # find_url(s_find(base_url+i, cookie))
-        print(i)
+    UN_URL = find_url(s_find(url))
+    OLD_URL.append(url)
+    for x in UN_URL:
+        if (url_repeat(str(x),OLD_URL)):
+            # print('链接:' + str(x))
+            UN_URL = UN_URL +find_url(s_find(str(x)))
+            OLD_URL.append(str(x))
+        else:
+            UN_URL.pop(0)
+            # print(UN_URL)
+    print(OLD_URL)
     print(login_url)
     print(post_login("http://jkxxcj.zjhu.edu.cn/yhb/login"))
