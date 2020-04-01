@@ -1,3 +1,4 @@
+#coding:utf_8
 import os
 import json
 import requests
@@ -10,29 +11,34 @@ from Cryptodome.Cipher import AES
 from Cryptodome import Random
 import base64
 from threading import Timer
-from sql_operation import db_operation,token,server_operation
+from sql_operation import db_operation,token,server_operation,msg_operation
 import time
+import rsa
 from flask import request
-
+from binascii import a2b_base64, b2a_base64
 op=db_operation()
 server=server_operation()
+msg=msg_operation()
 # class content:
 #     def __init__(self):
 #         self.server_plaintext=''
 #         self.server_cyphertext=''
 #         # self.front_plaintext = ''
 #         # self.front_cyphertext = ''
-class mid_server:
+class token_check:
     """MD5 base64 AES RSA 四种加密方法"""
     def __init__(self):
-        self.server_url='123'
+        # self.server_url='123'
         # self.cypher_text = ''
-        self.curr_dir = os.path.dirname(os.path.realpath(__file__))
-        self.server_private_key_file = os.path.join(self.curr_dir, "server_private_rsa_key.bin")
-        self.server_public_key_file = os.path.join(self.curr_dir, "server_rsa_public.pem")
-        op.init(self.server_url)
-    # def updatekey(self):
+        # self.curr_dir = os.path.dirname(os.path.realpath(__file__))
+        # self.server_private_key_file = os.path.join(self.curr_dir, "server_private_rsa_key.bin")
+        # self.server_public_key_file = os.path.join(self.curr_dir, "server_rsa_public.pem")
+        self.server_private_key=''
+        self.server_public_key=''
 
+    # def updatekey(self):
+    # def init_url(self,url):
+    #     op.init
     # 时间戳生成器
     def get_time(self):
         t = time.time()
@@ -47,17 +53,18 @@ class mid_server:
         return str(self.get_time())
 
     # 中间人为后端提供的解密接口
-    def server_decode(self,Decrypts):
-        data = request.get_data()
-        data = data.decode('utf-8')
-        data = json.loads(data)
-        cypher_text = data['cypher_text']
-        source_text=data['source']
-        plain_text=Decrypts.rsa_decode('huctf',cypher_text,self.server_private_key_file)
+    # def server_decode(self,Decrypts):
+    #     data = request.get_data()
+    #     data = data.decode('utf-8')
+    #     data = json.loads(data)
+    #     cypher_text = data['cypher_text']
+    #     source_text=data['source']
+    #     plain_text=Decrypts.rsa_decode('huctf',cypher_text,self.server_private_key_file)
 
     #获得user_id对应的token
     def search_token_by_id(self,user_id,url):
         op.init(url)
+        print('___________aaa')
         result = op.search_by_user_id(user_id)
         if result!=[]:
             token=result['token']
@@ -79,43 +86,37 @@ class mid_server:
     #根据user_id请求一个token
     def server_get_token(self,user_id,url):
         op.init(url)
-        print('good')
-        try:
-            if op.checkhave(user_id)==1:
-                dict=op.search_by_user_id(user_id)
-                token=dict['token']
-                print('数据库已有记录')
-                return {'code': 201, 'token': token,'msg':'数据库已有记录'}
-            if  user_id!='':
-                print(url)
-                random_num=self.rsa_random_num()
-                #token由时间戳+user_id+'huctf'的明文加密而成，加密算法可以是其他非对称算法
-                plain_text = random_num + user_id + 'huctf'
-                cypher_text = Encrypts.rsa_encode(self.public_key_file, plain_text)
-                token=cypher_text
-                if op.checkhave(user_id)==0:
-                    op.insert(user_id,random_num,token)
-                else:
-                    op.update(user_id,random_num,token)
-                print('申请token成功')
-                resu = {'code': 200, 'token': token,'msg':'申请token成功'}
-                return resu
-            else:
-                print('参数不能为空！')
-                resu = {'code': 10000, 'msg': '参数不能为空！'}
-                return resu
-        except:
-            resu = {'code': 10001, 'msg': '未知错误。'}
+        if op.checkhave(user_id)==1:
+            dict=op.search_by_user_id(user_id)
+            token=dict['token']
+            print('数据库已有记录')
+            return {'code': 201, 'token': token,'msg':'数据库已有记录'}
+
+        else:
+            random_num = self.rsa_random_num()
+            # print(random_num)
+            # token由时间戳+user_id+'huctf'的明文加密而成，加密算法可以是其他非对称算法
+            plain_text = random_num + user_id + 'huctf'
+            cypher_text = Encrypts.md5_encrypt( plain_text)
+            token =cypher_text
+            op.insert(user_id,random_num,token)
+
+            print('申请token成功')
+            resu = {'code': 200, 'token': token,'msg':'申请token成功'}
             return resu
 
-    # 中间人为后端提供公钥的接口
-    def mid_server_transport_Key(self):
-        pub_data = {
-            'private_key': open(self.server_private_key_file).read(),
-            'public_key': open(self.server_publiv_key_file).read(),
-        }
-        resu = pub_data
-        return resu
+        # except:
+        #     resu = {'code': 10001, 'msg': '未知错误。'}
+        #     return resu
+
+    # # 中间人为后端提供公钥的接口
+    # def mid_server_transport_Key(self):
+    #     pub_data = {
+    #         'private_key': open(self.server_private_key_file).read(),
+    #         'public_key': open(self.server_publiv_key_file).read(),
+    #     }
+    #     resu = pub_data
+    #     return resu
 
     # 创建一组中间人与后端的密钥
     def create_mid_server_key(self,url):
@@ -125,60 +126,168 @@ class mid_server:
             resu = {'code': 200, 'msg': '已有记录。'}
             return resu
         else:
-            # print('2')
-            print(self.server_public_key_file)
-            Encrypts.create_rsa_key(self.server_private_key_file ,self.server_public_key_file)
-            pub_key = ''
-            pri_key = ''
-            # print('1')
-            with open(self.server_private_key_file) as file_obj:
-                pub_key = file_obj.read()
-            with open(self.server_public_key_file) as file_obj:
-                pri_key = file_obj.read()
-            table_nm='token_'+url
+            token_tb='token_'+url
+            msg_tb='msg_check_'+url
             # print('0')
-            server.insert(url,pub_key,pri_key,table_nm)
-            server.create_new_token_table(table_nm)
+            server.insert(url,token_tb,msg_tb)
+            server.create_new_table(token_tb,msg_tb)
             print('初始化成功。')
             resu = {'code': 200, 'msg': '初始化成功。'}
             return resu
 
-
-
-
     #定时任务
     def timedTask(self):
         #每天更新一次
-        Timer(86400, self.create_mid_server_key, ()).start()
+        Timer(86400, self.task, ()).start()
+
 
     # 定时任务,定时更新密钥
-    def task(self,Encrypts):
+    def task(self):
         #用于删除一天以上的密钥
-        op.delete_task()
-
-    def transport_msg(self):
-        r = requests.post(self.server_url, self.cypher_text)
+        # op.delete_task()
+        server.delete_task()
 
 
-# class mid_front:
-#     """MD5 base64 AES RSA 四种加密方法"""
-#     def __init__(self):
-#         # self.front_url=''
-#         self.curr_dir = os.path.dirname(os.path.realpath(__file__))
-#         self.front_private_key_file = os.path.join(self.curr_dir, "front_private_rsa_key.bin")
-#         self.front_public_key_file = os.path.join(self.curr_dir, "front_rsa_public.pem")
-#
-#     # 中间人为前端提供的加密接口
-#     def front_encode(self,plain_text,Encrypts):
-#         return Encrypts.rsa_encode(self,self.public_key_file,plain_text)
-#
-#     # 中间人为前端提供公钥的接口
-#     def mid_front_transport_pubKey(self):
-#         return open(self.front_public_key_file).read()
-#
-#     # 创建一组中间人与前端的密钥
-#     def create_mid_server_key(self,Encrypts):
-#         Encrypts.create_rsa_key("huctf", self.front_private_key_file, self.front_public_key_file)
+class msg_random_check:
+    """MD5 base64 AES RSA 四种加密方法"""
+    def __init__(self):
+        self.private_key = ''
+        self.public_key = ''
+        self.sq=''
+
+    # 时间戳生成器
+    def get_time(self):
+        t = time.time()
+        print(int(round(t * 1000000)))  # 微秒级时间戳
+        return str(int(round(t * 1000000)))
+
+    # 中间人为前端提供的加密接口
+    def mid_front_encode(self,plain_text,sq,url):
+        puk=self.mid_front_transport_pubKey(sq,url)
+        if (puk['code'] == 200):
+            puk = puk['puk']
+            
+            return {'code': 200, 'result': Encrypts.rsa_encode(puk,plain_text)}
+        else:
+            return {'code': 10000, 'msg': '未找到公钥'}
+
+    #<script src="http://passport.cnblogs.com/scripts/jsencrypt.min.js"></script>
+    #function encrypt(req_url,self_url,data){
+    #       $.ajax({
+    #            url:req_url,
+    #            type:'post',
+
+
+    #中间人为后端提供的解密接口
+    def mid_sever_decode(self,cypher,sq,url):
+        prk=self.mid_server_transport_priKey2(self,sq,url)
+        print(cypher)
+        prk=prk.replace("\\n", "")[27:-25]
+        start = '-----BEGIN RSA PRIVATE KEY-----\n'
+        end = '-----END RSA PRIVATE KEY-----'
+        length = len(prk)
+        divide = 64  # 切片长度
+        offset = 0  # 拼接长度
+        result0=''
+        while length - offset > 0:
+            if length - offset > divide:
+                result0 += prk[offset:offset + divide] + '\n'
+            else:
+                result0 += prk[offset:] + '\n'
+            offset += divide
+        result0 = start + result0 + end
+        prk=result0
+        prk=RSA.importKey(prk)
+        prk0=Cipher_pkcs1_v1_5.new(prk)
+       # if(prk['code']==200):
+         #   prk=prk['prk']
+        result=prk0.decrypt(base64.b64decode(cypher),prk0)
+        print(result)
+        return {'code':200,'result':str(result)}
+       # else:
+         #   return {'code':10000,'msg':'未找到私钥'}
+
+    def check_sq(self,url,sq):
+        return msg.checkhave(sq)
+
+    # 中间人为前端提供公钥的接口
+    def mid_front_transport_pubKey(self,sq,url):
+        msg.init(url)
+        result=msg.search_by_sq(sq)
+        if result!=[]:
+            return {'code': 200, 'puk': result['puk']}
+        else:
+            result={'code':10000,'msg':'没有这个序列号'}
+            return result
+
+    #中间人为后端提供私钥的接口
+    def mid_server_transport_priKey(self,sq,url):
+        print(sq)
+        msg.init(url)
+        #if self.check_sq(self,sq,url) !=1:
+        result=msg.search_by_sq(sq)
+        #print('\n\n\n\n\n\n',result)
+        if result!=[]:
+            prk=result['prk']
+            print(prk)
+            msg.deleteis_by_sq(sq)
+            return {'code':200,'prk':prk}
+        else:
+           result={'code':10000,'msg':'未找到私钥'}
+           return result
+    #else:
+      #  result = {'code': 10001, 'msg': '没有这个序列号'}
+       # return  result
+
+    #中间人为自己提供私钥的接口
+    def mid_server_transport_priKey2(self,sq,url):
+        print(sq)
+        msg.init(url)
+        #if self.check_sq(self,sq,url) !=1:
+        result=msg.search_by_sq(sq)
+        #print('\n\n\n\n\n\n',result)
+        if result!=[]:
+            prk=result['prk']
+            print(prk)
+            return(prk)
+        else:
+           result={'code':10000,'msg':'未找到私钥'}
+           return result
+    #else:
+      #  result = {'code': 10001, 'msg': '没有这个序列号'}
+       # return  result
+
+
+    #用于生成序列号并且生成相应的rsa key，插入数据库中
+    def create_seq(self,url):
+        time_code=self.get_time(self)
+        strr=time_code+'huctf'
+        sq=Encrypts.md5_encrypt(strr)
+        self.sq=sq
+        return self.create_key(self,str(sq),url,time_code)
+
+    # 创建一组密钥
+    def create_key(self,sq,url,time_code):
+        # print('0')
+        msg.init(url)
+        if server.checkhave(sq) == 1:
+            print('已有记录。')
+            resu = {'code': 200,'sq':sq,'puk':self.public_key, 'msg': '数据已创建。'}
+            return resu
+        else:
+            # print('2')
+            self.public_key,self.private_key=Encrypts.generate_rsa_keys(Encrypts)
+
+            # print('0')
+            msg.insert(sq,self.public_key,self.private_key,time_code)
+            print('数据创建成功。')
+            resu = {"code": 200,"sq":str(sq),"puk":str(self.public_key)[2:-1], "msg": "数据创建成功。"}
+            return resu
+
+    # 用于删除失效密钥
+    def delete_key(self,url,sq):
+        msg.init(url)
+        msg.deleteis_by_sq(sq)
 
 
 class Encrypts:
@@ -186,7 +295,7 @@ class Encrypts:
     def __init__(self):
         self.aes_mode = AES.MODE_ECB  # AES加密模式
         self.aes_key_size = 256  # AES秘钥，随机数值
-        self.rsa_count = 2048  # RSA秘钥对，随机数值
+        self.rsa_count = 1024  # RSA秘钥对，随机数值
 
     def md5_encrypt(plaintext):
         """ MD5加密
@@ -236,7 +345,7 @@ class Encrypts:
 
     def generate_rsa_keys(self):
         """RSA秘钥对生成"""
-        rsa_count = self.rsa_count
+        rsa_count = 1024
         # 随机数生成器
         random_generator = Random.new().read
         # rsa算法生成实例
@@ -244,9 +353,13 @@ class Encrypts:
         # master的秘钥对的生成
         rsa_public_key = rsa.publickey().exportKey()
         rsa_private_key = rsa.exportKey()
+        # with open(private_key, "wb") as f:
+        #     f.write(rsa_public_key)
+        # with open(public_key, "wb") as f:
+        #     f.write(rsa_private_key)
         return rsa_public_key, rsa_private_key
 
-    def rsa_encrypt(message, rsa_public_key):
+    def rsa_encrypt(self,message, rsa_public_key):
         """use RSA to encrypt message,
         :param message: 需要加密的内容
         :param rsa_public_key: 公钥(字节类型）
@@ -257,18 +370,18 @@ class Encrypts:
         cipher = Cipher_pkcs1_v1_5.new(pub_key)
         msg = message.encode('utf-8')
         # 分段加密
-        default_encrypt_length = 245
-        length = default_encrypt_length
-        msg_list = [msg[i:i + length] for i in list(range(0, len(msg), length))]
+        # default_encrypt_length = 245
+        # length = default_encrypt_length
+        # msg_list = [msg[i:i + length] for i in list(range(0, len(msg), length))]
         # 加密后信息列表
-        encrypt_msg_list = []
-        for msg_str in msg_list:
-            cipher_text = base64.b64encode(cipher.encrypt(message=msg_str))
-            encrypt_msg_list.append(cipher_text)
-        return encrypt_msg_list
+        # encrypt_msg_list = []
+        # for msg_str in msg_list:
+        cipher_text = base64.b64encode(cipher.encrypt(message=msg))
+            # encrypt_msg_list.append(cipher_text)
+        return cipher_text
 
     def create_rsa_key(self, private_key='server_private_rsa_key.bin', public_key='server_rsa_public.pem'):
-        key = RSA.generate(2048)
+        key = RSA.generate(1024)
         encrypted_key = key.exportKey(passphrase='179', pkcs=8, protection="scryptAndAES128-CBC")
         # print(public_key)
         with open(private_key, "wb") as f:
@@ -312,7 +425,7 @@ class Decrypts:
         decrypted_text = decrypted_text.rstrip()  # 去空格
         return decrypted_text.decode()
 
-    def rsa_decrypt(encrypt_msg_list, rsa_private_key):
+    def rsa_decrypt(self,cypher, rsa_private_key):
         """ RSA解密
         :param encrypt_msg_list: 密文列表
         :param rsa_private_key: 私钥(字节类型)
@@ -322,15 +435,19 @@ class Decrypts:
         pri_key = RSA.importKey(rsa_private_key)
         cipher = Cipher_pkcs1_v1_5.new(pri_key)
         # 解密后信息列表
-        msg_list = []
-        for msg_str in encrypt_msg_list:
-            msg_str = base64.decodebytes(msg_str)
-            de_str = cipher.decrypt(msg_str, random_generator)
-            msg_list.append(de_str.decode('utf-8'))
-        return ''.join(msg_list)
+        msg_str = base64.decodebytes(cypher)
+        de_str = cipher.decrypt(msg_str, random_generator)
+        return  de_str.decode('utf-8')
+        # msg_list = []
+        # for msg_str in encrypt_msg_list:
+        #     msg_str = base64.decodebytes(msg_str)
+        #     de_str = cipher.decrypt(msg_str, random_generator)
+        #     msg_list.append(de_str.decode('utf-8'))
+        # return ''.join(msg_list)
 
     def rsa_decode(self,password='huctf',en_data=b'',private_key_file=''):
         # 读取密钥
+        # en_data=en_data.decode("ISO-8859-1", 'ignore')
         private_key = RSA.import_key(
             open(private_key_file).read(),
             passphrase=password
@@ -341,5 +458,9 @@ class Decrypts:
         print(data)
         return data
 if __name__=='__main__':
-    sv = server_operation()
-    sv.search_all()
+    # print(op.init('127.0.0.1:8886'))
+    sev=token_check()
+    sev.create_mid_server_key('127.0.0.1:8886')
+    sev.server_get_token('2019','127.0.0.1:8886')
+    # sv = server_operation()
+    # sv.search_all()
