@@ -9,6 +9,8 @@ from Crypto.PublicKey import RSA
 from binascii import b2a_hex, a2b_hex
 from Cryptodome.Cipher import AES
 from Cryptodome import Random
+import os
+
 #import RSA
 #data={
 #    'password':'123456',
@@ -30,21 +32,24 @@ ErSrz0laLtVq1a980wIDAQAB
 -----END PUBLIC KEY-----
 '''
 cipher_decode=''
+tokena='未验证'
 def menu():
+    os.system("cls")
     print('\n\n\n')
     print('*'*30)
     print('-'*10+'当前状态'+'-'*10)
     print('当前公钥：',puk)
     print('当前公钥序列号：',sq)
     print('当前ip：',ip)
-    print('当前用户：',user_id)
+    print('当前登录用户：',user_id)
     print('当前token：',token)
     print('当前原始信息：',text)
     print('当前密文：',cipher_text)
     print('解密密文：',cipher_decode)
+    print('token验证状态：',tokena)
     print('-'*10+'操作选项'+'-'*10)
     print('1.修改ip')
-    print('2.修改用户')
+    print('2.修改当前登录用户')
     print('3.获取公钥和序列号')
     print('4.获取token')
     print('5.验证token')
@@ -105,7 +110,9 @@ def check_token():
     }
     result=requests.post(url="http://39.96.60.14:5000/check_token",data=data)
     result=json.loads(result.text)
-    print(result)
+    tokena=result['msg']
+    return tokena
+    #print(result)
 
 def rsa_encrypt():
     # 加密对象
@@ -146,13 +153,19 @@ while(1):
     elif(choose=='4'):
         token=init_token()
     elif(choose=='5'):
-        check_token()
+        tokena=check_token()
     elif(choose=='6'):
         text=input("请输入新的原始信息：")
     elif(choose=='7'):
-        cipher_text=rsa_encrypt()
+        try:
+            cipher_text=rsa_encrypt()
+        except:
+            cipher_text='加密失败，请确认已获取RSA公钥'
     elif(choose=='8'):
-        cipher_decode=decrypt()
+        try:
+            cipher_decode=decrypt()
+        except:
+            cipher_decode='连接服务器解密失败，本组公私钥可能已经被使用'
         
 #token=init_token()
 #print(check_token(token,'1.1.1.1','Luz'))

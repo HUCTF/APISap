@@ -202,6 +202,7 @@ class msg_random_check:
        # if(prk['code']==200):
          #   prk=prk['prk']
         result=prk0.decrypt(base64.b64decode(cypher),prk0)
+        msg.deleteis_by_sq(sq)
         print(result)
         return {'code':200,'result':str(result)}
        # else:
@@ -248,6 +249,8 @@ class msg_random_check:
         #print('\n\n\n\n\n\n',result)
         if result!=[]:
             prk=result['prk']
+            #msg.deleteis_by_sq(sq)
+            #delete_key(self,url,sq)
             print(prk)
             return(prk)
         else:
