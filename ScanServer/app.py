@@ -1,9 +1,9 @@
 #coding:utf-8
 from flask import Flask, render_template_string
-from flask import render_template, request, flash, redirect,url_for
+from flask import render_template, request, flash, redirect, url_for , session
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField, SelectField, IntegerField
+from wtforms.validators import DataRequired, Length
 from flask_bootstrap import Bootstrap
 import base64
 import psutil
@@ -27,6 +27,7 @@ bootstrap = Bootstrap(app)
 class NameForm(FlaskForm):
     # text = StringField( "网卡名",validators= [DataRequired()])
     netname = SelectField('网卡名', coerce=str)
+    needpcap = StringField('抓包个数', validators=[DataRequired(), Length(1, 10)])
     submit = SubmitField( "提交")
 
 class ScipyForm(FlaskForm):
@@ -34,17 +35,30 @@ class ScipyForm(FlaskForm):
     spider = SubmitField("开启扫描")
     repeter = SubmitField("重发数据包")
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
     form = NameForm()
     netnames = get_net()
-    print(netnames)
-    net = [("",netname[0]+' ---- '+netname[1]) for netname in netnames]
-    print(net)
+    net = [(netname[0],netname[0]+' ---- '+netname[1]) for netname in netnames]
     form.netname.choices = net
-
+    if form.validate_on_submit():
+        netname = form.netname.data
+        needpacp = form.needpcap.data
+        session['you_can_take_it_']=netname
+        return redirect(url_for('pacp', netname=netname, needpacp=needpacp))
     return render_template('index.html', form=form)
 
+@app.route("/pacp")
+def pacp():
+    form = NameForm()
+    netname = request.args.get("netname", None)
+    needpacp = request.args.get("needpacp", None)
+    if session.get('you_can_take_it_'):
+        form = ScipyForm()
+        print(netname, needpacp)
+        return render_template("pacp.html", netname=netname, needpacp=needpacp, form=form)
+    return redirect(url_for('index'))
+    
 
 @app.errorhandler(400)
 def bad_request(e):
