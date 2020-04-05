@@ -13,9 +13,9 @@ import base64
 from threading import Timer
 from sql_operation import db_operation,token,server_operation,msg_operation
 import time
-from flask import request
-
 import rsa
+from flask import request
+from binascii import a2b_base64, b2a_base64
 op=db_operation()
 server=server_operation()
 msg=msg_operation()
@@ -138,7 +138,7 @@ class token_check:
     #定时任务
     def timedTask(self):
         #每天更新一次
-        Timer(5, self.task, ()).start()
+        Timer(86400, self.task, ()).start()
 
 
     # 定时任务,定时更新密钥
@@ -158,7 +158,7 @@ class msg_random_check:
     # 时间戳生成器
     def get_time(self):
         t = time.time()
-        # print(int(round(t * 1000000)))  # 微秒级时间戳
+        print(int(round(t * 1000000)))  # 微秒级时间戳
         return str(int(round(t * 1000000)))
 
     # 中间人为前端提供的加密接口
@@ -166,6 +166,7 @@ class msg_random_check:
         puk=self.mid_front_transport_pubKey(sq,url)
         if (puk['code'] == 200):
             puk = puk['puk']
+            
             return {'code': 200, 'result': Encrypts.rsa_encode(puk,plain_text)}
         else:
             return {'code': 10000, 'msg': '未找到公钥'}
@@ -179,14 +180,31 @@ class msg_random_check:
 
     #中间人为后端提供的解密接口
     def mid_sever_decode(self,cypher,sq,url):
-        prk=self.mid_server_transport_priKey(self,sq,url)
-        # print('---------------------------2')
-        if(prk['code']==200):
-            prk=prk['prk']
-            return {'code': 200, 'result': Decrypts.rsa_decrypt(Decrypts, cypher, prk)}
-        else:
-            return {'code': 10000, 'msg': '解密失败'}
-
+        prk=self.mid_server_transport_priKey2(self,sq,url)
+        print(cypher)
+        prk=prk.replace("\\n", "")[27:-25]
+        start = '-----BEGIN RSA PRIVATE KEY-----\n'
+        end = '-----END RSA PRIVATE KEY-----'
+        length = len(prk)
+        divide = 64  # 切片长度
+        offset = 0  # 拼接长度
+        result0=''
+        while length - offset > 0:
+            if length - offset > divide:
+                result0 += prk[offset:offset + divide] + '\n'
+            else:
+                result0 += prk[offset:] + '\n'
+            offset += divide
+        result0 = start + result0 + end
+        prk=result0
+        prk=RSA.importKey(prk)
+        prk0=Cipher_pkcs1_v1_5.new(prk)
+       # if(prk['code']==200):
+         #   prk=prk['prk']
+        result=prk0.decrypt(base64.b64decode(cypher),prk0)
+        msg.deleteis_by_sq(sq)
+        print(result)
+        return {'code':200,'result':str(result)}
        # else:
          #   return {'code':10000,'msg':'未找到私钥'}
 
@@ -197,7 +215,6 @@ class msg_random_check:
     def mid_front_transport_pubKey(self,sq,url):
         msg.init(url)
         result=msg.search_by_sq(sq)
-        # print(result)
         if result!=[]:
             return {'code': 200, 'puk': result['puk']}
         else:
@@ -206,14 +223,11 @@ class msg_random_check:
 
     #中间人为后端提供私钥的接口
     def mid_server_transport_priKey(self,sq,url):
-        # print(sq)
+        print(sq)
         msg.init(url)
         #if self.check_sq(self,sq,url) !=1:
-        # print("hghhhhhhhhhhhhhhhghg")
         result=msg.search_by_sq(sq)
-        # print(result)
-        # print('----------------------------')
-        # exit()
+        #print('\n\n\n\n\n\n',result)
         if result!=[]:
             prk=result['prk']
             print(prk)
@@ -228,14 +242,17 @@ class msg_random_check:
 
     #中间人为自己提供私钥的接口
     def mid_server_transport_priKey2(self,sq,url):
-        # print(sq)
+        print(sq)
         msg.init(url)
         #if self.check_sq(self,sq,url) !=1:
         result=msg.search_by_sq(sq)
         #print('\n\n\n\n\n\n',result)
         if result!=[]:
             prk=result['prk']
-            return{'code':200,'prk':prk}
+            #msg.deleteis_by_sq(sq)
+            #delete_key(self,url,sq)
+            print(prk)
+            return(prk)
         else:
            result={'code':10000,'msg':'未找到私钥'}
            return result
@@ -384,7 +401,7 @@ class Encrypts:
         cipher_rsa = PKCS1_v1_5.new(recipient_key)
 
         en_data = cipher_rsa.encrypt(plaintext)
-        # print(len(en_data), en_data)
+        print(len(en_data), en_data)
         return en_data
 
 class Decrypts:
@@ -411,14 +428,6 @@ class Decrypts:
         decrypted_text = decrypted_text.rstrip()  # 去空格
         return decrypted_text.decode()
 
-    def rsa_decrypt1(self,cypher, rsa_private_key):  # 用私钥解密
-        # with open('private.pem', 'rb') as privatefile:
-        #     p = privatefile.read()
-        privkey = rsa.PrivateKey.load_pkcs1(rsa_private_key)
-        lase_text = rsa.decrypt(cypher, privkey).decode()  # 注意，这里如果结果是bytes类型，就需要进行decode()转化为str
-        # print(lase_text)
-        exit()
-
     def rsa_decrypt(self,cypher, rsa_private_key):
         """ RSA解密
         :param encrypt_msg_list: 密文列表
@@ -429,7 +438,6 @@ class Decrypts:
         pri_key = RSA.importKey(rsa_private_key)
         cipher = Cipher_pkcs1_v1_5.new(pri_key)
         # 解密后信息列表
-        cypher=cypher.encode('gbk')
         msg_str = base64.decodebytes(cypher)
         de_str = cipher.decrypt(msg_str, random_generator)
         return  de_str.decode('utf-8')
