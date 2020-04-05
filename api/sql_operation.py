@@ -12,7 +12,6 @@ from sqlalchemy.orm import sessionmaker
 Base = declarative_base()
 app=Flask(__name__)
 engine = create_engine('mysql://123456:123456@localhost:3306/token1?charset=utf8', echo=True)
-
 Session = sessionmaker(bind=engine)
 
 session = Session()
