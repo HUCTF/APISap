@@ -81,7 +81,7 @@ def init_token():
     # resu = {'code': 10000, 'msg': '参数不能为空！'}
 
 #函数功能：token校验器(每次校验前端发来的token)
-#路径：/check_token
+#路径：/init_token
 #输入：
 #   ip = 开发者ip
 #   user_id = 登陆用户的id（唯一标识符)
@@ -191,12 +191,8 @@ def server_decode():
 def test():
     return 'good'
 if __name__ == '__main__':
-    # cypher="UM2/fqjmvx5nouTZXZ5opcKGWLvBUxp2tVmp180ob1pZl0D30zLiW2XQ88oQ0C+vIJl6+sehRXwj2FT6PKtwHK7V/cpwvHfblt4L8ZMdB+eiili29iBdSmTBTpVeoqbm8WlPa7EG5yasa93qNvlAGS5mHLRIL4eBDD0wwNisA7s="
-    # sq="87edcd8db7d42f2265a2cedaafecdee9"
-    # url='1.1.1.1'
-    # print(msg_check.mid_sever_decode(msg_check, cypher, sq, url))
     #用于定时清理
-    token_api.timedTask()
+    # token_api.timedTask()
     # test=1
     # print(token_api.search_token_by_id('2019', '127.0.0.1:8886'))
     # token_api.server_get_token('2019','127.0.0.1:8886')
@@ -206,4 +202,4 @@ if __name__ == '__main__':
     #token_api.server_get_token('21111', '127.0.0.1:8886')
 
     #print(msg_check.create_seq(msg_check,'127.0.0.1:8886'))
-    # server.run(debug='true' , port=5000, host='0.0.0.0')  # 指定端口、host,0.0.0.0代表不管几个网卡，任何ip都可以访问
+    server.run(debug='true' , port=5000, host='0.0.0.0')  # 指定端口、host,0.0.0.0代表不管几个网卡，任何ip都可以访问
