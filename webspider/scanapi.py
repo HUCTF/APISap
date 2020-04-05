@@ -12,21 +12,20 @@ def find_cookies(WebServer):
     browser.get(WebServer)
 
     s = requests.session()
-    # r = requests.get(browser.current_url)
     r = s.get(browser.current_url)
     params = re.compile('id="(.*?)"',re.S)
     result = re.findall(params, r.text)
 
-    doc = pq(browser.page_source)
-    
     login_url = browser.current_url
     # return 登入接口用于post检验
-
     userid = browser.find_element_by_id('zgh')
-    userid.send_keys("2018283120")
     time.sleep(1)
+    userid.send_keys("2018283120")
+    
     passwd = browser.find_element_by_id('mm')
+    time.sleep(1)
     passwd.send_keys("1234qwer")
+    
     button = browser.find_element_by_id('loginBtn')
     try:
         button.click()
@@ -56,7 +55,6 @@ def find_cookies(WebServer):
         print("get_cookies error")
     
     browser.close()
-
     return Cookies, login_url
 
 
@@ -132,16 +130,17 @@ if __name__ == "__main__":
     OLD_URL = []
     UN_URL = []
     url = 'http://jkxxcj.zjhu.edu.cn/serviceList.html'
-    msg_cookies = find_cookies("http://jkxxcj.zjhu.edu.cn/")
+    msg_cookies = find_cookies("http://jkxxcj.zjhu.edu.cn/login.html")
     cookie = msg_cookies[0]
     login_url = msg_cookies[1]
     base_url = 'http://jkxxcj.zjhu.edu.cn/'
-    UN_URL = find_url(s_find(url))
+    UN_URL = find_url(s_find(url, cookie))
     OLD_URL.append(url)
+    OLD_URL.append(login_url)
     for x in UN_URL:
         if (url_repeat(str(x),OLD_URL)):
             # print('链接:' + str(x))
-            UN_URL = UN_URL +find_url(s_find(str(x)))
+            UN_URL = UN_URL +find_url(s_find(str(x), cookie))
             OLD_URL.append(str(x))
         else:
             UN_URL.pop(0)
