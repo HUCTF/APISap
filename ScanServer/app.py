@@ -8,7 +8,7 @@ from flask_bootstrap import Bootstrap
 import base64
 import psutil
 
-from scanapi.v1 import NIC_package_get, RepeterByRequests
+from scanapi.v1.NIC_package_get import package_print
 
 def get_net():
     '''
@@ -60,7 +60,14 @@ def pacp():
         form = ScipyForm()
         if form.validate_on_submit():
             if form.scipy.data:
+                sniff(
+                    iface=netname,
+                    prn=package_print,
+                    lfilter=lambda p: ("GET" in str(p)) or ("POST" in str(p)),
+                    filter="tcp")
+                    #iface='XXX'  监听本地名为XXX的网卡
                 flash('开始抓包！')
+                
             elif form.spider.data:
                 flash('开始爬虫！')
             elif form.repeter.data:
