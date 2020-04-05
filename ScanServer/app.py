@@ -7,6 +7,9 @@ from wtforms.validators import DataRequired, Length
 from flask_bootstrap import Bootstrap
 import base64
 import psutil
+
+from scanapi.v1 import NIC_package_get, RepeterByRequests
+
 def get_net():
     '''
     获取当前机器所有的网卡名
@@ -48,17 +51,22 @@ def index():
         return redirect(url_for('pacp', netname=netname, needpacp=needpacp))
     return render_template('index.html', form=form)
 
-@app.route("/pacp")
+@app.route("/pacp", methods=['GET', 'POST'])
 def pacp():
     form = NameForm()
     netname = request.args.get("netname", None)
     needpacp = request.args.get("needpacp", None)
     if session.get('you_can_take_it_'):
         form = ScipyForm()
-        print(netname, needpacp)
+        if form.validate_on_submit():
+            if form.scipy.data:
+                flash('开始抓包！')
+            elif form.spider.data:
+                flash('开始爬虫！')
+            elif form.repeter.data:
+                flash('开始重发！')
         return render_template("pacp.html", netname=netname, needpacp=needpacp, form=form)
     return redirect(url_for('index'))
-    
 
 @app.errorhandler(400)
 def bad_request(e):
@@ -67,7 +75,6 @@ def bad_request(e):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
-
 
 if __name__ ==  "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
