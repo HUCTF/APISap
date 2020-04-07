@@ -4,11 +4,17 @@ from pyquery import PyQuery as pq
 import time
 import re
 import json
+# 无头浏览器模块
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 def find_cookies(WebServer):
     # WebServer = "http://jkxxcj.zjhu.edu.cn/"
-
-    browser = webdriver.Chrome()
+    # 无头浏览器浏览
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-gpu')
+    browser = webdriver.Chrome(chrome_options=chrome_options)
     browser.get(WebServer)
 
     s = requests.session()
@@ -149,25 +155,25 @@ def RQRUN():
     print(login_url)
     print(post_login("http://jkxxcj.zjhu.edu.cn/yhb/login"))
 
-# if __name__ == "__main__":
-#     OLD_URL = []
-#     UN_URL = []
-#     url = 'http://jkxxcj.zjhu.edu.cn/serviceList.html'
-#     msg_cookies = find_cookies("http://jkxxcj.zjhu.edu.cn/login.html")
-#     cookie = msg_cookies[0]
-#     login_url = msg_cookies[1]
-#     base_url = 'http://jkxxcj.zjhu.edu.cn/'
-#     UN_URL = find_url(s_find(url, cookie))
-#     OLD_URL.append(url)
-#     OLD_URL.append(login_url)
-#     for x in UN_URL:
-#         if (url_repeat(str(x),OLD_URL)):
-#             # print('链接:' + str(x))
-#             UN_URL = UN_URL +find_url(s_find(str(x), cookie))
-#             OLD_URL.append(str(x))
-#         else:
-#             UN_URL.pop(0)
-#             # print(UN_URL)
-#     print(OLD_URL)
-#     print(login_url)
-#     print(post_login("http://jkxxcj.zjhu.edu.cn/yhb/login"))
+if __name__ == "__main__":
+    OLD_URL = []
+    UN_URL = []
+    url = 'http://jkxxcj.zjhu.edu.cn/serviceList.html'
+    msg_cookies = find_cookies("http://jkxxcj.zjhu.edu.cn/login.html")
+    cookie = msg_cookies[0]
+    login_url = msg_cookies[1]
+    base_url = 'http://jkxxcj.zjhu.edu.cn/'
+    UN_URL = find_url(s_find(url, cookie))
+    OLD_URL.append(url)
+    OLD_URL.append(login_url)
+    for x in UN_URL:
+        if (url_repeat(str(x),OLD_URL)):
+            # print('链接:' + str(x))
+            UN_URL = UN_URL +find_url(s_find(str(x), cookie))
+            OLD_URL.append(str(x))
+        else:
+            UN_URL.pop(0)
+            # print(UN_URL)
+    print(OLD_URL)
+    print(login_url)
+    print(post_login("http://jkxxcj.zjhu.edu.cn/yhb/login"))
