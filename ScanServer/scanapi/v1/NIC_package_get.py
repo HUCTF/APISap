@@ -6,9 +6,9 @@ import os
 package_output='pcap' #'screen'/'document'/'all'/'pcap'
 # pcap=rdpcap(sys.path[0]+'\\package.pcap')
 WORKPATH = os.path.realpath('.')
-print(WORKPATH)
 
 pcap=rdpcap(WORKPATH + '\\package.pcap')
+
 def package_print(packet):
     if (package_output == 'screen') or (package_output == 'all'):
         print("\n".join(packet.sprintf("{Raw:%Raw.load%}").split(r"\r\n"))+'\n\n\n')
