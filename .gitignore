@@ -2,3 +2,5 @@
 package.txt
 2020*
 *.pcap
+debug.log
+.idea
