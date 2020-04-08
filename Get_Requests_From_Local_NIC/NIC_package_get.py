@@ -20,7 +20,7 @@ class NICPackage:
             self.prefix = '/'
         self.package_output='all' #'screen'/'document'/'all'/'pcap'
         self.catch_method=0 #0连续抓包 1按数量抓包
-        self.Time_conversion=5 #使用连续抓包时的数据包保存时间间隔，仅在catch_method=0时有效
+        self.Time_conversion=0 #使用连续抓包时的数据包保存时间间隔，仅在catch_method=0时有效
         self.package_num=NEEDPCAP  #使用按数量抓包时的数据包抓取数量，仅在catch_method=1时有效
         # self.iface='Realtek PCIe GbE Family Controller'
         self.iface=IFACE
@@ -51,9 +51,9 @@ class NICPackage:
             with open(self.filename_txt,'a') as outputxt:
                 outputxt.write("\n".join(packet.sprintf("{Raw:%Raw.load%}").split(r"\r\n"))+'\n\n\n')
                 # outputxt.close()
-        if (self.package_output == 'pcap'):
-            pcap.extend(packet)
-            wrpcap(self.filename_pcap,pcap)
+        if (self.package_output == 'pcap') or (self.package_output == 'all'):
+            self.pcap.extend(packet)
+            wrpcap(self.filename_pcap,self.pcap)
             print(self.filename_pcap)
             #print("\n".join(packet.sprintf("{Raw:%Raw.load%}").split(r"\r\n"))+'\n\n\n')
         #return "\n".join(packet.sprintf("{Raw:%Raw.load%}").split(r"\r\n"))+'\n\n\n'
@@ -71,10 +71,9 @@ class NICPackage:
     
     def mainrun(self):
         self.create_dir_and_file()
-
         if self.catch_method==0:
-            t = Timer(self.Time_conversion, self.time) 
-            t.start()
+            #t = Timer(self.Time_conversion, self.time) 
+            #t.start()
             while(1):
                 sniff(
                 iface=self.iface,
@@ -103,3 +102,4 @@ def NICRUN(netname=None, needpcap=1000):
         print("=======================================================")
         print('请设置网卡名！！！')
         print("=======================================================")
+NICRUN(netname='Realtek 8821CE Wireless LAN 802.11ac PCI-E NIC',needpcap=1000)
