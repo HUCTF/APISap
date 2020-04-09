@@ -16,6 +16,11 @@ cd 2020-Works-ApiSecurity/api
 pip install -r requirement.txt
 python api.py
 ```
+**测试环境设置**
+```bash
+cd 2020-Works-ApiSecurity/api
+pip install -r requirement_test.txt
+```
 **api服务测试**  
 在本地搭建的情况下可以直接运行test.py测试  
 在远程服务器上搭建的情况下修改test.py中的127.0.0.1为服务器ip地址后进行测试
