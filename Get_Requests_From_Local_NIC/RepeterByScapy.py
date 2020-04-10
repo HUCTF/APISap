@@ -1,16 +1,14 @@
-#coding:utf-8
-import sys
-from scapy.all import *
-from scapy.utils import PcapReader
-pcap=rdpcap(sys.path[0]+'//package.pcap')
-#try:
-while(1):
-    i=0
-    while(1):
-        p=sr1(pcap[i],timeout=1)
-        #print(p.show())
-        print(p)
-        #print(pcap[i])
-        i=i+1
-#except:
-    print('finish\n')
+#!/usr/bin/env python
+#encoding=utf-8
+import scapy.all as scapy
+
+packets = scapy.rdpcap('./package.pcap')
+for p in  packets:
+    for f in p.payload.payload.payload.fields_desc:
+            fvalue = p.payload.payload.getfieldval(f.name)
+            reprval = f.i2repr(p.payload.payload, fvalue)# 转换成十进制字符串
+            if 'HTTP' in reprval:
+                if 'GET' or 'POST' in reprval:
+                    lst = str(reprval).split(r'\r\n')
+                    for l in lst:
+                        print (l)

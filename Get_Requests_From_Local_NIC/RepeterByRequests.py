@@ -2,10 +2,11 @@
 import sys
 import requests
 import time
+import re
 from scapy.utils import PcapReader
 ##resend the package in package.txt, and get the return from server.
 host=''
-fd=open(sys.path[0]+'//packpost.txt')
+fd=open(sys.path[0]+'/packpost.txt', errors='ignore')
 def getmidstring(html, start_str, end):
     start = html.find(start_str)
     if start >= 0:
@@ -29,44 +30,54 @@ def Read_package():
        print("=========================")
 
        requests_post(line, host)
+
        
        #############################
-       #####  ´ıÓÅ»¯¡£¡£¡£      #####
-       #############################       
+       #####  ï¿½ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½      #####
+       #############################
 
 
 def requests_get(line, host):
+    line = line[1:]
     headers={}
     headers.clear()
-    # time.sleep(1)
-    while('Host:' not in line):
+    while("'" not in line):
         line = fd.readline()
         head = line.split(": ")
         if "\n" not in head[0] and head[0] != '':
             headers[head[0]]=head[1][:-1]
-    # print(headers)
-    host='http://'+str(getmidstring(line,'Host:','\n'))+str(host)
+    host='http://'+str(headers['Host'])+str(host)
     print(host)
+    print(headers)
     resp=requests.get(url=host,headers=headers).text
-    # print(resp.encode("gbk", errors="replace").decode('gb18030', 'ignore'))
-    # print(resp.encode("gbk", errors="replace"))
+    # print(resp)
+
 
 
 def requests_post(line, host):
+    line = line[1:]
     headers={}
+    data={}
     headers.clear()
     # time.sleep(1)
-    while('Host:' not in line):
-        line = fd.readline()
+    print(line)
+    line = fd.readline()
+    while("'" not in line and ":" in line):
         head = line.split(": ")
-        print(head)
-        if "\n" not in head[0] and head[0] != '':
+        if "\n" not in head[0] and head[0] != '' :
             headers[head[0]]=head[1][:-1]
-            print(headers)
-
-    host='http://'+str(getmidstring(line,'Host:','\n'))+str(host)
-    print(host)
-    resp=requests.post(url=host,headers=headers).text
+        line = fd.readline()
+    line = fd.readline()
+    if re.match(".+'", line):
+        line = line[:-2]
+        datas= line.split("&&")
+        for l in datas:
+            l.split('=')
+            data[l[0]]=l[2]
+    print(headers)
+    print(data)
+    host = 'http://' + str(headers['Host']) + str(host)
+    # resp=requests.post(url=host,headers=headers,data=data).text
     # print(resp)
 
 if __name__ == "__main__":
