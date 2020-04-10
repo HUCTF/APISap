@@ -1,7 +1,11 @@
+from ScanServer import app
+from ScanServer.forms import NameForm, ScipyForm, PrintLogForm
+from ScanServer.util import get_net, get_txt_file
+
 from flask import render_template, request, flash, redirect, url_for , session
-
-
 from threading import Thread
+import os
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     form = NameForm()
@@ -29,16 +33,17 @@ def pcap():
         needpcap = session.get('needpcap')
         if form.validate_on_submit():
             if form.scipy.data:
-                from scanapi.v2.NIC_package_get import NICRUN
+                from ScanServer.scanapi.v3.NIC_package_get import NICRUN
                 stop = 0
                 flash('开始抓包！')
-                
+                print("=========================",netname, needpcap)
                 thread = Thread(target=NICRUN, args=[netname, needpcap])
                 # 使用多线程
                 thread.start()
 
             elif form.spider.data:
-                from scanapi.v2.scanapi import RQRUN
+                
+                from ScanServer.scanapi.v3.scanapi import RQRUN
                 stop = 0
                 flash('开始爬虫！')
                 thread = Thread(target=RQRUN)
@@ -52,4 +57,10 @@ def pcap():
                 thread.start()
                 flash('开始重发！')
         return render_template("pcap.html", netname=netname, needpcap=needpcap, form=form, stop=stop, form1=form1)
-    return redirect(url_for('index'))   
+    return redirect(url_for('index'))
+
+@app.route('/api/package', methods=["GET"])
+def package_msg(): 
+    filename = request.args.get('filename')
+    s = get_txt_file(filename)
+    return s

@@ -7,7 +7,6 @@ app.config[ "SECRET_KEY"] =  "s_e_c_r_e_t_k_e_y_h_u_c_t_f"
 bootstrap.init_app(app)
 
 
-
 @app.errorhandler(400)
 def bad_request(e):
     return render_template('404.html'), 404
