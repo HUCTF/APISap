@@ -25,7 +25,7 @@ class NICPackage:
         # self.iface='Realtek PCIe GbE Family Controller'
         self.iface=IFACE
         self.pcap=[]
-        self.path = sys.path[0] + "\\ScanServer\\scanapi\\v3" + self.prefix + str(datetime.now().strftime("%Y-%m-%d_%H"))
+        self.path = sys.path[0] + self.prefix + str(datetime.now().strftime("%Y-%m-%d_%H"))
         self.filename = self.path + self.prefix + str(datetime.now().strftime("%Y-%m-%d_%H"))
         self.filename_pcap = self.filename + '.pcap'
         self.filename_txt = self.filename + '.txt'

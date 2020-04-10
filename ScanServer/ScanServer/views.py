@@ -62,6 +62,7 @@ def pcap():
 @app.route('/api/package', methods=["GET"])
 def package_msg(): 
     filename = request.args.get('filename')
-    # filename为数据包txt文件名，要求为绝对路径
+    # filename为数据包txt文件名
+    # 例如http://127.0.0.1:5000/api/package?filename=文件夹名\文件名
     s = get_txt_file(filename)
     return s
