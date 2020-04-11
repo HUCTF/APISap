@@ -4,11 +4,16 @@ from pyquery import PyQuery as pq
 import time
 import re
 import json
+# 无头浏览器模块
+from selenium.webdriver.chrome.options import Options
 
 def find_cookies(WebServer):
     # WebServer = "http://jkxxcj.zjhu.edu.cn/"
-
-    browser = webdriver.Chrome()
+    # 无头浏览器浏览
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-gpu')
+    browser = webdriver.Chrome(chrome_options=chrome_options)
     browser.get(WebServer)
 
     s = requests.session()
