@@ -5,7 +5,6 @@ import time
 import re
 import json
 # 无头浏览器模块
-from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 def find_cookies(WebServer):
