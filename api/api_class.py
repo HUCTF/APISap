@@ -11,7 +11,7 @@ from Cryptodome.Cipher import AES
 from Cryptodome import Random
 import base64
 from threading import Timer
-from sql_operation import db_operation,token,server_operation,msg_operation
+from sql_operation import db_operation,token,server_operation,msg_operation,token_count_operation,msg_check_count_operation
 import time
 import rsa
 from flask import request
@@ -19,12 +19,44 @@ from binascii import a2b_base64, b2a_base64
 op=db_operation()
 server=server_operation()
 msg=msg_operation()
-# class content:
-#     def __init__(self):
-#         self.server_plaintext=''
-#         self.server_cyphertext=''
-#         # self.front_plaintext = ''
-#         # self.front_cyphertext = ''
+tc=token_count_operation()
+mcc=msg_check_count_operation()
+
+class token_count:
+
+    #消费后更新数字或type
+    def update(self,kid,num,operator):
+        if operator=='set_type':
+            tc.set_type(kid,num)
+        elif operator=='add_count':
+            tc.add_count(kid,num)
+        elif operator=='add_times':
+            tc.add_times(kid,num)
+        elif operator=='add_newdata':
+            tc.add_newdata(kid,num)
+
+    #获取当前消费类型
+    def get_type(self,kid):
+        result=tc.search_by_kid(kid)
+        type=result['type']
+        return {'code':200,'type':type}
+
+    #查看当前消费类型是否清零
+    def check_num(self,kid,operator):
+        return  tc.check_num(kid,operator)
+        # return {'code': 10000, 'msg': '次数不足'}
+        # return {'code': 200, 'msg': '次数充足'}
+
+    #查看当前消费kid是否存在记录
+    def check_have(self,kid):
+        if tc.checkhave(kid)==0:
+            return {'code':10000,'msg':'没有找个用户的记录'}
+        else:
+            return  {'code':200,'msg':'存在记录'}
+
+
+class msg_check_count:
+    test=1
 class token_check:
     """MD5 base64 AES RSA 四种加密方法"""
     def __init__(self):
@@ -119,9 +151,9 @@ class token_check:
     #     return resu
 
     # 创建一组中间人与后端的密钥
-    def create_mid_server_key(self,url):
+    def create_mid_server_key(self,kid,url):
         # print('0')
-        if server.checkhave(url) == 1:
+        if server.checkhave(kid,url) == 1:
             print('已有记录。')
             resu = {'code': 200, 'msg': '已有记录。'}
             return resu
@@ -129,8 +161,8 @@ class token_check:
             token_tb='token_'+url
             msg_tb='msg_check_'+url
             # print('0')
-            server.insert(url,token_tb,msg_tb)
-            server.create_new_table(token_tb,msg_tb)
+            server.insert(kid,url,token_tb,msg_tb)
+            server.create_new_table(kid,token_tb,msg_tb)
             print('初始化成功。')
             resu = {'code': 200, 'msg': '初始化成功。'}
             return resu
@@ -146,7 +178,6 @@ class token_check:
         #用于删除一天以上的密钥
         # op.delete_task()
         server.delete_task()
-
 
 class msg_random_check:
     """MD5 base64 AES RSA 四种加密方法"""
