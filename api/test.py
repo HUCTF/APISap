@@ -17,6 +17,7 @@ from Cryptodome import Random
 #print(requests.post(url="http://www.hutc.xyz:8884/login_check",data=data).text)
 puk=''#当前公钥
 sq=''#当前公钥序列号
+uid='adasd5xc89aaaa+9d8a+9d'
 ip='1.1.1.1'
 user_id='Luz'
 token=''#当前token

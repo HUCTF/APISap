@@ -30,8 +30,10 @@ def init_ip():
     #url = data['ip']
     if request.method == 'POST':
         url=request.form.get("ip")
+        uid=request.form.get("uid")
     else:
         url=request.args.get("ip")
+        uid = request.args.get("uid")
     if url:
         token_api.create_mid_server_key(url)
         return {'code': 200, 'msg': "初始化成功"}
@@ -67,7 +69,7 @@ def init_token():
         url=request.form.get("ip")
         user_id=request.form.get("user_id")
     else:
-        password=request.args.get("ip")
+        # password=request.args.get("ip")
         user_id=request.args.get("user_id")
     if user_id and url:
         #resu = {'code': 200, 'token': token,'msg':'申请token成功'}
