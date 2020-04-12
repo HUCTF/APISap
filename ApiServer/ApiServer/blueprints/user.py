@@ -22,6 +22,7 @@ def vip():
 
 @user_bp.route('/register', methods=['GET', 'POST'])
 def register():
+    # register func
     form = RegisterForm()
     if form.validate_on_submit():
         username = form.username.data
@@ -49,6 +50,7 @@ def register():
 
 @user_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    # login in func
     # if current_user.is_authenticated:
         # return redirect(url_for('user.index'))
 
