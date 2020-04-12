@@ -45,6 +45,8 @@ class NICPackage:
         self.pcap = rdpcap(self.filename_pcap)
     
     def package_print(self, packet):
+        #if ('HTTP' not in packet):
+            #return 0
         if (self.package_output == 'screen') or (self.package_output == 'all'):
             print("\n".join(packet.sprintf("{Raw:%Raw.load%}").split(r"\r\n"))+'\n\n\n')
         if (self.package_output == 'document') or (self.package_output == 'all'):
@@ -74,21 +76,9 @@ class NICPackage:
         if self.catch_method==0:
             #t = Timer(self.Time_conversion, self.time) 
             #t.start()
-            while(1):
-                sniff(
-                iface=self.iface,
-                count=1,
-                prn=self.package_print,
-                lfilter=lambda p: ("GET" in str(p)) or ("POST" in str(p)),
-                filter="tcp")
+            sniff(iface=self.iface,prn=self.package_print,lfilter=lambda p: (("GET" in str(p)) or ("POST" in str(p))) and ('HTTP' in str(p)),filter="tcp")
         else:
-            sniff(
-            iface=self.iface,
-            count=self.package_num,
-            prn=self.package_print,
-            lfilter=lambda p: ("GET" in str(p)) or ("POST" in str(p)),
-            filter="tcp")
-
+            sniff(iface=self.iface,count=self.package_num,prn=self.package_print,lfilter=lambda p: (("GET" in str(p)) or ("POST" in str(p))) and ('HTTP' in str(p)),filter="tcp")
             #iface='XXX'  监听本地名为XXX的网卡
 
 
