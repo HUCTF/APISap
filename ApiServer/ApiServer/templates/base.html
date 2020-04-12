@@ -1,67 +1,50 @@
-{% from 'bootstrap/nav.html' import render_nav_item %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% block head %}
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>加密/解密</title>
-        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
-        <link rel="stylesheet"
-              href="{{ url_for('static', filename='css/perfect_blue.min.css') }}"
-              type="text/css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
-    {% endblock head %}
-    {% block headstop %} {% endblock headstop %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Basic Communication</title>
+  {% block css %}
+  <link rel="stylesheet" href="static/assets/common.css" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" type="text/css">
+  {% endblock css %}
 </head>
-<body>
-{% block nav %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav mr-auto">
-                   <a href="/"><strong style="margin-right: 5px;"> Home</strong></a>
-                    <a href="#about">about</a>
-                </ul>
-            </div>
-        </div>
+<body class="agora-theme">
+  <div class="navbar-fixed">
+    <nav class="agora-navbar">
+      <div class="nav-wrapper agora-primary-bg valign-wrapper">
+        <h5 class="left-align">APIsap 誓死捍卫你的api（scan and protect）</h5>
+        <a href="https://github.com/AgoraIO/Basic-Video-Call/tree/master/One-to-One-Video/Agora-Web-Tutorial-1to1" class="agora-github-pin"></a>
+      </div>
     </nav>
-{% endblock nav %}
-<main class="container">
+  </div>
+  <main class="container">
+    {% block flash %}
     {% for message in get_flashed_messages() %}
         <div class="alert alert-info">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             {{ message }}
         </div>
     {% endfor %}
-<!--     
-    {% block images %}
-    <div class="text-center">
-        <img src="{{ url_for('static', filename='flask-python.png') }}" style="width: 450px;">
-    </div>
-    {% endblock images %} -->
-    {% block content %}{% endblock content %}
+    {% endblock flash%}
+    {% block content %} {% endblock content %}
+  </main>
+  <footer class="text-center">
     {% block footer %}
-    <footer class="text-center">
-        <p>
-            <small> &copy; 2020 <a href="#" title="Written by HUCTF">HUCTF</a>
-            </small>
-        </p>
-    </footer>
+        <small> &copy; 2020 <a href="#" title="Written by huctf">HUCTF</a> |
+            <a href="#" title="Fork me on GitHub">GitHub</a>
+        </small>
+        <p><a id="bottom" href="#" title="Go Top">&uarr;</a></p>
     {% endblock footer %}
-</main>
-
-
-
-{% block scripts %}
-    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
-{% endblock %}
-</body>
-</html>
+</footer>
+ 
+  </body>
+  {% block script %}
+   <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+  {% endblock script %}
+  </html>
