@@ -60,13 +60,6 @@ def login():
         password = form.password.data
         remember = form.remember.data
         user = User.query.filter(User.username==username).first()
-        # user = User.query.filter(User.username==username, User.validate_password(password)).first()
-        print("==========================================")
-        print("==========================================")
-        print("==========================================")
-        print("==========================================")
-        print(user.username)
-        print(user.password_hash)
         if user and user.validate_password(password):
             login_user(user, remember)
             login_user(user, remember)
