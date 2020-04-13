@@ -11,7 +11,7 @@ from Cryptodome.Cipher import AES
 from Cryptodome import Random
 import base64
 from threading import Timer
-from sql_operation import db_operation,token,server_operation,msg_operation,token_count_operation,msg_check_count_operation
+from sql_operation import db_operation,token,server_operation,msg_operation,token_consume_operation,msg_check_consume_operation
 import time
 import rsa
 from flask import request
@@ -19,16 +19,19 @@ from binascii import a2b_base64, b2a_base64
 op=db_operation()
 server=server_operation()
 msg=msg_operation()
-tc=token_count_operation()
-mcc=msg_check_count_operation()
+tc=token_consume_operation()
+mcc=msg_check_consume_operation()
 
-class token_count:
+class token_consume:
+
+    # 查看当前消费类型的值
+    def search_num(self, kid, operator):
+        return tc.check_num(kid, operator)
+        # return {'code': 200, 'num': num}
 
     #消费后更新数字或type
-    def update(self,kid,num,operator):
-        if operator=='set_type':
-            tc.set_type(kid,num)
-        elif operator=='add_count':
+    def update_num(self,kid,num,operator):
+        if operator=='add_count':
             tc.add_count(kid,num)
         elif operator=='add_times':
             tc.add_times(kid,num)
@@ -41,11 +44,9 @@ class token_count:
         type=result['type']
         return {'code':200,'type':type}
 
-    #查看当前消费类型是否清零
-    def check_num(self,kid,operator):
-        return  tc.check_num(kid,operator)
-        # return {'code': 10000, 'msg': '次数不足'}
-        # return {'code': 200, 'msg': '次数充足'}
+    def update_type(self,kid,type):
+       tc.set_type(kid, type)
+
 
     #查看当前消费kid是否存在记录
     def check_have(self,kid):
@@ -55,7 +56,7 @@ class token_count:
             return  {'code':200,'msg':'存在记录'}
 
 
-class msg_check_count:
+class msg_check_consume:
     test=1
 class token_check:
     """MD5 base64 AES RSA 四种加密方法"""

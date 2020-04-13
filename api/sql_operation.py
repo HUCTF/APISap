@@ -22,8 +22,8 @@ session = Session()
 # db = SQLAlchemy(app)  # 实例化
 tablename=''
 
-#msg_check_count表，用于记录
-class msg_check_count(Base):
+#msg_check_consume表，用于记录
+class msg_check_consume(Base):
     __tablename__ = 'msg_check_count'
     __table_args__ = {
         'mysql_engine': 'InnoDB',
@@ -36,8 +36,8 @@ class msg_check_count(Base):
     data=Column(int(15), nullable=False,default=0)
     type=Column(String(255), nullable=False)
 
-#token_count表，用于记录
-class token_count(Base):
+#token_consume表，用于记录
+class token_consume(Base):
     __tablename__ = 'token_count'
     __table_args__ = {
         'mysql_engine': 'InnoDB',
@@ -102,7 +102,7 @@ class server(Base):
     }
     # id = Column(Integer, primary_key=True,unique=True,autoincrement=True)
     kid=Column(String(255), unique=True,primary_key=True,nullable=False)
-    url = Column(String(255), unique=True,primary_key=True,nullable=False)
+    url = Column(String(255), unique=True,nullable=False)
     token_tb= Column(String(255), nullable=False)
     msg_tb= Column(String(255), nullable=False)
 
@@ -565,8 +565,8 @@ class msg_operation:
         print(int(round(t * 1000000)))  # 微秒级时间戳
         return int(round(t * 1000000))/1000000
 
-#token_count表的操作
-class token_count_operation:
+#token_consume表的操作
+class token_consume_operation:
     def __init__(self):
         token=''
 
@@ -668,7 +668,7 @@ class token_count_operation:
 
     #获取所有数据
     def search_all(self):
-        dict = session.query(token_count).all()
+        dict = session.query(token_consume).all()
         for each in dict:
             # print(each)
             print(each.user_id + '|' + each.time_code + '|' + each.token)
@@ -676,7 +676,7 @@ class token_count_operation:
 
     def checkhave(self,kid):
         print(token.__tablename__)
-        results = session.query(token_count).filter_by(kid=kid).all()
+        results = session.query(token_consume).filter_by(kid=kid).all()
         # print(results)
         # print(results[0].token)
         # print(12345)
@@ -687,12 +687,11 @@ class token_count_operation:
             print(1)
             return 1
 
-    def check_num(self,kid,op):
+    def search_num(self,kid,op):
         result=self.search_by_kid(kid)
         num=result[op]
-        if num<=0:
-            return {'code':10000,'msg':'次数不足'}
-        return {'code':200,'msg':'次数充足'}
+        return {'code':200,'num':num}
+
 
     def get_time(self):
         t = time.time()
@@ -702,8 +701,8 @@ class token_count_operation:
         print(int(round(t * 1000000)))  # 微秒级时间戳
         return int(round(t * 1000000))/1000000
 
-#msg_check_count表的操作
-class msg_check_count_operation:
+#msg_check_consume表的操作
+class msg_check_consume_operation:
     def __init__(self):
         token=''
 
@@ -805,7 +804,7 @@ class msg_check_count_operation:
 
     #获取所有数据
     def search_all(self):
-        dict = session.query(token_count).all()
+        dict = session.query(token_consume).all()
         for each in dict:
             # print(each)
             print(each.user_id + '|' + each.time_code + '|' + each.token)
@@ -813,7 +812,7 @@ class msg_check_count_operation:
 
     def checkhave(self,kid):
         print(token.__tablename__)
-        results = session.query(msg_check_count).filter_by(kid=kid).all()
+        results = session.query(msg_check_consume).filter_by(kid=kid).all()
         # print(results)
         # print(results[0].token)
         # print(12345)

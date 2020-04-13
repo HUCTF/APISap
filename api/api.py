@@ -1,5 +1,5 @@
 #coding:utf-8
-from api_class import token_check,op,msg_random_check
+from api_class import token_check,op,msg_random_check,token_consume
 from flask import Flask, render_template, request, current_app
 from flask_cors import *
 server = Flask(__name__)
@@ -7,7 +7,8 @@ server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True  # 设置这一项是每�
 
 CORS(server,supports_credentials=True)
 token_api = token_check()
-msg_check =msg_random_check
+msg_check =msg_random_check()
+token_consume=token_consume()
 import json
 
 #函数功能：后端初始配置（只需执行一次）
@@ -42,7 +43,6 @@ def init_ip():
         return resu
     # print(url)
     #这里面会创建两个表，包括msg_tb、token_tb
-
 
 #函数功能：token生成器（每次用户登陆时使用一次）
 #路径：/init_token
@@ -125,7 +125,6 @@ def check_token():
         resu = {'code': 10002, 'result': '参数不能为空！'}
         return resu
 
-
 #函数功能：客户端请求获得公钥与序列号
 #路径：/get_puk_sq
 #输入：
@@ -151,7 +150,6 @@ def front_get_puk_sq():
     else:
         resu = {'code': 10000, 'result': '参数不能为空！'}
         return resu
-
 
 #函数功能：服务端通过序列号对密文解密
 #路径：/server_decode
@@ -186,12 +184,64 @@ def server_decode():
         resu = {'code': 10001, 'result': '参数不能为空！'}
         return resu
 
+#函数功能：修改用户的消费参数，operator为[add_count,add_times,add_newdata，up_type]中的一个
 
+#路径：/update_consume
+#输入：
+#   kid = 开发者kid
+#   num_or_type = 你想要增加参数的值，或者修改type的字符串
+#   operator = 你下要执行的操作，operator为[add_count,add_times,add_newdata，up_type]中的一个
+#               其中 add_count:增加count的num_or_type的量
+#                    add_times：增加times的num_or_type的量
+#                    add_newdata：增加newdata的num_or_type的量，为当前时间+num_or_type
+#                    up_type：通过num_or_type修改type的参数
+#               其中count:开发者拥有的可用的ip数量
+#                   free:开发者拥有的免费的调用次数，默认为1000
+#                   times:开发者能够调用的次数（消费获取）
+#                   newdata:当前能够使用的最晚期限（消费获取），时间戳表示
+#                   type: #开发者目前消费的类型，为[free,times,newdata]中的一个
+#                   通过num_or_type次数可以增加数量或者期限，也可以修改type
+#
+#返回：
+#   成功：生成并返回token
+#       resu = {'code': 200, 'result': plaintext}(返回明文)
+#
+#   失败：
+#       resu = {'code': 10000, 'result': '参数不能为空！'}
+#       return {'code': 10000, 'msg': '未找到私钥'}
+@server.route('/update_consume',methods=['get','post'])
+def update_consume():
+    if request.method == 'POST':
+        kid=request.form.get("kid")
+        num_or_type=request.form.get("num_or_type")
+        operator =request.form.get("operator")
+    else:
+        kid=request.args.get("kid")
+        num_or_type=request.args.get("num_or_type")
+        operator =request.args.get("operator")
+
+    if kid and num_or_type and operator:
+        result=token_consume.check_have(kid)
+        if result['code']==10000:
+            return result
+        #     return {'code':10000,'msg':'没有找个用户的记录'}
+        #     return  {'code':200,'msg':'存在记录'}
+        if operator=='up_type':
+            token_consume.update_type(kid,num_or_type)
+        else:
+            token_consume.update_num(kid,num_or_type,operator)
+        return result
+        # return {'code': 200, 'result': Decrypts.rsa_decrypt(cypher, prk)}
+        # return {'code': 10000, 'msg': '未找到私钥'}
+    else:
+        resu = {'code': 10001, 'result': '参数不能为空！'}
+        return resu
 
 
 @server.route('/test',methods=['get','post'])
 def test():
     return 'good'
+
 if __name__ == '__main__':
     #用于定时清理
     # token_api.timedTask()
