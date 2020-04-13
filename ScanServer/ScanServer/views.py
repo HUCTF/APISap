@@ -2,7 +2,7 @@ from ScanServer import app
 from ScanServer.forms import NameForm, ScipyForm, PrintLogForm
 from ScanServer.util import get_net, get_txt_file
 
-from flask import render_template, request, flash, redirect, url_for , session
+from flask import render_template, request, flash, redirect, url_for , session, jsonify
 from threading import Thread
 import os
 
@@ -58,6 +58,7 @@ def pcap():
                 flash('开始重发！')
         return render_template("pcap.html", netname=netname, needpcap=needpcap, form=form, stop=stop, form1=form1)
     return redirect(url_for('index'))
+    
 
 @app.route('/api/package', methods=["GET"])
 def package_msg(): 
@@ -65,4 +66,4 @@ def package_msg():
     # filename为数据包txt文件名
     # 例如http://127.0.0.1:5000/api/package?filename=文件夹名\文件名
     s = get_txt_file(filename)
-    return s
+    return jsonify({'code':'200', 'result':str(s)})
