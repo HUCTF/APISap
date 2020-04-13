@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import render_template, request, flash, redirect, url_for , session, Blueprint
-from flask_login import login_required, current_user, login_user
+from flask_login import login_required, current_user, login_user, logout_user
 from threading import Thread
 import os
 
@@ -32,6 +32,8 @@ def register():
             flash('请把信息填写完整')
         elif password != password1:
             flash('两次密码不一致，请重新输入！')
+        elif User.query.filter(User.username==username).first():
+            flash('这个用户名已经被注册过了！')
         else:
             new_user = User(username=username, id=None)
             new_user.set_password(password)
