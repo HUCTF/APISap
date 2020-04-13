@@ -25,9 +25,9 @@ mcc=msg_check_consume_operation()
 class token_consume:
 
     # 查看当前消费类型的值
-    def search_num(self, kid, operator):
-        return tc.check_num(kid, operator)
-        # return {'code': 200, 'num': num}
+    def search_kid_msg(self, kid):
+        return tc.search_num(kid)
+        # return {'code': 200, 'result': result}
 
     #消费后更新数字或type
     def update_num(self,kid,num,operator):
@@ -55,9 +55,37 @@ class token_consume:
         else:
             return  {'code':200,'msg':'存在记录'}
 
-
 class msg_check_consume:
-    test=1
+    # 查看当前消费类型的值
+    def search_kid_msg(self, kid):
+        return mcc.search_num(kid)
+        # return {'code': 200, 'result': result}
+
+    # 消费后更新数字或type
+    def update_num(self, kid, num, operator):
+        if operator == 'add_count':
+            mcc.add_count(kid, num)
+        elif operator == 'add_times':
+            mcc.add_times(kid, num)
+        elif operator == 'add_newdata':
+            mcc.add_newdata(kid, num)
+
+    # 获取当前消费类型
+    def get_type(self, kid):
+        result = mcc.search_by_kid(kid)
+        type = result['type']
+        return {'code': 200, 'type': type}
+
+    def update_type(self, kid, type):
+        mcc.set_type(kid, type)
+
+    # 查看当前消费kid是否存在记录
+    def check_have(self, kid):
+        if mcc.checkhave(kid) == 0:
+            return {'code': 10000, 'msg': '没有找个用户的记录'}
+        else:
+            return {'code': 200, 'msg': '存在记录'}
+
 class token_check:
     """MD5 base64 AES RSA 四种加密方法"""
     def __init__(self):
@@ -68,6 +96,29 @@ class token_check:
         # self.server_public_key_file = os.path.join(self.curr_dir, "server_rsa_public.pem")
         self.server_private_key=''
         self.server_public_key=''
+
+    def insert_token(self,url,user_id1,time_code1,token1):
+        op.init(url)
+        op.insert(user_id1,time_code1,token1)
+        return {'code':200,'result':'操作成功'}
+
+    def dele_by_uid(self,url,user_id):
+        op.init(url)
+        op.deleteis(user_id)
+        return {'code': 200,'result':'操作成功'}
+
+    def update_by_uid(self,url,uer_id,time_code,token):
+        op.init(url)
+        op.update(uer_id,time_code,token)
+        return {'code': 200,'result':'操作成功'}
+
+    def search_by_uid(self,url,user_id):
+        op.init(url)
+        return  {'code': 200,'result':op.search_by_user_id(user_id)}
+
+    def search_all(self,url):
+        op.init(url)
+        return  {'code': 200,'result':op.search_all()}
 
     # def updatekey(self):
     # def init_url(self,url):
@@ -186,6 +237,27 @@ class msg_random_check:
         self.private_key = ''
         self.public_key = ''
         self.sq=''
+
+    def insert_msg(self,url,sq,puk,prk,time_code):
+        msg.init(url)
+        msg.insert(sq,puk,prk,time_code)
+        return {'code':200,'result':'操作成功'}
+    def deleteis_by_sq(self,url,sq):
+        msg.init(url)
+        msg.deleteis_by_sq(sq)
+        return {'code': 200,'result':'操作成功'}
+    def update_by_sq(self,url,sq,puk,prk,time_code):
+        msg.init(url)
+        msg.update(sq,puk,prk,time_code)
+        return {'code': 200,'result':'操作成功'}
+    def search_by_sq(self,url,sq):
+        msg.init(url)
+        result=msg.search_by_sq(sq)
+        return {'code':200,'result':result}
+    def search_all(self,url):
+        msg.init(url)
+        result=msg.search_all
+        return {'code':200,'result':result}
 
     # 时间戳生成器
     def get_time(self):
