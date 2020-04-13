@@ -18,7 +18,7 @@ def index():
 @user_bp.route('/vip')
 @login_required
 def vip():
-    return "你好鸭，VIP用户！"
+    return "你好鸭，VIP用户 %s！欢迎回家" % current_user.username
 
 @user_bp.route('/register', methods=['GET', 'POST'])
 def register():
