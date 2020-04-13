@@ -7,7 +7,12 @@ Windows
 Python3.5+
 
 ------------------
+**初始化**
+
+新建apiserver数据库
+
 **运行**
+
 ```bash
 git clone https://github.com/HUCTF/2020-Works-ApiSecurity
 cd 2020-Works-ApiSecurity/ApiSecurity
