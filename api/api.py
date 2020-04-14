@@ -1,5 +1,5 @@
 #coding:utf-8
-from api_class import token_check,op,msg_random_check,token_consume
+from api_class import token_check,op,msg_random_check,token_consume,msg_check_consume
 from flask import Flask, render_template, request, current_app
 from flask_cors import *
 server = Flask(__name__)
@@ -9,6 +9,7 @@ CORS(server,supports_credentials=True)
 token_api = token_check()
 msg_check =msg_random_check()
 token_consume=token_consume()
+msg_consume=msg_check_consume()
 import json
 
 #函数功能：后端初始配置（只需执行一次）
@@ -31,13 +32,13 @@ def init_ip():
     #url = data['ip']
     if request.method == 'POST':
         url=request.form.get("ip")
-        uid=request.form.get("uid")
+        kid=request.form.get("kid")
     else:
         url=request.args.get("ip")
-        uid = request.args.get("uid")
+        kid = request.args.get("kid")
     try:
         if url:
-            token_api.create_mid_server_key(url)
+            token_api.create_mid_server_key(kid,url)
             return {'code': 200, 'result': "初始化成功"}
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
@@ -131,6 +132,7 @@ def check_token():
             return resu
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+
 #函数功能：客户端请求获得公钥与序列号
 #路径：/get_puk_sq
 #输入：
@@ -150,7 +152,7 @@ def front_get_puk_sq():
         url=request.args.get("ip")
     try:
         if url:
-            result = msg_check.create_seq(msg_check,url)
+            result = msg_check.create_seq(url)
             # resu = {'code': 200, 'sq': sq, 'puk': self.public_key, 'msg': '数据创建成功。'}
             # resu = {'code': 200,'sq':sq,'puk':self.public_key, 'msg': '数据已创建。'}
             return result
@@ -159,6 +161,7 @@ def front_get_puk_sq():
             return resu
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+
 #函数功能：服务端通过序列号对密文解密
 #路径：/server_decode
 #输入：
@@ -221,7 +224,7 @@ def msg_sql():
     if request.method == 'POST':
         kid= request.form.get("kid")
         operator = request.form.get("operator")
-        url = request.form.get("url")
+        url = request.form.get("ip")
         sq = request.form.get("sq")
         puk = request.form.get("puk")
         prk = request.form.get("prk")
@@ -229,7 +232,7 @@ def msg_sql():
     else:
         kid = request.args.get("kid")
         operator = request.args.get("operator")
-        url = request.args.get("url")
+        url = request.args.get("ip")
         sq = request.args.get("sq")
         puk = request.args.get("puk")
         prk = request.args.get("prk")
@@ -237,36 +240,39 @@ def msg_sql():
 
     try:
         if operator and kid:
-            result = token_consume.check_have(kid)
+            # print('1111111111111')
+            result = msg_check.check_have(kid)
+            # print('22222222222222')
+            print(result)
             if result['code']==10000:
                 return result
             #     return {'code':10000,'msg':'没有找个用户的记录'}
             if (operator == 'insert_msg'):
                 if url and sq and puk and prk and time_code:
-                    return token_api.insert_msg(url, sq, puk, prk,time_code)
+                    return msg_check.insert_msg(url, sq, puk, prk,time_code)
                 else:
                     return {'code': 10001, 'result': '参数不能为空！'}
 
             elif (operator == 'deleteis_by_sq'):
                 if url and sq:
-                    return token_api.deleteis_by_sq(url, sq)
+                    return msg_check.deleteis_by_sq(url, sq)
                 else:
                     return {'code': 10001, 'result': '参数不能为空！'}
 
             elif (operator == 'update_by_sq'):
                 if url and sq and puk and prk and time_code:
-                    return token_api.update_by_sq(url, sq, puk, prk,time_code)
+                    return msg_check.update_by_sq(url, sq, puk, prk,time_code)
                 else:
                     return {'code': 10001, 'result': '参数不能为空！'}
 
             elif (operator == 'search_by_sq'):
                 if url and sq:
-                    return token_api.search_by_sq(url, sq)
+                    return msg_check.search_by_sq(url, sq)
                 else:
                     return {'code': 10001, 'result': '参数不能为空！'}
             elif (operator == 'search_all'):
                 if url:
-                    return token_api.search_all(url)
+                    return msg_check.search_all(url)
                 else:
                     return {'code': 10001, 'result': '参数不能为空！'}
         else:
@@ -301,21 +307,23 @@ def token_sql():
     if request.method == 'POST':
         kid =request.form.get("kid")
         operator=request.form.get("operator")
-        url = request.form.get("url")
+        url = request.form.get("ip")
         user_id = request.form.get("user_id")
         time_code = request.form.get("time_code")
         token =request.form.get("token")
     else:
         kid = request.args.get("kid")
         operator = request.args.get("operator")
-        url = request.args.get("url")
+        url = request.args.get("ip")
         user_id = request.args.get("user_id")
         time_code = request.args.get("time_code")
         token = request.args.get("token")
 
+    print(operator)
+    print(url)
     try:
         if operator and kid:
-            result = token_consume.check_have(kid)
+            result = token_api.check_have(kid)
             if result['code'] == 10000:
                 return result
             if(operator=='insert_token'):
@@ -342,6 +350,7 @@ def token_sql():
                 else:
                     return {'code': 10001, 'result': '参数不能为空！'}
             elif (operator == 'search_all'):
+
                 if url :
                     return token_api.search_all(url)
                 else:
@@ -381,7 +390,7 @@ def token_sql():
 #       {'code': 10001, 'result': '参数不能为空！'}
 #       {'code': 10002, 'result': '出现未知错误！'}
 @server.route('/update_token_consume',methods=['get','post'])
-def update_consume():
+def update_token_consume():
     if request.method == 'POST':
         kid=request.form.get("kid")
         num_or_type=request.form.get("num_or_type")
@@ -409,8 +418,8 @@ def update_consume():
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
 
-#函数功能：查询数据信息
-#路径：/search_by_kid
+#函数功能：查询消费数据信息
+#路径：/token_consum_search
 #输入：
 #   kid= 开发者kid
 #返回：
@@ -439,7 +448,7 @@ def search_by_kid():
 
 
 @server.route('/update_msg_check_consume',methods=['get','post'])
-def update_consume():
+def update_msg_check_consume():
     if request.method == 'POST':
         kid=request.form.get("kid")
         num_or_type=request.form.get("num_or_type")
@@ -450,16 +459,18 @@ def update_consume():
         operator =request.args.get("operator")
     try:
         if kid and num_or_type and operator:
-            result=token_consume.check_have(kid)
+            # print('11111111111111111111')
+            result=msg_consume.check_have(kid)
+            # print('222222222222222222222222')
             if result['code']==10000:
                 return result
             #     return {'code':10000,'msg':'没有找个用户的记录'}
             #     return  {'code':200,'msg':'存在记录'}
             if operator=='up_type':
-                token_consume.update_type(kid,num_or_type)
+                msg_consume.update_type(kid,num_or_type)
                 return {'code': 200, 'result': '更新type成功！'}
             else:
-                token_consume.update_num(kid,num_or_type,operator)
+                msg_consume.update_num(kid,num_or_type,operator)
                 return {'code': 200, 'result': '增加成功！'}
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
@@ -468,18 +479,18 @@ def update_consume():
         resu = {'code': 10002, 'result': '出现未知错误！'}
 
 @server.route('/msg_check_consum_search',methods=['get','post'])
-def search_by_kid():
+def msg_check_consum_search():
     if request.method == 'POST':
         kid=request.form.get("kid")
     else:
         kid=request.args.get("kid")
 
     if kid:
-        result=token_consume.check_have(kid)
+        result=msg_consume.check_have(kid)
         if result['code']==10000:
             return result
         #     return {'code':10000,'msg':'没有找个用户的记录'}
-        return {'code': 200, 'result': token_consume.search_kid_msg(kid)}
+        return {'code': 200, 'result': msg_consume.search_kid_msg(kid)}
         #  result:[{'kid':test,'count':0,'times':0,'free':100,'data':1515151515,'type':'free'}]
     else:
         resu = {'code': 10001, 'result': '参数不能为空！'}
