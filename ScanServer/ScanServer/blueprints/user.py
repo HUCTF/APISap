@@ -9,6 +9,42 @@ from flask_login import login_required, current_user, login_user, logout_user
 from threading import Thread
 import os
 
+
+kubenetes_template = '''
+    apiVersion: v1
+    kind: ReplicaSet
+    metadata:
+      name: [username]
+    spec:
+      replicas: 3
+      selector:
+      matchLabels:
+        name:[username]
+      template:
+        metadata:
+          labels:
+            name:[username]
+        spec:
+          containers:
+          - name: [username]
+            image: [images]
+'''
+
+def build_docker(username):
+    ###############
+    ## 新建文件夹 ##
+    ###############
+
+    ####################
+    ## 具体化template ##
+    ####################
+
+    ##################
+    ## 保存template ##
+    ##################
+    os.system('kubectl create -f [path/kube.yml]')
+    
+
 user_bp = Blueprint('user', __name__)
 
 @user_bp.route('/')
