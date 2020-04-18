@@ -113,7 +113,9 @@ def package_msg():
     # filename为数据包txt文件名
     # 例如http://127.0.0.1:5000/api/package?filename=文件夹名\文件名
     s = get_txt_file(filename)
-    return jsonify({'code':'200', 'result':str(s)})
+    return jsonify({'code':'200',
+		'result':str(s),
+		'done':'done'})
 
 
 @user_bp.route('/register', methods=['GET', 'POST'])
