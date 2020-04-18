@@ -1,0 +1,6 @@
+requests
+selenium
+pyquery
+bs4
+lxml
+scapy
