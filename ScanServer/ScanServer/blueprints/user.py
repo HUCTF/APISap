@@ -104,7 +104,7 @@ def pcap():
                 thread.start()
                 flash('开始重发！')
         return render_template("pcap.html", netname=netname, needpcap=needpcap, form=form, stop=stop, form1=form1)
-    return redirect(url_for('net'))
+    return redirect(url_for('user.net'))
     
 
 @user_bp.route('/api/package', methods=["GET"])
