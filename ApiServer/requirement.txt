@@ -1,5 +1,6 @@
 flask
-fflask_wtf
+flask_wtf
 wtforms
 bootstrap-flask
 flask-login
+flask-sqlalchemy

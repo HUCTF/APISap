@@ -132,6 +132,67 @@ def decrypt():
     result=requests.post(url="http://127.0.0.1:5000/server_decode",data=data)
     result=json.loads(result.text)
     print(result)
+
+def msg_sql():
+    data = {
+        'ip': ip,
+        'sq': sq,
+        'cypher': cipher_text
+    }
+    result = requests.post(url="http://127.0.0.1:5000/server_decode", data=data)
+    result = json.loads(result.text)
+    print(result)
+
+def msg_sql():
+    data = {
+        'ip': ip,
+        'sq': sq,
+        'cypher': cipher_text
+    }
+    result = requests.post(url="http://127.0.0.1:5000/server_decode", data=data)
+    result = json.loads(result.text)
+    print(result)
+
+def msg_sql():
+    data = {
+        'ip': ip,
+        'sq': sq,
+        'cypher': cipher_text
+    }
+    result = requests.post(url="http://127.0.0.1:5000/server_decode", data=data)
+    result = json.loads(result.text)
+    print(result)
+
+def msg_sql():
+    data = {
+        'ip': ip,
+        'sq': sq,
+        'cypher': cipher_text
+    }
+    result = requests.post(url="http://127.0.0.1:5000/server_decode", data=data)
+    result = json.loads(result.text)
+    print(result)
+
+def msg_sql():
+    data = {
+        'ip': ip,
+        'sq': sq,
+        'cypher': cipher_text
+    }
+    result = requests.post(url="http://127.0.0.1:5000/server_decode", data=data)
+    result = json.loads(result.text)
+    print(result)
+
+def msg_sql():
+    data = {
+        'ip': ip,
+        'sq': sq,
+        'cypher': cipher_text
+    }
+    result = requests.post(url="http://127.0.0.1:5000/server_decode", data=data)
+    result = json.loads(result.text)
+    print(result)
+
 while(1):
     # init_ip()
     menu()

@@ -25,18 +25,21 @@ mcc=msg_check_consume_operation()
 class token_consume:
 
     # 查看当前消费类型的值
-    def search_num(self, kid, operator):
-        return tc.check_num(kid, operator)
-        # return {'code': 200, 'num': num}
+    def search_kid_msg(self, kid):
+        return tc.search_num(kid)
+        # return {'code': 200, 'result': result}
 
     #消费后更新数字或type
     def update_num(self,kid,num,operator):
+        print(operator)
         if operator=='add_count':
             tc.add_count(kid,num)
         elif operator=='add_times':
+            # print('-----------------------------')
             tc.add_times(kid,num)
         elif operator=='add_newdata':
             tc.add_newdata(kid,num)
+        return {'code': 200, 'result': '成功'}
 
     #获取当前消费类型
     def get_type(self,kid):
@@ -55,9 +58,41 @@ class token_consume:
         else:
             return  {'code':200,'msg':'存在记录'}
 
-
 class msg_check_consume:
-    test=1
+    # 查看当前消费类型的值
+    def search_kid_msg(self, kid):
+        return mcc.search_num(kid)
+        # return {'code': 200, 'result': result}
+
+    # 消费后更新数字或type
+    def update_num(self, kid, num, operator):
+        print(operator)
+        if operator == 'add_count':
+            mcc.add_count(kid, num)
+        elif operator == 'add_times':
+            # print('-----------------------------')
+            mcc.add_times(kid, num)
+        elif operator == 'add_newdata':
+            mcc.add_newdata(kid, num)
+        return {'code': 200, 'result': '成功'}
+
+    # 获取当前消费类型
+    def get_type(self, kid):
+        result = mcc.search_by_kid(kid)
+        type = result['type']
+        return {'code': 200, 'type': type}
+
+    def update_type(self, kid, type):
+        mcc.set_type(kid, type)
+
+    # 查看当前消费kid是否存在记录
+    def check_have(self, kid):
+        print('1111111144444444444444')
+        if mcc.checkhave(kid) == 0:
+            return {'code': 10000, 'msg': '没有找个用户的记录'}
+        else:
+            return {'code': 200, 'msg': '存在记录'}
+
 class token_check:
     """MD5 base64 AES RSA 四种加密方法"""
     def __init__(self):
@@ -68,6 +103,40 @@ class token_check:
         # self.server_public_key_file = os.path.join(self.curr_dir, "server_rsa_public.pem")
         self.server_private_key=''
         self.server_public_key=''
+
+    def check_have(self,kid):
+        print(server.checkhave2(kid))
+        if server.checkhave2(kid)==0:
+            return {'code':10000,'msg':'没有找个用户的记录'}
+        else:
+            return  {'code':200,'msg':'存在记录'}
+
+    def insert_token(self,url,user_id1,time_code1,token1):
+        op.init(url)
+        op.insert(user_id1,time_code1,token1)
+        return {'code':200,'result':'操作成功'}
+
+    def dele_by_uid(self,url,user_id):
+        op.init(url)
+        op.deleteis(user_id)
+        return {'code': 200,'result':'操作成功'}
+
+    def update_by_uid(self,url,uer_id,time_code,token):
+        op.init(url)
+        op.update(uer_id,time_code,token)
+        return {'code': 200,'result':'操作成功'}
+
+    def search_by_uid(self,url,user_id):
+        op.init(url)
+        return  {'code': 200,'result':op.search_by_user_id(user_id)}
+
+    def search_all(self,url):
+        # print('------------------------------')
+        op.init(url)
+        # dict={}
+        # print('------------------------------')
+        dict=op.search_all()
+        return  {'code': 200,'result':dict}
 
     # def updatekey(self):
     # def init_url(self,url):
@@ -163,7 +232,8 @@ class token_check:
             msg_tb='msg_check_'+url
             # print('0')
             server.insert(kid,url,token_tb,msg_tb)
-            server.create_new_table(kid,token_tb,msg_tb)
+            # print('111111111111111111111')
+            server.create_new_table(token_tb,msg_tb)
             print('初始化成功。')
             resu = {'code': 200, 'msg': '初始化成功。'}
             return resu
@@ -186,6 +256,34 @@ class msg_random_check:
         self.private_key = ''
         self.public_key = ''
         self.sq=''
+
+    def check_have(self,kid):
+        print(server.checkhave2(kid))
+        if server.checkhave2(kid)==0:
+            return {'code':10000,'msg':'没有找个用户的记录'}
+        else:
+            return  {'code':200,'msg':'存在记录'}
+    def insert_msg(self,url,sq,puk,prk,time_code):
+        msg.init(url)
+        msg.insert(sq,puk,prk,time_code)
+        return {'code':200,'result':'操作成功'}
+    def deleteis_by_sq(self,url,sq):
+        msg.init(url)
+        msg.deleteis_by_sq(sq)
+        return {'code': 200,'result':'操作成功'}
+    def update_by_sq(self,url,sq,puk,prk,time_code):
+        msg.init(url)
+        msg.update(sq,puk,prk,time_code)
+        return {'code': 200,'result':'操作成功'}
+    def search_by_sq(self,url,sq):
+        msg.init(url)
+        result=msg.search_by_sq(sq)
+        return {'code':200,'result':result}
+
+    def search_all(self,url):
+        msg.init(url)
+        result=msg.search_all()
+        return {'code':200,'result':result}
 
     # 时间戳生成器
     def get_time(self):
@@ -295,25 +393,26 @@ class msg_random_check:
 
     #用于生成序列号并且生成相应的rsa key，插入数据库中
     def create_seq(self,url):
-        time_code=self.get_time(self)
+        time_code=self.get_time()
         strr=time_code+'huctf'
         sq=Encrypts.md5_encrypt(strr)
         self.sq=sq
-        return self.create_key(self,str(sq),url,time_code)
+        return self.create_key(str(sq),url,time_code)
 
     # 创建一组密钥
     def create_key(self,sq,url,time_code):
-        # print('0')
+        # print('000000000000000000000')
         msg.init(url)
-        if server.checkhave(sq) == 1:
+        # print(msg.checkhave(sq))
+        if msg.checkhave(sq) == 1:
             print('已有记录。')
             resu = {'code': 200,'sq':sq,'puk':self.public_key, 'msg': '数据已创建。'}
             return resu
         else:
-            # print('2')
+            print('222222')
             self.public_key,self.private_key=Encrypts.generate_rsa_keys(Encrypts)
 
-            # print('0')
+            print('00000')
             msg.insert(sq,self.public_key,self.private_key,time_code)
             print('数据创建成功。')
             resu = {"code": 200,"sq":str(sq),"puk":str(self.public_key)[2:-1], "msg": "数据创建成功。"}

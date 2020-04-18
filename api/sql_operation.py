@@ -24,30 +24,30 @@ tablename=''
 
 #msg_check_consume表，用于记录
 class msg_check_consume(Base):
-    __tablename__ = 'msg_check_count'
+    __tablename__ = 'msg_check_consume'
     __table_args__ = {
         'mysql_engine': 'InnoDB',
         'mysql_charset': 'utf8'
     }
     kid = Column(String(255), unique=True, primary_key=True, nullable=False)
-    count = Column(int(10), nullable=False,default=0)
-    times = Column(int(10), nullable=False,default=0)
-    free = Column(int(10), nullable=False,default=1000)
-    data=Column(int(15), nullable=False,default=0)
+    count = Column(Integer, nullable=False,default=0)
+    times = Column(Integer, nullable=False,default=0)
+    free = Column(Integer, nullable=False,default=1000)
+    data=Column(Integer, nullable=False,default=0)
     type=Column(String(255), nullable=False)
 
 #token_consume表，用于记录
 class token_consume(Base):
-    __tablename__ = 'token_count'
+    __tablename__ = 'token_consume'
     __table_args__ = {
         'mysql_engine': 'InnoDB',
         'mysql_charset': 'utf8'
     }
     kid = Column(String(255), unique=True, primary_key=True, nullable=False)
-    count = Column(int(10), nullable=False,default=0)
-    times = Column(int(10), nullable=False,default=0)
-    free = Column(int(10), nullable=False,default=1000)
-    data=Column(int(15), nullable=False,default=0)
+    count = Column(Integer, nullable=False,default=0)
+    times = Column(Integer, nullable=False,default=0)
+    free = Column(Integer, nullable=False,default=1000)
+    data=Column(Integer, nullable=False,default=0)
     type=Column(String(255), nullable=False)
 
 #token表
@@ -249,10 +249,15 @@ class db_operation:
     #获取所有数据
     def search_all(self):
         dict = session.query(token).all()
+        dic={}
+        i=0
         for each in dict:
             # print(each)
-            print(each.user_id + '|' + each.time_code + '|' + each.token)
-        return dict
+            dic[i]={'user_id':each.user_id,'time_code':each.time_code,'token':each.token}
+            i=i+1
+            # print(each.user_id + '|' + each.time_code + '|' + each.token)
+        # print(dic[0])
+        return dic
 
     def checkhave(self,user_id):
         print(token.__tablename__)
@@ -282,7 +287,7 @@ class server_operation:
     def __init__(self):
         self.url = ''
     def insert(self,kid, url,token_tb,msg_tb):
-
+        print('-----------------')
         session.add(server(kid=kid,url=url,token_tb=token_tb,msg_tb=msg_tb))
         session.commit()
         print('单个数据添加成功')
@@ -373,16 +378,31 @@ class server_operation:
     # 获取所有数据
     def search_all(self):
         dict = session.query(server).all()
-        # print('good')
+        dic = {}
+        i = 0
         for each in dict:
             # print(each)
-            print(each.url +'|'+each.token_tb+'|'+each.msg_tb)
-        return dict
+            dic[i] = {'user_id': each.user_id, 'time_code': each.time_code, 'token': each.token}
+            i = i + 1
+            # print(each.user_id + '|' + each.time_code + '|' + each.token)
+        # print(dic[0])
+        return dic
 
     def checkhave(self, url,kid):
         # print('goddddddd' + url)
         # url='123'
         results = session.query(server).filter_by(url=url,kid=kid).all()
+        # print('adas')
+        if results == []:
+            return 0
+        else:
+            return 1
+            # 删除已经过时的密钥
+
+    def checkhave2(self, kid):
+        # print('goddddddd' + url)
+        # url='123'
+        results = session.query(server).filter_by(kid=kid).all()
         # print('adas')
         if results == []:
             return 0
@@ -398,10 +418,10 @@ class server_operation:
         return int(round(t * 1000000))
 
     def delete_task(self):
-        print('good')
+        # print('good')
         now = str(self.get_time()-60*60*24*1000000)
         # now='0'
-        print(now)
+        # print(now)
         dict = session.query(server).all()
         for each in dict:
             # each.token_tb  + each.msg_tb
@@ -412,6 +432,7 @@ class server_operation:
         print('good')
 
     def create_new_table(self,token_tb,msg_check):
+        # print('22222222222222222222222222')
         str1="CREATE TABLE `"+token_tb+"` "+\
             "(`user_id` varchar(255) CHARACTER SET utf8 NOT NULL,"+\
             "`time_code` varchar(255) CHARACTER SET utf8 NOT NULL,"+\
@@ -419,6 +440,7 @@ class server_operation:
             "PRIMARY KEY (`user_id`) USING BTREE)"+\
             " ENGINE=InnoDB DEFAULT CHARSET=utf8;"
         session.execute(str1)
+        session.commit()
         str2=" CREATE TABLE `"+msg_check+"`"+\
              " (`sq` varchar(255) DEFAULT NULL,"+\
              "`puk` varchar(1000) DEFAULT NULL,"+\
@@ -426,7 +448,9 @@ class server_operation:
              "`time_code` varchar(255) DEFAULT NULL)"+\
              " ENGINE=InnoDB DEFAULT CHARSET=utf8"
         session.execute(str2)
+        session.commit()
         print('建表成功')
+        return 1
 
 # msg表的操作
 class msg_operation:
@@ -537,17 +561,21 @@ class msg_operation:
     #获取所有数据
     def search_all(self):
         dict = session.query(msg).all()
+        dic = {}
+        i = 0
         for each in dict:
             # print(each)
-            print(each.sq + '|' + each.puk + '|' + each.prk + '|' + each.time_code)
-        return dict
+
+            dic[i] = {'sq': each.sq, 'puk': each.puk, 'prk': each.prk,'time_code':each.time_code}
+            i = i + 1
+            # print(each.user_id + '|' + each.time_code + '|' + each.token)
+        # print(dic[0])
+        return dic
 
     def checkhave(self,sq):
         print(msg.__tablename__)
         results = session.query(msg).filter_by(sq=sq).all()
-        # print(results)
-        # print(results[0].token)
-        # print(12345)
+
         if results ==[]:
             # print(0)
             return 0
@@ -574,7 +602,7 @@ class token_consume_operation:
         # print(user_id1)
         # print(time_code1)
         # print(token1)
-        session.add(token(kid=kid,count=count,times=times,free=free,data=data,type=type))
+        session.add(token_consume(kid=kid,count=count,times=times,free=free,data=data,type=type))
         session.commit()
         print('单个数据添加成功')
 
@@ -586,7 +614,7 @@ class token_consume_operation:
 
     # 删
     def deleteis(self,kid):
-        results = session.query(token).filter_by(kid=kid).all()
+        results = session.query(token_consume).filter_by(kid=kid).all()
         session.delete(results[0])
         session.commit()
         print('数据删除成功')
@@ -594,35 +622,35 @@ class token_consume_operation:
 
     # 改
     def update_count(self,kid,count):
-        results = session.query(token).filter_by(kid=kid).all()
+        results = session.query(token_consume).filter_by(kid=kid).all()
         # print(results[0].title)
         results[0].count = count
         session.commit()
         print('修改成功')
 
     def update_times(self,kid,times):
-        results = session.query(token).filter_by(kid=kid).all()
+        results = session.query(token_consume).filter_by(kid=kid).all()
         # print(results[0].title)
         results[0].times = times
         session.commit()
         print('修改成功')
 
     def update_free(self,kid,free):
-        results = session.query(token).filter_by(kid=kid).all()
+        results = session.query(token_consume).filter_by(kid=kid).all()
         # print(results[0].title)
         results[0].free = free
         session.commit()
         print('修改成功')
 
     def update_data(self,kid,data):
-        results = session.query(token).filter_by(kid=kid).all()
+        results = session.query(token_consume).filter_by(kid=kid).all()
         # print(results[0].title)
         results[0].data = data
         session.commit()
         print('修改成功')
 
     def set_type(self,kid,type):
-        results = session.query(token).filter_by(kid=kid).all()
+        results = session.query(token_consume).filter_by(kid=kid).all()
         # print(results[0].title)
         results[0].type = type
         session.commit()
@@ -631,23 +659,27 @@ class token_consume_operation:
     def add_count(self,kid,num):
         result=self.search_by_kid(kid)
         count=result['count']
-        count=count+num
-        self.update_count(count)
+        count=str(int(count) +int(num))
+        self.update_count(kid,count)
 
     def add_times(self,kid,num):
+        # print('inert----------------------')
         result = self.search_by_kid(kid)
+        # print(result)
         times = result['times']
-        times = times + num
-        self.update_count(times)
+        # print('times:'+times)
+        times = str(int(times) +int(num))
+        # print('times:' + times)
+        self.update_times(kid,times)
 
     def add_newdata(self,kid,num):
         now=self.get_time()
-        newdata=now+num
-        self.update_times(kid,newdata)
+        newdata=str(int(now) +int(num))
+        self.update_newdata(kid,newdata)
     #
     # # 查
     def search_by_kid(self,kid):
-        results = session.query(token).filter_by(kid=kid).all()
+        results = session.query(token_consume).filter_by(kid=kid).all()
         # print(results)
         resData = []
         for x in results:
@@ -669,13 +701,18 @@ class token_consume_operation:
     #获取所有数据
     def search_all(self):
         dict = session.query(token_consume).all()
+        dic = {}
+        i = 0
         for each in dict:
             # print(each)
-            print(each.user_id + '|' + each.time_code + '|' + each.token)
-        return dict
+            dic[i] = {'kid': each.kid, 'count': each.count, 'times': each.times,'free':each.free,'data':each.data,'type':each.type}
+            i = i + 1
+            # print(each.user_id + '|' + each.time_code + '|' + each.token)
+        # print(dic[0])
+        return dic
 
     def checkhave(self,kid):
-        print(token.__tablename__)
+        # print(token.__tablename__)
         results = session.query(token_consume).filter_by(kid=kid).all()
         # print(results)
         # print(results[0].token)
@@ -687,10 +724,9 @@ class token_consume_operation:
             print(1)
             return 1
 
-    def search_num(self,kid,op):
+    def search_num(self,kid):
         result=self.search_by_kid(kid)
-        num=result[op]
-        return {'code':200,'num':num}
+        return {'code':200,'result':result}
 
 
     def get_time(self):
@@ -710,7 +746,7 @@ class msg_check_consume_operation:
         # print(user_id1)
         # print(time_code1)
         # print(token1)
-        session.add(token(kid=kid,count=count,times=times,free=free,data=data,type=type))
+        session.add(msg_check_consume(kid=kid,count=count,times=times,free=free,data=data,type=type))
         session.commit()
         print('单个数据添加成功')
 
@@ -722,7 +758,7 @@ class msg_check_consume_operation:
 
     # 删
     def deleteis(self,kid):
-        results = session.query(token).filter_by(kid=kid).all()
+        results = session.query(msg_check_consume).filter_by(kid=kid).all()
         session.delete(results[0])
         session.commit()
         print('数据删除成功')
@@ -730,35 +766,35 @@ class msg_check_consume_operation:
 
     # 改
     def update_count(self,kid,count):
-        results = session.query(token).filter_by(kid=kid).all()
+        results = session.query(msg_check_consume).filter_by(kid=kid).all()
         # print(results[0].title)
         results[0].count = count
         session.commit()
         print('修改成功')
 
     def update_times(self,kid,times):
-        results = session.query(token).filter_by(kid=kid).all()
+        results = session.query(msg_check_consume).filter_by(kid=kid).all()
         # print(results[0].title)
         results[0].times = times
         session.commit()
         print('修改成功')
 
     def update_free(self,kid,free):
-        results = session.query(token).filter_by(kid=kid).all()
+        results = session.query(msg_check_consume).filter_by(kid=kid).all()
         # print(results[0].title)
         results[0].free = free
         session.commit()
         print('修改成功')
 
     def update_data(self,kid,data):
-        results = session.query(token).filter_by(kid=kid).all()
+        results = session.query(msg_check_consume).filter_by(kid=kid).all()
         # print(results[0].title)
         results[0].data = data
         session.commit()
         print('修改成功')
 
     def set_type(self,kid,type):
-        results = session.query(token).filter_by(kid=kid).all()
+        results = session.query(msg_check_consume).filter_by(kid=kid).all()
         # print(results[0].title)
         results[0].type = type
         session.commit()
@@ -767,23 +803,27 @@ class msg_check_consume_operation:
     def add_count(self,kid,num):
         result=self.search_by_kid(kid)
         count=result['count']
-        count=count+num
-        self.update_count(count)
+        count=str(int(count) +int(num))
+        self.update_count(kid,count)
 
     def add_times(self,kid,num):
+        # print('inert----------------------')
         result = self.search_by_kid(kid)
+        # print(result)
         times = result['times']
-        times = times + num
-        self.update_count(times)
+        # print('times:'+times)
+        times = str(int(times) +int(num))
+        # print('times:' + times)
+        self.update_times(kid,times)
 
     def add_newdata(self,kid,num):
         now=self.get_time()
-        newdata=now+num
-        self.update_times(kid,newdata)
+        newdata=str(int(now) +int(num))
+        self.update_newdata(kid,newdata)
     #
     # # 查
     def search_by_kid(self,kid):
-        results = session.query(token).filter_by(kid=kid).all()
+        results = session.query(msg_check_consume).filter_by(kid=kid).all()
         # print(results)
         resData = []
         for x in results:
@@ -804,24 +844,37 @@ class msg_check_consume_operation:
 
     #获取所有数据
     def search_all(self):
-        dict = session.query(token_consume).all()
+        dict = session.query(msg_check_consume).all()
+        dic = {}
+        i = 0
         for each in dict:
             # print(each)
-            print(each.user_id + '|' + each.time_code + '|' + each.token)
-        return dict
+            dic[i] = {'kid': each.kid, 'count': each.count, 'times': each.times,'free':each.free,'data':each.data,'type':each.type}
+            i = i + 1
+            # print(each.user_id + '|' + each.time_code + '|' + each.token)
+        # print(dic[0])
+        return dic
 
     def checkhave(self,kid):
-        print(token.__tablename__)
+        # print(token.__tablename__)
+        # print('kidkidkid:'+kid)
         results = session.query(msg_check_consume).filter_by(kid=kid).all()
         # print(results)
         # print(results[0].token)
         # print(12345)
+        # print(results)
         if results ==[]:
+
             # print(0)
             return 0
         else:
             print(1)
             return 1
+
+    def search_num(self,kid):
+        result=self.search_by_kid(kid)
+        return {'code':200,'result':result}
+
 
     def get_time(self):
         t = time.time()
