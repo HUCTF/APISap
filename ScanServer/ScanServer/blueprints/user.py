@@ -63,7 +63,7 @@ def net():
         needpcap = form.needpcap.data
         session['netname'] = netname
         session['needpcap'] = needpcap
-        return redirect(url_for('pcap', netname=netname, needpcap=needpcap))
+        return redirect(url_for('user.pcap', netname=netname, needpcap=needpcap))
     return render_template('net.html', form=form)
 
 @user_bp.route("/pcap", methods=['GET', 'POST'])
@@ -161,7 +161,6 @@ def login():
         password = form.password.data
         remember = form.remember.data
         user = [User.query.filter(User.username==username_or_email).first(), User.query.filter(User.email==username_or_email).first()]
-        print(user)
         if user[0]:
             if user[0].validate_password(password):
                 login_user(user[0], remember)

@@ -88,7 +88,7 @@ class NICPackage:
             lfilter=lambda p: ("GET" in str(p)) or ("POST" in str(p)),
             filter="tcp")
 
-            #iface='XXX'  监听本地名为XXX的网卡
+            #iface="XdXdX"  监听本地名为XdXdX的网卡
 
 
 def NICRUN(netname=None, needpcap=10):
