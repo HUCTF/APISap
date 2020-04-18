@@ -22,7 +22,6 @@ class NICPackage:
         self.catch_method=0 #0连续抓包 1按数量抓包
         self.Time_conversion=0 #使用连续抓包时的数据包保存时间间隔，仅在catch_method=0时有效
         self.package_num=NEEDPCAP  #使用按数量抓包时的数据包抓取数量，仅在catch_method=1时有效
-        # self.iface='Realtek PCIe GbE Family Controller'
         self.iface=IFACE
         self.pcap=[]
         self.path = sys.path[0] + self.prefix + str(datetime.now().strftime("%Y-%m-%d_%H"))
@@ -94,7 +93,7 @@ class NICPackage:
 
 def NICRUN(netname=None, needpcap=10):
     # a = NICPackage('Realtek PCIe GbE Family Controller')
-    netname = "Realtek PCIe GbE Family Controller"
+    # netname = "Realtek PCIe GbE Family Controller"
 
     if netname:
         print("Start get NIC package...")
