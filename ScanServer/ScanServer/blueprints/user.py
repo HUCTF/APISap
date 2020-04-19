@@ -63,7 +63,7 @@ def net():
         needpcap = form.needpcap.data
         session['netname'] = netname
         session['needpcap'] = needpcap
-        return redirect(url_for('pcap', netname=netname, needpcap=needpcap))
+        return redirect(url_for('user.pcap', netname=netname, needpcap=needpcap))
     return render_template('net.html', form=form)
 
 @user_bp.route("/pcap", methods=['GET', 'POST'])
@@ -104,7 +104,7 @@ def pcap():
                 thread.start()
                 flash('开始重发！')
         return render_template("pcap.html", netname=netname, needpcap=needpcap, form=form, stop=stop, form1=form1)
-    return redirect(url_for('net'))
+    return redirect(url_for('user.net'))
     
 
 @user_bp.route('/api/package', methods=["GET"])
@@ -113,7 +113,9 @@ def package_msg():
     # filename为数据包txt文件名
     # 例如http://127.0.0.1:5000/api/package?filename=文件夹名\文件名
     s = get_txt_file(filename)
-    return jsonify({'code':'200', 'result':str(s)})
+    return jsonify({'code':'200',
+		'result':str(s),
+		'done':'done'})
 
 
 @user_bp.route('/register', methods=['GET', 'POST'])
@@ -161,7 +163,6 @@ def login():
         password = form.password.data
         remember = form.remember.data
         user = [User.query.filter(User.username==username_or_email).first(), User.query.filter(User.email==username_or_email).first()]
-        print(user)
         if user[0]:
             if user[0].validate_password(password):
                 login_user(user[0], remember)

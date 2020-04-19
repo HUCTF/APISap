@@ -4,6 +4,7 @@ from flask import render_template
 from ApiServer.extensions import bootstrap, db, login_manager
 from ApiServer.config import config
 from ApiServer.blueprints.user import user_bp
+from ApiServer.blueprints.api import api_v1
 import os
 import click
 
@@ -27,6 +28,7 @@ def register_extensions(app):
 
 def register_blueprints(app):
     app.register_blueprint(user_bp)
+    app.register_blueprint(api_v1, url_prefix='/v1')
     # app.register_blueprint(user_bp, url_prefix='/user')
 
 

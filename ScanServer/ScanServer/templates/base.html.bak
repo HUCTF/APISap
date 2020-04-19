@@ -24,21 +24,26 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
-		<li>
-                   <a href="/" style="color: #495057;"><strong style="margin-right: 5px;">Home</strong></a>
-          </li><li>          <a href="#about" style="color: #495057;">about</a>
-            </li>    </ul>
+                   <a href="/"><strong style="margin-right: 5px;"> Home</strong></a>
+                    <a href="#about">about</a>
+                </ul>
             </div>
         </div>
     </nav>
 {% endblock nav %}
 <main class="container">
-    {% for message in get_flashed_messages(with_categories=True) %}
-        <div class="alert alert-{{ message[0] }}" role="alert">
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-info">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {{ message[1] }}
+            {{ message }}
         </div>
     {% endfor %}
+<!--     
+    {% block images %}
+    <div class="text-center">
+        <img src="{{ url_for('static', filename='flask-python.png') }}" style="width: 450px;">
+    </div>
+    {% endblock images %} -->
     {% block content %}{% endblock content %}
     {% block footer %}
     <footer class="text-center">
