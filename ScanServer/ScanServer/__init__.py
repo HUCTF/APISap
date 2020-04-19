@@ -4,6 +4,8 @@ from flask import render_template
 from ScanServer.extensions import bootstrap, db, login_manager
 from ScanServer.config import config
 from ScanServer.blueprints.user import user_bp
+from ScanServer.blueprints.admin import admin_bp
+from ScanServer.models import User
 import os
 import click
 
@@ -27,6 +29,7 @@ def register_extensions(app):
 
 def register_blueprints(app):
     app.register_blueprint(user_bp)
+    app.register_blueprint(admin_bp, url_prefix='/admin')
     # app.register_blueprint(user_bp, url_prefix='/user')
 
 
@@ -58,6 +61,13 @@ def register_commands(app):
             db.drop_all()
             click.echo('Drop tables.')
         db.create_all()
+        user = User(
+            username='admin',
+            email='admin@admin.com',
+            is_super=True
+        )
+        user.set_password('admin')
+        db.session.add(user)
         click.echo('Initialized database.')
 
     @app.cli.command()
@@ -71,7 +81,7 @@ def register_commands(app):
         click.echo('Initializing the database...')
         db.create_all()
 
-        user = user.query.first()
+        user = User.query.first()
         if user is not None:
             click.echo('The useristrator already exists, updating...')
             user.username = username
@@ -79,9 +89,10 @@ def register_commands(app):
             user.set_password(password)
         else:
             click.echo('Creating the temporary useristrator account...')
-            user = user(
+            user = User(
                 username=username,
-                email=email
+                email=email,
+                is_super=False
             )
             user.set_password(password)
             db.session.add(user)

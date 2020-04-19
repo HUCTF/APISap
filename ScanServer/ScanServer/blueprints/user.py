@@ -134,7 +134,7 @@ def register():
         elif User.query.filter(User.email==email).first():
             flash('这个邮箱已经被注册过了！')
         else:
-            new_user = User(username=username, email=email, id=None)
+            new_user = User(username=username, email=email, id=None, is_super=False)
             new_user.set_password(password)
             db.session.add(new_user)
             # try:
@@ -165,12 +165,10 @@ def login():
         if user[0]:
             if user[0].validate_password(password):
                 login_user(user[0], remember)
-                login_user(user[0], remember)
                 flash('Welcome back.', 'info')
                 return redirect_back()
         elif user[1]:
             if user[1].validate_password(password):
-                login_user(user[1], remember)
                 login_user(user[1], remember)
                 flash('Welcome back.', 'info')
                 return redirect_back()
