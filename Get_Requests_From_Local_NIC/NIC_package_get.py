@@ -7,7 +7,7 @@ from threading import Timer
 
 class NICPackage:
 
-    def __init__(self, IFACE=None,NEEDPCAP=1000):
+    def __init__(self, IFACE=None,NEEDPCAP=1000,ID="auto"):
         print(NEEDPCAP)
         if(NEEDPCAP>10000):
             NEEDPCAP=10000
@@ -22,6 +22,8 @@ class NICPackage:
             self.prefix = '\\'
         else:
             self.prefix = '/'
+        self.id=ID
+        print(ID)
         self.package_output='all' #'screen'/'document'/'all'/'pcap'
         self.catch_method=0 #0连续抓包 1按数量抓包
         self.Time_conversion=0 #使用连续抓包时的数据包保存时间间隔，仅在catch_method=0时有效
@@ -29,7 +31,7 @@ class NICPackage:
         # self.iface='Realtek PCIe GbE Family Controller'
         self.iface=IFACE
         self.pcap=[]
-        self.path = sys.path[0] + self.prefix + str(datetime.now().strftime("%Y-%m-%d_%H"))
+        self.path = sys.path[0] + self.prefix + self.id
         self.filename = self.path + self.prefix + str(datetime.now().strftime("%Y-%m-%d_%H"))
         self.filename_pcap = self.filename + '.pcap'
         self.filename_txt = self.filename + '.txt'
@@ -85,18 +87,21 @@ class NICPackage:
             sniff(iface=self.iface,count=self.package_num,prn=self.package_print,lfilter=lambda p: (("GET" in str(p)) or ("POST" in str(p))) and (url in str(p)) and ('HTTP' in str(p)),filter="tcp")
             #iface='XXX'  监听本地名为XXX的网卡
 
-needpcap=10001
-def NICRUN(netname=None,NEEDPCAP=needpcap):
+
+def NICRUN(netname=None,NEEDPCAP=111,ID=''):
     # a = NICPackage('Realtek PCIe GbE Family Controller')
     if netname:
         url='hyluz'
-        print("Start get NIC package...")
-        a = NICPackage(IFACE=netname,NEEDPCAP=needpcap)
+        print(NEEDPCAP)
+        #print(ID)
+        #print("Start get NIC package...")
+        a = NICPackage(IFACE=netname,NEEDPCAP=NEEDPCAP,ID=ID)
         a.NEEDPCAP=NEEDPCAP
         a.mainrun()
     else:
         print("=======================================================")
         print('请设置网卡名！！！')
         print("=======================================================")
-
-NICRUN(netname='Realtek 8821CE Wireless LAN 802.11ac PCI-E NIC',NEEDPCAP=needpcap)
+needpcap=10001
+id='Luz'
+NICRUN(netname='Realtek 8821CE Wireless LAN 802.11ac PCI-E NIC',NEEDPCAP=needpcap,ID=id)
