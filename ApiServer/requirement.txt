@@ -4,3 +4,5 @@ wtforms
 bootstrap-flask
 flask-login
 flask-sqlalchemy
+pycryptodomex
+py-mysql
