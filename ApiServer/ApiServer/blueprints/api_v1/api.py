@@ -10,7 +10,7 @@ from ApiServer.utils import redirect_back
 from ApiServer.extensions import db
 
 from .api_class import token_check,op,msg_random_check,token_consume,msg_check_consume
-from flask import Flask, render_template, request, current_app
+from flask import Flask, render_template, request, current_app, jsonify
 # from flask_cors import *
 import json
 
@@ -37,11 +37,6 @@ msg_consume=msg_check_consume()
 @api_v1.route('/init_ip',methods=['get','post'])
 def init_ip():
     #访问时需要带上参数：自己的ip
-    #data = request.get_data()
-    #data = data.decode('utf-8')
-    #data = json.loads(data)
-    # print(data)
-    #url = data['ip']
     if request.method == 'POST':
         url=request.form.get("ip")
         kid=request.form.get("kid")
@@ -51,14 +46,15 @@ def init_ip():
     try:
         if url:
             token_api.create_mid_server_key(kid,url)
-            return {'code': 200, 'result': "初始化成功"}
+            return jsonify({'code': 200, 'result': "初始化成功"})
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
-            return resu
-        # print(url)
+            return jsonify(resu)
         #这里面会创建两个表，包括msg_tb、token_tb
-    except:
+    except:y
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return jsonify(resu)
+
 
 #函数功能：token生成器（每次用户登陆时使用一次）
 #路径：/init_token
@@ -75,31 +71,22 @@ def init_ip():
 @api_v1.route('/init_token',methods=['get','post'])
 def init_token():
     #访问时需要带上参数：user_id,ip
-    #data = request.get_data()
-    #data = data.decode('utf-8')
-    #data = json.loads(data)
-    # plain_text = data['plain_text']
-    #user_id = data['user_id']
-    #url = data['ip']
     if request.method == 'POST':
         url=request.form.get("ip")
         user_id=request.form.get("user_id")
     else:
-        # password=request.args.get("ip")
         user_id=request.args.get("user_id")
     try:
         if user_id and url:
-            #resu = {'code': 200, 'token': token,'msg':'申请token成功'}
-            #resu={'code': 201, 'token': token,'msg':'数据库已有记录'}
             return token_api.server_get_token(user_id, url)
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
-            return resu
-        #return {'code': 201, 'token': token,'msg':'数据库已有记录'}
-        #resu = {'code': 200, 'token': token,'msg':'申请token成功'}
-        # resu = {'code': 10000, 'msg': '参数不能为空！'}
+            return jsonify(resu)
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return jsonify(resu)
+
+
 #函数功能：token校验器(每次校验前端发来的token)
 #路径：/init_token
 #输入：
@@ -132,18 +119,20 @@ def check_token():
                 sql_token = data['token']
                 if server_token == sql_token:
                     resu = {'code': 200, 'msg': "token验证成功"}
-                    return resu
+                    return jsonify(resu)
                 else:
                     resu = {'code': 10000, 'msg': 'token验证失败'}
-                    return resu
+                    return jsonify(resu)
             else:
                 resu = {'code': 10001, 'msg': "token已更新，请重新登陆"}
-                return resu
+                return jsonify(resu)
         else:
             resu = {'code': 10002, 'result': '参数不能为空！'}
-            return resu
+            return jsonify(resu)
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return jsonify(resu)
+
 
 #函数功能：客户端请求获得公钥与序列号
 #路径：/get_puk_sq
@@ -170,9 +159,11 @@ def front_get_puk_sq():
             return result
         else:
             resu = {'code': 10000, 'result': '参数不能为空！'}
-            return resu
+            return jsonify(resu)
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return jsonify(resu)
+
 
 #函数功能：服务端通过序列号对密文解密
 #路径：/server_decode
@@ -195,20 +186,18 @@ def server_decode():
         url=request.args.get("ip")
         sq=request.args.get("sq")
         cypher =request.args.get("cypher")
-    #url = data['ip']
-    #sq = data['sq']
-    #cypher = data['cypher']
     try:
         if url and sq and cypher:
             result = msg_check.mid_sever_decode(msg_check ,cypher, sq,url)
-            return result
+            return jsonify(result)
             # return {'code': 200, 'result': Decrypts.rsa_decrypt(cypher, prk)}
             # return {'code': 10000, 'msg': '未找到私钥'}
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
-            return resu
+            return jsonify(resu)
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return jsonify(resu)
 
 
 #函数功能：服务端通过序列号对密文解密
@@ -263,35 +252,36 @@ def msg_sql():
                 if url and sq and puk and prk and time_code:
                     return msg_check.insert_msg(url, sq, puk, prk,time_code)
                 else:
-                    return {'code': 10001, 'result': '参数不能为空！'}
+                    return jsonify({'code': 10001, 'result': '参数不能为空！'}
 
             elif (operator == 'deleteis_by_sq'):
                 if url and sq:
                     return msg_check.deleteis_by_sq(url, sq)
                 else:
-                    return {'code': 10001, 'result': '参数不能为空！'}
+                    return jsonify({'code': 10001, 'result': '参数不能为空！'})
 
             elif (operator == 'update_by_sq'):
                 if url and sq and puk and prk and time_code:
                     return msg_check.update_by_sq(url, sq, puk, prk,time_code)
                 else:
-                    return {'code': 10001, 'result': '参数不能为空！'}
+                    return jsonify({'code': 10001, 'result': '参数不能为空！'})
 
             elif (operator == 'search_by_sq'):
                 if url and sq:
                     return msg_check.search_by_sq(url, sq)
                 else:
-                    return {'code': 10001, 'result': '参数不能为空！'}
+                    return jsonify({'code': 10001, 'result': '参数不能为空！'})
             elif (operator == 'search_all'):
                 if url:
                     return msg_check.search_all(url)
                 else:
-                    return {'code': 10001, 'result': '参数不能为空！'}
+                    return jsonify({'code': 10001, 'result': '参数不能为空！'})
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
-            return resu
+            return jsonify(resu)
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return jsonify(resu)
 
 
 # 函数功能：token表的增删改查
@@ -429,6 +419,8 @@ def update_token_consume():
             return resu
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return jsonify(resu)
+
 
 #函数功能：查询消费数据信息
 #路径：/token_consum_search
@@ -489,6 +481,7 @@ def update_msg_check_consume():
             return resu
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return jsonify(resu)
 
 @api_v1.route('/msg_check_consum_search',methods=['get','post'])
 def msg_check_consum_search():
