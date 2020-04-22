@@ -1,5 +1,5 @@
 from ScanServer.forms import NameForm, ScipyForm, PrintLogForm, LoginForm, RegisterForm
-from ScanServer.util import get_net, get_txt_file, redirect_back
+from ScanServer.util import get_net, redirect_back
 from ScanServer.models import User
 from ScanServer.extensions import db
 
@@ -106,17 +106,6 @@ def pcap():
         return render_template("pcap.html", netname=netname, needpcap=needpcap, form=form, stop=stop, form1=form1)
     return redirect(url_for('user.net'))
     
-
-@user_bp.route('/api/package', methods=["GET"])
-def package_msg(): 
-    filename = request.args.get('filename')
-    # filename为数据包txt文件名
-    # 例如http://127.0.0.1:5000/api/package?filename=文件夹名\文件名
-    s = get_txt_file(filename)
-    return jsonify({'code':'200',
-		'result':str(s),
-		'done':'done'})
-
 
 @user_bp.route('/register', methods=['GET', 'POST'])
 def register():

@@ -16,7 +16,10 @@ from Cryptodome import Random
 #}
 #print(requests.post(url="http://www.hutc.xyz:8884/login_check",data=data).text)
 puk=''#当前公钥
+operator='search_all'
+prk='57687'
 sq=''#当前公钥序列号
+kid='1'
 uid='adasd5xc89aaaa+9d8a+9d'
 ip='1.1.1.1'
 user_id='Luz'
@@ -36,6 +39,8 @@ def menu():
     print('*'*30)
     print('-'*10+'当前状态'+'-'*10)
     print('当前公钥：',puk)
+    print('当前kid',kid)
+    print('当前操作：',operator)
     print('当前公钥序列号：',sq)
     print('当前ip：',ip)
     print('当前用户：',user_id)
@@ -44,6 +49,7 @@ def menu():
     print('当前密文：',cipher_text)
     print('解密密文：',cipher_decode)
     print('-'*10+'操作选项'+'-'*10)
+    print('0.init')
     print('1.修改ip')
     print('2.修改用户')
     print('3.获取公钥和序列号')
@@ -52,15 +58,23 @@ def menu():
     print('6.修改原始信息')
     print('7.加密原始信息')
     print('8.解密密文')
-    print('')
+    print('9.msg_check表的增删改查')
+    print('10.token表的增删改查')
+    print('11.更新token表kid的消费参数')
+    print('12.查询token表kid消费数据信息')
+    print('13.更新msg_check的消费数据')
+    print('14.查询msg_check表kid的消费数据信息')
+    print('15.输入新的数据库操作')
     print('*'*30)
 
     
 def init_ip():
     data={
+    'kid':kid,
     'ip':ip
     }
     print(requests.post(url="http://127.0.0.1:5000/init_ip",data=data).text)
+
 def get_puk_sq():
     data={
     'ip':ip
@@ -98,6 +112,7 @@ def init_token():
     result=json.loads(result.text)
     token=result['token']
     return token
+
 def check_token():
     data={
     'ip':ip,
@@ -123,6 +138,7 @@ def rsa_encrypt():
     cipher_text = base64.b64encode(cipher.encrypt(text.encode('utf-8'))).decode('utf-8')
     return cipher_text
     # encrypt_msg_list.append(ciph
+
 def decrypt():
     data={
     'ip':ip,
@@ -134,63 +150,66 @@ def decrypt():
     print(result)
 
 def msg_sql():
-    data = {
-        'ip': ip,
-        'sq': sq,
-        'cypher': cipher_text
+    data={
+    'kid':kid,
+    'operator':operator,
+    'ip':ip,
+    'sq':sq,
+    'puk':puk,
+    'prk':prk,
+    'time_code':'157789422313221'
     }
-    result = requests.post(url="http://127.0.0.1:5000/server_decode", data=data)
-    result = json.loads(result.text)
+    result=requests.post(url="http://127.0.0.1:5000/msg_sql",data=data)
+    result=json.loads(result.text)
     print(result)
 
-def msg_sql():
-    data = {
-        'ip': ip,
-        'sq': sq,
-        'cypher': cipher_text
+def token_sql():
+    data={
+    'kid':kid,
+    'ip':ip,
+    'operator': operator,
+    'user_id':user_id,
+    'time_code':'123456489',
+    'token':token,
     }
-    result = requests.post(url="http://127.0.0.1:5000/server_decode", data=data)
-    result = json.loads(result.text)
+    result=requests.post(url="http://127.0.0.1:5000/token_sql",data=data)
+    result=json.loads(result.text)
     print(result)
 
-def msg_sql():
-    data = {
-        'ip': ip,
-        'sq': sq,
-        'cypher': cipher_text
+def update_token_consume():
+    data={
+    'kid':kid,
+    'num_or_type':100,
+    'operator':'add_times',
     }
-    result = requests.post(url="http://127.0.0.1:5000/server_decode", data=data)
-    result = json.loads(result.text)
+    result=requests.post(url="http://127.0.0.1:5000/update_token_consume",data=data)
+    result=json.loads(result.text)
     print(result)
 
-def msg_sql():
-    data = {
-        'ip': ip,
-        'sq': sq,
-        'cypher': cipher_text
+def token_consum_search():
+    data={
+    'kid':kid,
     }
-    result = requests.post(url="http://127.0.0.1:5000/server_decode", data=data)
-    result = json.loads(result.text)
+    result=requests.post(url="http://127.0.0.1:5000/token_consum_search",data=data)
+    result=json.loads(result.text)
     print(result)
 
-def msg_sql():
-    data = {
-        'ip': ip,
-        'sq': sq,
-        'cypher': cipher_text
+def update_msg_check_consume():
+    data={
+    'kid':kid,
+    'num_or_type':100,
+    'operator':'add_times',
     }
-    result = requests.post(url="http://127.0.0.1:5000/server_decode", data=data)
-    result = json.loads(result.text)
+    result=requests.post(url="http://127.0.0.1:5000/update_msg_check_consume",data=data)
+    result=json.loads(result.text)
     print(result)
 
-def msg_sql():
-    data = {
-        'ip': ip,
-        'sq': sq,
-        'cypher': cipher_text
+def msg_check_consum_search():
+    data={
+    'kid':kid,
     }
-    result = requests.post(url="http://127.0.0.1:5000/server_decode", data=data)
-    result = json.loads(result.text)
+    result=requests.post(url="http://127.0.0.1:5000/msg_check_consum_search",data=data)
+    result=json.loads(result.text)
     print(result)
 
 while(1):
@@ -199,7 +218,9 @@ while(1):
 
     choose=input("请输入操作选项：")
     #print(choose)
-    if(choose=='1'):
+    if choose=='0':
+        init_ip()
+    elif(choose=='1'):
         #print(1)
         ip=input("请输入新的ip：")
     elif(choose=='2'):
@@ -216,7 +237,20 @@ while(1):
         cipher_text=rsa_encrypt()
     elif(choose=='8'):
         decrypt()
-        
+    elif (choose == '9'):
+        msg_sql()
+    elif (choose == '10'):
+        token_sql()
+    elif (choose == '11'):
+        update_token_consume()
+    elif (choose == '12'):
+        token_consum_search()
+    elif (choose == '13'):
+        update_msg_check_consume()
+    elif (choose == '14'):
+        msg_check_consum_search()
+    elif (choose == '15'):
+        operator = input("请输入新的数据库操作：")
 #token=init_token()
 #print(check_token(token,'1.1.1.1','Luz'))
 

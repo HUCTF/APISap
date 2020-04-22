@@ -4,6 +4,7 @@ from flask import render_template
 from ScanServer.extensions import bootstrap, db, login_manager
 from ScanServer.config import config
 from ScanServer.blueprints.user import user_bp
+from ScanServer.blueprints.api_v1.api import api_v1 
 from ScanServer.blueprints.admin import admin_bp
 from ScanServer.models import User
 import os
@@ -30,6 +31,7 @@ def register_extensions(app):
 def register_blueprints(app):
     app.register_blueprint(user_bp)
     app.register_blueprint(admin_bp, url_prefix='/admin')
+    app.register_blueprint(api_v1, url_prefix='/api/v1')
     # app.register_blueprint(user_bp, url_prefix='/user')
 
 
