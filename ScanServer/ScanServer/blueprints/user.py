@@ -80,17 +80,17 @@ def pcap():
         needpcap = session.get('needpcap')
         if form.validate_on_submit():
             if form.scipy.data:
-                from ScanServer.scanapi.v3.NIC_package_get import NICRUN
+                from ScanServer.scanapi.v4.NIC_package_get import NICRUN
                 stop = 0
                 flash('开始抓包！')
-                print("=========================",netname, needpcap)
-                thread = Thread(target=NICRUN, args=[netname, needpcap])
+                print("=========================",netname, needpcap, current_user.username)
+                thread = Thread(target=NICRUN, args=[netname, needpcap, str(current_user.username)])
                 # 使用多线程
                 thread.start()
 
             elif form.spider.data:
                 
-                from ScanServer.scanapi.v3.scanapi import RQRUN
+                from ScanServer.scanapi.v4.scanapi import RQRUN
                 stop = 0
                 flash('开始爬虫！')
                 thread = Thread(target=RQRUN)
