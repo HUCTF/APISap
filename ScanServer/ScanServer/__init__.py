@@ -70,7 +70,7 @@ def register_commands(app):
         )
         user.set_password('admin')
         db.session.add(user)
-        click.echo('Initialized database.')
+        click.echo('Initialized database...Success Add admin count.')
 
     @app.cli.command()
     @click.option('--username', prompt=True, help='The username used to login.')

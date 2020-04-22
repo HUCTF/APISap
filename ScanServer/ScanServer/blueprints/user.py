@@ -125,7 +125,7 @@ def register():
         elif User.query.filter(User.email==email).first():
             flash('这个邮箱已经被注册过了！')
         else:
-            new_user = User(username=username, email=email, id=None, is_super=False)
+            new_user = User(username=username, email=email, id=None)
             new_user.set_password(password)
             db.session.add(new_user)
             # try:
