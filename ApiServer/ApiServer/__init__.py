@@ -5,6 +5,7 @@ from ApiServer.extensions import bootstrap, db, login_manager
 from ApiServer.config import config
 from ApiServer.blueprints.user import user_bp
 from ApiServer.blueprints.api_v1.api import api_v1
+from ApiServer.models import User
 import os
 import click
 
