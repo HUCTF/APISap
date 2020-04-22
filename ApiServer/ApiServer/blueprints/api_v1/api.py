@@ -51,7 +51,7 @@ def init_ip():
             resu = {'code': 10001, 'result': '参数不能为空！'}
             return jsonify(resu)
         #这里面会创建两个表，包括msg_tb、token_tb
-    except:y
+    except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
         return jsonify(resu)
 
@@ -252,8 +252,7 @@ def msg_sql():
                 if url and sq and puk and prk and time_code:
                     return msg_check.insert_msg(url, sq, puk, prk,time_code)
                 else:
-                    return jsonify({'code': 10001, 'result': '参数不能为空！'}
-
+                    return jsonify({'code': 10001, 'result': '参数不能为空！'})
             elif (operator == 'deleteis_by_sq'):
                 if url and sq:
                     return msg_check.deleteis_by_sq(url, sq)
