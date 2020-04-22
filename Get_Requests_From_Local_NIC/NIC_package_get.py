@@ -7,7 +7,11 @@ from threading import Timer
 
 class NICPackage:
 
-    def __init__(self, IFACE=None, NEEDPCAP=1000):
+    def __init__(self, IFACE=None,NEEDPCAP=1000):
+        print(NEEDPCAP)
+        if(NEEDPCAP>10000):
+            NEEDPCAP=10000
+            print(NEEDPCAP)
         # self.path=''
         # self.filename=''
         # self.filename_txt=''
@@ -76,20 +80,23 @@ class NICPackage:
         if self.catch_method==0:
             #t = Timer(self.Time_conversion, self.time) 
             #t.start()
-            sniff(iface=self.iface,prn=self.package_print,lfilter=lambda p: (("GET" in str(p)) or ("POST" in str(p))) and ('HTTP' in str(p)),filter="tcp")
+            sniff(iface=self.iface,prn=self.package_print,lfilter=lambda p: (("GET" in str(p)) or ("POST" in str(p))) and ('HTTP' in str(p)) ,filter="tcp")
         else:
-            sniff(iface=self.iface,count=self.package_num,prn=self.package_print,lfilter=lambda p: (("GET" in str(p)) or ("POST" in str(p))) and ('HTTP' in str(p)),filter="tcp")
+            sniff(iface=self.iface,count=self.package_num,prn=self.package_print,lfilter=lambda p: (("GET" in str(p)) or ("POST" in str(p))) and (url in str(p)) and ('HTTP' in str(p)),filter="tcp")
             #iface='XXX'  监听本地名为XXX的网卡
 
-
-def NICRUN(netname=None, needpcap=1000):
+needpcap=10001
+def NICRUN(netname=None,NEEDPCAP=needpcap):
     # a = NICPackage('Realtek PCIe GbE Family Controller')
     if netname:
+        url='hyluz'
         print("Start get NIC package...")
-        a = NICPackage(IFACE=netname, NEEDPCAP=needpcap)
+        a = NICPackage(IFACE=netname,NEEDPCAP=needpcap)
+        a.NEEDPCAP=NEEDPCAP
         a.mainrun()
     else:
         print("=======================================================")
         print('请设置网卡名！！！')
         print("=======================================================")
-NICRUN(netname='Realtek 8821CE Wireless LAN 802.11ac PCI-E NIC',needpcap=1000)
+
+NICRUN(netname='Realtek 8821CE Wireless LAN 802.11ac PCI-E NIC',NEEDPCAP=needpcap)
