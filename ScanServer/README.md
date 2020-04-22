@@ -14,6 +14,7 @@ cd 2020-Works-ApiSecurity
 pip install -r requirement.txt
 
 set FLASK_APP=ScanServer
+flask initdb
 flask run
 ```
 启动成功后访问 <http://localhost:5000>
