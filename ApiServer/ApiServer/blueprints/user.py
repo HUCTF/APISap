@@ -35,7 +35,7 @@ def register():
         elif User.query.filter(User.username==username).first():
             flash('这个用户名已经被注册过了！')
         else:
-            new_user = User(username=username, id=None)
+            new_user = User(username=username, is_super=False, id=None)
             new_user.set_password(password)
             db.session.add(new_user)
             # try:
