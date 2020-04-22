@@ -91,7 +91,7 @@ class NICPackage:
 def NICRUN(netname=None,NEEDPCAP=111,ID=''):
     # a = NICPackage('Realtek PCIe GbE Family Controller')
     if netname:
-        url='hyluz'
+        #url='hyluz'
         print(NEEDPCAP)
         #print(ID)
         #print("Start get NIC package...")
