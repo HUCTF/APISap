@@ -61,6 +61,13 @@ def register_commands(app):
             click.echo('Drop tables.')
         db.create_all()
         click.echo('Initialized database.')
+        admin = User(
+            username='admin',
+            is_super=True,
+        )
+        admin.set_password('admin')
+        db.session.add(admin)
+        click.echo('Success Add Admin Count.')
 
     @app.cli.command()
     @click.option('--username', prompt=True, help='The username used to login.')
@@ -72,15 +79,16 @@ def register_commands(app):
         click.echo('Initializing the database...')
         db.create_all()
 
-        user = user.query.first()
+        user = User.query.first()
         if user is not None:
             click.echo('The useristrator already exists, updating...')
             user.username = username
             user.set_password(password)
         else:
             click.echo('Creating the temporary useristrator account...')
-            user = user(
+            user = User(
                 username=username,
+                is_super=False,
             )
             user.set_password(password)
             db.session.add(user)
