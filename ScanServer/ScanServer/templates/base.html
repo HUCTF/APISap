@@ -24,31 +24,37 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
-                   <a href="/"><strong style="margin-right: 5px;"> Home</strong></a>
-                    <a href="#about">about</a>
-                </ul>
+		<li>
+                   <a href="/" style="color: #495057;"><strong style="margin-right: 5px;">Home</strong></a>
+          </li><li>          <a href="#about" style="color: #495057;">about</a>
+            </li>    </ul>
             </div>
         </div>
     </nav>
 {% endblock nav %}
 <main class="container">
-    {% for message in get_flashed_messages() %}
-        <div class="alert alert-info">
+    {% for message in get_flashed_messages(with_categories=True) %}
+        <div class="alert alert-{{ message[0] }}" role="alert">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {{ message }}
+            {{ message[1] }}
         </div>
     {% endfor %}
-<!--     
-    {% block images %}
-    <div class="text-center">
-        <img src="{{ url_for('static', filename='flask-python.png') }}" style="width: 450px;">
-    </div>
-    {% endblock images %} -->
     {% block content %}{% endblock content %}
     {% block footer %}
     <footer class="text-center">
         <p>
             <small> &copy; 2020 <a href="#" title="Written by HUCTF">HUCTF</a>
+            </small>
+        </p>
+        <p>
+            <small>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('user.logout', next=request.full_path) }}">Logout</a>
+            |        <a href='{{ url_for('user.register', next=request.full_path)}}'>Register</a>
+                {% else %}
+                    <a href="{{ url_for('user.login', next=request.full_path) }}">Login</a>
+            |        <a href='{{ url_for('user.register', next=request.full_path)}}'>Register</a>
+                {% endif %}
             </small>
         </p>
     </footer>
