@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     id_md5 = db.Column(db.String(32), unique=True)
     username = db.Column(db.String(20))
+    email = db.Column(db.String(20))
     password_hash = db.Column(db.String(128))
     is_super = db.Column(db.Boolean)
 

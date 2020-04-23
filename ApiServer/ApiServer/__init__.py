@@ -60,18 +60,21 @@ def register_commands(app):
         click.echo('Initialized database.')
         admin = User(
             username='admin',
+            email='admin@admin.com',
             is_super=True,
         )
         admin.set_id(str(admin.id))
         admin.set_password('admin')
         db.session.add(admin)
+        db.session.commit()
         click.echo('Success Add Admin Count.')
 
     @app.cli.command()
     @click.option('--username', prompt=True, help='The username used to login.')
+    @click.option('--email', prompt=True, help='The Email used to login.')
     @click.option('--password', prompt=True, hide_input=True,
                   confirmation_prompt=True, help='The password used to login.')
-    def init(username, password):
+    def init(username, email, password):
         """Building Bluelog, just for you."""
 
         click.echo('Initializing the database...')
@@ -81,13 +84,15 @@ def register_commands(app):
         if user is not None:
             click.echo('The useristrator already exists, updating...')
             user.username = username
+            user.email = email
             user.set_password(password)
         else:
             click.echo('Creating the temporary useristrator account...')
             user = User(
                 username=username,
-                is_super=False,
+                email=email,
+                is_super=False
             )
-            user.set_id(str(user.id))
             user.set_password(password)
             db.session.add(user)
+            db.session.commit()

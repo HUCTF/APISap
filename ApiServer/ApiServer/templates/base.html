@@ -29,15 +29,27 @@
     {% endfor %}
     {% endblock flash%}
     {% block content %} {% endblock content %}
-  </main>
-  <footer class="text-center">
     {% block footer %}
-        <small> &copy; 2020 <a href="#" title="Written by huctf">HUCTF</a> |
-            <a href="#" title="Fork me on GitHub">GitHub</a>
-        </small>
-        <p><a id="bottom" href="#" title="Go Top">&uarr;</a></p>
+    <footer class="text-center">
+        <p>
+            <small> &copy; 2020 <a href="#" title="Written by HUCTF">HUCTF</a>
+            </small>
+        </p>
+        <p>
+            <small>
+                {% if current_user.is_authenticated() %}
+                    <a href="{{ url_for('user.logout', next=request.full_path) }}">Logout</a>
+            |        <a href='{{ url_for('user.register', next=request.full_path)}}'>Register</a>
+                {% else %}
+                    <a href="{{ url_for('user.login', next=request.full_path) }}">Login</a>
+            |        <a href='{{ url_for('user.register', next=request.full_path)}}'>Register</a>
+                {% endif %}
+            </small>
+        </p>
+    </footer>
     {% endblock footer %}
-</footer>
+  </main>
+
  
   </body>
   {% block script %}

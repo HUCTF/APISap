@@ -23,7 +23,6 @@ msg_check =msg_random_check()
 token_consume=token_consume()
 msg_consume=msg_check_consume()
 
-
 #函数功能：后端初始配置（只需执行一次）
 #路径：/init_ip
 #输入：
@@ -504,3 +503,14 @@ def msg_check_consum_search():
 @api_v1.route('/test',methods=['get','post'])
 def test():
     return 'good'
+
+@api_v1.route('/show/id', methods=['GET'])
+@login_required
+def show_id():
+    return jsonify({
+        'code':'200',
+        'id':str(current_user.id), 
+        'id_md5':current_user.id_md5, 
+        'username':current_user.username, 
+        'is_super':str(current_user.is_super)
+    })
