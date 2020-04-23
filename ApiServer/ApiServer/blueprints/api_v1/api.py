@@ -516,23 +516,23 @@ def show_id():
         'is_super':str(current_user.is_super)
     })
 
-@api_v1.errorhandler(400)
-def bad_request(e):
-    return jsonify({
-        'code':'400',
-        'error':'bad request'
-    })
+# @api_v1.errorhandler(400)
+# def bad_request(e):
+#     return jsonify({
+#         'code':'400',
+#         'error':'bad request'
+#     })
 
-@api_v1.errorhandler(404)
-def page_not_found(e):
-    return jsonify({
-        'code':'400',
-        'error':'bad request'
-    })
+# @api_v1.errorhandler(404)
+# def page_not_found(e):
+#     return jsonify({
+#         'code':'400',
+#         'error':'bad request'
+#     })
 
-@api_v1.errorhandler(500)
-def page_not_found(e):
-    return jsonify({
-        'code':'500',
-        'error':'Server Error'
-    })
+# @api_v1.errorhandler(500)
+# def page_not_found(e):
+#     return jsonify({
+#         'code':'500',
+#         'error':'Server Error'
+#     })

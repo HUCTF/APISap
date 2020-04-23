@@ -41,11 +41,11 @@ def register_shell_context(app):
 def register_errors(app):
     @app.errorhandler(400)
     def bad_request(e):
-        return render_template('404.html'), 404
+        return render_template('errors/404.html'), 404
 
     @app.errorhandler(404)
     def page_not_found(e):
-        return render_template('404.html'), 404
+        return render_template('errors/404.html'), 404
 
 def register_commands(app):
     @app.cli.command()
