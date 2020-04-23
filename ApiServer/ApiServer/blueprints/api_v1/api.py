@@ -11,13 +11,14 @@ from ApiServer.extensions import db
 
 from .api_class import token_check,op,msg_random_check,token_consume,msg_check_consume
 from flask import Flask, render_template, request, current_app, jsonify
-# from flask_cors import *
+from flask_cors import CORS
 import json
 
 
 api_v1 = Blueprint('api_v1', __name__)
 
-# CORS(server,supports_credentials=True)
+CORS(api_v1)
+
 token_api = token_check()
 msg_check =msg_random_check()
 token_consume=token_consume()
@@ -513,4 +514,25 @@ def show_id():
         'id_md5':current_user.id_md5, 
         'username':current_user.username, 
         'is_super':str(current_user.is_super)
+    })
+
+@api_v1.errorhandler(400)
+def bad_request(e):
+    return jsonify({
+        'code':'400',
+        'error':'bad request'
+    })
+
+@api_v1.errorhandler(404)
+def page_not_found(e):
+    return jsonify({
+        'code':'400',
+        'error':'bad request'
+    })
+
+@api_v1.errorhandler(500)
+def page_not_found(e):
+    return jsonify({
+        'code':'500',
+        'error':'Server Error'
     })
