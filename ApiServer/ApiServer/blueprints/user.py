@@ -13,7 +13,7 @@ user_bp = Blueprint('user', __name__)
 
 @user_bp.route('/')
 def index():
-    return 'hello, world'
+    return render_template('user/hello.html')
 
 @user_bp.route('/vip')
 @login_required
@@ -52,7 +52,7 @@ def register():
             #     flash("注册失败，请重试！")
             #     db.session.rollback()
             db.session.commit()
-            return redirect(url_for('user.index'))
+            return redirect(url_for('user.login'))
     return render_template('register.html', form=form)
 
 
@@ -72,14 +72,14 @@ def login():
             if user[0].validate_password(password):
                 login_user(user[0], remember)
                 flash('Welcome back.', 'info')
-                return redirect(url_for('user.index'))
+                return redirect_back()
             else:
                 flash('账号或者密码错误，请重新输入！', 'warning')
         elif user[1]:
             if user[1].validate_password(password):
                 login_user(user[1], remember)
                 flash('Welcome back.', 'info')
-                return redirect(url_for('user.index'))
+                return redirect_back()
             else:
                 flash('账号或者密码错误，请重新输入！', 'warning')    
         else:
