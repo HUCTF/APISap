@@ -36,6 +36,7 @@ def register():
             flash('这个用户名已经被注册过了！')
         else:
             new_user = User(username=username, is_super=False, id=None)
+            new_user.set_id(str(new_user.id))
             new_user.set_password(password)
             db.session.add(new_user)
             # try:
