@@ -23,6 +23,9 @@ def vip():
 @user_bp.route('/register', methods=['GET', 'POST'])
 def register():
     # register func
+    if current_user.is_authenticated():
+        return redirect(url_for('user.index'))
+
     form = RegisterForm()
     if form.validate_on_submit():
         username = form.username.data
@@ -56,8 +59,8 @@ def register():
 @user_bp.route('/login', methods=['GET', 'POST'])
 def login():
     # login in func
-    # if current_user.is_authenticated:
-        # return redirect(url_for('user.index'))
+    if current_user.is_authenticated():
+        return redirect(url_for('user.index'))
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -70,11 +73,15 @@ def login():
                 login_user(user[0], remember)
                 flash('Welcome back.', 'info')
                 return redirect(url_for('user.index'))
+            else:
+                flash('账号或者密码错误，请重新输入！', 'warning')
         elif user[1]:
             if user[1].validate_password(password):
                 login_user(user[1], remember)
                 flash('Welcome back.', 'info')
                 return redirect(url_for('user.index'))
+            else:
+                flash('账号或者密码错误，请重新输入！', 'warning')    
         else:
             flash('No account.', 'warning')
     return render_template('login.html', form=form)
