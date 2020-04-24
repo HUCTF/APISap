@@ -6,6 +6,7 @@ from ApiServer.config import config
 from ApiServer.blueprints.user import user_bp
 from ApiServer.blueprints.api_v1.api import api_v1
 from ApiServer.blueprints.admin import admin_bp
+from ApiServer.control.control import control
 from ApiServer.models import User
 import os
 import click
