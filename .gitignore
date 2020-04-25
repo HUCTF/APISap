@@ -4,3 +4,4 @@ package.txt
 *.pcap
 debug.log
 .idea
+.DS_Store
