@@ -57,6 +57,7 @@ Connection: Keep-Alive
 Cache-Control: no-cache
 Accept-Encoding: gzip, deflate
 Content-Type: application/octet-stream
+Cookie: 123456test
 Content-Length: 228
 
 '
@@ -74,6 +75,7 @@ Connection: Keep-Alive
 Cache-Control: no-cache
 Accept-Encoding: gzip, deflate
 Content-Type: application/octet-stream
+Cookie: 123456test
 Content-Length: 228
 
 '
@@ -91,6 +93,7 @@ Connection: Keep-Alive
 Cache-Control: no-cache
 Accept-Encoding: gzip, deflate
 Content-Type: application/octet-stream
+Cookie: 123456test
 Content-Length: 228
 
 '
