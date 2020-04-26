@@ -79,7 +79,7 @@ def get_puk_sq():
     data={
     'ip':ip
     }
-    result=requests.post(url="http://127.0.0.1:5000/get_puk_sq",data=data)
+    result=requests.post(url="http://39.96.60.14:5000/get_puk_sq",data=data)
     print(result.text.replace('\'','\"'))
     #result.text.replace('\\n','')
     result=json.loads(result.text.replace('\'','\"'))
