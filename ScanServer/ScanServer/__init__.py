@@ -70,6 +70,7 @@ def register_commands(app):
         )
         user.set_password('admin')
         db.session.add(user)
+        db.session.commit()
         click.echo('Initialized database...Success Add admin count.')
 
     @app.cli.command()
@@ -98,3 +99,4 @@ def register_commands(app):
             )
             user.set_password(password)
             db.session.add(user)
+            db.session.commit()
