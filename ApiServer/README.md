@@ -10,6 +10,8 @@ Python3.5+
 **初始化**
 
 新建apiserver数据库
+``create database apiserver``
+config.py 文件默认链接 root 1234qwer
 
 **运行**
 
