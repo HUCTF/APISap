@@ -52,7 +52,7 @@ def reset_db():
     click.echo('Success Add Admin Count.')
 
 @manager.command
-def init_db()
+def init_db():
     db.create_all()
     click.echo('Initialized database.')
     admin = User(
