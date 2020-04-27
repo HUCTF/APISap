@@ -6,3 +6,6 @@ flask-login
 flask-sqlalchemy
 pycryptodomex
 py-mysql
+rsa
+mysqlclient
+flask-script

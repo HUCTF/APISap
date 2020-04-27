@@ -51,9 +51,23 @@ def reset_db():
     db.session.commit()
     click.echo('Success Add Admin Count.')
 
+@manager.command
+def init_db()
+    db.create_all()
+    click.echo('Initialized database.')
+    admin = User(
+        username='admin',
+        email='admin@admin.com',
+        is_super=True,
+    )
+    admin.set_id(str(admin.id))
+    admin.set_password('admin')
+    db.session.add(admin)
+    db.session.commit()
+    click.echo('Success Add Admin Count.')
 
 @manager.command
-def init_db(username, email, password):
+def set_user(username, email, password):
     """Building Bluelog, just for you."""
 
     click.echo('Initializing the database...')
