@@ -23,7 +23,7 @@ def vip():
 @user_bp.route('/register', methods=['GET', 'POST'])
 def register():
     # register func
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         return redirect(url_for('user.index'))
 
     form = RegisterForm()
@@ -59,7 +59,7 @@ def register():
 @user_bp.route('/login', methods=['GET', 'POST'])
 def login():
     # login in func
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         return redirect(url_for('user.index'))
 
     form = LoginForm()
