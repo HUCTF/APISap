@@ -2,7 +2,7 @@ from ApiServer import create_app
 from ApiServer.extensions import db
 from ApiServer.models import User
 
-from flask_script import Manager
+from flask_script import Manager, Server, Shell
 import click
 app = create_app()
 
@@ -53,7 +53,7 @@ def reset_db():
 
 
 @manager.command
-def init(username, email, password):
+def init_db(username, email, password):
     """Building Bluelog, just for you."""
 
     click.echo('Initializing the database...')
