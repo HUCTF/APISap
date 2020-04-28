@@ -7,7 +7,12 @@
             <h1>Log in</h1>
         </div>
         <div class="row h-100 justify-content-center align-items-center">
+<!--            {{ render_form(form, extra_classes='col-6', action="{{ url_for('view.init_ip') }}", method='post') }}
+-->
+<!--               {{ render_form(form, extra_classes='col-6', action='/view/init_ip?', method='post') }}
+ -->
             {{ render_form(form, extra_classes='col-6', action=request.full_path, method='post') }}
         </div>
     </div>
 {% endblock %}
+     <!--       {{ render_form(form, extra_classes='col-6', action=request.full_path, method='post') }} -->

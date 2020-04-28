@@ -5,3 +5,4 @@ package.txt
 debug.log
 .idea
 .DS_Store
+config.py

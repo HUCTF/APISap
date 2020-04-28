@@ -13,7 +13,8 @@ user_bp = Blueprint('user', __name__)
 
 @user_bp.route('/')
 def index():
-    return render_template('user/hello.html')
+    return redirect(url_for('view.init_ip'))
+#    return render_template('user/hello.html')
 
 @user_bp.route('/vip')
 @login_required
@@ -42,6 +43,7 @@ def register():
             flash('这个邮箱已经被注册过了！')
         else:
             new_user = User(username=username, email=email, id=None)
+            new_user.set_id(str(new_user.id))
             new_user.set_password(password)
             db.session.add(new_user)
             # try:

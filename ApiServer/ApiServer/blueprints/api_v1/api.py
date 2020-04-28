@@ -17,7 +17,7 @@ import json
 
 api_v1 = Blueprint('api_v1', __name__)
 
-CORS(api_v1)
+#CORS(api_v1)
 
 token_api = token_check()
 msg_check =msg_random_check()
