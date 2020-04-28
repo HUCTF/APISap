@@ -13,7 +13,8 @@ user_bp = Blueprint('user', __name__)
 
 @user_bp.route('/')
 def index():
-    return render_template('user/hello.html')
+    return redirect(url_for('view.init_ip'))
+#    return render_template('user/hello.html')
 
 @user_bp.route('/vip')
 @login_required
