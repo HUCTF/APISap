@@ -61,7 +61,7 @@ func GetData()(sqpuk_ptr *sqpuk_s, err error) {
     sqpuk_ptr = &sqpuk_s{}
     sqpuk_c:=strings.Replace(string(sqpuk_b),"'","",-1)
     //err = json.Unmarshal(sqpuk_b, sqpuk_ptr) // JSON to Struct
-    sqpuk_ptr.code=[]byte(GetBetweenStr(sqpuk_c,"code: ",","))
+    sqpuk_ptr.code=[]byte(GetBetweenStr(sqpuk_c,"code: ",","))//暴力读取json
     puk1:=strings.Replace(GetBetweenStr(sqpuk_c,"puk: ",","),"\\n","\n",-1)
     //print(puk1)
     sqpuk_ptr.puk=[]byte(strings.Replace(puk1,"\\"," ",-1))
@@ -69,13 +69,19 @@ func GetData()(sqpuk_ptr *sqpuk_s, err error) {
     return sqpuk_ptr, err
     
 }
-func main() {
+func GetEncode(jiami []byte) string{
 	sqpuk, _  := GetData()
-
-	println(string(sqpuk.code))
-	println(string(sqpuk.sq))
-	println(string(sqpuk.puk))
-	jiami:=[]byte("hello")
+	//println(string(sqpuk.code))
+	//println(string(sqpuk.sq))
+	//println(string(sqpuk.puk))
+	//jiami:=[]byte("hello")
 	data, _ :=RsaEncrypt(sqpuk,jiami)
-	println(base64.StdEncoding.EncodeToString(data)) 
+	json:="{"+`"sq":`+`"`+string(sqpuk.sq)+`","encode_str":"`+base64.StdEncoding.EncodeToString(data)+`"}` //暴力构造json
+	json=strings.Replace(json," ","",-1)
+	return json
+}
+func main(){
+	jiami:=[]byte("ghjggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggghello")
+	json:=GetEncode(jiami)
+	println(json)
 }
