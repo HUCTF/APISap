@@ -6,6 +6,7 @@ from ApiServer.config import config
 from ApiServer.blueprints.user import user_bp
 from ApiServer.blueprints.api_v1.api import api_v1
 from ApiServer.blueprints.admin import admin_bp
+from ApiServer.blueprints.view import view
 from ApiServer.models import User
 import os
 import click
@@ -30,7 +31,8 @@ def register_extensions(app):
 def register_blueprints(app):
     app.register_blueprint(user_bp)
     app.register_blueprint(api_v1, url_prefix='/api/v1')
-    app.register_blueprint(admin_bp, url_prefix='/admin')    
+    app.register_blueprint(admin_bp, url_prefix='/admin')
+    app.register_blueprint(view, url_prefix='/view')
     # app.register_blueprint(user_bp, url_prefix='/user')
 
 def register_shell_context(app):

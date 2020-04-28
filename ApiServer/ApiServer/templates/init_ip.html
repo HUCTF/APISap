@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/init_ip.css') }}">
+
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/init_ip.js') }}"></script>
+
+<div class="container h-100">
+        <form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label  class="col-sm-2 control-label">ip</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="ip" placeholder="请输入您的服务器ip">
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-2 control-label">功能密码</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="mm" placeholder="请输你想注册此功能的密码">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox">请记住我
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" id="regs">注册</button>
+    </div>
+  </div>
+</form>
+</div>
+{% endblock %}
