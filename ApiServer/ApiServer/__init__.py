@@ -87,6 +87,7 @@ def register_commands(app):
             click.echo('The useristrator already exists, updating...')
             user.username = username
             user.email = email
+            user.set_id(str(user.id))
             user.set_password(password)
         else:
             click.echo('Creating the temporary useristrator account...')
@@ -95,6 +96,7 @@ def register_commands(app):
                 email=email,
                 is_super=False
             )
+            user.set_id(str(user.id))
             user.set_password(password)
             db.session.add(user)
             db.session.commit()

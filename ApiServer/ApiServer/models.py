@@ -25,7 +25,6 @@ class User(db.Model, UserMixin):
     
 
     def set_id(self, userid):
-        print(self.get_encode_password(userid))
         self.id_md5 = self.get_encode_password(userid)
     
     def check_id(self, userid):
