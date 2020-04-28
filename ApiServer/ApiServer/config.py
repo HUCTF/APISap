@@ -6,7 +6,7 @@ class BaseConfig(object):
 
 
 class DevelopmentConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = "mysql://123456:123456@localhost:3306/apiserver?charset=utf8"
+    SQLALCHEMY_DATABASE_URI = "mysql://root:1234qwer@localhost:3306/apiserver?charset=utf8"
 
 
 
