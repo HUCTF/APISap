@@ -66,7 +66,6 @@ def register_commands(app):
         user = User(
             username='admin',
             email='admin@admin.com',
-            is_super=True
         )
         user.set_password('admin')
         db.session.add(user)
@@ -95,7 +94,6 @@ def register_commands(app):
             user = User(
                 username=username,
                 email=email,
-                is_super=False
             )
             user.set_password(password)
             db.session.add(user)
