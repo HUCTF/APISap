@@ -9,6 +9,8 @@ from flask_login import login_required, current_user, login_user, logout_user
 from threading import Thread
 import os
 
+import docker
+
 
 kubenetes_template = '''
     apiVersion: v1
@@ -29,6 +31,50 @@ kubenetes_template = '''
           - name: [username]
             image: [images]
 '''
+cookie_env = '''
+    COOKIE_1=%s
+    COOKIE_2=%s
+'''
+userpswd_env = '''
+    USERID=%s
+    PASSWD=%s
+'''
+
+def build_docker1():
+    client = docker.from_env()
+    user_container = client.containers.run(
+        image="xxxxx",
+        command="python /opt/scanSpider.py %s" % current_user.username,
+        volumes={'/opt/scanspider/user/%s' % current_user.username:{
+                                                                'bind':'/opt/scanspider/%s' % current_user.username,'mode':'rw'
+                                                            }},
+        name='scanserver-%s' % current_user.username,
+        working_dir='/opt/spicer',
+        detach=True,
+        stdout=True,
+        stderr=True,
+        user='root',
+        remove=False)
+        wait_container(client, user_container)
+        print(str(user_container.logs()))
+
+        user_container.remove()
+
+def wait_container(client, user_container):
+    
+    if user_container in cli.containers.list(filters={'status':'exited'}):
+        with open('/tmp/py_log.txt', 'a') as f:
+            f.write(str(user_container.logs()))
+    else:
+        wait_container()
+
+
+#  -------------------------------------
+#  -------------------------------------
+#  -------------------------------------
+#  -------------------------------------
+#  -------------------------------------
+#  -------------------------------------
 
 def build_docker(username):
     ###############
