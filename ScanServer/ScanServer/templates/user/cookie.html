@@ -1,14 +1,8 @@
 {% extends 'base.html' %}
 {% from 'bootstrap/form.html' import render_form %}
 
-{% block headstop %}
-    {% if 0 == stop %}
-    <meta http-equiv="refresh" content="2;url={{ url_for('user.pcap1') }}">
-    {% endif %}
-{% endblock headstop %}
 {% block content %}
 <div>
-    <strong>目标网页：{{ website }}</strong><br>
     <!-- <strong>抓包数：{{ needpcap }}</strong><br> -->
 </div>
 <div class="container h-100">
@@ -19,3 +13,4 @@
 <br>
 <hr>
 {% endblock %}
+
