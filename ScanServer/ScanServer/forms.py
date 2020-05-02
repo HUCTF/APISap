@@ -36,11 +36,14 @@ class RegisterForm(FlaskForm):
 
 class InitForm(FlaskForm):
     website = StringField('网页', validators=[Optional(), URL(), Length(0, 255)])
+    runway = SelectField('身份验证方式', choices=[(1,"Cookie验证"),(2,"账号密码登入")], validators=[InputRequired])
     submit = SubmitField( "提交")
 
 class WorkForm(FlaskForm):
     spider = SubmitField("开启扫描敏感数据")
     repeter = SubmitField("重发数据包")
+
+
 
 class AimUserForm1(FlaskForm):
     username_or_email = StringField('Username / Email / Phone', validators=[DataRequired('请输入账号')])
@@ -49,7 +52,6 @@ class AimUserForm1(FlaskForm):
 class AimUserForm2(FlaskForm):
     username_or_email = StringField('Username / Email / Phone', validators=[DataRequired('请输入账号')])
     password = PasswordField('Password', validators=[DataRequired('请输入密码'), Length(1, 128)])
-
 
 
 class CookieForm1(FlaskForm):

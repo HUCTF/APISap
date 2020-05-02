@@ -122,23 +122,31 @@ def pcap1():
         if form.validate_on_submit():
             if form.spider.data:
                 print('kaishi')
-                import time
-                from ScanServer.scanapi.v4.NIC_package_get import NICRUN
-                stop = 0
-                flash('开始抓包！')
-                print("=========================",netname, 1000, current_user.username)
-                thread = Thread(target=NICRUN, args=[netname, 1000, str(current_user.username)])
-                # 使用多线程
-                thread.start()
-                time.sleep(0.5)
-                from ScanServer.scanapi.v4.scanapi import RQRUN
-                stop = 0
-                flash('开始爬虫！')
-                thread = Thread(target=RQRUN)
+                # import time
+                # from ScanServer.scanapi.v4.NIC_package_get import NICRUN
+                # stop = 0
+                # flash('开始抓包！')
+                # print("=========================",netname, 1000, current_user.username)
+                # thread = Thread(target=NICRUN, args=[netname, 1000, str(current_user.username)])
+                # # 使用多线程
+                # thread.start()
+                # time.sleep(0.5)
+                # from ScanServer.scanapi.v4.scanapi import RQRUN
+                # stop = 0
+                # flash('开始爬虫！')
+                # thread = Thread(target=RQRUN)
                 
-                # 使用多线程
-                thread.start()
+                # # 使用多线程
+                # thread.start()
+                
+                build_docker1()
 
+                
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
                 # thread = Thread(target=send_async_email, args=[app, message])
                 # # 使用多线程
                 # thread.start()
