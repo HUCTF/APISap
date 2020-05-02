@@ -129,16 +129,21 @@ def post_login(url):
     return r.text
     
 
-def RQRUN_COOKIE(aimurl, cookie):
-    '''
-        aimrul: 用户主地址（一般指个人中心）
-        cookies：用于登入的Cookie
-    '''
+
+# s_find()
+if __name__ == "__main__":
     OLD_URL = []
     UN_URL = []
-    base_url = aimurl.split('//')[0]+'//'+ aimurl.split('/')[2]
+    # url = 'https://jkxxcj.zjhu.edu.cn/serviceList.html'
+    url = input("主页url:")
+    base_url = input('base_url:')
+    login_url = input("登入接口url:")
+    msg_cookies = find_cookies(login_url)
+    cookie = msg_cookies[0]
+    login_url = msg_cookies[1]
+    # base_url = 'https://jkxxcj.zjhu.edu.cn/'
     UN_URL = find_url(s_find(url, cookie))
-    OLD_URL.append(aimurl)
+    OLD_URL.append(url)
     OLD_URL.append(login_url)
     for x in UN_URL:
         if (url_repeat(str(x),OLD_URL)):
@@ -148,23 +153,19 @@ def RQRUN_COOKIE(aimurl, cookie):
             UN_URL.pop(0)
 
 
-def RQRUN_ID(aimurl, cookies, postloginurl):
-    '''
-        aimrul: 用户主地址（一般指个人中心）
-        cookies：用于登入的Cookie
-        postloginurl：login Post的url地址
-    '''
+def RUN_COOKIE(url, cookie):
     OLD_URL = []
     UN_URL = []
-    # url = 'http://jkxxcj.zjhu.edu.cn/serviceList.html'
-    # msg_cookies = find_cookies("http://jkxxcj.zjhu.edu.cn/login.html")
-    msg_cookies = find_cookies(postloginurl)
+    # url = 'https://jkxxcj.zjhu.edu.cn/serviceList.html'
+    url = input("主页url:")
+    base_url = input('base_url:')
+    login_url = input("登入接口url:")
+    msg_cookies = find_cookies(login_url)
     cookie = msg_cookies[0]
     login_url = msg_cookies[1]
-    # base_url = 'http://jkxxcj.zjhu.edu.cn/'
-    base_url = aimurl.split('//')[0]+'//'+ aimurl.split('/')[2]
+    # base_url = 'https://jkxxcj.zjhu.edu.cn/'
     UN_URL = find_url(s_find(url, cookie))
-    OLD_URL.append(aimurl)
+    OLD_URL.append(url)
     OLD_URL.append(login_url)
     for x in UN_URL:
         if (url_repeat(str(x),OLD_URL)):
