@@ -1,0 +1,1 @@
+ls /sys/class/net
