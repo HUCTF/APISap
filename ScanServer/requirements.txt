@@ -1,4 +1,11 @@
 flask
-fflask_wtf
-wtforms
+flask_wtf
+flask-sqlalchemy
+flask-script
+flask-login
 bootstrap-flask
+psutil
+wtforms
+docker
+mysqlclient
+
