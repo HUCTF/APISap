@@ -5,7 +5,7 @@ except ImportError:
     from urllib.parse import urlparse, urljoin
 
 from flask import request, redirect, url_for, current_app, jsonify
-
+from werkzeug.http import HTTP_STATUS_CODES
 import psutil
 import os
 def get_net():
@@ -43,5 +43,12 @@ def redirect_back(default='user.index', **kwargs):
         if is_safe_url(target):
             return redirect(target)
     return redirect(url_for(default, **kwargs))
+
+def api_abort(code, message=None, **kwargs):
+    if message is None:
+        message = HTTP_STATUS_CODES.get(code, '')
+
+    response = jsonify(message=message, **kwargs)
+    return response,code
 
 
