@@ -10,4 +10,10 @@ RUN pip install --no-cache-dir -r /requirements.txt  -i https://pypi.tuna.tsingh
 
 COPY . /opt/spider
 
-ENTRYPOINT  
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+
+RUN chmod u+x /docker-entrypoint.sh 
+
+ENTRYPOINT ./docker-entrypoint.sh
+
+# docker run -it --env-file=.env [image] 
