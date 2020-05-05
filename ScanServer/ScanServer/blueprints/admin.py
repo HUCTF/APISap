@@ -1,5 +1,5 @@
 from ScanServer.forms import NameForm, ScipyForm, PrintLogForm, LoginForm, RegisterForm
-from ScanServer.util import get_net, get_txt_file, redirect_back
+from ScanServer.utils import get_net, get_txt_file, redirect_back
 from ScanServer.models import User
 from ScanServer.extensions import db
 

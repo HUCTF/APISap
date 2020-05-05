@@ -1,5 +1,5 @@
 from ScanServer.forms import NameForm, ScipyForm, PrintLogForm, LoginForm, RegisterForm, InitForm, CookieForm, AimUserForm
-from ScanServer.util import get_net, redirect_back
+from ScanServer.utils import get_net, redirect_back, write_env
 from ScanServer.models import User
 from ScanServer.extensions import db
 
@@ -119,23 +119,48 @@ def index():
 def pcap1():
     website = session.get('website')
     runway = session.get('runway')
+
+
     if session.get('runway') == 'cookie':
+
         form = CookieForm()
         stop = 1
+        usercookie1 = form.usercookie1.data
+        usercookie2 = form.usercookie2.data
+        
+        env_head = ['USERNAME={}\n'.format(current_user.username, 'RUNWAY={}\n'.format(runway)]
+        write_env(current_user.username, env_list=env=env_head, flag='w')
+
         if form.validate_on_submit():
             if form.spider.data:
                 print('kaishi')
                 flash('开始重发！')
                 print('重发')
+#                env_list = ['USERNAME={}\n'.format(current_user.username, 'RUNWAY={}\n'.format(runway)]
+                env_body = ['USERCOOKIE1={}\n'.format(usercookie1), 'USERCOOKIE2={}\n'.format(usercookie2)]
+                write_env(current_user.username, env_list=env_body, flag='a')
+
+
+
         return render_template("user/pcap.html", website=website, form=form)
+
+
+
     elif session.get('runway') == 'userid':
+
         form = AimUserForm()
         stop = 1
+
+
+
         if form.validate_on_submit():
             if form.spider.data:
                 print('kaishi')
                 flash('开始重发！')
                 print('重发')
+
+
+
         return render_template("user/pcap.html", website=website, form=form)
 
     return redirect(url_for('user.index'))
