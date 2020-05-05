@@ -1,6 +1,6 @@
 from ScanServer import app
 from ScanServer.forms import NameForm, ScipyForm, PrintLogForm
-from ScanServer.util import get_net, get_txt_file
+from ScanServer.utils import get_net, get_txt_file
 
 from flask import render_template, request, flash, redirect, url_for , session, jsonify
 from threading import Thread
