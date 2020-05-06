@@ -102,6 +102,6 @@ def NICRUN(netname=None,NEEDPCAP=111,ID=''):
         print("=======================================================")
         print('请设置网卡名！！！')
         print("=======================================================")
-needpcap=10001
-id='Luz'
-NICRUN(netname='eth0',NEEDPCAP=needpcap,ID=id)
+#needpcap=10001
+#id='Luz'
+#NICRUN(netname='eth0',NEEDPCAP=needpcap,ID=id)
