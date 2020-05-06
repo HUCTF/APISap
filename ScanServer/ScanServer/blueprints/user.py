@@ -1,5 +1,5 @@
 from ScanServer.forms import NameForm, ScipyForm, PrintLogForm, LoginForm, RegisterForm, InitForm, CookieForm, AimUserForm
-from ScanServer.utils import get_net, redirect_back, write_env
+from ScanServer.utils import get_net, redirect_back, write_env, initenv_userfile
 from ScanServer.models import User
 from ScanServer.extensions import db
 
@@ -91,8 +91,8 @@ def build_docker(username):
     ##################
     # os.system('kubectl create -f [path/kube.yml]')
     if current_user.is_authenticated:
-        os.system('docker run -id -v /tmp/%s:/opt/scanspider/%s --name scanserver-%s images python /opt/ScanSpider.py %s' % (username, username, username, website))
-        
+        os.system('docker run -id --env-file=userfile_center/{0}/{0}_env/.env -v /root/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider:/opt/scanspider/{0} --name scanserver-{0} python:3.7-alpine tail -f'.format(username))
+
 
 user_bp = Blueprint('user', __name__)
 
@@ -110,6 +110,8 @@ def index():
         runway = form.runway.data
         session['website'] = str(website)
         session['runway'] = runway
+        initenv_userfile(current_user, str(website), runway)
+        build_docker(current_user.username)
         return redirect(url_for('user.pcap1'))
     return render_template('user/index.html', form=form)
 
@@ -128,8 +130,8 @@ def pcap1():
         usercookie1 = form.usercookie1.data
         usercookie2 = form.usercookie2.data
         
-        env_head = ['USERNAME={}\n'.format(current_user.username, 'RUNWAY={}\n'.format(runway)]
-        write_env(current_user.username, env_list=env=env_head, flag='w')
+        env_head = ['USERNAME={}\n'.format(current_user.username), 'RUNWAY={}\n'.format(runway)]
+        write_env(current_user.username, env_list=env_head, flag='w')
 
         if form.validate_on_submit():
             if form.spider.data:

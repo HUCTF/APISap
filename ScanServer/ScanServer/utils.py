@@ -51,12 +51,12 @@ def api_abort(code, message=None, **kwargs):
     response = jsonify(message=message, **kwargs)
     return response,code
 
-def write_env(username, env_listi, flag):
+def write_env(username, env_list, flag):
     '''
-    write env to user/.env
-        params: env_list: list
-        mean: env_list: env list msg
-        return: none
+    function: write env to user/.env
+    params: env_list: env list msg
+    type: env_list: list
+    return: none
     '''
     if flag=='w':
         with open('.env', 'w') as fn:
@@ -66,3 +66,44 @@ def write_env(username, env_listi, flag):
         with open('.env', 'a') as fn:
             for env in env_list:
                 fn.write(env)
+
+
+def initenv_userfile(current_user, website, runway):
+    '''
+    function: init .envrc
+    params: current_user: 
+    type: current_user: dict
+    return: none
+    '''
+#    if runway == 'cookie':
+#        env_msg = '''
+#            RUNWAY=cookie
+#            COOKIE1=
+#            COOKIE2=
+#            PASSWD=1234qwer
+#            WEBSITE=
+#        '''
+#    elif runway == 'userid':
+#        env_msg = '''
+#            USERNAME=USER
+#            USERNAME=99kies
+#            PASSWD=1234qwer
+#            WEBSITE=
+#    '''
+    
+    envrc = '''USERNAME={}\nWEBSITE={}\nRUNWAY={}\n'''.format(current_user.username, website, runway)
+    
+    center_file = 'userfile_center'
+
+    userfile = center_file + os.path.sep + '{}'.format(current_user.username.lower())
+    if not os.path.exists(userfile):
+        os.makedirs(userfile)
+    env_path = userfile + os.path.sep + '{}_env'.format(current_user.username.lower())
+    filename = env_path + os.path.sep +'.env'
+    if not os.path.exists(env_path):
+        os.makedirs(env_path)
+        with open(filename, 'w', encoding='utf-8') as fn:
+            fn.write(envrc)
+    spiderpath = userfile + os.path.sep + '{}_spider'.format(current_user.username.lower())
+    if not os.path.exists(spiderpath):
+        os.mkdir(spiderpath)
