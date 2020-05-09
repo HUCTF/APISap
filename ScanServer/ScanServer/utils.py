@@ -51,19 +51,26 @@ def api_abort(code, message=None, **kwargs):
     response = jsonify(message=message, **kwargs)
     return response,code
 
-def write_env(username, env_list, flag):
+def write_env(current_user, env_list, flag):
     '''
     function: write env to user/.env
     params: env_list: env list msg
     type: env_list: list
     return: none
     '''
+    print('====== current_user username ======')
+    print(current_user.username)
+   
+    center_file = 'userfile_center'
+    userfile = center_file + os.path.sep + '{}'.format(current_user.username.lower())
+    env_path_file = userfile + os.path.sep + '{}_env'.format(current_user.username.lower()) + os.path.sep + '.env'
+    
     if flag=='w':
-        with open('.env', 'w') as fn:
+        with open(env_path_file, 'w') as fn:
             for env in env_list:
                 fn.write(env)
     elif flag=='a': 
-        with open('.env', 'a') as fn:
+        with open(env_path_file, 'a') as fn:
             for env in env_list:
                 fn.write(env)
 

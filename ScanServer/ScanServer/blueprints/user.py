@@ -91,6 +91,11 @@ def build_docker(username):
     ##################
     # os.system('kubectl create -f [path/kube.yml]')
     if current_user.is_authenticated:
+        try:
+            os.system('docker stop scanserver-{0}'.format(username))
+            os.system('docker rm scanserver-{0}'.format(username))
+        except:
+            pass
         os.system('docker run -id --env-file=userfile_center/{0}/{0}_env/.env -v /root/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider:/opt/scanspider/{0} --name scanserver-{0} python:3.7-alpine tail -f'.format(username))
 
 
@@ -111,7 +116,7 @@ def index():
         session['website'] = str(website)
         session['runway'] = runway
         initenv_userfile(current_user, str(website), runway)
-        build_docker(current_user.username)
+#        build_docker(current_user.username)
         return redirect(url_for('user.pcap1'))
     return render_template('user/index.html', form=form)
 
@@ -130,8 +135,8 @@ def pcap1():
         usercookie1 = form.usercookie1.data
         usercookie2 = form.usercookie2.data
         
-        env_head = ['USERNAME={}\n'.format(current_user.username), 'RUNWAY={}\n'.format(runway)]
-        write_env(current_user.username, env_list=env_head, flag='w')
+#        env_head = ['USERNAME={}\n'.format(current_user.username), 'RUNWAY={}\n'.format(runway)]
+#        write_env(current_user, env_list=env_head, flag='a')
 
         if form.validate_on_submit():
             if form.spider.data:
@@ -140,9 +145,13 @@ def pcap1():
                 print('重发')
 #                env_list = ['USERNAME={}\n'.format(current_user.username, 'RUNWAY={}\n'.format(runway)]
                 env_body = ['USERCOOKIE1={}\n'.format(usercookie1), 'USERCOOKIE2={}\n'.format(usercookie2)]
-                write_env(current_user.username, env_list=env_body, flag='a')
-
-
+                print(env_body)
+                write_env(current_user, env_list=env_body, flag='a')
+                print('======================')
+                print('======================')
+                print('======================')
+                build_docker(current_user.username)
+                return rediect(url_for(''))
 
         return render_template("user/pcap.html", website=website, form=form)
 
@@ -166,6 +175,11 @@ def pcap1():
         return render_template("user/pcap.html", website=website, form=form)
 
     return redirect(url_for('user.index'))
+
+
+@user_bp.route('message', methods=['GET', 'POST'])
+def message():
+    return render_template("")
 
 
 
