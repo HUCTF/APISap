@@ -162,7 +162,10 @@ def pcap1():
         form = AimUserForm()
         stop = 1
 
-
+        userid1 = form.userid1.data
+        passwd1 = form.passwd1.data
+        userid2 = form.userid2.data
+        passwd2 = form.passwd2.data
 
         if form.validate_on_submit():
             if form.spider.data:
@@ -170,8 +173,9 @@ def pcap1():
                 flash('开始重发！')
                 print('重发')
 
-
-
+                env_body = ['USERID1={}\n'.format(userid1), 'PASSWD1={}\n'.format(passwd1), 'USERID2={}\n'.format(userid2), 'PASSWD2={}\n'.format(passwd2)]
+                write_env(current_user, env_list=env_body, flag='a')
+                build_docker(current_user.username)
         return render_template("user/pcap.html", website=website, form=form)
 
     return redirect(url_for('user.index'))
