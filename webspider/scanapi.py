@@ -1,6 +1,5 @@
 import requests
 from selenium import webdriver
-from pyquery import PyQuery as pq
 import time
 import re
 import json
