@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, current_app
 from flask_cors import *
 server = Flask(__name__)
 server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True  # 设置这一项是每次请求结束后都会自动提交数据库中的变动
+# server.config['SEND_FILE_MAX_AGE_DEFAULT']=timedelta(seconds=1)
 
 CORS(server,supports_credentials=True)
 token_api = token_check()
@@ -63,18 +64,23 @@ def init_ip():
 @server.route('/init_token',methods=['get','post'])
 def init_token():
     #访问时需要带上参数：user_id,ip
-    #data = request.get_data()
-    #data = data.decode('utf-8')
-    #data = json.loads(data)
-    # plain_text = data['plain_text']
-    #user_id = data['user_id']
-    #url = data['ip']
+    # data = request.get_data()
+    # # data = data.decode('utf-8')
+    # data = json.loads(data)
+    # user_id = data['user_id']
+    # url = data['ip']
+    # print(url)
+    # print(user_id)
     if request.method == 'POST':
+        print('godo')
         url=request.form.get("ip")
         user_id=request.form.get("user_id")
-    else:
+    elif request.method == 'GET':
         # password=request.args.get("ip")
+        url = request.args.get("ip")
         user_id=request.args.get("user_id")
+    print(url)
+    print(user_id)
     try:
         if user_id and url:
             #resu = {'code': 200, 'token': token,'msg':'申请token成功'}

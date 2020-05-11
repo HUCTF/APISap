@@ -6,6 +6,7 @@ $(document).ready(function(){
     $("#encode_bt").click(function () {
         res=GetEncode('I am front')
         console.log(res)
+        console.log(JSON.parse(res))
     })
 
 });
@@ -35,13 +36,6 @@ function  wasm() {
     // );
     const go = new Go();
     let mod, inst;
-  // var importObject = {
-  //       imports: {
-  //         imported_func: function(arg) {
-  //           console.log(arg);
-  //         }
-  //       }
-  //     };
 
       fetch('/static/encode.wasm').then(response =>
         response.arrayBuffer()
