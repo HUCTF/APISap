@@ -92,11 +92,14 @@ def build_docker(username):
     # os.system('kubectl create -f [path/kube.yml]')
     if current_user.is_authenticated:
         try:
-            os.system('docker stop scanserver-{0}'.format(username))
+            try:
+                os.system('docker stop scanserver-{0}'.format(username))
+            except:
+                pass
             os.system('docker rm scanserver-{0}'.format(username))
         except:
             pass
-        os.system('docker run -id --env-file=userfile_center/{0}/{0}_env/.env -v /root/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider:/opt/scanspider/{0} --name scanserver-{0} scanserver'.format(username))
+        os.system("docker run -id --env-file=userfile_center/{0}/{0}_env/.env -v /opt/2020-works-apisecurity/ScanServer/userfile_center/{0}/{0}_spider:/opt/spider/{0} --name scanserver-{0} scanserver".format(username))
 
 user_bp = Blueprint('user', __name__)
 
@@ -150,7 +153,7 @@ def pcap1():
                 print('======================')
                 print('======================')
                 build_docker(current_user.username)
-                return rediect(url_for(''))
+    #            return rediect(url_for(''))
 
         return render_template("user/pcap.html", website=website, form=form)
 
