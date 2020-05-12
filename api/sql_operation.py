@@ -101,8 +101,8 @@ class server(Base):
         'mysql_charset': 'utf8'
     }
     # id = Column(Integer, primary_key=True,unique=True,autoincrement=True)
-    kid=Column(String(255), unique=True,primary_key=True,nullable=False)
-    url = Column(String(255), unique=True,nullable=False)
+    kid=Column(String(255), unique=True,nullable=False)
+    url = Column(String(255),nullable=False,primary_key=True)
     token_tb= Column(String(255), nullable=False)
     msg_tb= Column(String(255), nullable=False)
 
@@ -388,10 +388,10 @@ class server_operation:
         # print(dic[0])
         return dic
 
-    def checkhave(self, url,kid):
+    def checkhave(self, kid,url):
         # print('goddddddd' + url)
         # url='123'
-        results = session.query(server).filter_by(url=url,kid=kid).all()
+        results = session.query(server).filter_by(url=url).all()
         # print('adas')
         if results == []:
             return 0

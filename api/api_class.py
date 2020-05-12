@@ -228,6 +228,7 @@ class token_check:
             resu = {'code': 200, 'msg': '已有记录。'}
             return resu
         else:
+            # print("have________----")
             token_tb='token_'+url
             msg_tb='msg_check_'+url
             # print('0')

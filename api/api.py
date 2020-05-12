@@ -37,17 +37,16 @@ def init_ip():
     else:
         url=request.args.get("ip")
         kid = request.args.get("kid")
-    try:
-        if url:
-            token_api.create_mid_server_key(kid,url)
-            return {'code': 200, 'result': "初始化成功"}
-        else:
-            resu = {'code': 10001, 'result': '参数不能为空！'}
-            return resu
-        # print(url)
+
+    if url:
+        token_api.create_mid_server_key(kid,url)
+        return json.dumps({'code': 200, 'result': "初始化成功"})
+    else:
+        resu = {'code': 10001, 'result': '参数不能为空！'}
+        return json.dumps(resu)
+    # print(url)
         #这里面会创建两个表，包括msg_tb、token_tb
-    except:
-        resu = {'code': 10002, 'result': '出现未知错误！'}
+
 
 #函数功能：token生成器（每次用户登陆时使用一次）
 #路径：/init_token
@@ -85,15 +84,17 @@ def init_token():
         if user_id and url:
             #resu = {'code': 200, 'token': token,'msg':'申请token成功'}
             #resu={'code': 201, 'token': token,'msg':'数据库已有记录'}
-            return token_api.server_get_token(user_id, url)
+            resu=token_api.server_get_token(user_id, url)
+            return json.dumps(resu)
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
-            return resu
+            return json.dumps(resu)
         #return {'code': 201, 'token': token,'msg':'数据库已有记录'}
         #resu = {'code': 200, 'token': token,'msg':'申请token成功'}
         # resu = {'code': 10000, 'msg': '参数不能为空！'}
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return json.dumps(resu)
 #函数功能：token校验器(每次校验前端发来的token)
 #路径：/init_token
 #输入：
@@ -126,18 +127,19 @@ def check_token():
                 sql_token = data['token']
                 if server_token == sql_token:
                     resu = {'code': 200, 'msg': "token验证成功"}
-                    return resu
+                    return json.dumps(resu)
                 else:
                     resu = {'code': 10000, 'msg': 'token验证失败'}
-                    return resu
+                    return json.dumps(resu)
             else:
                 resu = {'code': 10001, 'msg': "token已更新，请重新登陆"}
-                return resu
+                return json.dumps(resu)
         else:
             resu = {'code': 10002, 'result': '参数不能为空！'}
-            return resu
+            return json.dumps(resu)
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return json.dumps(resu)
 
 #函数功能：客户端请求获得公钥与序列号
 #路径：/get_puk_sq
@@ -158,15 +160,16 @@ def front_get_puk_sq():
         url=request.args.get("ip")
     try:
         if url:
-            result = msg_check.create_seq(url)
+            resu = msg_check.create_seq(url)
             # resu = {'code': 200, 'sq': sq, 'puk': self.public_key, 'msg': '数据创建成功。'}
             # resu = {'code': 200,'sq':sq,'puk':self.public_key, 'msg': '数据已创建。'}
-            return result
+            return json.dumps(resu)
         else:
             resu = {'code': 10000, 'result': '参数不能为空！'}
-            return resu
+            return json.dumps(resu)
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return json.dumps(resu)
 
 #函数功能：服务端通过序列号对密文解密
 #路径：/server_decode
