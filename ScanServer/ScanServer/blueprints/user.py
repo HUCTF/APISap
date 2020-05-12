@@ -96,8 +96,7 @@ def build_docker(username):
             os.system('docker rm scanserver-{0}'.format(username))
         except:
             pass
-        os.system('docker run -id --env-file=userfile_center/{0}/{0}_env/.env -v /root/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider:/opt/scanspider/{0} --name scanserver-{0} python:3.7-alpine tail -f'.format(username))
-
+        os.system('docker run -id --env-file=userfile_center/{0}/{0}_env/.env -v /root/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider:/opt/scanspider/{0} --name scanserver-{0} scanserver'.format(username))
 
 user_bp = Blueprint('user', __name__)
 
@@ -181,9 +180,9 @@ def pcap1():
     return redirect(url_for('user.index'))
 
 
-@user_bp.route('message', methods=['GET', 'POST'])
-def message():
-    return render_template("")
+#@user_bp.route('message', methods=['GET', 'POST'])
+#def message():
+#    return render_template("")
 
 
 
