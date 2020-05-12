@@ -11,6 +11,7 @@ Python3.5+
 请新建一个``scanserver``数据库
 
 ```bash
+cd /opt
 git clone https://github.com/HUCTF/2020-Works-ApiSecurity
 cd 2020-Works-ApiSecurity
 pip install -r requirement.txt
