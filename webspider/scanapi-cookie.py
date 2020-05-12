@@ -97,9 +97,8 @@ def url_repeat(url,array): #url查重 如果不重复返回1
 
 
 def s_find(url, cookie):
-    surl=url
     # cookie = {"JSESSIONID":'MWQxY2ExYmItYjMxYy00MjU1LWE2ODktYzRhNzU4ZGY4OTNh'}
-    res = requests.get(url=surl,cookies=cookie)
+    res = requests.get(url=url,cookies=cookie)
     return res.text
 
 def find_url(html):  #查找返回的a标签链接
@@ -161,9 +160,11 @@ def RUN_COOKIE(url, type, cookie, useranme, password):
     :param url:扫描url
     :param type:1为cookie，2为用户名密码
     :return:
-    '''
-    base_url = url
-    # login_url = input("登入接口url:")
+    '''https://jkxxcj.zjhu.edu.cn/
+    url = url
+    global base_url
+    base_url = input("基础url:")
+    login_url = input("登入接口url:")
     if type == 1:
         cof = cookie.split("=")
         Cookie={
@@ -171,11 +172,12 @@ def RUN_COOKIE(url, type, cookie, useranme, password):
         }
         cookie = Cookie
     else:
-        cof = find_cookies(url,useranme,password).split("=")
+        cof = find_cookies(base_url,useranme,password).split("=")
         Cookie = {
             cof[0]: cof[1]
         }
         cookie = Cookie
+    print(find_url(s_find(url, cookie)))
     OLD_URL = []
     UN_URL = []
     # url = 'https://jkxxcj.zjhu.edu.cn/serviceList.html'
@@ -195,5 +197,6 @@ def RUN_COOKIE(url, type, cookie, useranme, password):
         else:
             UN_URL.pop(0)
 
-RUN_COOKIE('https://jkxxcj.zjhu.edu.cn/',2,None,'2018283303','yhq20000512')
-RUN_COOKIE('https://jkxxcj.zjhu.edu.cn/',1,'health-data-Id=MGQ0MTM0YmQtMWQ2NC00MGViLTkzMGMtODNkZDM4ODU3YjJi',None,None)
+RUN_COOKIE('https://jkxxcj.zjhu.edu.cn/serviceList.html',2,None,'2018283303','yhq20000512')
+
+RUN_COOKIE('https://jkxxcj.zjhu.edu.cn/serviceList.html',1,'health-data-Id=MGQ0MTM0YmQtMWQ2NC00MGViLTkzMGMtODNkZDM4ODU3YjJi',None,None)
