@@ -99,7 +99,7 @@ def build_docker(username):
             os.system('docker rm scanserver-{0}'.format(username))
         except:
             pass
-        os.system("docker run -id --env-file=userfile_center/{0}/{0}_env/.env -v /opt/2020-works-apisecurity/ScanServer/userfile_center/{0}/{0}_spider:/opt/spider/{0} --name scanserver-{0} scanserver".format(username))
+        os.system("docker run -id --env-file=userfile_center/{0}/{0}_env/.env -v /opt/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider:/opt/spider/{0} --name scanserver-{0} scanserver".format(username))
 
 user_bp = Blueprint('user', __name__)
 

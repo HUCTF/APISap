@@ -1,6 +1,6 @@
 from NIC_package_get import NICRUN
 from threading import Thread
-#from scanapi-coomie import RUN_COOKIE
+from ScanapiCookie import RUN_COOKIE
 import os
 import requests
 
@@ -12,8 +12,8 @@ class spider():
         self.USERNAME=os.environ.get('USERNAME')
 
         if self.RUNWAY == 'cookie':
-            self.COOKIE1 = os.environ.get('COOKIE1')
-            self.COOKIE2 = os.environ.get('COOKIE2')
+            self.COOKIE1 = os.environ.get('USERCOOKIE1')
+            self.COOKIE2 = os.environ.get('USERCOOKIE2')
         elif self.RUNWAY == 'userid':
             self.USERID1 = os.environ.get('USERID1')
             self.PASSWD1 = os.environ.get('PASSWD1')
@@ -29,8 +29,12 @@ class spider():
 #        thread = Thread(target=RQRUN)
         # 使用多线程
 #        thread.start()
-        RUN_COOKIE(self.WEBSITE, self.COOKIE1)
-        
+        thread = Thread(target=RUN_COOKIE, args=[self.WEBSITE, self.COOKIE1])
+        thread.start()
+
+#        RUN_COOKIE(self.WEBSITE, self.COOKIE1)
+#        RUN_COOKIE('https://jkxxcj.zjhu.edu.cn/serviceList.html','health-data-Id=MGQ0MTM0YmQtMWQ2NC00MGViLTkzMGMtODNkZDM4ODU3YjJi')
+ 
         print(self.COOKIE1, self.COOKIE2)
 
         
