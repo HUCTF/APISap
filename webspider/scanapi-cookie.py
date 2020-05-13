@@ -1,67 +1,11 @@
 import requests
-from selenium import webdriver
-from pyquery import PyQuery as pq
 import time
 import re
 import base64
 import json
 # 无头浏览器模块
-from selenium.webdriver.chrome.options import Options
 
 def find_cookies(Url, username, password):
-    # WebServer = "http://jkxxcj.zjhu.edu.cn/"
-    # 无头浏览器浏览
-    # chrome_options = Options()
-    # chrome_options.add_argument('--headless')
-    # chrome_options.add_argument('--disable-gpu')
-    # browser = webdriver.Chrome(chrome_options=chrome_options)
-    # browser = webdriver.Chrome()
-    # browser.get(WebServer)
-
-    # s = requests.session()
-    # r = s.get(browser.current_url)
-    # params = re.compile('id="(.*?)"',re.S)
-    # result = re.findall(params, r.text)
-
-    # login_url = browser.current_url
-    # # return 登入接口用于post检验
-    # userid = browser.find_element_by_id('zgh')
-    # time.sleep(1)
-    # userid.send_keys("2018283120")
-    
-    # passwd = browser.find_element_by_id('mm')
-    # time.sleep(1)
-    # passwd.send_keys("1234qwer")
-    
-    # button = browser.find_element_by_id('loginBtn')
-    # try:
-    #     button.click()
-    #     print("Success Login")
-    # except:
-    #     print("Login Fail! Please try again!")
-
-    # time.sleep(30)
-    #
-    # cookies_msg = {}
-    # Cookies = {}
-    #
-    # try:
-    #     msg = {}
-        # for j in browser.get_cookies():
-        #     msg = j
-        # for i in msg:
-        #     if i == 'name':
-        #         cookies_msg[i]=msg[i]
-        #     if i == 'value':
-        #         cookies_msg[i]=msg[i]
-            # print(i, msg[i])
-        
-        # Cookies[cookies_msg['name']] = cookies_msg['value']
-            
-    # except:
-    #     print("get_cookies error")
-    #
-    # browser.close()
     header={"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36",
             "Content-Type":"application/x-www-form-urlencoded; charset=UTF-8",
             }
@@ -155,28 +99,22 @@ def find_url(html):  #查找返回的a标签链接
 #             UN_URL.pop(0)
 
 
-def RUN_COOKIE(url, type, cookie, useranme, password):
+def RUN_COOKIE(url, cookie):
     '''
     :param url:扫描url
     :param type:1为cookie，2为用户名密码
     :return:
-    '''https://jkxxcj.zjhu.edu.cn/
-    url = url
+    '''
+    #https://jkxxcj.zjhu.edu.cn/
     global base_url
-    base_url = input("基础url:")
-    login_url = input("登入接口url:")
-    if type == 1:
-        cof = cookie.split("=")
-        Cookie={
-            cof[0]:cof[1]
-        }
-        cookie = Cookie
-    else:
-        cof = find_cookies(base_url,useranme,password).split("=")
-        Cookie = {
-            cof[0]: cof[1]
-        }
-        cookie = Cookie
+    #base_url = input("基础url:")
+    #login_url = input("登入接口url:")
+    base_url= url
+    login_url = url
+    cof = cookie.split("=")
+    cookie={
+        cof[0]:cof[1]
+    }
     print(find_url(s_find(url, cookie)))
     OLD_URL = []
     UN_URL = []
@@ -197,6 +135,4 @@ def RUN_COOKIE(url, type, cookie, useranme, password):
         else:
             UN_URL.pop(0)
 
-RUN_COOKIE('https://jkxxcj.zjhu.edu.cn/serviceList.html',2,None,'2018283303','yhq20000512')
-
-RUN_COOKIE('https://jkxxcj.zjhu.edu.cn/serviceList.html',1,'health-data-Id=MGQ0MTM0YmQtMWQ2NC00MGViLTkzMGMtODNkZDM4ODU3YjJi',None,None)
+RUN_COOKIE('https://jkxxcj.zjhu.edu.cn/serviceList.html','health-data-Id=MGQ0MTM0YmQtMWQ2NC00MGViLTkzMGMtODNkZDM4ODU3YjJi')
