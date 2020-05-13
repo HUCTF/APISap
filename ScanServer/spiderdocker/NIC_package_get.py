@@ -104,4 +104,4 @@ def NICRUN(netname=None,NEEDPCAP=111,ID=''):
         print("=======================================================")
 #needpcap=10001
 #id='Luz'
-#NICRUN(netname='eth0',NEEDPCAP=needpcap,ID=id)
+#NICRUN(netname='Realtek 8821CE Wireless LAN 802.11ac PCI-E NIC',NEEDPCAP=needpcap,ID=id)

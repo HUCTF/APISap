@@ -62,11 +62,9 @@ def requests_get(line, host):
         del headers['Cookie']
         print(cookie)
     print(headers)
-    for i in range(1,n+1):
+@    for i in range(1,n+1):
     # resp=requests.get(url=host,headers=headers,cookies=cookie).text
     # print(resp)
-
-
 
 def requests_post(line, host):
     line = line[1:]
@@ -100,6 +98,7 @@ def requests_post(line, host):
     # host = 'http://' + str(headers['Host']) + str(host)
     # resp=requests.post(url=host,headers=headers,data=data).text
     # print(resp)
+
 
 if __name__ == "__main__":
     while(1):
