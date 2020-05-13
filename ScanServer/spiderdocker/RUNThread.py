@@ -29,10 +29,10 @@ class spider():
 #        thread = Thread(target=RQRUN)
         # 使用多线程
 #        thread.start()
-        thread = Thread(target=RUN_COOKIE, args=[self.WEBSITE, self.COOKIE1])
-        thread.start()
+#        thread = Thread(target=RUN_COOKIE, args=[self.WEBSITE, self.COOKIE1])
+#        thread.start()
 
-#        RUN_COOKIE(self.WEBSITE, self.COOKIE1)
+        RUN_COOKIE(self.WEBSITE, self.COOKIE1)
 #        RUN_COOKIE('https://jkxxcj.zjhu.edu.cn/serviceList.html','health-data-Id=MGQ0MTM0YmQtMWQ2NC00MGViLTkzMGMtODNkZDM4ODU3YjJi')
  
         print(self.COOKIE1, self.COOKIE2)
