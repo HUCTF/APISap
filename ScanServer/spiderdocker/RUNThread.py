@@ -1,6 +1,6 @@
 from NIC_package_get import NICRUN
 from threading import Thread
-#from .scanapi import RQRUN
+#from scanapi-coomie import RUN_COOKIE
 import os
 import requests
 
@@ -29,15 +29,9 @@ class spider():
 #        thread = Thread(target=RQRUN)
         # 使用多线程
 #        thread.start()
-        print('cookie')
-        print('cookie')
-        print('cookie')
-        print('cookie')
+        RUN_COOKIE(self.WEBSITE, self.COOKIE1)
+        
         print(self.COOKIE1, self.COOKIE2)
-        for i in range(10):
-            r = requests.get('https://baidu.com').text
-            print(r)
-
 
         
     def RUNThread_Userid(self):
