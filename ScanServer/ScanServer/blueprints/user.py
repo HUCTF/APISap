@@ -183,119 +183,11 @@ def pcap1():
     return redirect(url_for('user.index'))
 
 
-#@user_bp.route('message', methods=['GET', 'POST'])
-#def message():
-#    return render_template("")
-
-
-
-# @user_bp.route("/pcap1", methods=['GET', 'POST'])
-# @login_required
-# def pcap1():
-#     # form = NameForm()
-#     # form1 = PrintLogForm()
-#     stop = 1
-#     if session.get('website'):
-#         form = WorkForm()
-#         website = session.get('website')
-#         runway = session.get('runway')
-#         if form.validate_on_submit():
-#             if form.spider.data:
-#                 print('kaishi')
-#                 # import time
-#                 # from ScanServer.scanapi.v4.NIC_package_get import NICRUN
-#                 # stop = 0
-#                 # flash('开始抓包！')
-#                 # print("=========================",netname, 1000, current_user.username)
-#                 # thread = Thread(target=NICRUN, args=[netname, 1000, str(current_user.username)])
-#                 # # 使用多线程
-#                 # thread.start()
-#                 # time.sleep(0.5)
-#                 # from ScanServer.scanapi.v4.scanapi import RQRUN
-#                 # stop = 0
-#                 # flash('开始爬虫！')
-#                 # thread = Thread(target=RQRUN)
-                
-#                 # # 使用多线程
-#                 # thread.start()
-                
-#                 # build_docker1()
-
-                
-# # ---------------------------------------------------------------------
-# # ---------------------------------------------------------------------
-# # ---------------------------------------------------------------------
-# # ---------------------------------------------------------------------
-# # ---------------------------------------------------------------------
-#                 # thread = Thread(target=send_async_email, args=[app, message])
-#                 # # 使用多线程
-#                 # thread.start()
-#                 flash('开始重发！')
-#                 print('重发')
-#         return render_template("user/pcap.html", website=website, form=form)
-#     return redirect(url_for('user.index'))
-
-
-
-# @user_bp.route("/net", methods=["GET", "POST"])
-# @login_required
-# def net():
-#     form = NameForm()
-#     # netnames = get_net()
-#     # net = [(netname[0],netname[0]+' ---- '+netname[1]) for netname in netnames]
-#     # form.netname.choices = net
-#     if form.validate_on_submit():
-#         netname = form.netname.data
-#         needpcap = form.needpcap.data
-#         session['netname'] = netname
-#         session['needpcap'] = needpcap
-#         return redirect(url_for('user.pcap', netname=netname, needpcap=needpcap))
-#     return render_template('net.html', form=form)
-
-# @user_bp.route("/pcap", methods=['GET', 'POST'])
-# @login_required
-# def pcap():
-#     form = NameForm()
-#     form1 = PrintLogForm()
-#     netname = request.args.get("netname", None)
-#     needpcap = request.args.get("needpcap", None)
-#     stop = 1
-#     if session.get('netname') and session.get('needpcap'):
-#         form = ScipyForm()
-#         netname = session.get('netname')
-#         needpcap = session.get('needpcap')
-#         if form.validate_on_submit():
-#             if form.scipy.data:
-#                 from ScanServer.scanapi.v4.NIC_package_get import NICRUN
-#                 stop = 0
-#                 flash('开始抓包！')
-#                 print("=========================",netname, needpcap, current_user.username)
-#                 thread = Thread(target=NICRUN, args=[netname, needpcap, str(current_user.username)])
-#                 # 使用多线程
-#                 thread.start()
-
-#             elif form.spider.data:
-                
-#                 from ScanServer.scanapi.v4.scanapi import RQRUN
-#                 stop = 0
-#                 flash('开始爬虫！')
-#                 thread = Thread(target=RQRUN)
-                
-#                 # 使用多线程
-#                 thread.start()
-
-#             elif form.repeter.data:
-#                 thread = Thread(target=send_async_email, args=[app, message])
-#                 # 使用多线程
-#                 thread.start()
-#                 flash('开始重发！')
-#         return render_template("pcap.html", netname=netname, needpcap=needpcap, form=form, stop=stop, form1=form1)
-#     return redirect(url_for('user.net'))
-    
-
 @user_bp.route('/register', methods=['GET', 'POST'])
 def register():
     # register func
+    if current_user.is_authenticated:
+        return redirect(url_for('user.index'))
     form = RegisterForm()
     if form.validate_on_submit():
         username = form.username.data
@@ -329,8 +221,8 @@ def register():
 @user_bp.route('/login', methods=['GET', 'POST'])
 def login():
     # login in func
-    # if current_user.is_authenticated:
-        # return redirect(url_for('user.index'))
+    if current_user.is_authenticated:
+        return redirect(url_for('user.index'))
 
     form = LoginForm()
     if form.validate_on_submit():

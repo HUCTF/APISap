@@ -32,7 +32,7 @@ class NICPackage:
         self.iface=IFACE
         self.pcap=[]
         self.path = sys.path[0] + self.prefix + self.id
-        self.filename = self.path + self.prefix + str(datetime.now().strftime("%Y-%m-%d_%H"))
+        self.filename = self.path + self.prefix + self.id
         self.filename_pcap = self.filename + '.pcap'
         self.filename_txt = self.filename + '.txt'
         
