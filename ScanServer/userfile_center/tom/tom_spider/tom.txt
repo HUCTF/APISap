@@ -1,0 +1,77 @@
+'GET /index.aspx../help/help_return.aspx HTTP/1.1
+Host: mall.27399.com
+User-Agent: python-requests/2.23.0
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+Cookie: ASP.NET_SessionId=1my0f055ww1f3n55rh2mbgqv
+
+'
+
+
+'GET /index.aspx../help/help_answer4_1.aspx HTTP/1.1
+Host: mall.27399.com
+User-Agent: python-requests/2.23.0
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+Cookie: ASP.NET_SessionId=1my0f055ww1f3n55rh2mbgqv
+
+'
+
+
+'GET /index.aspx../KeFuCenter.aspx HTTP/1.1
+Host: mall.27399.com
+User-Agent: python-requests/2.23.0
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+Cookie: ASP.NET_SessionId=1my0f055ww1f3n55rh2mbgqv
+
+'
+
+
+'GET /index.aspx../help/help_jifen.aspx HTTP/1.1
+Host: mall.27399.com
+User-Agent: python-requests/2.23.0
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+Cookie: ASP.NET_SessionId=1my0f055ww1f3n55rh2mbgqv
+
+'
+
+
+'GET /portal/registerSystemInfo?recordcode=34050402000018 HTTP/1.1
+Host: www.beian.gov.cn
+User-Agent: python-requests/2.23.0
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+Cookie: ASP.NET_SessionId=1my0f055ww1f3n55rh2mbgqv
+
+'
+
+
+'GET /index.aspx../help/help_jifen.aspx HTTP/1.1
+Host: mall.27399.com
+User-Agent: python-requests/2.23.0
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+Cookie: ASP.NET_SessionId=1my0f055ww1f3n55rh2mbgqv
+
+'
+
+
+'GET /portal/registerSystemInfo?recordcode=34050402000018 HTTP/1.1
+Host: www.beian.gov.cn
+User-Agent: python-requests/2.23.0
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+Cookie: ASP.NET_SessionId=1my0f055ww1f3n55rh2mbgqv
+
+'
+
+

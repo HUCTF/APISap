@@ -10,7 +10,7 @@ from threading import Thread
 import os
 
 import docker
-
+import time
 
 kubenetes_template = '''
     apiVersion: v1
@@ -153,8 +153,9 @@ def pcap1():
                 print('======================')
                 print('======================')
                 build_docker(current_user.username)
-                import time
-                time.sleep(10)
+                time.sleep(3)
+                os.system("docker exec -it scanserver-{0} sh /docker-entrypoint.sh".format(current_user.username))
+                time.sleep(100)
                 from ScanServer.scanapi.v5.RepeterByRequests import RUNRepeter
                 thread = Thread(target=RUNRepeter, args=[current_user.username])
                 thread.start()
