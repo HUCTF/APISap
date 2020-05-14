@@ -166,7 +166,7 @@ class token_check:
     #获得user_id对应的token
     def search_token_by_id(self,user_id,url):
         op.init(url)
-        print('___________aaa')
+        # print('___________aaa')
         result = op.search_by_user_id(user_id)
         if result!=[]:
             token=result['token']
@@ -308,34 +308,55 @@ class msg_random_check:
     #            url:req_url,
     #            type:'post',
 
+    def mid_sever_decode(self,cypher, sq, url):
+        # print(cypher,sq,url)
+        # print(11212221)
+        prk = msg_random_check.mid_server_transport_priKey2(self,sq, url)
 
-    #中间人为后端提供的解密接口
-    def mid_sever_decode(self,cypher,sq,url):
-        prk=self.mid_server_transport_priKey2(self,sq,url)
+        # print(prk)
+        cypher = cypher.replace(" ", "")
+        # cypher=cypher[:-1]
         print(cypher)
-        prk=prk.replace("\\n", "")[27:-25]
-        start = '-----BEGIN RSA PRIVATE KEY-----\n'
-        end = '-----END RSA PRIVATE KEY-----'
-        length = len(prk)
-        divide = 64  # 切片长度
-        offset = 0  # 拼接长度
-        result0=''
-        while length - offset > 0:
-            if length - offset > divide:
-                result0 += prk[offset:offset + divide] + '\n'
-            else:
-                result0 += prk[offset:] + '\n'
-            offset += divide
-        result0 = start + result0 + end
-        prk=result0
-        prk=RSA.importKey(prk)
-        prk0=Cipher_pkcs1_v1_5.new(prk)
-       # if(prk['code']==200):
-         #   prk=prk['prk']
-        result=prk0.decrypt(base64.b64decode(cypher),prk0)
+        prk = RSA.importKey(prk)
+        prk0 = Cipher_pkcs1_v1_5.new(prk)
+        # if(prk['code']==200):
+        #   prk=prk['prk']
+        result = prk0.decrypt(base64.b64decode(cypher), prk0)
         msg.deleteis_by_sq(sq)
         print(result)
-        return {'code':200,'result':str(result)}
+        return {'code': 200, 'result': str(result)}
+                # else:
+                #   return {'code':10000,'msg':'未找到私钥'}
+    #中间人为后端提供的解密接口
+    # def mid_sever_decode(self,cypher,sq,url):
+    #     prk=self.mid_server_transport_priKey2(sq,url)
+    #     print(cypher)
+    #     prk=prk.replace("\\n", "")[27:-25]
+    #     start = '-----BEGIN RSA PRIVATE KEY-----\n'
+    #     end = '-----END RSA PRIVATE KEY-----'
+    #     length = len(prk)
+    #     divide = 64  # 切片长度
+    #     offset = 0  # 拼接长度
+    #     result0=''
+    #     while length - offset > 0:
+    #         if length - offset > divide:
+    #             result0 += prk[offset:offset + divide] + '\n'
+    #         else:
+    #             result0 += prk[offset:] + '\n'
+    #         offset += divide
+    #     result0 = start + result0 + end
+    #
+    #     prk=result0
+    #     prk=RSA.importKey(prk)
+    #     prk0=Cipher_pkcs1_v1_5.new(prk)
+    #    # if(prk['code']==200):
+    #      #   prk=prk['prk']
+    #     result=prk0.decrypt(base64.b64decode(cypher),prk0)
+    #     # msg.deleteis_by_sq(sq)
+    #
+    #     print(result.decode('utf-8'))
+    #     return {'code':200,'result':result.decode('utf-8')}
+
        # else:
          #   return {'code':10000,'msg':'未找到私钥'}
 
@@ -385,7 +406,7 @@ class msg_random_check:
             print(prk)
             return(prk)
         else:
-           result={'code':10000,'msg':'未找到私钥'}
+           result={'code':10001,'msg':'未找到私钥'}
            return result
     #else:
       #  result = {'code': 10001, 'msg': '没有这个序列号'}

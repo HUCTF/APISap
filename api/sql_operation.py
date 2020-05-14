@@ -198,6 +198,7 @@ class db_operation:
     #
     # # 查
     def search_by_user_id(self,user_id):
+        # print('11111111111111111')
         results = session.query(token).filter_by(user_id=user_id).all()
         # print(results)
         resData = []
