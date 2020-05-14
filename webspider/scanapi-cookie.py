@@ -3,6 +3,7 @@ import time
 import re
 import base64
 import json
+from urllib.parse import urlparse
 # 无头浏览器模块
 
 def find_cookies(Url, username, password):
@@ -76,32 +77,10 @@ def find_url(html):  #查找返回的a标签链接
     
 
 
-# s_find()
-# if __name__ == "__main__":
-#     OLD_URL = []
-#     UN_URL = []
-#     # url = 'https://jkxxcj.zjhu.edu.cn/serviceList.html'
-#     url = input("主页url:")
-#     base_url = input('base_url:')
-#     login_url = input("登入接口url:")
-#     msg_cookies = find_cookies(login_url)
-#     cookie = msg_cookies[0]
-#     login_url = msg_cookies[1]
-#     # base_url = 'https://jkxxcj.zjhu.edu.cn/'
-#     UN_URL = find_url(s_find(url, cookie))
-#     OLD_URL.append(url)
-#     OLD_URL.append(login_url)
-#     for x in UN_URL:
-#         if (url_repeat(str(x),OLD_URL)):
-#             UN_URL = UN_URL +find_url(s_find(str(x), cookie))
-#             OLD_URL.append(str(x))
-#         else:
-#             UN_URL.pop(0)
-
 
 def RUN_COOKIE(url, cookie):
     '''
-    :param url:扫描url
+    :param url:服务url
     :param type:1为cookie，2为用户名密码
     :return:
     '''
@@ -109,13 +88,15 @@ def RUN_COOKIE(url, cookie):
     global base_url
     #base_url = input("基础url:")
     #login_url = input("登入接口url:")
-    base_url= url
-    login_url = url
+    url1=url
+    res=urlparse(url1)
+    base_url= res.scheme+'://'+res.netloc+'/'
+    # print(base_url)
     cof = cookie.split("=")
     cookie={
         cof[0]:cof[1]
     }
-    print(find_url(s_find(url, cookie)))
+    # print(find_url(s_find(url, cookie)))
     OLD_URL = []
     UN_URL = []
     # url = 'https://jkxxcj.zjhu.edu.cn/serviceList.html'
@@ -135,4 +116,37 @@ def RUN_COOKIE(url, cookie):
         else:
             UN_URL.pop(0)
 
-RUN_COOKIE('https://jkxxcj.zjhu.edu.cn/serviceList.html','health-data-Id=MGQ0MTM0YmQtMWQ2NC00MGViLTkzMGMtODNkZDM4ODU3YjJi')
+
+def RUN_USERID(url, username, password):
+    '''
+    :param url:服务url
+    :param type:1为cookie，2为用户名密码
+    :return:
+    '''
+    #https://jkxxcj.zjhu.edu.cn/
+    global base_url
+    url1=url
+    res=urlparse(url1)
+    base_url= res.scheme+'://'+res.netloc+'/'
+    cof = find_cookies(base_url, username, password)
+    cof = cof.split("=")
+    cookie={
+        cof[0]:cof[1]
+    }
+    # print(find_url(s_find(url, cookie)))
+    OLD_URL = []
+    UN_URL = []
+    UN_URL = find_url(s_find(url, cookie))
+    OLD_URL.append(url)
+    OLD_URL.append(url)
+    for x in UN_URL:
+        if (url_repeat(str(x),OLD_URL)):
+            # print('链接:' + str(x))
+            UN_URL = UN_URL +find_url(s_find(str(x), cookie))
+            OLD_URL.append(str(x))
+        else:
+            UN_URL.pop(0)
+    print(OLD_URL)
+
+# RUN_COOKIE('https://jkxxcj.zjhu.edu.cn/serviceList.html','health-data-Id=MGQ0MTM0YmQtMWQ2NC00MGViLTkzMGMtODNkZDM4ODU3YjJi')
+RUN_USERID('https://jkxxcj.zjhu.edu.cn/serviceList.html','2018283303','yhq20000512')
