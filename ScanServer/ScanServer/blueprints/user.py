@@ -153,7 +153,9 @@ def pcap1():
                 print('======================')
                 print('======================')
                 build_docker(current_user.username)
-                from scanapi.v5.RepeterByRequests import RUNRepeter
+                import time
+                time.sleep(10)
+                from ScanServer.scanapi.v5.RepeterByRequests import RUNRepeter
                 thread = Thread(target=RUNRepeter, args=[current_user.username])
                 thread.start()
  

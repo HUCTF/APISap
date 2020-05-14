@@ -68,6 +68,21 @@ class RepeterByRequests:
             print(cookie)
         print(headers)
 
+        try:
+           # from Checker.NLP.address import address
+            #import re
+            from Checker.RE.checker import name
+            r = requests.get(host, cookies=cookie, headers=headers)
+            print(r.status_code)
+            r.encoding = r.apparent_encoding
+          #  print(r.text)
+            jjj = re.sub(r'<.*?>', '', r.text)
+            #print(jjj)
+            name(jjj)
+        except:
+            print('error')
+
+
     def requests_post(self, line, host):
         line = line[1:]
         headers={}
@@ -97,6 +112,18 @@ class RepeterByRequests:
             print(cookie)
         print(headers)
         print(data)
+        try: 
+            from Checker.NLP.address import address
+            import re
+            r = requests.post(host, cookies=cookie, data=data, headers=headers)
+            print(r.status_code)
+            r.encoding = r.apparent_encoding
+            print(r.text)
+            jjj = re.sub(r'<.*?>', '', r.text)
+            print(jjj)
+            address(jjj)
+        except:
+            print('error')
 
 
 def RUNRepeter(filename):
