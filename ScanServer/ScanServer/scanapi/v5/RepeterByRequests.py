@@ -21,8 +21,6 @@ class RepeterByRequests:
             if not flag:
                 break
 
-
-
     def getmidstring(self, html, start_str, end):
         start = html.find(start_str)
         if start >= 0:
