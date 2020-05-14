@@ -15,7 +15,13 @@ from Cryptodome import Random
 #    'user_id':'123456'
 #}
 #print(requests.post(url="http://www.hutc.xyz:8884/login_check",data=data).text)
-puk=''#当前公钥
+puk='''-----BEGIN PUBLIC KEY-----
+nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCy+5RUHf+slrvDCAnO2OPMa0JX
+ngXPTFwbsmhgctNuEpBcxumhda7whcEAzcRsVUppmn5wW6oplo7VtO2ASO0sdOv3L
+nUUqcnMmdtl8yrw6J46JxHrz8W+WoeSVIvQ09iCCyJTLUR0r2u4pO0F47Vqtl3j9F
+nu9gVrIbK5tLchDhlBQIDAQAB
+-----END PUBLIC KEY-----
+'''
 operator='search_all'
 prk='57687'
 sq=''#当前公钥序列号
@@ -27,10 +33,10 @@ token=''#当前token
 text='1234'
 cipher_text=''
 public_key = '''-----BEGIN PUBLIC KEY-----
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC2GdFVfnjmqWNfN3m2Hml4pMcm
-o66ltA2NHiG0DWuEs2XWVaNL8dAc6/Z/qA2nBXfKg/W/nEzJr6bbSm3oxlGm+AOA
-Ennra+YPnS1ocoMbXwM1JUwjH5GbO93xfSDBGvOUE7c30zVkRkasN0vzG0WnoSTR
-ErSrz0laLtVq1a980wIDAQAB
+nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCy+5RUHf+slrvDCAnO2OPMa0JX
+ngXPTFwbsmhgctNuEpBcxumhda7whcEAzcRsVUppmn5wW6oplo7VtO2ASO0sdOv3L
+nUUqcnMmdtl8yrw6J46JxHrz8W+WoeSVIvQ09iCCyJTLUR0r2u4pO0F47Vqtl3j9F
+nu9gVrIbK5tLchDhlBQIDAQAB
 -----END PUBLIC KEY-----
 '''
 cipher_decode=''
@@ -79,7 +85,7 @@ def get_puk_sq():
     data={
     'ip':ip
     }
-    result=requests.post(url="http://39.96.60.14:5000/get_puk_sq",data=data)
+    result=requests.post(url="http://127.0.0.1:5000/get_puk_sq",data=data)
     print(result.text.replace('\'','\"'))
     #result.text.replace('\\n','')
     result=json.loads(result.text.replace('\'','\"'))

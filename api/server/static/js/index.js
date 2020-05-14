@@ -1,12 +1,34 @@
-
+var data_to_server={
+    'ip':'2.2.2.2',
+    'user_id':'2',
+    'token':'',
+    'sq':'',
+    'cypher':'',
+}
+var token=''
 $(document).ready(function(){
     wasm()
     $('#token').text('you get token: '+getCookie('token'))
     // $("#encode").click(function () { })
     $("#encode_bt").click(function () {
         res=GetEncode('I am front')
+        // console.log(res)
+        res=JSON.parse(res)
         console.log(res)
-        console.log(JSON.parse(res))
+        console.log(res['sq'])
+        console.log(res['encode_str'])
+        data_to_server['sq']=res['sq']
+        data_to_server['cypher']=res['encode_str']
+        $('#sq').text('sq: '+res['sq'])
+        $('#encode_str').text('encode_str: '+res['encode_str'])
+    })
+
+     $("#get_msg").click(function () {
+         url='/get_server_res'
+         data_to_server['token']=getCookie('token')
+         trans(url,data_to_server)
+         // console.log(res)
+
     })
 
 });
@@ -51,9 +73,6 @@ function  wasm() {
     }
       );
 
-    function encode_str() {
-
-    }
 }
 
 function getCookie(cname)
@@ -76,9 +95,9 @@ function trans(urll,dataa) {
             async:false,
             dataType:'json',
             success : function(result) {
-                setCookie('token',result['token'])
-                alert('good')
-                 window.location.href = '/index';
+                console.log(result)
+                  $('#server_res').text('server_res: '+result['result'])
+
             },
             //请求失败，包含具体的错误信息
             error : function(e){

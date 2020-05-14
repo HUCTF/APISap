@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $("#sub").click(function () {
         // alert('good')
-        url='http://127.0.0.1:5000/init_token'
+        url='http://www.hyluz.cn:5000/init_token'
         data={'ip':"2.2.2.2",'user_id':"2"}
         trans(url,data)
 

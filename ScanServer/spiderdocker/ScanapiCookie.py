@@ -115,7 +115,7 @@ def RUN_COOKIE(url, cookie):
     cookie={
         cof[0]:cof[1]
     }
-    print(find_url(s_find(url, cookie)))
+    # print(find_url(s_find(url, cookie)))
     OLD_URL = []
     UN_URL = []
     # url = 'https://jkxxcj.zjhu.edu.cn/serviceList.html'
@@ -128,11 +128,13 @@ def RUN_COOKIE(url, cookie):
     OLD_URL.append(url)
     OLD_URL.append(url)
     for x in UN_URL:
+        print(x)
         if (url_repeat(str(x),OLD_URL)):
             # print('链接:' + str(x))
             UN_URL = UN_URL +find_url(s_find(str(x), cookie))
             OLD_URL.append(str(x))
         else:
             UN_URL.pop(0)
+    print(OLD_URL)
 
-#RUN_COOKIE('https://jkxxcj.zjhu.edu.cn/serviceList.html','health-data-Id=MGQ0MTM0YmQtMWQ2NC00MGViLTkzMGMtODNkZDM4ODU3YjJi')
+RUN_COOKIE('http://mall.27399.com/index.aspx','ASP.NET_SessionId=1my0f055ww1f3n55rh2mbgqv')

@@ -95,6 +95,7 @@ def init_token():
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
         return json.dumps(resu)
+
 #函数功能：token校验器(每次校验前端发来的token)
 #路径：/init_token
 #输入：
@@ -117,13 +118,18 @@ def check_token():
         user_id=request.form.get("user_id")
         server_token =request.form.get("token")
     else:
-        password=request.args.get("ip")
+        url=request.args.get("ip")
         user_id=request.args.get("user_id")
         server_token =request.args.get("token")
+        print(url)
+        print(user_id)
+        print(server_token)
     try:
-        if url and user_id and url:
+
+        if url and user_id and server_token:
             data = token_api.search_token_by_id(user_id, url)
             if data['code'] == 200:
+                print('-------------------')
                 sql_token = data['token']
                 if server_token == sql_token:
                     resu = {'code': 200, 'msg': "token验证成功"}
@@ -138,8 +144,30 @@ def check_token():
             resu = {'code': 10002, 'result': '参数不能为空！'}
             return json.dumps(resu)
     except:
-        resu = {'code': 10002, 'result': '出现未知错误！'}
+        resu = {'code': 10003, 'result': '出现未知错误！'}
         return json.dumps(resu)
+
+def check_token2(url,user_id,server_token):
+    try:
+        if url and user_id and server_token:
+            data = token_api.search_token_by_id(user_id, url)
+            if data['code'] == 200:
+                sql_token = data['token']
+                if server_token == sql_token:
+                    resu = {'code': 200, 'msg': "token验证成功"}
+                    return resu
+                else:
+                    resu = {'code': 10000, 'msg': 'token验证失败'}
+                    return resu
+            else:
+                resu = {'code': 10001, 'msg': "token已更新，请重新登陆"}
+                return resu
+        else:
+            resu = {'code': 10002, 'result': '参数不能为空！'}
+            return resu
+    except:
+        resu = {'code': 10002, 'result': '出现未知错误！'}
+        return resu
 
 #函数功能：客户端请求获得公钥与序列号
 #路径：/get_puk_sq
@@ -175,38 +203,71 @@ def front_get_puk_sq():
 #路径：/server_decode
 #输入：
 #   ip = 开发者ip
+#   sq=序列号
+#   cyhper=密文
 #返回：
 #   成功：生成并返回token
 #       resu = {'code': 200, 'result': plaintext}(返回明文)
 #
 #   失败：
-#       resu = {'code': 10000, 'result': '参数不能为空！'}
+#       resu = {'code': 10001, 'result': '参数不能为空！'}
 #       return {'code': 10000, 'msg': '未找到私钥'}
-@server.route('/server_decode',methods=['get','post'])
-def server_decode():
+@server.route('/server_decode2',methods=['get','post'])
+def server_decode2():
     if request.method == 'POST':
         url=request.form.get("ip")
         sq=request.form.get("sq")
         cypher =request.form.get("cypher")
+        user_id = request.form.get("user_id")
+        token = request.form.get("token")
     else:
         url=request.args.get("ip")
         sq=request.args.get("sq")
         cypher =request.args.get("cypher")
-    #url = data['ip']
-    #sq = data['sq']
-    #cypher = data['cypher']
-    try:
-        if url and sq and cypher:
-            result = msg_check.mid_sever_decode(msg_check ,cypher, sq,url)
+        user_id = request.args.get("user_id")
+        token = request.args.get("token")
+
+    # try:
+    if url and sq and cypher and user_id and token:
+        result=check_token2(url,user_id,token)
+        if result['code']==200:
+            result = msg_check.mid_sever_decode(cypher, sq,url)
             return result
             # return {'code': 200, 'result': Decrypts.rsa_decrypt(cypher, prk)}
             # return {'code': 10000, 'msg': '未找到私钥'}
         else:
-            resu = {'code': 10001, 'result': '参数不能为空！'}
-            return resu
-    except:
-        resu = {'code': 10002, 'result': '出现未知错误！'}
+            return result
+    else:
+        resu = {'code': 10001, 'result': '参数不能为空！'}
+        return resu
+    # except:
+    #     resu = {'code': 10002, 'result': '出现未知错误！'}
 
+@server.route('/server_decode', methods=['get', 'post'])
+def server_decode():
+    if request.method == 'POST':
+        url = request.form.get("ip")
+        sq = request.form.get("sq")
+        cypher = request.form.get("cypher")
+    else:
+        url = request.args.get("ip")
+        sq = request.args.get("sq")
+        cypher = request.args.get("cypher")
+    # url = data['ip']
+    # sq = data['sq']
+    # cypher = data['cypher']
+    # try:
+    if url and sq and cypher:
+        result = msg_check.mid_sever_decode(cypher, sq, url)
+        return result
+        # return {'code': 200, 'result': Decrypts.rsa_decrypt(cypher, prk)}
+        # return {'code': 10000, 'msg': '未找到私钥'}
+    else:
+        resu = {'code': 10001, 'result': '参数不能为空！'}
+        return resu
+    # except:
+    #     resu = {'code': 10002, 'result': '出现未知错误！'}
+    #     return resu
 
 #函数功能：服务端通过序列号对密文解密
 #路径：/msg_check表的增删改查
