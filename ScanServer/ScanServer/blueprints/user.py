@@ -153,8 +153,10 @@ def pcap1():
                 print('======================')
                 print('======================')
                 build_docker(current_user.username)
-    #            return rediect(url_for(''))
-
+                from scanapi.v5.RepeterByRequests import RUNRepeter
+                thread = Thread(target=RUNRepeter, args=[current_user.username])
+                thread.start()
+ 
         return render_template("user/pcap.html", website=website, form=form)
 
 
