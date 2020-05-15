@@ -56,15 +56,23 @@ def requests_get(line, host):
         head = line.split(": ")
         if "\n" not in head[0] and head[0] != '':
             headers[head[0]]=head[1][:-1]
-    host='http://'+str(headers['Host'])+str(host)
     if 'Cookie' in headers.keys():
         cookie.setdefault('Cookie',headers['Cookie'])
         del headers['Cookie']
         print(cookie)
     print(headers)
-    for i in range(1,n+1):
-    # resp=requests.get(url=host,headers=headers,cookies=cookie).text
-    # print(resp)
+    try:
+        headers['Host']
+    except:
+        print("not Host!")
+    else:
+        host='http://'+str(headers['Host'])+str(host)
+        try:
+            resp=requests.get(url=host,headers=headers,cookies=cookie,timeout=3).text
+        except:
+            print("pass")
+        else:
+            print(resp)
 
 
 
@@ -97,9 +105,18 @@ def requests_post(line, host):
         print(cookie)
     print(headers)
     print(data)
-    # host = 'http://' + str(headers['Host']) + str(host)
-    # resp=requests.post(url=host,headers=headers,data=data).text
-    # print(resp)
+    try:
+        headers['Host']
+    except:
+        print("not Host!")
+    else:
+        host = 'http://' + str(headers['Host']) + str(host)
+        try:
+            resp=requests.post(url=host,headers=headers,data=data,timeout=3).text
+        except:
+            print("pass")
+        else:
+            print(resp)
 
 if __name__ == "__main__":
     while(1):
