@@ -1,16 +1,29 @@
-<link rel="stylesheet" href="../../static/css/show.css">
-<script src="../../static/js/show.js"></script>
+
 {% extends 'base.html' %}
 {% from 'bootstrap/form.html' import render_form %}
 
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/show.css') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<!--<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">-->
+<link href="{{ url_for('static', filename='css/font-awesome.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/animate.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 
-<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="{{ url_for('static', filename='js/jsencrypt.min.js') }}"></script>
+<!--<script src="{{ url_for('static', filename='js/plugins/peity/jquery.peity.min.js') }}"></script>-->
+<!--<script src="{{ url_for('static', filename='js/content.js') }}"></script>-->
+<!--&lt;!&ndash;<script src="{{ url_for('static', filename='js/demo/peity-demo.js') }}"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;<script src="{{ url_for('static', filename='js/plugins/echarts/echarts-all.js') }}"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;<script src="{{ url_for('static', filename='js/demo/echarts-demo.js') }}"></script>&ndash;&gt;-->
+<!--<script src="{{ url_for('static', filename='js/plugins/sparkline/jquery.sparkline.min.js') }}"></script>-->
 <script src="{{ url_for('static', filename='js/show.js') }}"></script>
- <style>
+<style>
 .container{
 margin-left: 10px;  margin-top:10px ;
     max-width: 100%!important;
@@ -20,6 +33,9 @@ margin-left: 10px;  margin-top:10px ;
 .container-left{
     float: left;
 }
+    li{
+        overflow-y: auto;
+    }
 
  </style>
 <div class="container   " >
@@ -53,7 +69,23 @@ margin-left: 10px;  margin-top:10px ;
 
             </div>
         </div>
+
+
         <div class="container-left" style="width:calc(100% - 450px);margin-left: 20px;max-height: 800px">
+
+            <!--<div class="container-left" style="min-width: 1000px;">-->
+                <!--<div class="col-sm-3">-->
+                <!--<div class="ibox">-->
+                    <!--<div class="ibox-content">-->
+                        <!--<h5>百分比</h5>-->
+                        <!--<h2>42/20</h2>-->
+                        <!--<div class="text-center">-->
+                            <!--<div id="sparkline5"></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
             <div class="container-left" style="min-width: 1000px;">
                 <div class="panel panel-default " >
                     <div class="panel-heading">
@@ -83,7 +115,12 @@ margin-left: 10px;  margin-top:10px ;
 
                 </div>
             </div>
+
+
         </div>
+
+
+
     </div>
 
 
@@ -108,21 +145,22 @@ margin-left: 10px;  margin-top:10px ;
             测试环境
         </div>
         <ul class="list-group">
-            <li class="list-group-item">ip:2.2.2.2</li>
-            <li class="list-group-item">kid:2</li>
-            <li class="list-group-item">user_id:Luz</li>
-             <li class="list-group-item">text:12345</li>
-            <li class="list-group-item">token:</li>
-            <li class="list-group-item">puk:</li>
-            <li class="list-group-item">sq:</li>
-            <li class="list-group-item">cipher_text:</li>
-            <li class="list-group-item">cipher_decode:</li>
+            <li class="list-group-item"><div style="float: left" >ip:</div><div style="float: left" id="ip">2.2.2.2</div></li>
+
+            <li class="list-group-item" ><div style="float: left" >kid:</div><div id="kid">2</div></li>
+            <li class="list-group-item" ><div style="float: left" >user_id:</div><div id="user_id">Luz</div></li>
+            <li class="list-group-item" ><div style="float: left" >text:</div><div id="text"style="overflow-y: auto;width: 210px;float: left">12345</div> </li>
+            <li class="list-group-item" ><div style="float: left" >token:</div><div id="token" style="overflow-y: auto;width: 210px;float: left"></div>  <button type="button" class="btn btn-default btn-sm" style="float: right" id="get_token">get_token</button> </li>
+            <li class="list-group-item" ><div style="float: left" >puk:</div><div id="puk" style="overflow-y: auto;width: 210px;float: left"></div> <button type="button" class="btn btn-default btn-sm" style="float: right" id="get_puk_sq">get_puk_sq</button></li>
+            <li class="list-group-item" ><div style="float: left" >sq:</div><div id="sq"style="overflow-y: auto;width: 210px;float: left"></div></li>
+            <li class="list-group-item" ><div style="float: left" >cipher_text:</div><div id="cipher_text"style="overflow-y: auto;width: 210px;float: left"></div>   <button type="button" class="btn btn-default btn-sm" style="float: right" id="rsa_encode">rsa_encode</button></li>
+            <li class="list-group-item" ><div style="float: left" >cipher_decode:</div><div id="cipher_decode"style="overflow-y: auto;width: 210px;float: left"></div> <button type="button" class="btn btn-default btn-sm" style="float: right" id="server_decode">server_decode</button></li>
         </ul>
     </div>
         </div>
     </div>
 
-     <div style="max-height: 500px;float: left;margin-left: 50px;width: calc(100% - 450px);overflow-y: auto;: " >
+     <div style="max-height: 500px;float: left;margin-left: 50px;width: calc(100% - 450px);: " >
         <div class="dropdown" >
                 <button type="button" class="btn dropdown-toggle" id="2" data-toggle="dropdown">ip选择
                     <span class="caret"></span>
@@ -136,6 +174,7 @@ margin-left: 10px;  margin-top:10px ;
                     </li>
                 </ul>
             </div>
+         <div style="overflow-y: auto;max-height: 500px;">
         <div style="width: 400px">
 
             <div class="panel panel-default">
@@ -161,17 +200,18 @@ margin-left: 10px;  margin-top:10px ;
                 <br/>   失败：
                 <br/>       参数为空{'code': 10001, 'result': '参数不能为空！'}
             </li>
-            <li class="list-group-item" style="width: 1000px">kid:2</li>
-            <li class="list-group-item" style="width: 1000px">user_id:Luz</li>
-             <li class="list-group-item" style="width: 1000px">text:12345</li>
-            <li class="list-group-item" style="width: 1000px">token:</li>
-            <li class="list-group-item" style="width: 1000px">puk:</li>
-            <li class="list-group-item" style="width: 1000px">sq:</li>
-            <li class="list-group-item" style="width: 1000px">cipher_text:</li>
-            <li class="list-group-item" style="width: 1000px">cipher_decode:</li>
+            <li class="list-group-item"style="width: 1000px">kid:2</li>
+            <li class="list-group-item"style="width: 1000px">user_id:Luz</li>
+             <li class="list-group-item"style="width: 1000px">text:12345 </li>
+            <li class="list-group-item"style="width: 1000px">token:  </li>
+            <li class="list-group-item"style="width: 1000px">puk:    </li>
+            <li class="list-group-item"style="width: 1000px">sq:</li>
+            <li class="list-group-item"style="width: 1000px">cipher_text:     </li>
+            <li class="list-group-item"style="width: 1000px">cipher_decode:  </li>
         </ul>
     </div>
         </div>
+             </div>
     </div>
 </div>
 
