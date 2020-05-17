@@ -1,6 +1,6 @@
 ip=''
-kid=''
-user_id=''
+kid='2'
+user_id='Luz'
 text=''
 token=''
 puk=''
@@ -25,13 +25,37 @@ $(document).ready(function () {
         cipher_text=$('#cipher_text').text()
         cipher_decode=$('#cipher_decode').text()
     })
+    $('#liuchen').click(function () {
+        // alert('img')
+        $(location).attr('href', '/view/img');
+    })
+    $('#download').click(function () {
+        window.location.href = '/static/wasm.rar'
+    })
+
+    $('#ceshi1').click(function () {
+        url='http://www.hyluz.cn:5000/init_ip?ip='+ip+'&kid='+kid
+        data='init_ip'
+        trans(url,data)
+    })
 
     $('#get_token').click(function () {
         url='http://www.hyluz.cn:5000/init_token?ip='+ip+'&user_id='+user_id
         data='init_token'
         trans(url,data)
     })
+      $('#ceshi2').click(function () {
+        url='http://www.hyluz.cn:5000/init_token?ip='+ip+'&user_id='+user_id
+        data='init_token'
+        trans(url,data)
+    })
+
        $('#get_puk_sq').click(function () {
+        url='http://www.hyluz.cn:5000/get_puk_sq?ip='+ip
+        data='get_puk_sq'
+        trans(url,data)
+    })
+    $('#ceshi4').click(function () {
         url='http://www.hyluz.cn:5000/get_puk_sq?ip='+ip
         data='get_puk_sq'
         trans(url,data)
@@ -40,11 +64,29 @@ $(document).ready(function () {
         $('#cipher_text').text(encode(puk,text))
 
     })
+    $('#token_check_bt').click(function () {
+        url='http://www.hyluz.cn:5000/check_token?ip='+ip+'&token='+token+'&user_id='+user_id
+        data='check_token'
+        // alert(url)
+        trans(url,data)
+    })
+    $('#ceshi3').click(function () {
+        url='http://www.hyluz.cn:5000/check_token?ip='+ip+'&token='+token+'&user_id='+user_id
+        data='check_token'
+        // alert(url)
+        trans(url,data)
+    })
      $('#server_decode').click(function () {
          cipher_text=cipher_text.replace(/\+/g,"@")
         url='http://www.hyluz.cn:5000/server_decode?ip='+ip+'&sq='+sq+'&cypher='+cipher_text
         data='server_decode'
         trans(url,data)
+    })
+    $('#ceshi5').click(function () {
+        cipher_text=cipher_text.replace(/\+/g,"@")
+        url='http://www.hyluz.cn:5000/server_decode?ip='+ip+'&sq='+sq+'&cypher='+cipher_text
+        data='server_decode'
+         trans(url,data)
     })
 
 
@@ -58,25 +100,35 @@ function trans(urll,data) {
             url : urll,
             // data:JSON.stringify(data),
             success : function(result) {
-                alert(result)
+                // alert(result)
                 if(typeof(result)=='string')
                 { if(data!='server_decode'){
                     result = result.replace(/\'/g, "\"");}
-                    alert(result)
+                    // alert(result)
                     result=$.parseJSON(result)
                 }
-                // alert(result['puk'])
+                // alert(JSON.stringify(result))
                 if(data=='init_token'){
                     // alert(result['token'])
                     $('#token').text(result['token'])
+                    $('#token3').text(result['token'])
+                    $('#res2').text(JSON.stringify(result))
                     token=result['token']
                 }else if (data=='get_puk_sq'){
                     $('#puk').text(result['puk'])
                     $('#sq').text(result['sq'])
+                    $('#sq6').text(result['sq'])
+                    $('#res4').text(JSON.stringify(result))
                     puk=result['puk']
                     sq=result['sq']
                 }else if(data=='server_decode'){
+                    $('#res5').text(JSON.stringify(result))
                     $('#cipher_decode').text(result['result'])
+                }else if(data=='check_token'){
+                    $('#res3').text(JSON.stringify(result))
+                     $('#token_check').text(result['msg'])
+                }else if(data=='init_ip'){
+                     $('#res1').text(JSON.stringify(result))
                 }
 
             },

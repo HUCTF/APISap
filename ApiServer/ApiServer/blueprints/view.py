@@ -23,6 +23,11 @@ def index():
         return render_template('view/index.html')
     else:
         return redirect_back()
+@view_bp.route('/img', methods=['GET', 'POST'])
+@login_required
+def img():
+
+        return render_template('view/img.html')
 
 
 @view_bp.route('/show', methods=['GET', 'POST'])

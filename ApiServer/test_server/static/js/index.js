@@ -33,6 +33,7 @@ $(document).ready(function(){
 
 });
 
+
 // 读取cookie
 function  wasm() {
      if (!WebAssembly.instantiateStreaming) {
@@ -42,20 +43,6 @@ function  wasm() {
             return await WebAssembly.instantiate(source, importObject);
         };
     }
-
-    // const go = new Go();
-    // let mod, inst;
-    // WebAssembly.instantiateStreaming(fetch("/static/encode.wasm", {
-    //   headers: {
-    //     "Content-Type": "application/wasm",
-    //      },
-    // }),go.importObject).then(
-    //     async result => {
-    //         mod = result.module;
-    //         inst = result.instance;
-    //         await go.run(inst);
-    //     }
-    // );
     const go = new Go();
     let mod, inst;
 

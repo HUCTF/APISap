@@ -151,6 +151,8 @@ margin-left: 10px;  margin-top:10px ;
             <li class="list-group-item" ><div style="float: left" >user_id:</div><div id="user_id">Luz</div></li>
             <li class="list-group-item" ><div style="float: left" >text:</div><div id="text"style="overflow-y: auto;width: 210px;float: left">12345</div> </li>
             <li class="list-group-item" ><div style="float: left" >token:</div><div id="token" style="overflow-y: auto;width: 210px;float: left"></div>  <button type="button" class="btn btn-default btn-sm" style="float: right" id="get_token">get_token</button> </li>
+            <li class="list-group-item" ><div style="float: left" >token_check:</div><div id="token_check" style="overflow-y: auto;width: 210px;float: left"></div>  <button type="button" class="btn btn-default btn-sm" style="float: right" id="token_check_bt">token_check</button> </li>
+
             <li class="list-group-item" ><div style="float: left" >puk:</div><div id="puk" style="overflow-y: auto;width: 210px;float: left"></div> <button type="button" class="btn btn-default btn-sm" style="float: right" id="get_puk_sq">get_puk_sq</button></li>
             <li class="list-group-item" ><div style="float: left" >sq:</div><div id="sq"style="overflow-y: auto;width: 210px;float: left"></div></li>
             <li class="list-group-item" ><div style="float: left" >cipher_text:</div><div id="cipher_text"style="overflow-y: auto;width: 210px;float: left"></div>   <button type="button" class="btn btn-default btn-sm" style="float: right" id="rsa_encode">rsa_encode</button></li>
@@ -160,8 +162,9 @@ margin-left: 10px;  margin-top:10px ;
         </div>
     </div>
 
-     <div style="max-height: 500px;float: left;margin-left: 50px;width: calc(100% - 450px);: " >
+     <div style="max-height: 700px;float: left;margin-left: 50px;width: calc(100% - 450px)" >
         <div class="dropdown" >
+            <div style="float: left">
                 <button type="button" class="btn dropdown-toggle" id="2" data-toggle="dropdown">ip选择
                     <span class="caret"></span>
                 </button>
@@ -174,45 +177,237 @@ margin-left: 10px;  margin-top:10px ;
                     </li>
                 </ul>
             </div>
-         <div style="overflow-y: auto;max-height: 500px;">
+            <div style="float: left"><button type="button" class="btn btn-default btn-sm"  id="liuchen"  >流程图</button></div>
+            <div style="float: left"><button type="button" class="btn btn-default btn-sm"  id="download">wasm下载</button></div>
+             <!--<div style="float: left"><button type="button" class="btn btn-default btn-sm"  id="download1">wasm_exec.js下载</button></div>-->
+            </div>
+
+         <div style="overflow-y: auto;max-height: 700px;clear: both">
         <div style="width: 400px">
 
             <div class="panel panel-default">
-        <div class="list-group-item" style="background-color: darkgrey;border-radius: 4px;opacity: 0.5;width: 1000px">
-            具体接口使用
+        <div class="list-group-item" style="background-color: darkgrey;border-radius: 4px;opacity: 0.5;width: 1000px;clear: both">
+            <div >具体接口使用</div>
+
         </div>
         <ul class="list-group">
             <li class="list-group-item" style="width: 1000px">
-                <a href="*">http://www.hyluz.cn:5000/init_token</a>
-                <br/>
-                接口介绍：
-                <br/>
-                <br/>函数功能：token生成器（每次用户登陆时使用一次）
-                <br/>路径：/init_token
+                <div style="width: 50%;float: left;">
+                    <a href="*">http://www.hyluz.cn:5000/init_ip</a>
+                    <br/>
+                    接口介绍：
+                    <br/>函数功能：后端初始配置（只需执行一次）
+                    <br/>路径：/init_ip
+                    <br/>输入：
+                    <br/>   ip = 开发者ip
+                    <br/> kid = 开发者id
+                    <br/>返回：
+                    <br/>   成功：初始化完成
+                    <br/>       初始化成功{'code': 200, 'msg': "初始化成功"}
+                    <br/>
+                    <br/>   失败：
+                    <br/>       参数为空{'code': 10001, 'result': '参数不能为空！'}
+                </div>
+                <div style="float: left;width: 50%;">
+                    <div style="margin-top: 5px"> 测试数据:</div>
+                     <div style="margin-top: 5px;clear: both"><div style="float: left" >ip:</div><div id="ip1"style="overflow-y: auto;width: 210px;float: left">2.2.2.2</div></div>
+                    <div style="margin-top: 5px;clear: both"><div style="float: left" >kid:</div><div id="kid1"style="overflow-y: auto;width: 210px;float: left">2</div></div>
+                    <div style="margin-top: 5px;clear: both"><button type="button" class="btn btn-default btn-sm"  id="ceshi1">测试接口</button></div>
+                    <div><div style="float: left">result:</div><div style="float: left" id="res1"></div></div>
+                </div>
+
+            </li>
+            <li class="list-group-item"style="width: 1000px">
+                <div style="width: 50%;float: left;">
+                   <a href="*">http://www.hyluz.cn:5000/init_token</a>
+                    <br/>
+                    接口介绍：
+                    <br/>函数功能：token生成器（每次用户登陆时使用一次）
+                    <br/>路径：/init_token
+                    <br/>输入：
+                    <br/>   ip = 开发者ip
+                    <br/>   user_id = 登陆用户的id（唯一标识符)
+                    <br/>返回：
+                    <br/>   成功：生成并返回token
+                    <br/>       resu = {'code': 200, 'token': token,'msg':'申请token成功'}
+                    <br/>       resu={'code': 201, 'token': token,'msg':'数据库已有记录'}
+                    <br/>
+                    <br/>   失败：
+                    <br/>       参数为空{'code': 10001, 'result': '参数不能为空！'}
+                </div>
+                <div style="float: left;width: 50%;">
+                    <div style="margin-top: 5px"> 测试数据:</div>
+                     <div style="margin-top: 5px;clear: both"><div style="float: left" >ip:</div><div id="ip2"style="overflow-y: auto;width: 210px;float: left">2.2.2.2</div></div>
+                     <div style="margin-top: 5px;clear: both"><div style="float: left" >user_id:</div><div id="user_id2"style="overflow-y: auto;width: 210px;float: left">2</div></div>
+
+
+                     <!--<div style="margin-top: 5px">ip:2.2.2.2</div>-->
+                     <!--<div style="margin-top: 5px">user_id:2</div>-->
+                    <div style="margin-top: 5px;clear: both"><button type="button" class="btn btn-default btn-sm"  id="ceshi2">测试接口</button></div>
+                    <div><div style="float: left">result:</div><div style="float: left" id="res2"></div></div>
+                </div>
+            </li>
+
+            <li class="list-group-item"style="width: 1000px">
+                <div style="width: 50%;float: left;">
+                   <a href="*">http://www.hyluz.cn:5000/check_token</a>
+                    <br/>
+                    接口介绍：
+                    <br/>函数功能：token校验器(每次校验前端发来的token)
+                    <br/>路径：/check_token
+                    <br/>输入：
+                    <br/>   ip = 开发者ip
+                    <br/>   user_id = 登陆用户的id（唯一标识符)
+                    <br/>   token = 待校验的token
+                    <br/>返回：
+                    <br/>   成功：生成并返回token
+                    <br/>       resu = {'code': 200, 'msg': "token验证成功"}
+                    <br/>
+                    <br/>   失败：
+                    <br/>       resu = {'code': 10000, 'msg': 'token验证失败'}
+                    <br/>       resu = {'code': 10001, 'msg': "token已更新，请重新登陆"}
+                    <br/>       resu = {'code': 10002, 'result': '参数不能为空！'}
+                </div>
+                <div style="float: left;width: 50%;">
+                    <div style="margin-top: 5px"> 测试数据:</div>
+                    <div style="margin-top: 5px"><div style="float: left" >ip:</div><div id="ip3"style="overflow-y: auto;width: 210px;float: left">2.2.2.2</div></div>
+                     <div style="margin-top: 5px;clear: both"><div style="float: left" >user_id:</div><div id="user_id3"style="overflow-y: auto;width: 210px;float: left">2</div></div>
+                    <div style="margin-top: 5px;clear: both"><div style="float: left" >token:</div><div id="token3"style="overflow-y: auto;width: 210px;float: left"></div></div>
+                    <div style="margin-top: 5px;clear: both"><button type="button" class="btn btn-default btn-sm"  id="ceshi3">测试接口</button></div>
+                    <div><div style="float: left">result:</div><div style="float: left" id="res3"></div></div>
+                </div>
+            </li>
+            <li class="list-group-item"style="width: 1000px">
+                <div style="width: 50%;float: left;">
+                   <a href="*">http://www.hyluz.cn:5000/get_puk_sq</a>
+                    <br/>
+                    接口介绍：
+                    <br/>函数功能：服务端通过序列号对密文解密
+                    <br/>路径：/get_puk_sq
+                    <br/>输入：
+                    <br/>   ip = 开发者ip
+                    <br/>返回：
+                    <br/>   成功：生成并返回token
+                    <br/>       resu = {'code': 200, 'result': plaintext}(返回明文)
+                    <br/>
+                    <br/>   失败：
+                    <br/>       resu = {'code': 10000, 'result': '参数不能为空！'}
+                    <br/>       return {'code': 10000, 'msg': '未找到私钥'}
+                </div>
+
+            <div style="float: left;width: 50%;">
+                    <div style="margin-top: 5px"> 测试数据:</div>
+                    <div style="margin-top: 5px"><div style="float: left" >ip:</div><div id="ip4"style="overflow-y: auto;width: 210px;float: left">2.2.2.2</div></div>
+
+                    <div style="margin-top: 5px;clear: both"><button type="button" class="btn btn-default btn-sm"  id="ceshi4">测试接口</button></div>
+                    <div><div style="float: left">result:</div><div style="float: left" id="res4"></div></div>
+                </div>
+            </li>
+
+
+            <li class="list-group-item"style="width: 1000px">
+                <div style="width: 50%;float: left;">
+                   <a href="*">http://www.hyluz.cn:5000/server_decode</a>
+                    <br/>
+                    接口介绍：
+                <br/>函数功能：服务端通过序列号对密文解密
+                <br/>路径：/server_decode
                 <br/>输入：
                 <br/>   ip = 开发者ip
-                <br/>   user_id = 登陆用户的id（唯一标识符)
+                <br>   sq=序列号
+                <br>   cypher= 密文
                 <br/>返回：
                 <br/>   成功：生成并返回token
-                <br/>       resu = {'code': 200, 'token': token,'msg':'申请token成功'}
-                <br/>       resu={'code': 201, 'token': token,'msg':'数据库已有记录'}
+                <br/>       resu = {'code': 200, 'result': plaintext}(返回明文)
                 <br/>
                 <br/>   失败：
-                <br/>       参数为空{'code': 10001, 'result': '参数不能为空！'}
+                <br/>       resu = {'code': 10000, 'result': '参数不能为空！'}
+                <br/>       return {'code': 10000, 'msg': '未找到私钥'}
+                </div>
+                <div style="float: left;width: 50%;">
+                    <div style="margin-top: 5px"> 测试数据:</div>
+                    <div style="margin-top: 5px;clear: both"><div style="float: left" >ip:</div><div id="ip5"style="overflow-y: auto;width: 210px;float: left">2.2.2.2</div></div>
+                    <div style="margin-top: 5px;clear: both"><div style="float: left" >sq:</div><div id="sq5"style="overflow-y: auto;width: 210px;float: left"></div></div>
+                    <div style="margin-top: 5px;clear: both"><div style="float: left" >cypher:</div><div id="cypher5"style="overflow-y: auto;width: 210px;float: left">12345</div></div>
+                    <div style="margin-top: 5px;clear: both"><button type="button" class="btn btn-default btn-sm"  id="ceshi5">测试接口</button></div>
+                    <div><div style="float: left">result:</div><div style="float: left" id="res5"></div></div>
+                </div>
             </li>
-            <li class="list-group-item"style="width: 1000px">kid:2</li>
-            <li class="list-group-item"style="width: 1000px">user_id:Luz</li>
-             <li class="list-group-item"style="width: 1000px">text:12345 </li>
-            <li class="list-group-item"style="width: 1000px">token:  </li>
-            <li class="list-group-item"style="width: 1000px">puk:    </li>
-            <li class="list-group-item"style="width: 1000px">sq:</li>
-            <li class="list-group-item"style="width: 1000px">cipher_text:     </li>
-            <li class="list-group-item"style="width: 1000px">cipher_decode:  </li>
+
+            <li class="list-group-item"style="width: 1000px">
+                <div style="width: 50%;float: left;">
+                   <!--<a href="*">http://www.hyluz.cn:5000/server_decode</a>-->
+                    <br/>
+                    wasm使用介绍：
+                    <br/>在自己的js中复制以下wasm函数，并且在执行js的时候调用一次，而后可以使用GetEncode函数进行加密
+                    <br/>html也需要首先引用wasm_exec.js
+                    <br/>$(document).ready(function(){
+                    <br/>    wasm()
+                    <br/>    res=GetEncode('I am front',ip)
+                    <br/>});
+                    <br/>
+                    <br/>function  wasm() {
+                    <br/>     if (!WebAssembly.instantiateStreaming) {
+                    <br/>        // polyfill
+                    <br/>        WebAssembly.instantiateStreaming = async (resp, importObject) => {
+                    <br/>            const source = await (await resp).arrayBuffer();
+                    <br/>            return await WebAssembly.instantiate(source, importObject);
+                    <br/>        };
+                    <br/>    }
+                    <br/>    const go = new Go();
+                    <br/>    let mod, inst;
+                    <br/>
+                    <br/>      fetch('/static/encode.wasm').then(response =>
+                    <br/>        response.arrayBuffer()
+                    <br/>      ).then(bytes =>
+                    <br/>        WebAssembly.instantiate(bytes, go.importObject)
+                    <br/>      ).then(
+                    <br/>          async result =>
+                    <br/>    {
+                    <br/>        mod = result.module;
+                    <br/>        inst = result.instance;
+                    <br/>        await
+                    <br/>        go.run(inst);
+                    <br/>    }
+                    <br/>      );
+                    <br/>
+                    <br/>}
+                </div>
+
+            </li>
+            <!--<li class="list-group-item"style="width: 1000px">-->
+                <!--<div style="width: 50%;float: left;">-->
+                   <!--<a href="*">http://www.hyluz.cn:5000/plain_encode</a>-->
+                    <!--<br/>-->
+                    <!--接口介绍：-->
+                    <!--<br/>函数功能：加密-->
+                    <!--<br/>路径：/plain_encode-->
+                    <!--<br/>输入：-->
+                    <!--<br/>   plain = 明文plain-->
+                    <!--<br/>   puk = 公钥puk-->
+                    <!--<br/>返回：-->
+                    <!--<br/>   成功：生成并返回token-->
+                    <!--<br/>       resu = {'code': 200, 'result': 密文}(返回明文)-->
+                    <!--<br/>-->
+                    <!--<br/>   失败：-->
+                    <!--<br/>       resu = {'code': 10000, 'result': '参数不能为空！'}-->
+
+                <!--</div>-->
+                <!--<div style="float: left;width: 50%;">-->
+                    <!--<div style="margin-top: 5px"> 测试数据:</div>-->
+                     <!--<div style="margin-top: 5px">ip:2.2.2.2</div>-->
+                     <!--<div style="margin-top: 5px">user_id:2</div>-->
+                    <!--<div style="margin-top: 5px"><button type="button" class="btn btn-default btn-sm"  id="ceshi5">测试接口</button></div>-->
+                    <!--<div><div style="float: left">result:</div><div style="float: left" id="res5"></div></div>-->
+                <!--</div>-->
+            <!--</li>-->
+
+
         </ul>
     </div>
         </div>
              </div>
     </div>
 </div>
-
+<!--<img src="{{ url_for('static', filename='img/1.png') }}" style="width: 100%px;">-->
 {% endblock %}

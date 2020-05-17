@@ -1,5 +1,5 @@
 #coding:utf-8
-from api_class import token_check,op,msg_random_check,token_consume,msg_check_consume,msg_random_check
+from api_class import token_check,op,msg_random_check,token_consume,msg_check_consume,msg_random_check,server_op
 from flask import Flask, render_template, request, current_app
 from flask_cors import *
 server = Flask(__name__)
@@ -11,12 +11,14 @@ token_api = token_check()
 msg_check =msg_random_check()
 token_consume=token_consume()
 msg_consume=msg_check_consume()
+ser=server_op()
 import json
 
 #函数功能：后端初始配置（只需执行一次）
 #路径：/init_ip
 #输入：
-#   ip = 开发者ip
+#   ip = 开发者所需ip
+#   kid = 开发者id
 #返回：
 #   成功：初始化完成
 #       初始化成功{'code': 200, 'msg': "初始化成功"}
@@ -37,10 +39,12 @@ def init_ip():
     else:
         url=request.args.get("ip")
         kid = request.args.get("kid")
+        print(url)
+        print(kid)
     try:
         if url:
             token_api.create_mid_server_key(kid,url)
-            print(1)
+            # ser.insert_token_consume(url)
             return {'code': 200, 'result': "初始化成功"}
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
@@ -99,7 +103,7 @@ def init_token():
         return json.dumps(resu,ensure_ascii=False)
 
 #函数功能：token校验器(每次校验前端发来的token)
-#路径：/init_token
+#路径：/check_token
 #输入：
 #   ip = 开发者ip
 #   user_id = 登陆用户的id（唯一标识符)
@@ -209,6 +213,8 @@ def plain_encode():
 #路径：/server_decode
 #输入：
 #   ip = 开发者ip
+#   sq=序列号
+#   cypher= 密文
 #返回：
 #   成功：生成并返回token
 #       resu = {'code': 200, 'result': plaintext}(返回明文)
@@ -417,7 +423,7 @@ def token_sql():
 
 #路径：/update_consume
 #输入：
-#   kid = 开发者kid
+#   url = ip
 #   num_or_type = 你想要增加参数的值，或者修改type的字符串
 #   operator = 你下要执行的操作，operator为[add_count,add_times,add_newdata，up_type]中的一个
 #               其中 add_count:增加count的num_or_type的量
@@ -443,25 +449,25 @@ def token_sql():
 @server.route('/update_token_consume',methods=['get','post'])
 def update_token_consume():
     if request.method == 'POST':
-        kid=request.form.get("kid")
+        url=request.form.get("url")
         num_or_type=request.form.get("num_or_type")
         operator =request.form.get("operator")
     else:
-        kid=request.args.get("kid")
+        url=request.args.get("url")
         num_or_type=request.args.get("num_or_type")
         operator =request.args.get("operator")
     try:
-        if kid and num_or_type and operator:
-            result=token_consume.check_have(kid)
+        if url and num_or_type and operator:
+            result=token_consume.check_have(url)
             if result['code']==10000:
                 return json.dumps(result,ensure_ascii=False)
             #     return {'code':10000,'msg':'没有找个用户的记录'}
             #     return  {'code':200,'msg':'存在记录'}
             if operator=='up_type':
-                token_consume.update_type(kid,num_or_type)
+                token_consume.update_type(url,num_or_type)
                 return {'code': 200, 'result': '更新type成功！'}
             else:
-                token_consume.update_num(kid,num_or_type,operator)
+                token_consume.update_num(url,num_or_type,operator)
                 return {'code': 200, 'result': '增加成功！'}
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
@@ -474,7 +480,7 @@ def update_token_consume():
 #函数功能：查询消费数据信息
 #路径：/token_consum_search
 #输入：
-#   kid= 开发者kid
+#   ip= 开发者ip
 #返回：
 #   成功：生成并返回token
 #
@@ -484,16 +490,16 @@ def update_token_consume():
 @server.route('/token_consum_search',methods=['get','post'])
 def search_by_kid():
     if request.method == 'POST':
-        kid=request.form.get("kid")
+        url=request.form.get("url")
     else:
-        kid=request.args.get("kid")
+        url=request.args.get("url")
 
-    if kid:
-        result=token_consume.check_have(kid)
+    if url:
+        result=token_consume.check_have(url)
         if result['code']==10000:
             return json.dumps(result,ensure_ascii=False)
         #     return {'code':10000,'msg':'没有找个用户的记录'}
-        return {'code': 200, 'result': token_consume.search_kid_msg(kid)}
+        return {'code': 200, 'result': token_consume.search_kid_msg(url)}
         #  result:[{'kid':test,'count':0,'times':0,'free':100,'data':1515151515,'type':'free'}]
     else:
         resu = {'code': 10001, 'result': '参数不能为空！'}
@@ -503,27 +509,27 @@ def search_by_kid():
 @server.route('/update_msg_check_consume',methods=['get','post'])
 def update_msg_check_consume():
     if request.method == 'POST':
-        kid=request.form.get("kid")
+        url=request.form.get("url")
         num_or_type=request.form.get("num_or_type")
         operator =request.form.get("operator")
     else:
-        kid=request.args.get("kid")
+        url=request.args.get("url")
         num_or_type=request.args.get("num_or_type")
         operator =request.args.get("operator")
     try:
-        if kid and num_or_type and operator:
+        if url and num_or_type and operator:
             # print('11111111111111111111')
-            result=msg_consume.check_have(kid)
+            result=msg_consume.check_have(url)
             # print('222222222222222222222222')
             if result['code']==10000:
                 return json.dumps(result,ensure_ascii=False)
             #     return {'code':10000,'msg':'没有找个用户的记录'}
             #     return  {'code':200,'msg':'存在记录'}
             if operator=='up_type':
-                msg_consume.update_type(kid,num_or_type)
+                msg_consume.update_type(url,num_or_type)
                 return {'code': 200, 'result': '更新type成功！'}
             else:
-                msg_consume.update_num(kid,num_or_type,operator)
+                msg_consume.update_num(url,num_or_type,operator)
                 return {'code': 200, 'result': '增加成功！'}
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
@@ -536,16 +542,16 @@ def update_msg_check_consume():
 @server.route('/msg_check_consum_search',methods=['get','post'])
 def msg_check_consum_search():
     if request.method == 'POST':
-        kid=request.form.get("kid")
+        url=request.form.get("url")
     else:
-        kid=request.args.get("kid")
+        url=request.args.get("url")
 
-    if kid:
-        result=msg_consume.check_have(kid)
+    if url:
+        result=msg_consume.check_have(url)
         if result['code']==10000:
             return json.dumps(result,ensure_ascii=False)
         #     return {'code':10000,'msg':'没有找个用户的记录'}
-        return {'code': 200, 'result': msg_consume.search_kid_msg(kid)}
+        return {'code': 200, 'result': msg_consume.search_kid_msg(url)}
         #  result:[{'kid':test,'count':0,'times':0,'free':100,'data':1515151515,'type':'free'}]
     else:
         resu = {'code': 10001, 'result': '参数不能为空！'}

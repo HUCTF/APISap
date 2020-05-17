@@ -21,74 +21,78 @@ server=server_operation()
 msg=msg_operation()
 tc=token_consume_operation()
 mcc=msg_check_consume_operation()
+class server_op:
+    def insert_token_consume(self,url):
+        tc.insert(url)
+        mcc.insert(url)
+
 
 class token_consume:
-
     # 查看当前消费类型的值
-    def search_kid_msg(self, kid):
-        return tc.search_num(kid)
+    def search_kid_msg(self, url):
+        return tc.search_num(url)
         # return {'code': 200, 'result': result}
 
     #消费后更新数字或type
-    def update_num(self,kid,num,operator):
+    def update_num(self,url,num,operator):
         print(operator)
         if operator=='add_count':
-            tc.add_count(kid,num)
+            tc.add_count(url,num)
         elif operator=='add_times':
             # print('-----------------------------')
-            tc.add_times(kid,num)
+            tc.add_times(url,num)
         elif operator=='add_newdata':
-            tc.add_newdata(kid,num)
+            tc.add_newdata(url,num)
         return {'code': 200, 'result': '成功'}
 
     #获取当前消费类型
-    def get_type(self,kid):
-        result=tc.search_by_kid(kid)
+    def get_type(self,url):
+        result=tc.search_by_kid(url)
         type=result['type']
         return {'code':200,'type':type}
 
-    def update_type(self,kid,type):
-       tc.set_type(kid, type)
+    def update_type(self,url,type):
+       tc.set_type(url, type)
 
 
     #查看当前消费kid是否存在记录
-    def check_have(self,kid):
-        if tc.checkhave(kid)==0:
+    def check_have(self,url):
+        if tc.checkhave(url)==0:
             return {'code':10000,'msg':'没有找个用户的记录'}
         else:
             return  {'code':200,'msg':'存在记录'}
 
 class msg_check_consume:
     # 查看当前消费类型的值
-    def search_kid_msg(self, kid):
-        return mcc.search_num(kid)
+    def search_kid_msg(self, url):
+        return mcc.search_num(url)
         # return {'code': 200, 'result': result}
 
     # 消费后更新数字或type
-    def update_num(self, kid, num, operator):
+    def update_num(self, url, num, operator):
         print(operator)
         if operator == 'add_count':
-            mcc.add_count(kid, num)
+            mcc.add_count(url, num)
         elif operator == 'add_times':
             # print('-----------------------------')
-            mcc.add_times(kid, num)
+            mcc.add_times(url, num)
         elif operator == 'add_newdata':
-            mcc.add_newdata(kid, num)
+            mcc.add_newdata(url, num)
         return {'code': 200, 'result': '成功'}
 
     # 获取当前消费类型
-    def get_type(self, kid):
-        result = mcc.search_by_kid(kid)
+    def get_type(self, url):
+        result = mcc.search_by_kid(url)
         type = result['type']
         return {'code': 200, 'type': type}
 
-    def update_type(self, kid, type):
-        mcc.set_type(kid, type)
+    def update_type(self, url, type):
+        mcc.set_type(url, type)
 
     # 查看当前消费kid是否存在记录
-    def check_have(self, kid):
+    def check_have(self, url):
         print('1111111144444444444444')
-        if mcc.checkhave(kid) == 0:
+        if mcc.checkhave(url) == 0:
             return {'code': 10000, 'msg': '没有找个用户的记录'}
         else:
             return {'code': 200, 'msg': '存在记录'}
@@ -107,7 +111,7 @@ class token_check:
     def check_have(self,kid):
         print(server.checkhave2(kid))
         if server.checkhave2(kid)==0:
-            return {'code':10000,'msg':'没有找个用户的记录'}
+            return {'code':10000,'msg':'没有找到用户的记录'}
         else:
             return  {'code':200,'msg':'存在记录'}
 
