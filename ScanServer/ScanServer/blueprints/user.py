@@ -155,7 +155,7 @@ def pcap1():
                 build_docker(current_user.username)
                 time.sleep(3)
                 os.system("docker exec -it scanserver-{0} sh /docker-entrypoint.sh".format(current_user.username))
-                time.sleep(100)
+                time.sleep(10)
                 from ScanServer.scanapi.v5.RepeterByRequests import RUNRepeter
                 thread = Thread(target=RUNRepeter, args=[current_user.username])
                 thread.start()

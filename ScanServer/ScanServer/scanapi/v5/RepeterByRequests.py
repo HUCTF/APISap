@@ -131,7 +131,4 @@ def RUNRepeter(filename):
         flag = RepeterByRequests(filename)
 
 if __name__ == "__main__":
-    while(1):
-        flag = Read_package()
-        if not flag:
-            break
+    RUNRepeter('aaaa')

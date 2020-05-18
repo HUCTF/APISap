@@ -137,4 +137,3 @@ def RUN_COOKIE(url, cookie):
             UN_URL.pop(0)
     print(OLD_URL)
 
-RUN_COOKIE('http://mall.27399.com/index.aspx','ASP.NET_SessionId=1my0f055ww1f3n55rh2mbgqv')
