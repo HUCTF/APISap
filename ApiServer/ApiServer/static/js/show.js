@@ -158,8 +158,8 @@ function init_trans(urll,op){
                     for(var each in res){
                         // alert(each)
                         text+='<div class="panel panel-default"><div class="panel-heading">ip:'+each+' </div>'
-                        text+='<table class="table"><th>功能</th><th>剩余使用次数</th><tr><td>token</td><td>'+res[each]['token']+'</td><td><button type="button" class="btn btn-default bt_num"  id="token_'+ip+'">查看</button></td></tr>'
-                        text+=' <tr><td>rsa</td><td>'+res[each]['msg']+'</td><td><button type="button" class="btn btn-default bt_num"  id="msg_'+ip+'">查看</button></td></tr>'
+                        text+='<table class="table"><th>功能</th><th>剩余使用次数</th><tr><td>token</td><td>'+res[each]['token']+'</td><td><button type="button" class="btn btn-default bt_num"  id="token_'+each+'">查看</button></td></tr>'
+                        text+=' <tr><td>rsa</td><td>'+res[each]['msg']+'</td><td><button type="button" class="btn btn-default bt_num"   id="msg_'+each+'">查看</button></td></tr>'
                         text+='</table></div>'
 
                     }
@@ -167,15 +167,15 @@ function init_trans(urll,op){
                 }
 
             $('.bt_num').click(function () {
-                    // alert(this.id)
+                   // alert(this.id.substring(6))
                 // alert(this.id.substring(0,5))
                     if(this.id.substring(0,3)=='msg'||this.id.substring(0,5)=='token') {
                         // alert(1)
                         if (this.id.substring(0, 3) == 'msg') {
-                            table_trans('http://www.hyluz.cn:5000/msg_sql?kid=' + kid + '&operator=search_all&ip=' + ip, this.id)
+                            table_trans('http://www.hyluz.cn:5000/msg_sql?kid=' + kid + '&operator=search_all&ip=' + this.id.substring(4), this.id)
                         }else if (this.id.substring(0, 5) == 'token') {
                             // alert(2)
-                            table_trans('http://www.hyluz.cn:5000/token_sql?kid=' + kid + '&operator=search_all&ip=' + ip, this.id)
+                            table_trans('http://www.hyluz.cn:5000/token_sql?kid=' + kid + '&operator=search_all&ip=' + this.id.substring(6), this.id)
                         }
                     }
                     // alert('good')
