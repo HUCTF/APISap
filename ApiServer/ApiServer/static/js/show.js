@@ -8,11 +8,15 @@ sq=''
 cipher_text=''
 cipher_decode=''
 $(document).ready(function () {
-    var $=jQuery.noConflict();
+        var $=jQuery.noConflict();
+    init_trans('http://127.0.0.1:5000/search_by_kid?kid='+kid,'init_num')
+    // init_trans()
+
     ip=$('#ip').text()
     kid=$('#kid').text()
     user_id=$('#user_id').text()
     text=$('#text').text()
+
 
     $('button').click(function () {
         ip=$('#ip').text()
@@ -44,13 +48,13 @@ $(document).ready(function () {
         data='init_token'
         trans(url,data)
     })
-      $('#ceshi2').click(function () {
+    $('#ceshi2').click(function () {
         url='http://www.hyluz.cn:5000/init_token?ip='+ip+'&user_id='+user_id
         data='init_token'
         trans(url,data)
     })
 
-       $('#get_puk_sq').click(function () {
+    $('#get_puk_sq').click(function () {
         url='http://www.hyluz.cn:5000/get_puk_sq?ip='+ip
         data='get_puk_sq'
         trans(url,data)
@@ -60,7 +64,7 @@ $(document).ready(function () {
         data='get_puk_sq'
         trans(url,data)
     })
-     $('#rsa_encode').click(function () {
+    $('#rsa_encode').click(function () {
         $('#cipher_text').text(encode(puk,text))
 
     })
@@ -76,7 +80,7 @@ $(document).ready(function () {
         // alert(url)
         trans(url,data)
     })
-     $('#server_decode').click(function () {
+    $('#server_decode').click(function () {
          cipher_text=cipher_text.replace(/\+/g,"@")
         url='http://www.hyluz.cn:5000/server_decode?ip='+ip+'&sq='+sq+'&cypher='+cipher_text
         data='server_decode'
@@ -140,6 +144,88 @@ function trans(urll,data) {
         });
 }
 
+function init_trans(urll,op){
+     $.ajax({
+            type : "GET",
+            contentType: "application/json;charset=UTF-8",
+            url : urll,
+            // data:JSON.stringify(data),
+            success : function(result) {
+                // alert(JSON.parse(result['result']))
+                res=JSON.parse(result['result'])
+                if(op=='init_num'){
+                    var text=''
+                    for(var each in res){
+                        // alert(each)
+                        text+='<div class="panel panel-default"><div class="panel-heading">ip:'+each+' </div>'
+                        text+='<table class="table"><th>功能</th><th>剩余使用次数</th><tr><td>token</td><td>'+res[each]['token']+'</td><td><button type="button" class="btn btn-default bt_num"  id="token_'+ip+'">查看</button></td></tr>'
+                        text+=' <tr><td>rsa</td><td>'+res[each]['msg']+'</td><td><button type="button" class="btn btn-default bt_num"  id="msg_'+ip+'">查看</button></td></tr>'
+                        text+='</table></div>'
+
+                    }
+                    $('#gn').html(text)
+                }
+
+            $('.bt_num').click(function () {
+                    // alert(this.id)
+                // alert(this.id.substring(0,5))
+                    if(this.id.substring(0,3)=='msg'||this.id.substring(0,5)=='token') {
+                        // alert(1)
+                        if (this.id.substring(0, 3) == 'msg') {
+                            table_trans('http://127.0.0.1:5000/msg_sql?kid=' + kid + '&operator=search_all&ip=' + ip, this.id)
+                        }else if (this.id.substring(0, 5) == 'token') {
+                            // alert(2)
+                            table_trans('http://127.0.0.1:5000/token_sql?kid=' + kid + '&operator=search_all&ip=' + ip, this.id)
+                        }
+                    }
+                    // alert('good')
+                })
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                alert("未知错误")
+
+            }
+        });
+}
+
+
+function table_trans(urll,op) {
+    $.ajax({
+            type : "GET",
+            contentType: "application/json;charset=UTF-8",
+            url : urll,
+            // data:JSON.stringify(data),
+            success : function(result) {
+                // alert(JSON.stringify(result['result']))
+                res=result['result']
+                if (op.substring(0, 5) == 'token') {
+                    var text='<div class="panel panel-default " ><div class="panel-heading"><h3 class="panel-title" style="margin: 0 auto">表：'+op+'</h3></div>'
+                    text+='<div class="panel-body">ip:'+ip+'</div> <table class="table" max-height="800px" style="overflow-y: auto"><th>user_id</th><th>time_code</th><th>token</th>'
+                     for(each in res){
+                        text+='<tr><td><div style="overflow-y: auto; max-width: 400px;max-height: 60px">'+res[each]['user_id']+'</div></td><td><div style="overflow-y: auto; max-width: 400px;max-height: 60px">'+res[each]['time_code']+'</div></td><td><div style="overflow-y: auto; max-width: 400px;max-height: 60px">'+res[each]['token']+'</div></td></tr>'
+                    }
+                    text+='</table></div>'
+                    $('#table1').html(text)
+                }else if (op.substring(0, 3) == 'msg') {
+                    var text='<div class="panel panel-default " ><div class="panel-heading"><h3 class="panel-title" style="margin: 0 auto">表：'+op+'</h3></div>'
+                    text+='<div class="panel-body">ip:'+ip+'</div><table class="table" ><th>prk</th><th>puk</th><th>sq</th><th>time_code</th>'
+                    for(each in res){
+                        text+='<tr><td><div style="overflow-y: auto; max-width: 400px;max-height: 60px">'+res[each]['prk']+'</div></td><td><div style="overflow-y: auto; max-width: 400px;max-height: 60px">'+res[each]['puk']+'</div></td><td><div style="overflow-y: auto; max-width: 400px;max-height: 60px">'+res[each]['sq']+'</div></td><td><div style="overflow-y: auto; max-width: 400px;max-height: 60px">'+res[each]['time_code']+'</div></td></tr>'
+                    }
+                    text+='</table></div>'
+                    $('#table1').html(text)
+                }
+
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                alert("未知错误")
+
+            }
+        });
+}
+
 function encode(PUBLIC_KEY,strr) {
     PUBLIC_KEY = PUBLIC_KEY.replace(/\\n/g, "");
     // alert(strr)
@@ -151,7 +237,6 @@ function encode(PUBLIC_KEY,strr) {
     return encrypted
 
 }
-
 
 
 function getCookie(cname)

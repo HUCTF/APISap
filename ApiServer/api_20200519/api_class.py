@@ -21,23 +21,48 @@ server=server_operation()
 msg=msg_operation()
 tc=token_consume_operation()
 mcc=msg_check_consume_operation()
-class server_op:
-    def insert_token_consume(self,url):
-        tc.insert(url)
-        mcc.insert(url)
 
+class server_opr:
+    def search_by_kid(self,kid):
+        res=server.search_by_kid(kid)
+        print(res)
+        return res
+
+    def serach_token_num(self,url):
+        res=tc.search_by_url(url)
+        print(res)
+        return res
+
+    def serach_msg_num(self,url):
+        res=mcc.search_by_url(url)
+        print(res)
+        return res
+
+    def insert_token_msg(self,url):
+        if tc.checkhave(url) == 1:
+            print('已有记录。')
+            resu = {'code': 200, 'msg': '已有记录。'}
+            return resu
+        else:
+            tc.insert(url)
+            mcc.insert(url)
+            resu = {'code': 200, 'msg': '已有记录。'}
+            return resu
+
+    # def show_token(self,name):
 
 class token_consume:
+
     # 查看当前消费类型的值
-    def search_kid_msg(self, url):
+    def search_url_msg(self, url):
         return tc.search_num(url)
         # return {'code': 200, 'result': result}
 
     #消费后更新数字或type
     def update_num(self,url,num,operator):
         print(operator)
-        if operator=='add_count':
-            tc.add_count(url,num)
+        if operator=='add_free':
+            tc.add_free(url,num)
         elif operator=='add_times':
             # print('-----------------------------')
             tc.add_times(url,num)
@@ -47,7 +72,7 @@ class token_consume:
 
     #获取当前消费类型
     def get_type(self,url):
-        result=tc.search_by_kid(url)
+        result=tc.search_by_url(url)
         type=result['type']
         return {'code':200,'type':type}
 
@@ -55,7 +80,7 @@ class token_consume:
        tc.set_type(url, type)
 
 
-    #查看当前消费kid是否存在记录
+    #查看当前消费url是否存在记录
     def check_have(self,url):
         if tc.checkhave(url)==0:
             return {'code':10000,'msg':'没有找个用户的记录'}
@@ -64,16 +89,16 @@ class token_consume:
 
 class msg_check_consume:
     # 查看当前消费类型的值
-    def search_kid_msg(self, url):
+    def search_url_msg(self, url):
         return mcc.search_num(url)
         # return {'code': 200, 'result': result}
 
     # 消费后更新数字或type
     def update_num(self, url, num, operator):
         print(operator)
-        if operator == 'add_count':
+        if operator == 'add_free':
             mcc.add_count(url, num)
-        elif operator == 'add_times':
+        elif operator == 'add_free':
             # print('-----------------------------')
             mcc.add_times(url, num)
         elif operator == 'add_newdata':
@@ -82,14 +107,14 @@ class msg_check_consume:
 
     # 获取当前消费类型
     def get_type(self, url):
-        result = mcc.search_by_kid(url)
+        result = mcc.search_by_url(url)
         type = result['type']
         return {'code': 200, 'type': type}
 
     def update_type(self, url, type):
         mcc.set_type(url, type)
 
-    # 查看当前消费kid是否存在记录
+    # 查看当前消费url是否存在记录
     def check_have(self, url):
         print('1111111144444444444444')
         if mcc.checkhave(url) == 0:
@@ -111,7 +136,7 @@ class token_check:
     def check_have(self,kid):
         print(server.checkhave2(kid))
         if server.checkhave2(kid)==0:
-            return {'code':10000,'msg':'没有找到用户的记录'}
+            return {'code':10000,'msg':'没有找个用户的记录'}
         else:
             return  {'code':200,'msg':'存在记录'}
 
@@ -173,6 +198,7 @@ class token_check:
         # print('___________aaa')
         result = op.search_by_user_id(user_id)
         if result!=[]:
+            token_consume.update_num(token_consume,url,-1,'add_free')
             token=result['token']
             resu = {'code': 200, 'token': token,'msg':'查询成功'}
             return resu
@@ -311,13 +337,6 @@ class msg_random_check:
     #       $.ajax({
     #            url:req_url,
     #            type:'post',
-    def mid_sever_encrypt(self, message, rsa_public_key):
-        pub_key = RSA.importKey(rsa_public_key)
-        cipher = Cipher_pkcs1_v1_5.new(pub_key)
-        msg = message.encode('utf-8')
-        cipher_text = base64.b64encode(cipher.encrypt(message=msg))
-        return {'code':200,'result':str(cipher_text)}
-
     def mid_sever_decode(cypher,sq,url):
         #print(cypher,sq,url)
         #print(11212221)
@@ -335,6 +354,7 @@ class msg_random_check:
         result=prk0.decrypt(base64.b64decode(cypher),prk0)
         msg.deleteis_by_sq(sq)
         print(result)
+        msg_check_consume.update_num(msg_check_consume,url,-1,'add_free')
         return {'code':200,'result':str(result)}
        # else:
          #   return {'code':10000,'msg':'未找到私钥'}

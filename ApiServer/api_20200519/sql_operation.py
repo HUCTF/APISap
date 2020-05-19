@@ -12,7 +12,6 @@ from sqlalchemy.orm import sessionmaker
 Base = declarative_base()
 app=Flask(__name__)
 engine = create_engine('mysql://123456:123456@localhost:3306/token1?charset=utf8', echo=True)
-#engine = create_engine('mysql://qwer2:123456@localhost:3306/qwer2?charset=utf8', echo=True)
 Session = sessionmaker(bind=engine)
 
 session = Session()
@@ -30,7 +29,7 @@ class msg_check_consume(Base):
         'mysql_engine': 'InnoDB',
         'mysql_charset': 'utf8'
     }
-    kid = Column(String(255), unique=True, primary_key=True, nullable=False)
+    url = Column(String(255), unique=True, primary_key=True, nullable=False)
     count = Column(Integer, nullable=False,default=0)
     times = Column(Integer, nullable=False,default=0)
     free = Column(Integer, nullable=False,default=1000)
@@ -44,7 +43,7 @@ class token_consume(Base):
         'mysql_engine': 'InnoDB',
         'mysql_charset': 'utf8'
     }
-    kid = Column(String(255), unique=True, primary_key=True, nullable=False)
+    url = Column(String(255), unique=True, primary_key=True, nullable=False)
     count = Column(Integer, nullable=False,default=0)
     times = Column(Integer, nullable=False,default=0)
     free = Column(Integer, nullable=False,default=1000)
@@ -339,7 +338,7 @@ class server_operation:
             })
         # print(resData)
         if resData != []:
-            return resData[0]
+            return resData
         else:
             return resData
 
@@ -390,7 +389,7 @@ class server_operation:
         # print(dic[0])
         return dic
 
-    def checkhave(self,url):
+    def checkhave(self, kid,url):
         # print('goddddddd' + url)
         # url='123'
         results = session.query(server).filter_by(url=url).all()
@@ -600,11 +599,11 @@ class token_consume_operation:
     def __init__(self):
         token=''
 
-    def insert(self,url):
+    def insert(self,url,count,times,free,data,type):
         # print(user_id1)
         # print(time_code1)
         # print(token1)
-        session.add(token_consume(url=url))
+        session.add(token_consume(url=url,count=count,times=times,free=free,data=data,type=type))
         session.commit()
         print('单个数据添加成功')
 
@@ -659,14 +658,19 @@ class token_consume_operation:
         print('修改成功')
 
     def add_count(self,url,num):
-        result=self.search_by_kid(url)
+        result=self.search_by_url(url)
         count=result['count']
         count=str(int(count) +int(num))
         self.update_count(url,count)
 
+    def add_free(self, url, num):
+        result = self.search_by_url(url)
+        count = result['free']
+        count = str(int(count) + int(num))
+        self.update_free(url, count)
     def add_times(self,url,num):
         # print('inert----------------------')
-        result = self.search_by_kid(url)
+        result = self.search_by_url(url)
         # print(result)
         times = result['times']
         # print('times:'+times)
@@ -680,7 +684,7 @@ class token_consume_operation:
         self.update_newdata(url,newdata)
     #
     # # 查
-    def search_by_kid(self,url):
+    def search_by_url(self,url):
         results = session.query(token_consume).filter_by(url=url).all()
         # print(results)
         resData = []
@@ -713,9 +717,9 @@ class token_consume_operation:
         # print(dic[0])
         return dic
 
-    def checkhave(self,kid):
+    def checkhave(self,url):
         # print(token.__tablename__)
-        results = session.query(token_consume).filter_by(kid=kid).all()
+        results = session.query(token_consume).filter_by(url=url).all()
         # print(results)
         # print(results[0].token)
         # print(12345)
@@ -726,8 +730,8 @@ class token_consume_operation:
             print(1)
             return 1
 
-    def search_num(self,kid):
-        result=self.search_by_kid(kid)
+    def search_num(self,url):
+        result=self.search_by_url(url)
         return {'code':200,'result':result}
 
 
@@ -744,11 +748,11 @@ class msg_check_consume_operation:
     def __init__(self):
         token=''
 
-    def insert(self,url):
+    def insert(self,url,count,times,free,data,type):
         # print(user_id1)
         # print(time_code1)
         # print(token1)
-        session.add(msg_check_consume(url=url))
+        session.add(msg_check_consume(url=url,count=count,times=times,free=free,data=data,type=type))
         session.commit()
         print('单个数据添加成功')
 
@@ -803,14 +807,18 @@ class msg_check_consume_operation:
         print('修改成功')
 
     def add_count(self,url,num):
-        result=self.search_by_kid(url)
+        result=self.search_by_url(url)
         count=result['count']
         count=str(int(count) +int(num))
         self.update_count(url,count)
-
+    def add_free(self,url,num):
+        result=self.search_by_url(url)
+        count=result['free']
+        count=str(int(count) +int(num))
+        self.update_free(url,count)
     def add_times(self,url,num):
         # print('inert----------------------')
-        result = self.search_by_kid(url)
+        result = self.search_by_url(url)
         # print(result)
         times = result['times']
         # print('times:'+times)
@@ -824,7 +832,7 @@ class msg_check_consume_operation:
         self.update_newdata(url,newdata)
     #
     # # 查
-    def search_by_kid(self,url):
+    def search_by_url(self,url):
         results = session.query(msg_check_consume).filter_by(url=url).all()
         # print(results)
         resData = []
@@ -874,7 +882,7 @@ class msg_check_consume_operation:
             return 1
 
     def search_num(self,url):
-        result=self.search_by_kid(url)
+        result=self.search_by_url(url)
         return {'code':200,'result':result}
 
 
