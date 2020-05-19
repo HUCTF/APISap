@@ -9,7 +9,7 @@ cipher_text=''
 cipher_decode=''
 $(document).ready(function () {
         var $=jQuery.noConflict();
-    init_trans('http://127.0.0.1:5000/search_by_kid?kid='+kid,'init_num')
+    init_trans('http://www.hyluz.cn:5000/search_by_kid?kid='+kid,'init_num')
     // init_trans()
 
     ip=$('#ip').text()
@@ -172,10 +172,10 @@ function init_trans(urll,op){
                     if(this.id.substring(0,3)=='msg'||this.id.substring(0,5)=='token') {
                         // alert(1)
                         if (this.id.substring(0, 3) == 'msg') {
-                            table_trans('http://127.0.0.1:5000/msg_sql?kid=' + kid + '&operator=search_all&ip=' + ip, this.id)
+                            table_trans('http://www.hyluz.cn:5000/msg_sql?kid=' + kid + '&operator=search_all&ip=' + ip, this.id)
                         }else if (this.id.substring(0, 5) == 'token') {
                             // alert(2)
-                            table_trans('http://127.0.0.1:5000/token_sql?kid=' + kid + '&operator=search_all&ip=' + ip, this.id)
+                            table_trans('http://www.hyluz.cn:5000/token_sql?kid=' + kid + '&operator=search_all&ip=' + ip, this.id)
                         }
                     }
                     // alert('good')
