@@ -142,10 +142,6 @@ def pcap1():
 
         if form.validate_on_submit():
             if form.spider.data:
-                print('kaishi')
-                flash('开始重发！')
-                print('重发')
-#                env_list = ['USERNAME={}\n'.format(current_user.username, 'RUNWAY={}\n'.format(runway)]
                 env_body = ['USERCOOKIE1={}\n'.format(usercookie1), 'USERCOOKIE2={}\n'.format(usercookie2)]
                 print(env_body)
                 write_env(current_user, env_list=env_body, flag='a')
@@ -154,11 +150,15 @@ def pcap1():
                 print('======================')
                 build_docker(current_user.username)
                 time.sleep(3)
+                flag = 0
                 os.system("docker exec -it scanserver-{0} sh /docker-entrypoint.sh".format(current_user.username))
-                while os.path.getsize('/opt/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider/{0}.txt'.format(current_user.username)) != '0':
-                    from ScanServer.scanapi.v5.RepeterByRequests import RUNRepeter
-                    thread = Thread(target=RUNRepeter, args=[current_user.username])
-                    thread.start()
+                while os.path.getsize('/opt/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider/{0}.txt'.format(current_user.username)) != 0 and flag == 0:
+                    if flag == 0:
+                        flag = 1
+                        from ScanServer.scanapi.v5.RepeterByRequests import RUNRepeter
+                        thread = Thread(target=RUNRepeter, args=[current_user.username])
+                        thread.start()
+                        break
  
         return render_template("user/pcap.html", website=website, form=form)
 

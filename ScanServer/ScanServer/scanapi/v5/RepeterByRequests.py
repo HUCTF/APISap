@@ -130,5 +130,3 @@ def RUNRepeter(filename):
     while(1):
         flag = RepeterByRequests(filename)
 
-if __name__ == "__main__":
-    RUNRepeter('aaaa')
