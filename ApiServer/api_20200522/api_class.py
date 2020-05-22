@@ -97,7 +97,7 @@ class msg_check_consume:
     def update_num(self, url, num, operator):
         print(operator)
         if operator == 'add_free':
-            mcc.add_count(url, num)
+            mcc.add_free(url, num)
         elif operator == 'add_free':
             # print('-----------------------------')
             mcc.add_times(url, num)
@@ -461,10 +461,10 @@ class msg_random_check:
             resu = {'code': 200,'sq':sq,'puk':self.public_key, 'msg': '数据已创建。'}
             return resu
         else:
-            print('222222')
+            # print('222222')
             self.public_key,self.private_key=Encrypts.generate_rsa_keys(Encrypts)
 
-            print('00000')
+            # print('00000')
             msg.insert(sq,self.public_key,self.private_key,time_code)
             print('数据创建成功。')
             resu = {"code": 200,"sq":str(sq),"puk":str(self.public_key)[2:-1], "msg": "数据创建成功。"}
