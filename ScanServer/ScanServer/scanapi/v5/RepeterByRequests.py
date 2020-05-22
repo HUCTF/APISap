@@ -61,26 +61,30 @@ class RepeterByRequests:
             head = line.split(": ")
             if "\n" not in head[0] and head[0] != '':
                 headers[head[0]]=head[1][:-1]
-        host='http://'+str(headers['Host'])+str(host)
+        host='https://'+str(headers['Host'])+str(host)
         if 'Cookie' in headers.keys():
             cookie.setdefault('Cookie',headers['Cookie'])
             del headers['Cookie']
             print(cookie)
         print(headers)
 
-        try:
+#        try:
            # from Checker.NLP.address import address
             #import re
-            from Checker.RE.checker import name
-            r = requests.get(host, cookies=cookie, headers=headers)
-            print(r.status_code)
-            r.encoding = r.apparent_encoding
-          #  print(r.text)
-            jjj = re.sub(r'<.*?>', '', r.text)
-            #print(jjj)
-            name(jjj)
-        except:
-            print('error')
+        from Checker.RE.checker import checker
+        from Checker.NLP.address import address
+
+        r = requests.get(host, cookies=cookie, headers=headers, timeout=2)
+        print(r.status_code)
+        r.encoding = r.apparent_encoding
+       #  print(r.text)
+  #     jjj = re.sub(r'<.*?>', '', r.text)
+        print(r.text)
+        checker(r.text)
+        print('---------')
+        address(r.text)
+      #  except:
+       #     print('error')
 
 
     def requests_post(self, line, host):
@@ -115,7 +119,7 @@ class RepeterByRequests:
         try: 
             from Checker.NLP.address import address
             import re
-            r = requests.post(host, cookies=cookie, data=data, headers=headers)
+            r = requests.post(host, cookies=cookie, data=data, headers=headers, timeout=2)
             print(r.status_code)
             r.encoding = r.apparent_encoding
             print(r.text)

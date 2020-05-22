@@ -58,5 +58,3 @@ def checker(resp):
     name(resp)
     address(resp)
 
-testtext = '{"cleanCache":false,"id":"9ED676EFEA73E2FCE055000000000001",1732500265@qq.com"mm":6226094425653290"25110CAABBB4B66D42ED09665DC32C3A","zjhm":"33028120000512821X","zgh":"2018283303","xm":"俞鸿权","lxdh":"17816783700","sfqy":"1","sfxgmm":"1","bjid":null,"xslbid":"1","bjmc":"20182831","xnqs":"17幢507","jtszd":"阳明街道鲤鱼山庄","sftxg":"1","xyid":"0020","sfid":"31/浙江","csid":"388/宁波","qyid":"3285/余姚市","yhlx":"student"}'
-checker(testtext)
