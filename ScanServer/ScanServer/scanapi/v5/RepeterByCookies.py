@@ -12,10 +12,11 @@ cookieC = {'Cookie':'159786test'}
 
 class RepeterByRequests:
 
-    def __init__(self, username):
+    def __init__(self, username, cookieb=None):
         self.username = username
         self.filename = '/opt/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider/{0}.txt'.format(self.username)
         self.fd=open(self.filename, errors='ignore')
+        self.cookieb=cookieb
         while(1):
             flag = self.Read_package()
             if not flag:
@@ -74,7 +75,7 @@ class RepeterByRequests:
         from Checker.RE.checker import checker
         from Checker.NLP.address import address
 
-        r = requests.get(host, cookies=cookie, headers=headers, timeout=2)
+        r = requests.get(host, cookies=self.cookieb, headers=headers, timeout=2)
         print(r.status_code)
         r.encoding = r.apparent_encoding
        #  print(r.text)
@@ -119,7 +120,7 @@ class RepeterByRequests:
         try: 
             from Checker.NLP.address import address
             import re
-            r = requests.post(host, cookies=cookie, data=data, headers=headers, timeout=2)
+            r = requests.post(host, cookies=self.cookieb, data=data, headers=headers, timeout=2)
             print(r.status_code)
             r.encoding = r.apparent_encoding
             print(r.text)
@@ -130,8 +131,8 @@ class RepeterByRequests:
             print('error')
 
 
-def RUNRepeter(filename):
+def RUNRepeter(filename, cookieb):
     while(1):
-        flag = RepeterByRequests(filename)
+        flag = RepeterByRequests(filename, cookieb)
 
 
