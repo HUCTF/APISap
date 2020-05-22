@@ -1,5 +1,5 @@
 #coding:utf-8
-from api_class import token_check,op,msg_random_check,token_consume,msg_check_consume
+from api_class import token_check,op,msg_random_check,token_consume,msg_check_consume,msg_random_check,server_opr
 from flask import Flask, render_template, request, current_app
 from flask_cors import *
 server = Flask(__name__)
@@ -11,6 +11,7 @@ token_api = token_check()
 msg_check =msg_random_check()
 token_consume=token_consume()
 msg_consume=msg_check_consume()
+server_op1=server_opr()
 import json
 
 #函数功能：后端初始配置（只需执行一次）
@@ -37,16 +38,20 @@ def init_ip():
     else:
         url=request.args.get("ip")
         kid = request.args.get("kid")
-
+    # try:
     if url:
         token_api.create_mid_server_key(kid,url)
-        return json.dumps({'code': 200, 'result': "初始化成功"})
+        server_op1.insert_token_msg(url)
+        print(1)
+        return {'code': 200, 'result': "初始化成功"}
     else:
         resu = {'code': 10001, 'result': '参数不能为空！'}
-        return json.dumps(resu)
+        return json.dumps(resu,ensure_ascii=False)
     # print(url)
         #这里面会创建两个表，包括msg_tb、token_tb
-
+    # except:
+    #     resu = {'code': 10002, 'result': '出现未知错误！'}
+    #     return json.dumps(resu,ensure_ascii=False)
 
 #函数功能：token生成器（每次用户登陆时使用一次）
 #路径：/init_token
@@ -84,17 +89,16 @@ def init_token():
         if user_id and url:
             #resu = {'code': 200, 'token': token,'msg':'申请token成功'}
             #resu={'code': 201, 'token': token,'msg':'数据库已有记录'}
-            resu=token_api.server_get_token(user_id, url)
-            return json.dumps(resu)
+            return token_api.server_get_token(user_id, url)
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
-            return json.dumps(resu)
+            return json.dumps(resu,ensure_ascii=False)
         #return {'code': 201, 'token': token,'msg':'数据库已有记录'}
         #resu = {'code': 200, 'token': token,'msg':'申请token成功'}
         # resu = {'code': 10000, 'msg': '参数不能为空！'}
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
-        return json.dumps(resu)
+        return json.dumps(resu,ensure_ascii=False)
 
 #函数功能：token校验器(每次校验前端发来的token)
 #路径：/init_token
@@ -121,53 +125,28 @@ def check_token():
         url=request.args.get("ip")
         user_id=request.args.get("user_id")
         server_token =request.args.get("token")
-        print(url)
-        print(user_id)
-        print(server_token)
-    try:
-
-        if url and user_id and server_token:
-            data = token_api.search_token_by_id(user_id, url)
-            if data['code'] == 200:
-                print('-------------------')
-                sql_token = data['token']
-                if server_token == sql_token:
-                    resu = {'code': 200, 'msg': "token验证成功"}
-                    return json.dumps(resu)
-                else:
-                    resu = {'code': 10000, 'msg': 'token验证失败'}
-                    return json.dumps(resu)
+    #try:
+    if url and user_id:
+        print(url,user_id)
+        data = token_api.search_token_by_id(user_id, url)
+        if data['code'] == 200:
+            sql_token = data['token']
+            if server_token == sql_token:
+                resu = {'code': 200, 'msg': "token验证成功"}
+                return json.dumps(resu,ensure_ascii=False)
             else:
-                resu = {'code': 10001, 'msg': "token已更新，请重新登陆"}
-                return json.dumps(resu)
+                resu = {'code': 10000, 'msg': 'token验证失败'}
+                return json.dumps(resu,ensure_ascii=False)
         else:
-            resu = {'code': 10002, 'result': '参数不能为空！'}
-            return json.dumps(resu)
-    except:
+            resu = {'code': 10001, 'msg': "token已更新，请重新登陆"}
+            return json.dumps(resu,ensure_ascii=False)
+    else:
+        resu = {'code': 10002, 'result': '参数不能为空！'}
+        return json.dumps(resu,ensure_ascii=False)
+    #except:
         resu = {'code': 10003, 'result': '出现未知错误！'}
-        return json.dumps(resu)
+        return json.dumps(resu,ensure_ascii=False)
 
-def check_token2(url,user_id,server_token):
-    try:
-        if url and user_id and server_token:
-            data = token_api.search_token_by_id(user_id, url)
-            if data['code'] == 200:
-                sql_token = data['token']
-                if server_token == sql_token:
-                    resu = {'code': 200, 'msg': "token验证成功"}
-                    return resu
-                else:
-                    resu = {'code': 10000, 'msg': 'token验证失败'}
-                    return resu
-            else:
-                resu = {'code': 10001, 'msg': "token已更新，请重新登陆"}
-                return resu
-        else:
-            resu = {'code': 10002, 'result': '参数不能为空！'}
-            return resu
-    except:
-        resu = {'code': 10002, 'result': '出现未知错误！'}
-        return resu
 
 #函数功能：客户端请求获得公钥与序列号
 #路径：/get_puk_sq
@@ -188,86 +167,60 @@ def front_get_puk_sq():
         url=request.args.get("ip")
     try:
         if url:
-            resu = msg_check.create_seq(url)
+
+            result = msg_check.create_seq(url)
+            print(str(result))
             # resu = {'code': 200, 'sq': sq, 'puk': self.public_key, 'msg': '数据创建成功。'}
             # resu = {'code': 200,'sq':sq,'puk':self.public_key, 'msg': '数据已创建。'}
-            return json.dumps(resu)
+            return str(result)
         else:
             resu = {'code': 10000, 'result': '参数不能为空！'}
-            return json.dumps(resu)
+            return json.dumps(resu,ensure_ascii=False)
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
-        return json.dumps(resu)
+        return json.dumps(resu,ensure_ascii=False)
+
 
 #函数功能：服务端通过序列号对密文解密
 #路径：/server_decode
 #输入：
 #   ip = 开发者ip
-#   sq=序列号
-#   cyhper=密文
 #返回：
 #   成功：生成并返回token
 #       resu = {'code': 200, 'result': plaintext}(返回明文)
 #
 #   失败：
-#       resu = {'code': 10001, 'result': '参数不能为空！'}
+#       resu = {'code': 10000, 'result': '参数不能为空！'}
 #       return {'code': 10000, 'msg': '未找到私钥'}
-@server.route('/server_decode2',methods=['get','post'])
-def server_decode2():
+@server.route('/server_decode',methods=['get','post'])
+def server_decode():
     if request.method == 'POST':
         url=request.form.get("ip")
         sq=request.form.get("sq")
         cypher =request.form.get("cypher")
-        user_id = request.form.get("user_id")
-        token = request.form.get("token")
     else:
+        print(11211)
         url=request.args.get("ip")
         sq=request.args.get("sq")
         cypher =request.args.get("cypher")
-        user_id = request.args.get("user_id")
-        token = request.args.get("token")
-
-    # try:
-    if url and sq and cypher and user_id and token:
-        result=check_token2(url,user_id,token)
-        if result['code']==200:
-            result = msg_check.mid_sever_decode(cypher, sq,url)
-            return result
-            # return {'code': 200, 'result': Decrypts.rsa_decrypt(cypher, prk)}
+        print(url,sq,cypher)
+    #url = data['ip']
+    #sq = data['sq']
+    #cypher = data['cypher']
+  #  try:
+        if url and sq and cypher:
+            result=msg_random_check.mid_sever_decode(cypher, sq,url)
+            return json.dumps(result,ensure_ascii=False)
+        # return {'code': 200, 'result': Decrypts.rsa_decrypt(cypher, prk)}
             # return {'code': 10000, 'msg': '未找到私钥'}
         else:
-            return result
-    else:
-        resu = {'code': 10001, 'result': '参数不能为空！'}
-        return resu
-    # except:
-    #     resu = {'code': 10002, 'result': '出现未知错误！'}
+            resu = {'code': 10001, 'result': '参数不能为空！'}
+            return json.dumps(resu,ensure_ascii=False)
+   # except:
+     #   resu = {'code': 10002, 'result': '出现未知错误！'}
+	 
+       # return(resu)
 
-@server.route('/server_decode', methods=['get', 'post'])
-def server_decode():
-    if request.method == 'POST':
-        url = request.form.get("ip")
-        sq = request.form.get("sq")
-        cypher = request.form.get("cypher")
-    else:
-        url = request.args.get("ip")
-        sq = request.args.get("sq")
-        cypher = request.args.get("cypher")
-    # url = data['ip']
-    # sq = data['sq']
-    # cypher = data['cypher']
-    # try:
-    if url and sq and cypher:
-        result = msg_check.mid_sever_decode(cypher, sq, url)
-        return result
-        # return {'code': 200, 'result': Decrypts.rsa_decrypt(cypher, prk)}
-        # return {'code': 10000, 'msg': '未找到私钥'}
-    else:
-        resu = {'code': 10001, 'result': '参数不能为空！'}
-        return resu
-    # except:
-    #     resu = {'code': 10002, 'result': '出现未知错误！'}
-    #     return resu
 
 #函数功能：服务端通过序列号对密文解密
 #路径：/msg_check表的增删改查
@@ -315,7 +268,7 @@ def msg_sql():
             # print('22222222222222')
             print(result)
             if result['code']==10000:
-                return result
+                return json.dumps(result,ensure_ascii=False)
             #     return {'code':10000,'msg':'没有找个用户的记录'}
             if (operator == 'insert_msg'):
                 if url and sq and puk and prk and time_code:
@@ -347,9 +300,11 @@ def msg_sql():
                     return {'code': 10001, 'result': '参数不能为空！'}
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
-            return resu
+            return json.dumps(resu,ensure_ascii=False)
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return json.dumps(resu,ensure_ascii=False)
+
 
 
 # 函数功能：token表的增删改查
@@ -395,7 +350,7 @@ def token_sql():
         if operator and kid:
             result = token_api.check_have(kid)
             if result['code'] == 10000:
-                return result
+                return json.dumps(result,ensure_ascii=False)
             if(operator=='insert_token'):
                 if url and user_id and time_code and token:
                     return token_api.insert_token(url,user_id,time_code,token)
@@ -427,9 +382,11 @@ def token_sql():
                     return {'code': 10001, 'result': '参数不能为空！'}
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
-            return resu
+            return json.dumps(resu,ensure_ascii=False)
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return json.dumps(resu,ensure_ascii=False)
+
 
 
 #函数功能：修改用户的消费参数，operator为[add_count,add_times,add_newdata，up_type]中的一个
@@ -473,7 +430,7 @@ def update_token_consume():
         if kid and num_or_type and operator:
             result=token_consume.check_have(kid)
             if result['code']==10000:
-                return result
+                return json.dumps(result,ensure_ascii=False)
             #     return {'code':10000,'msg':'没有找个用户的记录'}
             #     return  {'code':200,'msg':'存在记录'}
             if operator=='up_type':
@@ -484,9 +441,11 @@ def update_token_consume():
                 return {'code': 200, 'result': '增加成功！'}
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
-            return resu
+            return json.dumps(resu,ensure_ascii=False)
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return json.dumps(resu,ensure_ascii=False)
+
 
 #函数功能：查询消费数据信息
 #路径：/token_consum_search
@@ -508,64 +467,97 @@ def search_by_kid():
     if kid:
         result=token_consume.check_have(kid)
         if result['code']==10000:
-            return result
+            return json.dumps(result,ensure_ascii=False)
         #     return {'code':10000,'msg':'没有找个用户的记录'}
         return {'code': 200, 'result': token_consume.search_kid_msg(kid)}
         #  result:[{'kid':test,'count':0,'times':0,'free':100,'data':1515151515,'type':'free'}]
     else:
         resu = {'code': 10001, 'result': '参数不能为空！'}
-        return resu
+        return json.dumps(resu,ensure_ascii=False)
 
 
 @server.route('/update_msg_check_consume',methods=['get','post'])
 def update_msg_check_consume():
     if request.method == 'POST':
-        kid=request.form.get("kid")
+        url=request.form.get("url")
         num_or_type=request.form.get("num_or_type")
         operator =request.form.get("operator")
     else:
-        kid=request.args.get("kid")
+        url=request.args.get("url")
         num_or_type=request.args.get("num_or_type")
         operator =request.args.get("operator")
     try:
-        if kid and num_or_type and operator:
+        if url and num_or_type and operator:
             # print('11111111111111111111')
-            result=msg_consume.check_have(kid)
+            result=msg_consume.check_have(url)
             # print('222222222222222222222222')
             if result['code']==10000:
-                return result
+                return json.dumps(result,ensure_ascii=False)
             #     return {'code':10000,'msg':'没有找个用户的记录'}
             #     return  {'code':200,'msg':'存在记录'}
             if operator=='up_type':
-                msg_consume.update_type(kid,num_or_type)
+                msg_consume.update_type(url,num_or_type)
                 return {'code': 200, 'result': '更新type成功！'}
             else:
-                msg_consume.update_num(kid,num_or_type,operator)
+                msg_consume.update_num(url,num_or_type,operator)
                 return {'code': 200, 'result': '增加成功！'}
         else:
             resu = {'code': 10001, 'result': '参数不能为空！'}
-            return resu
+            return json.dumps(resu,ensure_ascii=False)
     except:
         resu = {'code': 10002, 'result': '出现未知错误！'}
+        return json.dumps(resu,ensure_ascii=False)
+
 
 @server.route('/msg_check_consum_search',methods=['get','post'])
 def msg_check_consum_search():
+    if request.method == 'POST':
+        url=request.form.get("url")
+    else:
+        url=request.args.get("url")
+
+    if url:
+        result=msg_consume.check_have(url)
+        if result['code']==10000:
+            return json.dumps(result,ensure_ascii=False)
+        #     return {'code':10000,'msg':'没有找个用户的记录'}
+        return {'code': 200, 'result': msg_consume.search_url_msg(url)}
+        #  result:[{'url':test,'count':0,'times':0,'free':100,'data':1515151515,'type':'free'}]
+    else:
+        resu = {'code': 10001, 'result': '参数不能为空！'}
+        return json.dumps(resu,ensure_ascii=False)
+
+@server.route('/search_by_kid',methods=['get','post'])
+def search_by_kid1():
     if request.method == 'POST':
         kid=request.form.get("kid")
     else:
         kid=request.args.get("kid")
 
     if kid:
-        result=msg_consume.check_have(kid)
+        result=token_api.check_have(kid)
         if result['code']==10000:
-            return result
+            return json.dumps(result,ensure_ascii=False)
         #     return {'code':10000,'msg':'没有找个用户的记录'}
-        return {'code': 200, 'result': msg_consume.search_kid_msg(kid)}
+        result=server_op1.search_by_kid(kid)
+        # json.loads(result['result'])
+        res={}
+        j=0
+        print(result)
+        for i in result:
+            print(i)
+            res[i['url']]=i['url']
+        for i in res:
+            print(i+'------------')
+            token=server_op1.serach_token_num(i)
+            msg=server_op1.serach_msg_num(i)
+            # print(token)
+            res[i]={'token':token['free'],'msg':msg['free']}
+        return {'code': 200, 'result':json.dumps(res,ensure_ascii=False) }
         #  result:[{'kid':test,'count':0,'times':0,'free':100,'data':1515151515,'type':'free'}]
     else:
         resu = {'code': 10001, 'result': '参数不能为空！'}
-        return resu
-
+        return json.dumps(resu,ensure_ascii=False)
 
 @server.route('/test',methods=['get','post'])
 def test():

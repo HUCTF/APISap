@@ -22,73 +22,102 @@ msg=msg_operation()
 tc=token_consume_operation()
 mcc=msg_check_consume_operation()
 
+class server_opr:
+    def search_by_kid(self,kid):
+        res=server.search_by_kid(kid)
+        print(res)
+        return res
+
+    def serach_token_num(self,url):
+        res=tc.search_by_url(url)
+        print(res)
+        return res
+
+    def serach_msg_num(self,url):
+        res=mcc.search_by_url(url)
+        print(res)
+        return res
+
+    def insert_token_msg(self,url):
+        if tc.checkhave(url) == 1:
+            print('已有记录。')
+            resu = {'code': 200, 'msg': '已有记录。'}
+            return resu
+        else:
+            tc.insert(url)
+            mcc.insert(url)
+            resu = {'code': 200, 'msg': '已有记录。'}
+            return resu
+
+    # def show_token(self,name):
+
 class token_consume:
 
     # 查看当前消费类型的值
-    def search_kid_msg(self, kid):
-        return tc.search_num(kid)
+    def search_url_msg(self, url):
+        return tc.search_num(url)
         # return {'code': 200, 'result': result}
 
     #消费后更新数字或type
-    def update_num(self,kid,num,operator):
+    def update_num(self,url,num,operator):
         print(operator)
-        if operator=='add_count':
-            tc.add_count(kid,num)
+        if operator=='add_free':
+            tc.add_free(url,num)
         elif operator=='add_times':
             # print('-----------------------------')
-            tc.add_times(kid,num)
+            tc.add_times(url,num)
         elif operator=='add_newdata':
-            tc.add_newdata(kid,num)
+            tc.add_newdata(url,num)
         return {'code': 200, 'result': '成功'}
 
     #获取当前消费类型
-    def get_type(self,kid):
-        result=tc.search_by_kid(kid)
+    def get_type(self,url):
+        result=tc.search_by_url(url)
         type=result['type']
         return {'code':200,'type':type}
 
-    def update_type(self,kid,type):
-       tc.set_type(kid, type)
+    def update_type(self,url,type):
+       tc.set_type(url, type)
 
 
-    #查看当前消费kid是否存在记录
-    def check_have(self,kid):
-        if tc.checkhave(kid)==0:
+    #查看当前消费url是否存在记录
+    def check_have(self,url):
+        if tc.checkhave(url)==0:
             return {'code':10000,'msg':'没有找个用户的记录'}
         else:
             return  {'code':200,'msg':'存在记录'}
 
 class msg_check_consume:
     # 查看当前消费类型的值
-    def search_kid_msg(self, kid):
-        return mcc.search_num(kid)
+    def search_url_msg(self, url):
+        return mcc.search_num(url)
         # return {'code': 200, 'result': result}
 
     # 消费后更新数字或type
-    def update_num(self, kid, num, operator):
+    def update_num(self, url, num, operator):
         print(operator)
-        if operator == 'add_count':
-            mcc.add_count(kid, num)
-        elif operator == 'add_times':
+        if operator == 'add_free':
+            mcc.add_free(url, num)
+        elif operator == 'add_free':
             # print('-----------------------------')
-            mcc.add_times(kid, num)
+            mcc.add_times(url, num)
         elif operator == 'add_newdata':
-            mcc.add_newdata(kid, num)
+            mcc.add_newdata(url, num)
         return {'code': 200, 'result': '成功'}
 
     # 获取当前消费类型
-    def get_type(self, kid):
-        result = mcc.search_by_kid(kid)
+    def get_type(self, url):
+        result = mcc.search_by_url(url)
         type = result['type']
         return {'code': 200, 'type': type}
 
-    def update_type(self, kid, type):
-        mcc.set_type(kid, type)
+    def update_type(self, url, type):
+        mcc.set_type(url, type)
 
-    # 查看当前消费kid是否存在记录
-    def check_have(self, kid):
+    # 查看当前消费url是否存在记录
+    def check_have(self, url):
         print('1111111144444444444444')
-        if mcc.checkhave(kid) == 0:
+        if mcc.checkhave(url) == 0:
             return {'code': 10000, 'msg': '没有找个用户的记录'}
         else:
             return {'code': 200, 'msg': '存在记录'}
@@ -169,6 +198,7 @@ class token_check:
         # print('___________aaa')
         result = op.search_by_user_id(user_id)
         if result!=[]:
+            token_consume.update_num(token_consume,url,-1,'add_free')
             token=result['token']
             resu = {'code': 200, 'token': token,'msg':'查询成功'}
             return resu
@@ -307,26 +337,27 @@ class msg_random_check:
     #       $.ajax({
     #            url:req_url,
     #            type:'post',
+    def mid_sever_decode(cypher,sq,url):
+        #print(cypher,sq,url)
+        #print(11212221)
+        prk=msg_random_check.mid_server_transport_priKey2(sq,url)
 
-    def mid_sever_decode(self,cypher, sq, url):
-        # print(cypher,sq,url)
-        # print(11212221)
-        prk = msg_random_check.mid_server_transport_priKey2(self,sq, url)
-
-        # print(prk)
-        cypher = cypher.replace(" ", "")
-        # cypher=cypher[:-1]
+        #print(prk)
+        cypher=cypher.replace(" ","")
+        cypher=cypher.replace("@","+")
+        #cypher=cypher[:-1]
         print(cypher)
-        prk = RSA.importKey(prk)
-        prk0 = Cipher_pkcs1_v1_5.new(prk)
-        # if(prk['code']==200):
-        #   prk=prk['prk']
-        result = prk0.decrypt(base64.b64decode(cypher), prk0)
+        prk=RSA.importKey(prk)
+        prk0=Cipher_pkcs1_v1_5.new(prk)
+       # if(prk['code']==200):
+         #   prk=prk['prk']
+        result=prk0.decrypt(base64.b64decode(cypher),prk0)
         msg.deleteis_by_sq(sq)
         print(result)
-        return {'code': 200, 'result': str(result)}
-                # else:
-                #   return {'code':10000,'msg':'未找到私钥'}
+        msg_check_consume.update_num(msg_check_consume,url,-1,'add_free')
+        return {'code':200,'result':str(result)}
+       # else:
+         #   return {'code':10000,'msg':'未找到私钥'}
     #中间人为后端提供的解密接口
     # def mid_sever_decode(self,cypher,sq,url):
     #     prk=self.mid_server_transport_priKey2(sq,url)
@@ -393,7 +424,7 @@ class msg_random_check:
        # return  result
 
     #中间人为自己提供私钥的接口
-    def mid_server_transport_priKey2(self,sq,url):
+    def mid_server_transport_priKey2(sq,url):
         print(sq)
         msg.init(url)
         #if self.check_sq(self,sq,url) !=1:
@@ -406,12 +437,11 @@ class msg_random_check:
             print(prk)
             return(prk)
         else:
-           result={'code':10001,'msg':'未找到私钥'}
+           result={'code':10000,'msg':'未找到私钥'}
            return result
     #else:
       #  result = {'code': 10001, 'msg': '没有这个序列号'}
        # return  result
-
 
     #用于生成序列号并且生成相应的rsa key，插入数据库中
     def create_seq(self,url):
@@ -431,10 +461,10 @@ class msg_random_check:
             resu = {'code': 200,'sq':sq,'puk':self.public_key, 'msg': '数据已创建。'}
             return resu
         else:
-            print('222222')
+            # print('222222')
             self.public_key,self.private_key=Encrypts.generate_rsa_keys(Encrypts)
 
-            print('00000')
+            # print('00000')
             msg.insert(sq,self.public_key,self.private_key,time_code)
             print('数据创建成功。')
             resu = {"code": 200,"sq":str(sq),"puk":str(self.public_key)[2:-1], "msg": "数据创建成功。"}
