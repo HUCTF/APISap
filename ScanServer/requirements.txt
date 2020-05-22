@@ -8,4 +8,4 @@ psutil
 wtforms
 docker
 mysqlclient
-
+Email_Validator

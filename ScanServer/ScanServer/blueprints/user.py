@@ -155,10 +155,10 @@ def pcap1():
                 build_docker(current_user.username)
                 time.sleep(3)
                 os.system("docker exec -it scanserver-{0} sh /docker-entrypoint.sh".format(current_user.username))
-                time.sleep(10)
-                from ScanServer.scanapi.v5.RepeterByRequests import RUNRepeter
-                thread = Thread(target=RUNRepeter, args=[current_user.username])
-                thread.start()
+                while os.path.getsize('/opt/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider/{0}.txt'.format(current_user.username)) != '0':
+                    from ScanServer.scanapi.v5.RepeterByRequests import RUNRepeter
+                    thread = Thread(target=RUNRepeter, args=[current_user.username])
+                    thread.start()
  
         return render_template("user/pcap.html", website=website, form=form)
 
