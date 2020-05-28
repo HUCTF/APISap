@@ -61,7 +61,7 @@ class RepeterByRequests:
             head = line.split(": ")
             if "\n" not in head[0] and head[0] != '':
                 headers[head[0]]=head[1][:-1]
-        host='https://'+str(headers['Host'])+str(host)
+        host='http://'+str(headers['Host'])+str(host)
         if 'Cookie' in headers.keys():
             cookie.setdefault('Cookie',headers['Cookie'])
             del headers['Cookie']
@@ -71,10 +71,10 @@ class RepeterByRequests:
 #        try:
            # from Checker.NLP.address import address
             #import re
-        from Checker.RE.checker import checker
-        from Checker.NLP.address import address
+        from ScanServer.scanapi.v5.Checker.RE.checker import checker
+        from ScanServer.scanapi.v5.Checker.NLP.address import address
 
-        r = requests.get(host, cookies=cookie, headers=headers, timeout=2)
+        r = requests.get(host, cookies=cookie, headers=headers, timeout=5)
         print(r.status_code)
         r.encoding = r.apparent_encoding
        #  print(r.text)
@@ -117,9 +117,9 @@ class RepeterByRequests:
         print(headers)
         print(data)
         try: 
-            from Checker.NLP.address import address
+            from ScanServer.scanapi.v5.Checker.NLP.address import address
             import re
-            r = requests.post(host, cookies=cookie, data=data, headers=headers, timeout=2)
+            r = requests.post(host, cookies=cookie, data=data, headers=headers, timeout=5)
             print(r.status_code)
             r.encoding = r.apparent_encoding
             print(r.text)
