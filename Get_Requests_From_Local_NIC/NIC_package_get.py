@@ -86,6 +86,9 @@ class NICPackage:
         else:
             sniff(iface=self.iface,count=self.package_num,prn=self.package_print,lfilter=lambda p: (("GET" in str(p)) or ("POST" in str(p))) and (url in str(p)) and ('HTTP' in str(p)),filter="tcp")
             #iface='XXX'  监听本地名为XXX的网卡
+    def save(self):
+        with open(self.filename_txt,'a') as outputxt:
+            outputxt.write("==========")
 
 
 def NICRUN(netname=None,NEEDPCAP=111,ID=''):
@@ -98,6 +101,7 @@ def NICRUN(netname=None,NEEDPCAP=111,ID=''):
         a = NICPackage(IFACE=netname,NEEDPCAP=NEEDPCAP,ID=ID)
         a.NEEDPCAP=NEEDPCAP
         a.mainrun()
+        a.save()
     else:
         print("=======================================================")
         print('请设置网卡名！！！')
