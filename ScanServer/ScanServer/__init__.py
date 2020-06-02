@@ -98,3 +98,5 @@ def register_commands(app):
             user.set_password(password)
             db.session.add(user)
             db.session.commit()
+
+app = create_app()
