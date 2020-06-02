@@ -105,35 +105,27 @@ def RUN_COOKIE(url, cookie):
     :param type:1为cookie，2为用户名密码
     :return:
     '''
-    #https://jkxxcj.zjhu.edu.cn/
-    global base_url
-    #base_url = input("基础url:")
-    #login_url = input("登入接口url:")
-    base_url= url
-    login_url = url
-    cof = cookie.split("=")
-    cookie={
-        cof[0]:cof[1]
-    }
-    # print(find_url(s_find(url, cookie)))
-    OLD_URL = []
-    UN_URL = []
-    # url = 'https://jkxxcj.zjhu.edu.cn/serviceList.html'
-    # url = input("主页url:")
-    # msg_cookies = find_cookies(url)
-    # cookie = msg_cookies[0]
-    # login_url = msg_cookies[1]
-    # base_url = 'https://jkxxcj.zjhu.edu.cn/'
-    UN_URL = find_url(s_find(url, cookie))
-    OLD_URL.append(url)
-    OLD_URL.append(url)
-    for x in UN_URL:
-        print(x)
-        if (url_repeat(str(x),OLD_URL)):
-            # print('链接:' + str(x))
-            UN_URL = UN_URL +find_url(s_find(str(x), cookie))
-            OLD_URL.append(str(x))
-        else:
-            UN_URL.pop(0)
-    print(OLD_URL)
-
+    try:
+        global base_url
+        base_url= url
+        login_url = url
+        cof = cookie.split("=")
+        cookie={
+            cof[0]:cof[1]
+        }
+        OLD_URL = []
+        UN_URL = []
+        UN_URL = find_url(s_find(url, cookie))
+        OLD_URL.append(url)
+        OLD_URL.append(url)
+        for x in UN_URL:
+            print(x)
+            if (url_repeat(str(x),OLD_URL)):
+                # print('链接:' + str(x))
+                UN_URL = UN_URL +find_url(s_find(str(x), cookie))
+                OLD_URL.append(str(x))
+            else:
+                UN_URL.pop(0)
+        print(OLD_URL)
+    except:
+        print('next')

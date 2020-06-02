@@ -77,15 +77,10 @@ class RepeterByRequests:
         r = requests.get(host, cookies=cookie, headers=headers, timeout=5)
         print(r.status_code)
         r.encoding = r.apparent_encoding
-       #  print(r.text)
   #     jjj = re.sub(r'<.*?>', '', r.text)
-        print(r.text)
         checker(r.text)
         print('---------')
         address(r.text)
-      #  except:
-       #     print('error')
-
 
     def requests_post(self, line, host):
         line = line[1:]
@@ -114,6 +109,7 @@ class RepeterByRequests:
             cookie.setdefault('Cookie',headers['Cookie'])
             del headers['Cookie']
             print(cookie)
+        host='http://'+str(headers['Host'])+str(host)
         print(headers)
         print(data)
         try: 
