@@ -114,3 +114,30 @@ def initenv_userfile(current_user, website, runway):
     spiderpath = userfile + os.path.sep + '{}_spider'.format(current_user.username.lower())
     if not os.path.exists(spiderpath):
         os.mkdir(spiderpath)
+
+
+def write_dp_yaml(current_user):
+
+    dp = """apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: {0}-deployment
+spec:
+ selector:
+  matchLabels:
+   app: {0}
+ replicas: 3
+ template:
+  metadata:
+   labels:
+    app: {0}
+  spec:
+   containers:
+   - name: {0}
+     image: scanserver
+     imagePullPolicy: IfNotPresent
+     ports:
+     - containerPort: 80
+    """
+    dp_user_yaml = db.format(current_user.username)
+            

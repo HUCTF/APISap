@@ -1,5 +1,5 @@
 from ScanServer.forms import NameForm, ScipyForm, PrintLogForm, LoginForm, RegisterForm, InitForm, CookieForm, AimUserForm
-from ScanServer.utils import get_net, redirect_back, write_env, initenv_userfile
+from ScanServer.utils import get_net, redirect_back, write_env, initenv_userfile, get_txt_file
 from ScanServer.models import User
 from ScanServer.extensions import db
 
@@ -77,7 +77,7 @@ def build_docker1():
 #  -------------------------------------
 #  -------------------------------------
 
-def build_docker(username):
+def build_docker(current_user):
     ###############
     ## 新建文件夹 ##
     ###############
@@ -93,13 +93,13 @@ def build_docker(username):
     if current_user.is_authenticated:
         try:
             try:
-                os.system('docker stop scanserver-{0}'.format(username))
+                os.system('docker stop scanserver-{0}'.format(current_user.username))
             except:
                 pass
-            os.system('docker rm scanserver-{0}'.format(username))
+            os.system('docker rm scanserver-{0}'.format(current_user.username))
         except:
             pass
-        os.system("docker run -id --env-file=userfile_center/{0}/{0}_env/.env -v /opt/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider:/opt/spider/{0} --name scanserver-{0} scanserver".format(username))
+        os.system("docker run -id --env-file=userfile_center/{0}/{0}_env/.env -v /opt/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider:/opt/spider/{0} --name scanserver-{0} scanserver".format(current_user.username))
 
 user_bp = Blueprint('user', __name__)
 
@@ -145,47 +145,40 @@ def pcap1():
                 env_body = ['USERCOOKIE1={}\n'.format(usercookie1), 'USERCOOKIE2={}\n'.format(usercookie2)]
                 print(env_body)
                 write_env(current_user, env_list=env_body, flag='a')
+                time.sleep(3)
                 print('======================')
                 print('======================')
                 print('======================')
-                build_docker(current_user.username)
+                
+                build_docker(current_user)
+#                thread = Thread(target=build_docker, args=[current_user])
+#                thread.start()
                 time.sleep(3)
                 flag = 0
-                os.system("docker exec -it scanserver-{0} sh /docker-entrypoint.sh".format(current_user.username))
-                while os.path.getsize('/opt/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider/{0}.txt'.format(current_user.username)) != 0 and flag == 0:
-                    if flag == 0:
-                        flag = 1
-                        from ScanServer.scanapi.v5.RepeterByRequests import RUNRepeter
-                        thread = Thread(target=RUNRepeter, args=[current_user.username])
-                        thread.start()
-                        break
+     #           os.system("docker exec -it scanserver-{0} sh /docker-entrypoint.sh".format(current_user.username))
+################
+################
+################
+#                while os.path.getsize('/opt/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider/{0}.txt'.format(current_user.username)) != 0 and flag == 0:
+#                    if flag == 0:
+#                        flag = 1
+#                        from ScanServer.scanapi.v5.RepeterByRequests import RUNRepeter
+#                        thread = Thread(target=RUNRepeter, args=[current_user.username])
+#                        thread.start()
+#                        break
+################
+################
+################
+
+                return redirect(url_for("user.result", filename="userfile_center/{0}/{0}_spider/{0}.txt".format(current_user.username)))
  
         return render_template("user/pcap.html", website=website, form=form)
 
 
 
-    elif session.get('runway') == 'userid':
 
-        form = AimUserForm()
-        stop = 1
 
-        userid1 = form.userid1.data
-        passwd1 = form.passwd1.data
-        userid2 = form.userid2.data
-        passwd2 = form.passwd2.data
 
-        if form.validate_on_submit():
-            if form.spider.data:
-                print('kaishi')
-                flash('开始重发！')
-                print('重发')
-
-                env_body = ['USERID1={}\n'.format(userid1), 'PASSWD1={}\n'.format(passwd1), 'USERID2={}\n'.format(userid2), 'PASSWD2={}\n'.format(passwd2)]
-                write_env(current_user, env_list=env_body, flag='a')
-                build_docker(current_user.username)
-        return render_template("user/pcap.html", website=website, form=form)
-
-    return redirect(url_for('user.index'))
 
 
 @user_bp.route('/register', methods=['GET', 'POST'])
@@ -221,6 +214,27 @@ def register():
             db.session.commit()
             return redirect(url_for('user.index'))
     return render_template('register.html', form=form)
+
+@user_bp.route('/result', methods=['GET', 'POST'])
+@login_required
+def result():
+    filename = request.args.get('filename')
+    print("=====result=====")
+    print(filename)
+    if filename:
+        s = get_txt_file(filename)
+        return jsonify({
+                    'code':'200',
+                    'result':str(s),
+                    'done':'done',
+               })
+    else:
+        return jsonify({
+                    'code':'400',
+                    'result':'please input filename!',
+               })
+
+
 
 
 @user_bp.route('/login', methods=['GET', 'POST'])

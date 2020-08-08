@@ -4,8 +4,7 @@ from ScanapiCookie import RUN_COOKIE
 import os
 import requests
 from flask import Flask, jsonify
-from scanapi.v5.RepeterByRequests import RUNRepeter
-import time
+from scanapi.v1.RepeterByRequests import RUNRepeter
 
 class spider():
     def __init__(self):
@@ -40,7 +39,7 @@ class spider():
 
 #        RUN_COOKIE(self.WEBSITE, self.COOKIE1)
 #        RUN_COOKIE('https://jkxxcj.zjhu.edu.cn/serviceList.html','health-data-Id=MGQ0MTM0YmQtMWQ2NC00MGViLTkzMGMtODNkZDM4ODU3YjJi')
-        time.sleep(3) 
+ 
         flag = 0
         while os.path.getsize('/opt/spider/{0}/{0}.txt'.format(self.USERNAME)) != 0 and flag == 0:
             if flag == 0:
@@ -68,17 +67,6 @@ def get_txt_file(filename):
          f.close()
     return str(s)
 
-def nlp_file(username):
-    flag = 0
-    while os.path.getsize('/opt/spider/{0}/{0}.txt'.format(username)) != 0 and flag == 0:
-        if flag == 0:
-            flag=1
-            RUNRepeter(username)
-#            thread = Thread(target=RUNRepeter, args=[username])
-#            thread.start()
-            break
-                                                                                                 
-
 app = Flask(__name__)
     
 @app.route("/")
@@ -86,7 +74,6 @@ def index():
     filename = "/opt/spider/{0}/{0}.txt".format(os.environ.get('USERNAME'))
     result = get_txt_file(filename)
     if result:
-        nlp_file(os.environ.get('USERNAME'))
         return jsonify({
             "result": result,
             "code": "200"
@@ -102,8 +89,8 @@ def app_run(host, port):
     app.run(host=host, port=int(port))                                         
                                                          
 if __name__ == '__main__':                               
-#    thread = Thread(target=app_run, args=['0.0.0.0', 81])
-#    thread.start()                   
+    thread = Thread(target=app_run, args=['0.0.0.0', 80])
+    thread.start()                   
 #    app.run(host='0.0.0.0', port=81)                                     
     a = spider()            
     if a.RUNWAY=='cookie':                      

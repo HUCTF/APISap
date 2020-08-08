@@ -14,7 +14,7 @@ class RepeterByRequests:
 
     def __init__(self, username):
         self.username = username
-        self.filename = '/opt/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider/{0}.txt'.format(self.username)
+        self.filename = '/opt/spider/{0}/{0}.txt'.format(self.username)
         self.fd=open(self.filename, errors='ignore')
         while(1):
             flag = self.Read_package()
@@ -68,20 +68,19 @@ class RepeterByRequests:
             print(cookie)
         print(headers)
 
-        try:
+#        try:
            # from Checker.NLP.address import address
             #import re
-            from Checker.RE.checker import name
-            r = requests.get(host, cookies=cookie, headers=headers)
-            print(r.status_code)
-            r.encoding = r.apparent_encoding
-          #  print(r.text)
-            jjj = re.sub(r'<.*?>', '', r.text)
-            #print(jjj)
-            name(jjj)
-        except:
-            print('error')
+        from .Checker.RE.checker import checker
+        from .Checker.NLP.address import address
 
+        r = requests.get(host, cookies=cookie, headers=headers, timeout=5)
+        print(r.status_code)
+        r.encoding = r.apparent_encoding
+  #     jjj = re.sub(r'<.*?>', '', r.text)
+        checker(r.text)
+        print('---------')
+        address(r.text)
 
     def requests_post(self, line, host):
         line = line[1:]
@@ -110,12 +109,13 @@ class RepeterByRequests:
             cookie.setdefault('Cookie',headers['Cookie'])
             del headers['Cookie']
             print(cookie)
+        host='http://'+str(headers['Host'])+str(host)
         print(headers)
         print(data)
         try: 
-            from Checker.NLP.address import address
+            from .Checker.NLP.address import address
             import re
-            r = requests.post(host, cookies=cookie, data=data, headers=headers)
+            r = requests.post(host, cookies=cookie, data=data, headers=headers, timeout=5)
             print(r.status_code)
             r.encoding = r.apparent_encoding
             print(r.text)
@@ -130,8 +130,4 @@ def RUNRepeter(filename):
     while(1):
         flag = RepeterByRequests(filename)
 
-if __name__ == "__main__":
-    while(1):
-        flag = Read_package()
-        if not flag:
-            break
+
