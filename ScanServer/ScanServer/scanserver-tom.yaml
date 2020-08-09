@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scanserver-deployment-tom
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scanserver-tom
+  template:
+    metadata:
+      labels:
+        app: scanserver-tom
+    spec:
+      containers:
+      - env:
+        - name: USERNAME
+          value: tom
+        - name: WEBSITE
+          value: http://members.kaiyuanshe.cn
+        - name: RUNWAY
+          value: cookie
+        - name: USERCOOKIE1
+          value: 1=1
+        - name: USERCOOKIE2
+          value: 1=1
+        image: scanserver
+        imagePullPolicy: IfNotPresent
+        name: scanserver-tom
