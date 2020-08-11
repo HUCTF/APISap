@@ -101,24 +101,8 @@ def register():
     return render_template('register.html', form=form)
 
 @user_bp.route('/result', methods=['GET', 'POST'])
-@login_required
 def result():
-    filename = request.args.get('filename')
-    print("=====result=====")
-    print(filename)
-    if filename:
-        s = get_txt_file(filename)
-        return jsonify({
-                    'code':'200',
-                    'result':str(s),
-                    'done':'done',
-               })
-    else:
-        return jsonify({
-                    'code':'400',
-                    'result':'please input filename!',
-               })
-
+    return render_template('user/result.html')
 
 
 
