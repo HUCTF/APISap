@@ -21,6 +21,38 @@ userpswd_env = '''
     USERID=%s
     PASSWD=%s
 '''
+def wait_container(client, user_container):
+    if user_container in client.containers.list(filters={'status':'exited'}):
+        with open('/tmp/py_log.txt', 'a') as f:
+            f.write(str(user_container.logs()))
+    else:
+        wait_container()
+        
+
+
+def build_docker(current_user):
+    ###############
+    ## 新建文件夹 ##
+    ###############
+
+    ####################
+    ## 具体化template ##
+    ####################
+
+    ##################
+    ## 保存template ##
+    ##################
+    # os.system('kubectl create -f [path/kube.yml]')
+    if current_user.is_authenticated:
+        try:
+            try:
+                os.system('docker stop scanserver-{0}'.format(current_user.username))
+            except:
+                pass
+            os.system('docker rm scanserver-{0}'.format(current_user.username))
+        except:
+            pass
+        os.system("docker run -id --env-file=userfile_center/{0}/{0}_env/.env -v /opt/2020-Works-ApiSecurity/ScanServer/userfile_center/{0}/{0}_spider:/opt/spider/{0} --name scanserver-{0} scanserver".format(current_user.username))
 
 user_bp = Blueprint('user', __name__)
 
@@ -66,6 +98,35 @@ def pcap1():
         return render_template("user/pcap.html", website=website, form=form)
 
 
+
+@user_bp.route('/deployment/delete', methods=["GET"])
+@login_required
+def delete_container():
+    delete_deployment(current_user.username)
+    return jsonify({"result": "delete success", "code":"200"})
+
+@user_bp.route('deployment/pod/status', methods=["GET"])
+@login_required
+def pod_status():
+    status = os.system('kubectl -n scanserver get po | grep kies')
+    if status == 0:
+        return jsonify({
+            "result": "RUNNING",
+            "code": "200"
+        })
+    else:
+        return jsonify({
+            "result": "None",
+            "code": "404"
+        })
+
+@user_bp.route('deployment/list', methods=['GET', 'POST'])
+@login_required
+def pod_list():
+    if current_user.username == 'admin':
+        return 
+
+
 @user_bp.route('/register', methods=['GET', 'POST'])
 def register():
     # register func
@@ -101,8 +162,24 @@ def register():
     return render_template('register.html', form=form)
 
 @user_bp.route('/result', methods=['GET', 'POST'])
+@login_required
 def result():
-    return render_template('user/result.html')
+    filename = request.args.get('filename')
+    print("=====result=====")
+    print(filename)
+    if filename:
+        s = get_txt_file(filename)
+        return jsonify({
+                    'code':'200',
+                    'result':str(s),
+                    'done':'done',
+               })
+    else:
+        return jsonify({
+                    'code':'400',
+                    'result':'please input filename!',
+               })
+
 
 
 
