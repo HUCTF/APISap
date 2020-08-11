@@ -12,6 +12,7 @@ def address(text):
 
 
     t = client.address(text)
-    print(t)
-    print(type(t))
-    return t
+    print("===============")
+    print(t.get('city'))
+    print("=================")
+    return t.get("city")

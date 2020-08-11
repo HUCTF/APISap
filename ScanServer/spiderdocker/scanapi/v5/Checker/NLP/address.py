@@ -12,4 +12,17 @@ def address(text):
 
 
     t = client.address(text)
+
+    # print("===============")
+    try:
+        del t['log_id']
+        del t['text']
+        del t['town']
+        del t['detail']
+        del t['town_code']
+        del t['county_code']
+        del t['city_code']
+    except:
+        print('',end='')
     print(t)
+    return t

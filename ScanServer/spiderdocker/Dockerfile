@@ -2,7 +2,7 @@ FROM python:3.7-alpine
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
     apk update && \
-    apk add --no-cache curl tcpdump
+    apk add --no-cache curl tcpdump python3-dev gcc libc-dev
 
 COPY requirements.txt /requirements.txt
 

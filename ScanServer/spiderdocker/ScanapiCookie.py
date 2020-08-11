@@ -2,7 +2,7 @@ import requests
 import time
 import re
 import base64
-import json
+import os
 # 无头浏览器模块
 
 def find_cookies(Url, username, password):
@@ -69,7 +69,9 @@ def find_url(html):  #查找返回的a标签链接
             else:
                 mycount = mycount + 1
                 if(url_repeat(complete_url(link),result)):
-                    result.append(complete_url(link))
+                    if "https" not in complete_url(link) and os.environ.get('WEBSITE')[7:] in complete_url(link):
+                        result.append(complete_url(link))
+                    # result.append(complete_url(link))
     # print("打印超链接个数:", mycount)
     return result
 
@@ -129,3 +131,8 @@ def RUN_COOKIE(url, cookie):
         print(OLD_URL)
     except:
         print('next')
+
+
+base_url="http://60.191.141.102:7788/"
+print(find_url(requests.get("http://60.191.141.102:7788/").text))
+

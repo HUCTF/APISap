@@ -68,12 +68,12 @@ def get_txt_file(filename):
          f.close()
     return str(s)
 
-def nlp_file(username):
+def nlp_file(username,COOKIE1,COOKIE2):
     flag = 0
     while os.path.getsize('/opt/spider/{0}/{0}.txt'.format(username)) != 0 and flag == 0:
         if flag == 0:
             flag=1
-            RUNRepeter(username)
+            RUNRepeter(username,COOKIE1,COOKIE2)
 #            thread = Thread(target=RUNRepeter, args=[username])
 #            thread.start()
             break
@@ -86,7 +86,7 @@ def index():
     filename = "/opt/spider/{0}/{0}.txt".format(os.environ.get('USERNAME'))
     result = get_txt_file(filename)
     if result:
-        nlp_file(os.environ.get('USERNAME'))
+        nlp_file(os.environ.get('USERNAME'),os.environ.get('COOKIE1'),os.environ.get('COOKIE2'))
         return jsonify({
             "result": result,
             "code": "200"

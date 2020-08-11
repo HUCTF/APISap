@@ -2,3 +2,7 @@ flask
 scapy
 requests
 Beautifulsoup4
+pymysql
+datetime
+python-Levenshtein
+jaro_winkler
